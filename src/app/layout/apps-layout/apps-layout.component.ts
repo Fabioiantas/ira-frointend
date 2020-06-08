@@ -33,7 +33,6 @@ import {animate, query, style, transition, trigger} from '@angular/animations';
     ])
   ]
 })
-
 export class AppsLayoutComponent {
 
   @select('config') public config$: Observable<any>;

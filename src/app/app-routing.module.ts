@@ -9,9 +9,9 @@ import { RouterModule, Routes } from '@angular/router';
 // Components
 import { HomeComponent } from './dashboard/home/home.component';
 // Pages
-import { AppsLayoutComponent } from './Layout/apps-layout/apps-layout.component';
-import { BaseLayoutComponent } from './Layout/base-layout/base-layout.component';
-import { PagesLayoutComponent } from './Layout/pages-layout/pages-layout.component';
+import { AppsLayoutComponent } from './layout/apps-layout/apps-layout.component';
+import { BaseLayoutComponent } from './layout/base-layout/base-layout.component';
+import { PagesLayoutComponent } from './layout/pages-layout/pages-layout.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { Role } from './_models/role';
 import { AdminComponent } from './admin/admin.component';

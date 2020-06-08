@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {ConfigActions} from '../store/config.actions';
-import {ThemeOptions} from '../../theme-options'
+import {ThemeOptions} from '../../theme-options';
 
 @Component({
   selector: 'app-options-drawer',

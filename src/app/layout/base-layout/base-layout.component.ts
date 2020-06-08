@@ -9,7 +9,6 @@ import {animate, query, style, transition, trigger} from '@angular/animations';
   selector: 'app-base-layout',
   templateUrl: './base-layout.component.html',
   animations: [
-
     trigger('architectUIAnimation', [
       transition('* <=> *', [
         query(':enter, :leave', [
@@ -33,7 +32,6 @@ import {animate, query, style, transition, trigger} from '@angular/animations';
     ])
   ]
 })
-
 export class BaseLayoutComponent {
 
   @select('config') public config$: Observable<any>;

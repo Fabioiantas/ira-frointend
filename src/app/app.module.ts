@@ -41,25 +41,25 @@ import { AppComponent } from './app.component';
 // Dashboards
 import { HomeComponent } from './dashboard/home/home.component';
 // Pages
-import { AppsLayoutComponent } from './Layout/apps-layout/apps-layout.component';
+import { AppsLayoutComponent } from './layout/apps-layout/apps-layout.component';
 // LAYOUT
-import { BaseLayoutComponent } from './Layout/base-layout/base-layout.component';
-import { FooterMenuComponent } from './Layout/Components/footer/elements/footer-menu/footer-menu.component';
+import { BaseLayoutComponent } from './layout/base-layout/base-layout.component';
+import { FooterMenuComponent } from './layout/Components/footer/elements/footer-menu/footer-menu.component';
 // FOOTER
-import { FooterComponent } from './Layout/Components/footer/footer.component';
-import { SearchBoxComponent } from './Layout/Components/header/elements/search-box/search-box.component';
-import { UserBoxComponent } from './Layout/Components/header/elements/user-box/user-box.component';
+import { FooterComponent } from './layout/Components/footer/footer.component';
+import { SearchBoxComponent } from './layout/Components/header/elements/search-box/search-box.component';
+import { UserBoxComponent } from './layout/Components/header/elements/user-box/user-box.component';
 // HEADER
-import { HeaderComponent } from './Layout/Components/header/header.component';
-import { PageTitleComponent } from './Layout/Components/page-title/page-title.component';
-import { LogoComponent } from './Layout/Components/sidebar/elements/logo/logo.component';
+import { HeaderComponent } from './layout/Components/header/header.component';
+import { PageTitleComponent } from './layout/Components/page-title/page-title.component';
+import { LogoComponent } from './layout/Components/sidebar/elements/logo/logo.component';
 // SIDEBAR
-import { SidebarComponent } from './Layout/Components/sidebar/sidebar.component';
-import { PagesLayoutComponent } from './Layout/pages-layout/pages-layout.component';
+import { SidebarComponent } from './layout/Components/sidebar/sidebar.component';
+import { PagesLayoutComponent } from './layout/pages-layout/pages-layout.component';
 import { ThemeOptions } from './theme-options';
-import { ArchitectUIState, rootReducer } from './ThemeOptions/store';
-import { ConfigActions } from './ThemeOptions/store/config.actions';
-import { DotsComponent } from './Layout/Components/header/elements/dots/dots.component';
+import { ArchitectUIState, rootReducer } from './themeOptions/store';
+import { ConfigActions } from './themeOptions/store/config.actions';
+import { DotsComponent } from './layout/Components/header/elements/dots/dots.component';
 import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { AdminComponent } from './admin/admin.component';
 import { DialogBoxComponent } from './dialog-box/dialog-box.component';
@@ -85,6 +85,7 @@ import { AdicionarUsuarioComponent } from './usuario/adicionar-usuario/adicionar
 import { ProdutosLiberadosComponent } from './produtos-liberados/produtos-liberados.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ProgramacaoPendenteAnaliseComponent } from './programacao-pendente-analise/programacao-pendente-analise.component';
+import { OptionsDrawerComponent } from './themeOptions/options-drawer/options-drawer.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -137,7 +138,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AdicionarProdutoComponent,
     AdicionarUsuarioComponent,
     ProdutosLiberadosComponent,
-    ProgramacaoPendenteAnaliseComponent
+    ProgramacaoPendenteAnaliseComponent,
+    OptionsDrawerComponent
 
   ],
   imports: [
