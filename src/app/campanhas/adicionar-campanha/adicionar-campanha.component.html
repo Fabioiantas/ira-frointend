@@ -1,0 +1,128 @@
+<div class="app-page-title app-page-title-simple" style="padding-bottom: 15px;">
+  <div class="page-title-wrapper">
+    <div class="page-title-heading">
+      <div>
+        <div class="page-title-subheading opacity-10">
+          <nav class="" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a [routerLink]="">
+                  <fa name="home"></fa>
+                </a>
+              </li>
+              <li class="breadcrumb-item">
+                Cadastro
+              </li>
+              <li class="active breadcrumb-item" aria-current="page">
+                Campanha
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tabs-animated tabs-animated-shadow card">
+  <div class="card-body">
+    <h5 class="card-title">Cadastro de Campanha</h5>
+    <form [formGroup]="this.formGroup" class="needs-validation" novalidate (validSubmit)="this.handleValidSubmit()">
+      <div class="form-row">
+        <div class="col-md-6 mb-6 form-group">
+          <label for="nmCampanhaValida">Nome Campanha</label>
+          <input formControlName="nmCampanha" type="text" class="form-control" id="nmCampanhaValida"
+            placeholder="Campanha" value="" required>
+        </div>
+        <div class="col-md-6 mb-6 form-group">
+          <label for="validationCustom02">Descrição</label>
+          <input formControlName="descCampanha" type="text" class="form-control" id="validationCustom02"
+            placeholder="Descrição" value="" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-6 mb-6 form-group">
+          <label for="dtIniCampanha">Data Início Campanha</label>
+          <div class="input-group">
+            <input class="form-control" placeholder="dia-mes-ano" (click)="dtIniProgramacao.toggle()"
+              name="dtIniProgramacao" formControlName="dtIniProgramacao" ngbDatepicker #dtIniProgramacao="ngbDatepicker"
+              autocomplete="off">
+            <div class="input-group-append">
+              <button class="btn btn-primary" (click)="dtIniProgramacao.toggle()" type="button">
+                <i class="fa fa-calendar"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 mb-6 form-group">
+          <label for="dtFimProgramacao">Data Fim Campanha</label>
+          <div class="input-group">
+            <input class="form-control" (click)="dtFimProgramacao.toggle()" placeholder="dia/mês/ano"
+              name="dtFimProgramacao" formControlName="dtFimProgramacao" ngbDatepicker #dtFimProgramacao="ngbDatepicker"
+              autocomplete="off">
+            <div class="input-group-append">
+              <button class="btn btn-primary" (click)="dtFimProgramacao.toggle()" type="button">
+                <i class="fa fa-calendar"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 mb-6 form-group">
+          <label for="dtIniVigencia">Data Início Vigência</label>
+          <div class="input-group">
+            <input class="form-control" (click)="dtIniVigencia.toggle()" placeholder="dia-mes-ano" name="dtIniVigencia"
+              formControlName="dtIniVigencia" ngbDatepicker #dtIniVigencia="ngbDatepicker" autocomplete="off">
+            <div class="input-group-append">
+              <button class="btn btn-primary" (click)="dtIniVigencia.toggle()" type="button">
+                <i class="fa fa-calendar"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 mb-6 form-group">
+          <label for="dtFimVigencia">Data Fim Vigência</label>
+          <div class="input-group">
+            <input class="form-control" (click)="dtFimVigencia.toggle()" placeholder="dia-mes-ano" name="dtFimVigencia"
+              formControlName="dtFimVigencia" ngbDatepicker #dtFimVigencia="ngbDatepicker" autocomplete="off">
+            <div class="input-group-append">
+              <button class="btn btn-primary" (click)="dtFimVigencia.toggle()" type="button">
+                <i class="fa fa-calendar"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 mb-6 form-group">
+          <label for="dtIniRetirada">Data Início Retirada</label>
+          <div class="input-group">
+            <input class="form-control" placeholder="dia-mes-ano" (click)="dtIniRetirada.toggle()" name="dtIniRetirada"
+              formControlName="dtIniRetirada" ngbDatepicker #dtIniRetirada="ngbDatepicker" autocomplete="off">
+            <div class="input-group-append">
+              <button class="btn btn-primary" (click)="dtIniRetirada.toggle()" type="button">
+                <i class="fa fa-calendar"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 mb-6 form-group">
+          <label for="dtFimVigencia">Data Fim Retirada</label>
+          <div class="input-group">
+            <input class="form-control" (click)="dtFimRetirada.toggle()" placeholder="dia-mes-ano" name="dtFimRetirada"
+              formControlName="dtFimRetirada" ngbDatepicker #dtFimRetirada="ngbDatepicker" autocomplete="off">
+            <div class="input-group-append">
+              <button class="btn btn-primary" (click)="dtFimRetirada.toggle()" type="button">
+                <i class="fa fa-calendar"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <bfv-messages></bfv-messages>
+      </div>
+      <div class="text-right">
+        <button class="btn btn-danger" (click)="this.handleReset()" type="button">Cancelar</button>
+        <button class="btn btn-success ml-2" (click)="this.salvar()" type="submit">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>

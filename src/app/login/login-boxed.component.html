@@ -1,0 +1,63 @@
+<div class="h-100 bg-plum-plate bg-animation">
+  <div class="d-flex h-100 justify-content-center align-items-center">
+    <div class="mx-auto app-login-box col-md-8">
+      <div class="modal-dialog w-100 mx-auto">
+        <div class="modal-content">
+          <div class="modal-body">
+            <div class="h5 modal-title text-center">
+              <h4 class="mt-2">
+                <div class="text-blue opacity-10">Fármaco Frísia</div>
+                <span class="opacity-6">Por favor, entre com seu e-mail e senha.</span>
+              </h4>
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" ><i class="fa fa-envelope-o "></i></span>
+              </div>
+              <input type="text" [(ngModel)]="user.login" class="form-control" placeholder="Insira seu login." aria-label="login">
+            </div>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fa fa-lock" style="margin-left: 3px; margin-right: 2px;"></i></span>
+              </div>
+              <input type="password" [(ngModel)]="user.dsSenha" (keyup.enter)="login()" class="form-control" name="dsSenha" placeholder="Insira sua senha." aria-label="password">
+            </div>
+            <div class="custom-control custom-checkbox"><input id="exampleCheck" type="checkbox" name="check"
+                autocomplete="off" class="custom-control-input" value="true"><label
+                class="custom-control-label">
+                Lembrar-me
+              </label></div>
+          </div>
+          <div class="modal-footer clearfix">
+            <div class="float-left"><a [routerLink]="" class="btn-lg btn btn-link">Recuperar
+              Senha</a></div>
+            <div class="float-right">
+              <button type="button" class="btn btn-primary btn-lg" (click)="login()" [ladda]="isLoading">Entrar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="text-center text-blue opacity-8 mt-3">
+        <br>© Fármaco Frísia 2020
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<ng-template #loginBox let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">Login</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <p>
+      Ocorreu um erro ao realizar o login, consulte o administrador do sistema
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>

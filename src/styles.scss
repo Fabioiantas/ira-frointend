@@ -1,0 +1,30 @@
+@import "assets/base";
+@import '~perfect-scrollbar/css/perfect-scrollbar.css';
+
+.icon-header{
+  font-size: 18px;
+}
+.text-blue{
+  color:#0056b3;
+}
+
+.ngx-datatable.bootstrap{
+  box-shadow: 0 0.46875rem 2.1875rem rgba(4, 9, 20, 0.03), 0 0.9375rem 1.40625rem rgba(4, 9, 20, 0.03), 0 0.25rem 0.53125rem rgba(4, 9, 20, 0.05), 0 0.125rem 0.1875rem rgba(4, 9, 20, 0.03) !important;
+  background-color: #fff;
+}
+.ngx-datatable.bootstrap .datatable-footer {
+  background: #fff !important;
+  color: #333 !important;
+}
+.datatable-row-detail { width: 100vw; }
+.ngx-datatable.bootstrap .datatable-header .datatable-header-cell{
+  border-bottom: 1px solid #e9ecef !important;
+  border-top: 1px solid #e9ecef !important;
+}
+
+.ngx-datatable.bootstrap .datatable-header .datatable-header-cell .datatable-header-cell-label{
+  font-weight: bold !important;
+}
+.ngx-datatable.bootstrap .datatable-body .datatable-body-row.active{
+  background-color: #0070ce !important;
+}

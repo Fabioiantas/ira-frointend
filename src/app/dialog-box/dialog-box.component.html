@@ -1,0 +1,15 @@
+
+<div class="modal-header panel-{{tipoMsg}}">
+  <h4 class="modal-title pull-left">{{title}}</h4>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <p [innerHTML]="msg"></p>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-{{tipoMsg}} btn-sm" *ngIf="type != 'CONFIRM'" (click)="closeModal()">Fechar</button>
+    <button *ngIf="botao.sim" type="button" class="btn btn-success btn-sm" (click)="botaoConfirmacao('sim', numberDialog)">SIM</button>
+    <button type="button" *ngIf="botao.nao" class="btn btn-danger btn-sm" (click)="botaoConfirmacao('nao', numberDialog)">NÃO</button>
+</div>
