@@ -87,6 +87,7 @@ import { ProdutosLiberadosComponent } from './produtos-liberados/produtos-libera
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ProgramacaoPendenteAnaliseComponent } from './programacao-pendente-analise/programacao-pendente-analise.component';
 import { OptionsDrawerComponent } from './themeOptions/options-drawer/options-drawer.component';
+import { RecursoCadastroComponent } from './Recurso/recurso-cadastro/recurso-cadastro.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -141,7 +142,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AdicionarUsuarioComponent,
     ProdutosLiberadosComponent,
     ProgramacaoPendenteAnaliseComponent,
-    OptionsDrawerComponent
+    OptionsDrawerComponent,
+    RecursoCadastroComponent
 
   ],
   imports: [

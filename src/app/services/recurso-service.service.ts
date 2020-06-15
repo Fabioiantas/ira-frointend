@@ -18,16 +18,17 @@ lista(): Observable<Recurso[]> {
 }
 
 add(recurso: Recurso) {
-  return this.http.post(environment.baseUrl + '/recurso/add', Recurso);
+
+  return this.http.post<any>(environment.baseUrl + '/auth/recurso', recurso);
 }
 
 remove(recurso: Recurso) {
-  return this.http.post(environment.baseUrl + '/recurso/remove', Recurso);
+  return this.http.post(environment.baseUrl + '/recurso/remove', recurso);
 }
 
 
 edit(recurso: Recurso) {
-  return this.http.put(environment.baseUrl + '/recurso/edit', Recurso);
+  return this.http.put(environment.baseUrl + '/recurso/edit', recurso);
 }
 
 getById(id: any) {

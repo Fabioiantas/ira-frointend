@@ -1,5 +1,5 @@
 export class Recurso {
   id: BigInteger;
-  nmRecurso: string;
-  dsRecurso: string;
+  nm_recurso: string;
+  ds_recurso: string;
 }

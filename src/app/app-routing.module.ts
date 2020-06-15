@@ -14,7 +14,7 @@ import { HomeComponent } from './dashboard/home/home.component';
 import { AppsLayoutComponent } from './layout/apps-layout/apps-layout.component';
 import { BaseLayoutComponent } from './layout/base-layout/base-layout.component';
 import { PagesLayoutComponent } from './layout/pages-layout/pages-layout.component';
-import { AuthGuard } from './_guards/auth.guard';
+import { AuthGuard } from './guards/auth.guard';
 import { Role } from './_models/role';
 import { AdminComponent } from './admin/admin.component';
 import { UsuarioComponent } from './usuario/usuario.component';
@@ -23,6 +23,7 @@ import { ForgotPasswordBoxedComponent } from './login/forgot-password/forgot-pas
 import { CampanhasComponent } from './campanhas/campanhas.component';
 import { AdicionarProdutoComponent } from './produto/adicionar-produto/adicionar-produto.component';
 import { ProgramacaoPendenteAnaliseComponent } from './programacao-pendente-analise/programacao-pendente-analise.component';
+import { RecursoCadastroComponent } from './Recurso/recurso-cadastro/recurso-cadastro.component';
 
 const routes: Routes = [
   {
@@ -57,7 +58,7 @@ const routes: Routes = [
       },
       {
         path: 'adicionar',
-        component: AdicionarCampanhaComponent,
+        component: RecursoCadastroComponent,
         canActivate: [AuthGuard],
         data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
       },

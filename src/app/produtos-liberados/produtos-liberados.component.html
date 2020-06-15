@@ -1,3 +1,160 @@
-<p>
-  produtos-liberados works!
-</p>
+<app-header></app-header>
+<app-menu></app-menu>
+
+<div class="content-wrapper">
+
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <h1>
+      <i class="fa fa-home" aria-hidden="true"></i> Cadastro de Produtos
+    </h1>
+    <ol class="breadcrumb">
+      <li>
+        <a routerLink="/">
+          <i class="fa fa-dashboard"></i> Home</a>
+      </li>
+      <li class="active">
+        <a routerLink="/produtos">Produtos</a>
+      </li>
+    </ol>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+
+    <div class="row">
+      <!-- left column -->
+      <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="box box-primary">
+          <div class="box-header with-border">
+            <h3 class="box-title">Formulário</h3>
+          </div>
+          <!-- /.box-header -->
+          <!-- form start -->
+          <form class="form-horizontal" (ngSubmit)="salvar()" #produtosForm="ngForm">
+            <div class="box-body">
+              <div class="form-group">
+                <label for="codigo" class="col-sm-2 control-label">Nome:</label>
+                <div class="col-sm-5">
+                  <input class="form-control" type="text" [(ngModel)]="produto.dsProduto" name="dsProduto"
+                    [maxLength]="40" [required]="true"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="codigo" class="col-sm-2 control-label">Tipo Produto:</label>
+                <div class="col-md-3">
+                  <ng-select class="form-control2" [(ngModel)]="produto.ieTipoProduto" name="ieTipoProduto" [required]="true">
+                    <ng-option *ngFor="let tipo of tipoProdutos" [value]="tipo.cdItemDominio"> {{tipo.nmItemDominio}}
+                    </ng-option>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="codigo" class="col-sm-2 control-label">Nome Variedade: </label>
+                <div class="col-md-3">
+                  <input class="form-control" type="text" [(ngModel)]="produto.nmVariedade" name="nmVariedade" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="codigo" class="col-sm-2 control-label">Taxa de Germinação:</label>
+                <div class="col-md-3">
+                  <input class="form-control" type="number" [(ngModel)]="produto.txGerminacao" name="txGerminacao" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="codigo" class="col-sm-2 control-label">PS Mil Semente:</label>
+                <div class="col-md-3">
+                  <input class="form-control" type="number" [(ngModel)]="produto.psMilSementes" name="psMilSementes" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="codigo" class="col-sm-2 control-label">Número de Sementes na Embalagem:</label>
+                <div class="col-md-3">
+                  <input class="form-control" type="number" [(ngModel)]="produto.nrPlantaContidaSaco" name="nrPlantaContidaSaco" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="codigo" class="col-sm-2 control-label">Unidade Padrão: </label>
+                <div class="col-md-3">
+                  <ng-select class="form-control2" [(ngModel)]="produto.cdUnidadePadrao" name="cdUnidadePadrao" [required]="true">
+                    <ng-option [value]="'KG'">KG</ng-option>
+                    <ng-option [value]="'LT'">LT</ng-option>
+                    <ng-option [value]="'PC'">PC</ng-option>
+                    <ng-option [value]="'DS'">DS</ng-option>
+                    <ng-option [value]="'SC'">SC</ng-option>
+                    <ng-option [value]="'CX'">CX</ng-option>
+                    <ng-option [value]="'GR'">GR</ng-option>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="codigo" class="col-sm-2 control-label">Dosagem Mínima:</label>
+                <div class="col-md-3">
+                  <input class="form-control" mask='separator' thousandSeparator="." type="text" [(ngModel)]="produto.qtDosagemMinima" name="qtDosagemMinima" [required]="true"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="codigo" class="col-sm-2 control-label">Dosagem Máxima:</label>
+                <div class="col-md-3">
+                  <input class="form-control" mask='separator' thousandSeparator="." type="text" [(ngModel)]="produto.qtDosagemMaxima" name="qtDosagemMaxima" [required]="true"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="codigo" class="col-sm-2 control-label">Produto Tratamento?:</label>
+                <div class="col-md-3">
+                  <ng-select class="form-control2" [(ngModel)]="produto.ieProdutoTratamento" name="ieProdutoTratamento" [required]="true">
+                    <ng-option [value]="'S'">Sim</ng-option>
+                    <ng-option [value]="'N'">Não</ng-option>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="codigo" class="col-sm-2 control-label">Embalagem Bag?:</label>
+                <div class="col-md-3">
+                  <ng-select class="form-control2" [(ngModel)]="produto.ieEmbalagemBag" name="ieEmbalagemBag">
+                    <ng-option [value]="'S'">Sim</ng-option>
+                    <ng-option [value]="'N'">Não</ng-option>
+                  </ng-select>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="codigo" class="col-sm-2 control-label">Número Registro Mapa:</label>
+                <div class="col-md-3">
+                  <input class="form-control" type="text" [(ngModel)]="produto.nrRegistroMapa" name="nrRegistroMapa" [maxLength]="100" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="codigo" class="col-sm-2 control-label">Número Registro RNC:</label>
+                <div class="col-md-3">
+                  <input class="form-control" type="text" [(ngModel)]="produto.nrRegistroRNC" name="nrRegistroRNC" [maxLength]="100"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="codigo" class="col-sm-2 control-label">Situação: </label>
+                <div class="col-md-3">
+                  <ng-select class="form-control2" [(ngModel)]="produto.ieSituacaoProduto" name="ieSituacaoProduto" [required]="true">
+                    <ng-option *ngFor="let situacao of situacoes" [value]="situacao.id">{{situacao.descricao}}
+                    </ng-option>
+                  </ng-select>
+                </div>
+              </div>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+              <button type="submit" class="btn btn-default" (click)="cancelar()">Cancel</button>
+              <button type="submit" class="btn btn-info pull-right" [disabled]="produtosForm.invalid"
+                (ngSubmit)="salvar()">Salvar</button>
+            </div>
+            <!-- /.box-footer -->
+          </form>
+        </div>
+        <!-- /.box -->
+      </div>
+    </div>
+
+  </section>
+
+</div>
+
+<app-footer></app-footer>

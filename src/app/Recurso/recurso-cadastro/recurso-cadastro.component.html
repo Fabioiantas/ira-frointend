@@ -1,0 +1,56 @@
+<div class="app-page-title app-page-title-simple" style="padding-bottom: 15px;">
+  <div class="page-title-wrapper">
+    <div class="page-title-heading">
+      <div>
+        <div class="page-title-subheading opacity-10">
+          <nav class="" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a [routerLink]="">
+                  <fa name="home"></fa>
+                </a>
+              </li>
+              <li class="breadcrumb-item">
+                Recurso
+              </li>
+              <li class="active breadcrumb-item" aria-current="page">
+                Cadastrar Recurso
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main content -->
+<div class="tabs-animated tabs-animated-shadow card">
+  <div class="card-body">
+    <form [formGroup]="this.formGroup" class="needs-validation">
+      <h5 class="card-title">Cadastro de Recurso</h5>
+      <div class="form-row">
+        <div class="col-md-12 mb-12 form-group">
+          <label for="nm_recurso">Nome Recurso</label>
+          <input formControlName="nm_recurso" type="text" class="form-control" id="nm_recurso"
+            placeholder="Nome do Recurso" value="" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-12 mb-12 form-group">
+          <label for="ds_recurso">Descrição do Recurso</label>
+          <input formControlName="ds_recurso" type="text" class="form-control" id="ds_recurso"
+            placeholder="Descrição do Recurso" value="" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <bfv-messages></bfv-messages>
+      </div>
+      <div class="text-right">
+        <button class="btn btn-danger" (click)="handleReset()" type="button">Cancelar</button>
+        <button class="btn btn-success ml-2" (click)="salvar()" type="submit" [ladda]="isLoading">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>
+

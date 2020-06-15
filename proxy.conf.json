@@ -1,6 +1,7 @@
 {
-  "/api-farmacos": {
-    "target": "http://localhost:8080",
-    "secure": false
+  "/api/*": {
+    "target": "http://localhost:8000",
+    "secure": false,
+    "logLevel": "debug"
   }
 }

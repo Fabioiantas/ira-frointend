@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticationService } from '../_services/authentication.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login-boxed',
