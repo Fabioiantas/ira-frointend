@@ -1,7 +1,7 @@
 <div [class]="'app-sidebar sidebar-shadow ' + (config$ | async).sidebarTheme" (mouseover)="sidebarHover()"
      (mouseout)="sidebarHover()">
   <div class="app-header__logo">
-    <div class="logo-type">Portal Fármaco</div>
+    <div class="logo-type">IRA - Ambiental</div>
     <div class="header__pane ml-auto">
       <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
               [ngClass]="{'is-active' : globals.toggleSidebar}" (click)="toggleSidebar()">
@@ -24,11 +24,61 @@
             </div>
             <ngb-accordion [destroyOnHide]="false" [closeOthers]="true" [activeIds]="extraParameter">
 
-              <ngb-panel id="programacaoMenu">
+              <ngb-panel id="licenciamentoMenu">
                 <ng-template ngbPanelHeader>
                   <button ngbPanelToggle class="vsm-link">
                     <i class="vsm-icon-menu fa fa-calendar-check-o"></i>
-                    <span class="vsm-title">Programação</span>
+                    <span class="vsm-title">Licenciamento</span>
+                    <i class="vsm-arrow"></i>
+                  </button>
+                </ng-template>
+
+                <ng-template ngbPanelContent>
+                  <div class="vsm-dropdown">
+                    <div class="vsm-list">
+                      <div class="vsm-item">
+                        <a routerLinkActive="active-item" routerLink="/programacao" class="vsm-link"><span
+                          class="vsm-title">Recursos</span></a>
+                      </div>
+                      <div class="vsm-item">
+                        <a routerLinkActive="active-item" routerLink="/programacao-pendente" class="vsm-link"><span
+                          class="vsm-title">Programações Pendentes</span></a>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-panel>
+
+              <ngb-panel id="monitoramentoMenu">
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link">
+                    <i class="vsm-icon-menu fa fa-calendar-check-o"></i>
+                    <span class="vsm-title">Monitoramento</span>
+                    <i class="vsm-arrow"></i>
+                  </button>
+                </ng-template>
+
+                <ng-template ngbPanelContent>
+                  <div class="vsm-dropdown">
+                    <div class="vsm-list">
+                      <div class="vsm-item">
+                        <a routerLinkActive="active-item" routerLink="/recurso" class="vsm-link"><span
+                          class="vsm-title">Recursos</span></a>
+                      </div>
+                      <div class="vsm-item">
+                        <a routerLinkActive="active-item" routerLink="/programacao-pendente" class="vsm-link"><span
+                          class="vsm-title">Programações Pendentes</span></a>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-panel>
+
+              <ngb-panel id="residuosMenu">
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link">
+                    <i class="vsm-icon-menu fa fa-calendar-check-o"></i>
+                    <span class="vsm-title">Resíduos</span>
                     <i class="vsm-arrow"></i>
                   </button>
                 </ng-template>

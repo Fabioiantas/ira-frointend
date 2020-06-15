@@ -16,6 +16,7 @@ export class I18n {
 @Injectable()
 export class CustomDatepickerI18n extends NgbDatepickerI18n {
 
+  // tslint:disable-next-line:variable-name
   constructor(private _i18n: I18n) {
     super();
   }
@@ -32,7 +33,7 @@ export class CustomDatepickerI18n extends NgbDatepickerI18n {
     return this.getMonthShortName(month);
   }
 
-  getDayAriaLabel(date: import('@ng-bootstrap/ng-bootstrap').NgbDateStruct): string {
+  getDayAriaLabel(date: import ('@ng-bootstrap/ng-bootstrap').NgbDateStruct): string {
     return date.day.toString();
   }
 

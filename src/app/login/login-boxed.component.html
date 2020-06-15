@@ -14,13 +14,13 @@
               <div class="input-group-prepend">
                 <span class="input-group-text" ><i class="fa fa-envelope-o "></i></span>
               </div>
-              <input type="text" [(ngModel)]="user.login" class="form-control" placeholder="Insira seu login." aria-label="login">
+              <input type="text" [(ngModel)]="user.email" class="form-control" placeholder="Insira seu login." aria-label="login">
             </div>
             <div class="input-group mb-3">
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fa fa-lock" style="margin-left: 3px; margin-right: 2px;"></i></span>
               </div>
-              <input type="password" [(ngModel)]="user.dsSenha" (keyup.enter)="login()" class="form-control" name="dsSenha" placeholder="Insira sua senha." aria-label="password">
+              <input type="password" [(ngModel)]="user.password" (keyup.enter)="login()" class="form-control" name="dsSenha" placeholder="Insira sua senha." aria-label="password">
             </div>
             <div class="custom-control custom-checkbox"><input id="exampleCheck" type="checkbox" name="check"
                 autocomplete="off" class="custom-control-input" value="true"><label

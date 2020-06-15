@@ -1,3 +1,4 @@
+import { RecursoComponent } from './Recurso/Recurso.component';
 import { AgmCoreModule } from '@agm/core';
 import { DevToolsExtension, NgRedux, NgReduxModule } from '@angular-redux/store';
 import { CommonModule } from '@angular/common';
@@ -127,6 +128,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     TecnicoComponent,
 
     // Components
+    RecursoComponent,
     NgxDatatableFilterComponent,
     NgxResizeWatcherDirective,
     CampanhasComponent,

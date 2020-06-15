@@ -1,3 +1,4 @@
+import { RecursoComponent } from './Recurso/Recurso.component';
 import { ProgramacaoComponent } from './programacao/programacao.component';
 import { ProdutosLiberadosComponent } from './produtos-liberados/produtos-liberados.component';
 import { TecnicoComponent } from './tecnico/tecnico.component';
@@ -8,6 +9,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 // Components
 import { HomeComponent } from './dashboard/home/home.component';
+// import { RecursoComponent } from './recurso-component/recurso-component.component';
 // Pages
 import { AppsLayoutComponent } from './layout/apps-layout/apps-layout.component';
 import { BaseLayoutComponent } from './layout/base-layout/base-layout.component';
@@ -39,6 +41,32 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: { roles: [Role.Admin], extraParameter: 'pagesMenu3' }
       },
+
+    ]
+  },
+
+  {
+    path: 'recurso',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: RecursoComponent,
+        data: { extraParameter: 'cadastroMenu' },
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'adicionar',
+        component: AdicionarCampanhaComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
+      },
+      {
+        path: 'editar/:id',
+        component: AdicionarCampanhaComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
+      }
 
     ]
   },

@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AuthenticationService } from '../_services/authentication.service';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login-boxed',
@@ -10,7 +11,7 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styles: []
 })
 export class LoginBoxedComponent implements OnInit {
-  user = {login: '', dsSenha: ''};
+  user = {email: '', password: ''};
   returnUrl: any = '';
 
   @ViewChild('loginBox') loginBoxTemplate;
@@ -27,14 +28,15 @@ export class LoginBoxedComponent implements OnInit {
 
   login() {
     this.isLoading = true;
-
     this.loginService.login(this.user).subscribe(data => {
       this.router.navigate([this.returnUrl && this.returnUrl !== '' ? this.returnUrl : '/']);
       this.isLoading = false;
-    }, (err) => {
-      this.modalService.open(this.loginBoxTemplate);
+    }, (error) => {
+      alert(error.error);
+      // this.modalService.open(this.loginBoxTemplate);
       this.isLoading = false;
-    });
+    }
+    );
   }
 
 }
