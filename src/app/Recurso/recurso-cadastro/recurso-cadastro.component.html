@@ -33,14 +33,14 @@
         <div class="col-md-12 mb-12 form-group">
           <label for="nm_recurso">Nome Recurso</label>
           <input formControlName="nm_recurso" type="text" class="form-control" id="nm_recurso"
-            placeholder="Nome do Recurso" value="" required>
+            placeholder="Nome do Recurso" value="" [(ngModel)]="recurso.nm_recurso" required>
         </div>
       </div>
       <div class="form-row">
         <div class="col-md-12 mb-12 form-group">
           <label for="ds_recurso">Descrição do Recurso</label>
           <input formControlName="ds_recurso" type="text" class="form-control" id="ds_recurso"
-            placeholder="Descrição do Recurso" value="" required>
+            placeholder="Descrição do Recurso" value="" [(ngModel)]="recurso.ds_recurso" required>
         </div>
       </div>
       <div class="form-group">

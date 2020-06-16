@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { RecursoServiceService } from 'src/app/services/recurso-service.service';
 import { DialogBoxService } from 'src/app/_services/dialog-box.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Recurso } from 'src/app/models/recurso';
 
 @Component({
   selector: 'app-recurso-cadastro',
@@ -10,20 +11,36 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./recurso-cadastro.component.sass']
 })
 export class RecursoCadastroComponent implements OnInit {
-   formGroup = new FormGroup({
+  formGroup = new FormGroup({
     nm_recurso: new FormControl('', Validators.required),
     ds_recurso: new FormControl('', Validators.required)
   });
 
+  recurso: Recurso = new Recurso();
   params: any;
   isLoading: any = false;
+
+  id: any;
+  nmRecurso: any;
+  dsRecurso: any;
+
+  registro: any;
   constructor(private recursoService: RecursoServiceService, private dialogBox: DialogBoxService,
-    private route: ActivatedRoute, private router: Router) {
+              private route: ActivatedRoute, private router: Router) {
 }
 
   ngOnInit() {
+    this.route.params.subscribe(data => {
+      this.params = data;
+    });
+    if (this.params.id) {
+      this.recursoService.getById(this.params.id).subscribe(response => {
+        this.recurso = response;
+      });
+    }
+
   }
-  
+
   handleValidSubmit() {
     console.log(this.formGroup.value);
   }

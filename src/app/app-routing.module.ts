@@ -63,8 +63,8 @@ const routes: Routes = [
         data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
       },
       {
-        path: 'editar/:id',
-        component: AdicionarCampanhaComponent,
+        path: 'adicionar/:id',
+        component: RecursoCadastroComponent,
         canActivate: [AuthGuard],
         data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
       }

@@ -83,7 +83,6 @@
     "redux": "4.0.0",
     "slick-carousel": "^1.8.1",
     "sweetalert2": "^7.33.1",
-    "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
@@ -96,6 +95,8 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.9.4",
     "codelyzer": "~4.5.0",
+    "cross-env": "^5.0.5",
+    "increase-memory-limit": "^1.0.3",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~3.1.1",
@@ -105,10 +106,8 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
+    "tslib": "^1.13.0",
     "tslint": "~5.11.0",
-    "typescript": "~3.2.2",
-    "increase-memory-limit": "^1.0.3",
-    "cross-env": "^5.0.5",
-    "tslib": "^2.0.0"
+    "typescript": "~3.2.2"
   }
 }

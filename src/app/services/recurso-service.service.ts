@@ -13,8 +13,16 @@ export class RecursoServiceService {
 
 constructor(private http: HttpClient, private router: Router) { }
 
+listar(): any {
+  return this.http.get(environment.baseUrl + '/auth/recursos');
+}
+
 lista(): Observable<Recurso[]> {
   return this.http.get<Recurso[]>(environment.baseUrl + '/recurso/list');
+}
+
+listar2(): any {
+  return this.http.get(environment.baseUrl + 'auth/recursos');
 }
 
 add(recurso: Recurso) {
@@ -32,7 +40,7 @@ edit(recurso: Recurso) {
 }
 
 getById(id: any) {
-  return this.http.get<Recurso>(environment.baseUrl + '/recurso/id/' + id);
+  return this.http.get<Recurso>(environment.baseUrl + '/recurso/' + id);
 }
 
 }
