@@ -30,17 +30,17 @@ add(recurso: Recurso) {
   return this.http.post<any>(environment.baseUrl + '/auth/recurso', recurso);
 }
 
-remove(recurso: Recurso) {
-  return this.http.post(environment.baseUrl + '/recurso/remove', recurso);
+remove(id) {
+  return this.http.delete(environment.baseUrl + '/auth/recurso/' + id);
 }
 
 
 edit(recurso: Recurso) {
-  return this.http.put(environment.baseUrl + '/recurso/edit', recurso);
+  return this.http.put(environment.baseUrl + 'auth/recurso', recurso);
 }
 
 getById(id: any) {
-  return this.http.get<Recurso>(environment.baseUrl + '/recurso/' + id);
+  return this.http.get<Recurso>(environment.baseUrl + '/auth/recurso/' + id);
 }
 
 }

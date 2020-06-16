@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { RecursoServiceService } from 'src/app/services/recurso-service.service';
 import { DialogBoxService } from 'src/app/_services/dialog-box.service';
 import { ActivatedRoute, Router } from '@angular/router';
+
+import { RecursoServiceService } from 'src/app/services/recurso-service.service';
 import { Recurso } from 'src/app/models/recurso';
 
 @Component({
@@ -27,7 +28,7 @@ export class RecursoCadastroComponent implements OnInit {
   registro: any;
   constructor(private recursoService: RecursoServiceService, private dialogBox: DialogBoxService,
               private route: ActivatedRoute, private router: Router) {
-}
+  }
 
   ngOnInit() {
     this.route.params.subscribe(data => {
@@ -44,12 +45,18 @@ export class RecursoCadastroComponent implements OnInit {
   handleValidSubmit() {
     console.log(this.formGroup.value);
   }
+  
   salvar() {
     if (!this.formGroup.valid) { return; }
     this.recursoService[this.formGroup.value.id ? 'edit' : 'add'](this.formGroup.value).subscribe(() => {
       this.dialogBox.show('Recurso salvo com sucesso!', 'OK');
       this.router.navigate(['/recurso']);
     });
+  }
+
+  handleReset() {
+    this.formGroup.reset();
+    this.router.navigate(['/recurso']);
   }
 
 }
