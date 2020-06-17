@@ -11,36 +11,28 @@ import { Recurso } from '../models/recurso';
 })
 export class RecursoServiceService {
 
-constructor(private http: HttpClient, private router: Router) { }
+  constructor(private http: HttpClient, private router: Router) { }
 
-listar(): any {
-  return this.http.get(environment.baseUrl + '/auth/recursos');
-}
+  listar(): any {
+    return this.http.get(environment.baseUrl + '/auth/recursos');
+  }
 
-lista(): Observable<Recurso[]> {
-  return this.http.get<Recurso[]>(environment.baseUrl + '/recurso/list');
-}
+  add(recurso: Recurso) {
 
-listar2(): any {
-  return this.http.get(environment.baseUrl + 'auth/recursos');
-}
+    return this.http.post<any>(environment.baseUrl + '/auth/recurso', recurso);
+  }
 
-add(recurso: Recurso) {
-
-  return this.http.post<any>(environment.baseUrl + '/auth/recurso', recurso);
-}
-
-remove(id) {
-  return this.http.delete(environment.baseUrl + '/auth/recurso/' + id);
-}
+  remove(id) {
+    return this.http.delete(environment.baseUrl + '/auth/recurso/' + id);
+  }
 
 
-edit(recurso: Recurso) {
-  return this.http.put(environment.baseUrl + 'auth/recurso', recurso);
-}
+  edit(recurso: Recurso) {
+    return this.http.put(environment.baseUrl + '/auth/recurso', recurso);
+  }
 
-getById(id: any) {
-  return this.http.get<Recurso>(environment.baseUrl + '/auth/recurso/' + id);
-}
+  getById(id: any) {
+    return this.http.get<Recurso>(environment.baseUrl + '/auth/recurso/' + id);
+  }
 
 }

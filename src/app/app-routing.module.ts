@@ -24,6 +24,8 @@ import { CampanhasComponent } from './campanhas/campanhas.component';
 import { AdicionarProdutoComponent } from './produto/adicionar-produto/adicionar-produto.component';
 import { ProgramacaoPendenteAnaliseComponent } from './programacao-pendente-analise/programacao-pendente-analise.component';
 import { RecursoCadastroComponent } from './Recurso/recurso-cadastro/recurso-cadastro.component';
+import { ParametroComponent } from './parametro/parametro.component';
+import { ParametroCadastroComponent } from './parametro/parametro-cadastro/parametro-cadastro.component';
 
 const routes: Routes = [
   {
@@ -65,6 +67,32 @@ const routes: Routes = [
       {
         path: 'adicionar/:id',
         component: RecursoCadastroComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
+      }
+
+    ]
+  },
+
+  {
+    path: 'parametro',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: ParametroComponent,
+        data: { extraParameter: 'cadastroMenu' },
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'adicionar',
+        component: ParametroCadastroComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
+      },
+      {
+        path: 'adicionar/:id',
+        component: ParametroCadastroComponent,
         canActivate: [AuthGuard],
         data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
       }

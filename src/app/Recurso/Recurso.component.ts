@@ -1,11 +1,8 @@
-import { RecursoServiceService } from 'src/app/services/recurso-service.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { Recurso } from '../models/recurso';
-import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+
 import { DialogBoxService } from '../_services/dialog-box.service';
+import { RecursoServiceService } from 'src/app/services/recurso-service.service';
 
 declare var $: any;
 
@@ -15,18 +12,17 @@ declare var $: any;
   styleUrls: ['./Recurso.component.css']
 })
 export class RecursoComponent implements OnInit {
+  
   recursos: any = [];
   selected: any = [];
   rowsRecurso: any[];
-
-
 
   columnsRecurso = [
     {name : 'Recurso', prop : 'nm_recurso', width : '35%', selecionado: true},
     {name : 'Descrição', prop : 'ds_recurso', width : '20%', selecionado: false}
   ];
 
-  constructor(private http: HttpClient, private router: Router,
+  constructor(private router: Router,
               private recursoService: RecursoServiceService,
               private dialogBox: DialogBoxService) { }
 
@@ -56,7 +52,7 @@ export class RecursoComponent implements OnInit {
 
   editar(id) {
     console.log('editar: ' + id);
-    this.router.navigate(['/auth/recurso/adicionar/' + id])
+    this.router.navigate(['/recurso/adicionar/' + id])
   }
 
   editarForm(e){

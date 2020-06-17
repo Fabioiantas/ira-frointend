@@ -13,6 +13,7 @@ import { Recurso } from 'src/app/models/recurso';
 })
 export class RecursoCadastroComponent implements OnInit {
   formGroup = new FormGroup({
+    id: new FormControl(''),
     nm_recurso: new FormControl('', Validators.required),
     ds_recurso: new FormControl('', Validators.required)
   });
@@ -35,8 +36,13 @@ export class RecursoCadastroComponent implements OnInit {
       this.params = data;
     });
     if (this.params.id) {
-      this.recursoService.getById(this.params.id).subscribe(response => {
-        this.recurso = response;
+      this.recursoService.getById(this.params.id).subscribe(recurso => {
+        this.recurso = recurso;
+        this.formGroup.patchValue({
+          id: recurso.id,
+          nm_recurso: recurso.nm_recurso,
+          ds_recurso: recurso.ds_recurso
+        });
       });
     }
 
