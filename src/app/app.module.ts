@@ -90,6 +90,17 @@ import { OptionsDrawerComponent } from './themeOptions/options-drawer/options-dr
 import { RecursoCadastroComponent } from './Recurso/recurso-cadastro/recurso-cadastro.component';
 import { ParametroComponent } from './parametro/parametro.component';
 import { ParametroCadastroComponent } from './parametro/parametro-cadastro/parametro-cadastro.component';
+import { FonteEmissaoComponent } from './fonte-emissao/fonte-emissao.component';
+import { LicencaAmbientalComponent } from './licenca-ambiental/licenca-ambiental.component';
+import { TipoAtividadeComponent } from './tipo-atividade/tipo-atividade.component';
+import { TipoLicencaComponent } from './tipo-licenca/tipo-licenca.component';
+import { OrgaoResponsavelComponent } from './orgao-responsavel/orgao-responsavel.component';
+import { ArquivosComponent } from './arquivos/arquivos.component';
+import { EntidadeComponent } from './entidade/entidade.component';
+import { TipoAtividadeCadastroComponent } from './tipo-atividade/tipo-atividade-cadastro/tipo-atividade-cadastro.component';
+import { TipoLicencaCadastroComponent } from './tipo-licenca/tipo-licenca-cadastro/tipo-licenca-cadastro.component';
+import { OrgaoResponsavelCadastroComponent } from './orgao-responsavel/orgao-responsavel-cadastro/orgao-responsavel-cadastro.component';
+import { EntidadeCadastroComponent } from './entidade/entidade-cadastro/entidade-cadastro.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -147,7 +158,18 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     OptionsDrawerComponent,
     RecursoCadastroComponent,
     ParametroComponent,
-    ParametroCadastroComponent
+    ParametroCadastroComponent,
+    FonteEmissaoComponent,
+    LicencaAmbientalComponent,
+    TipoAtividadeComponent,
+    TipoLicencaComponent,
+    OrgaoResponsavelComponent,
+    ArquivosComponent,
+    EntidadeComponent,
+    TipoAtividadeCadastroComponent,
+    TipoLicencaCadastroComponent,
+    OrgaoResponsavelCadastroComponent,
+    EntidadeCadastroComponent
 
   ],
   imports: [
