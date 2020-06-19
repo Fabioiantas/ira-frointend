@@ -26,6 +26,15 @@ import { ProgramacaoPendenteAnaliseComponent } from './programacao-pendente-anal
 import { RecursoCadastroComponent } from './Recurso/recurso-cadastro/recurso-cadastro.component';
 import { ParametroComponent } from './parametro/parametro.component';
 import { ParametroCadastroComponent } from './parametro/parametro-cadastro/parametro-cadastro.component';
+import { LicencaAmbientalComponent } from './licenca-ambiental/licenca-ambiental.component';
+import { OrgaoResponsavelComponent } from './orgao-responsavel/orgao-responsavel.component';
+import { OrgaoResponsavelCadastroComponent } from './orgao-responsavel/orgao-responsavel-cadastro/orgao-responsavel-cadastro.component';
+import { TipoAtividadeComponent } from './tipo-atividade/tipo-atividade.component';
+import { TipoAtividadeCadastroComponent } from './tipo-atividade/tipo-atividade-cadastro/tipo-atividade-cadastro.component';
+import { TipoLicencaComponent } from './tipo-licenca/tipo-licenca.component';
+import { TipoLicencaCadastroComponent } from './tipo-licenca/tipo-licenca-cadastro/tipo-licenca-cadastro.component';
+import { EntidadeComponent } from './entidade/entidade.component';
+import { EntidadeCadastroComponent } from './entidade/entidade-cadastro/entidade-cadastro.component';
 
 const routes: Routes = [
   {
@@ -47,7 +56,7 @@ const routes: Routes = [
 
     ]
   },
-
+// ############## ROTAS
   {
     path: 'recurso',
     component: BaseLayoutComponent,
@@ -100,6 +109,133 @@ const routes: Routes = [
     ]
   },
 
+  {
+    path: 'licenca',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: LicencaAmbientalComponent,
+        data: { extraParameter: 'cadastroMenu' },
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'adicionar',
+        component: LicencaAmbientalComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
+      },
+      {
+        path: 'adicionar/:id',
+        component: LicencaAmbientalComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
+      }
+
+    ]
+  },
+  {
+    path: 'orgao',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: OrgaoResponsavelComponent,
+        data: { extraParameter: 'cadastroMenu' },
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'adicionar',
+        component: OrgaoResponsavelCadastroComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
+      },
+      {
+        path: 'adicionar/:id',
+        component: OrgaoResponsavelCadastroComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
+      }
+
+    ]
+  },
+  {
+    path: 'tipoatividade',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: TipoAtividadeComponent,
+        data: { extraParameter: 'cadastroMenu' },
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'adicionar',
+        component: TipoAtividadeCadastroComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
+      },
+      {
+        path: 'adicionar/:id',
+        component: TipoAtividadeComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
+      }
+
+    ]
+  },
+  
+  {
+    path: 'tipolicenca',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: TipoLicencaComponent,
+        data: { extraParameter: 'cadastroMenu' },
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'adicionar',
+        component: TipoLicencaCadastroComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
+      },
+      {
+        path: 'adicionar/:id',
+        component: TipoLicencaCadastroComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
+      }
+
+    ]
+  },
+  {
+    path: 'entidade',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: EntidadeComponent,
+        data: { extraParameter: 'cadastroMenu' },
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'adicionar',
+        component: EntidadeCadastroComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
+      },
+      {
+        path: 'adicionar/:id',
+        component: EntidadeCadastroComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
+      }
+
+    ]
+  },
+// #####################
   {
     path: 'campanha',
     component: BaseLayoutComponent,

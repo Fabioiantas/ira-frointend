@@ -1,3 +1,61 @@
-<p>
-  tipo-licenca-cadastro works!
-</p>
+<div class="app-page-title app-page-title-simple" style="padding-bottom: 15px;">
+  <div class="page-title-wrapper">
+    <div class="page-title-heading">
+      <div>
+        <div class="page-title-subheading opacity-10">
+          <nav class="" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a [routerLink]="">
+                  <fa name="home"></fa>
+                </a>
+              </li>
+              <li class="breadcrumb-item">
+                Tipo Licenca
+              </li>
+              <li class="active breadcrumb-item" aria-current="page">
+                Cadastrar Tipo Licenca
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main content -->
+<div class="tabs-animated tabs-animated-shadow card">
+  <div class="card-body">
+    <form [formGroup]="this.formGroup" class="needs-validation">
+      <h5 class="card-title">Cadastro de Tipo Licenca</h5>
+      
+      <!-- INPUTS -->
+      <div class="form-row">
+        <div class="col-md-12 mb-12 form-group">
+          <label for="nm_orgao">Tipo de Licenca</label>
+          <input formControlName="nm_licenca" type="text" class="form-control" id="nm_licenca"
+            placeholder="Tipo de Licenca" value="" [(ngModel)]="tipoLicenca.nm_licenca" required>
+        </div>
+        <div class="col-md-12 mb-12 form-group">
+          <label for="nm_orgao">Abreviação</label>
+          <input formControlName="nm_abreviado" type="text" class="form-control" id="nm_abreviado"
+            placeholder="Abreviação" value="" [(ngModel)]="tipoLicenca.nm_abreviado" required onkeyup="this.value = this.value.toUpperCase();">
+        </div>
+        <div class="col-md-12 mb-12 form-group">
+          <label for="nm_orgao">Informações</label>
+          <input formControlName="ds_informacao_licenca" type="text" class="form-control" id="ds_informacao_licenca"
+            placeholder="Informações sobre a Licença" value="" [(ngModel)]="tipoLicenca.ds_informacao_licenca" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <bfv-messages></bfv-messages>
+      </div>
+      <div class="text-right">
+        <button class="btn btn-danger" (click)="handleReset()" type="button">Cancelar</button>
+        <button class="btn btn-success ml-2" (click)="salvar()" type="submit" [ladda]="isLoading">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>
+

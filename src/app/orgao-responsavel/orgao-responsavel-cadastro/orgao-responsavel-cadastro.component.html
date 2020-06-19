@@ -1,3 +1,113 @@
-<p>
-  orgao-responsavel-cadastro works!
-</p>
+<div class="app-page-title app-page-title-simple" style="padding-bottom: 15px;">
+  <div class="page-title-wrapper">
+    <div class="page-title-heading">
+      <div>
+        <div class="page-title-subheading opacity-10">
+          <nav class="" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a [routerLink]="">
+                  <fa name="home"></fa>
+                </a>
+              </li>
+              <li class="breadcrumb-item">
+                Orgão Responsável
+              </li>
+              <li class="active breadcrumb-item" aria-current="page">
+                Cadastrar Orgão Responsável
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main content -->
+<div class="tabs-animated tabs-animated-shadow card">
+  <div class="card-body">
+    <form [formGroup]="this.formGroup" class="needs-validation">
+      <h5 class="card-title">Cadastro de Orgão Responsável</h5>
+      
+      <!-- INPUTS -->
+      <div class="form-row">
+        <div class="col-md-12 mb-12 form-group">
+          <label for="nm_orgao">Nome Orgão Responsável</label>
+          <input formControlName="nm_orgao" type="text" class="form-control" id="nm_orgao"
+            placeholder="Nome do Orgão Responsável" value="" [(ngModel)]="orgao.nm_orgao" required onkeyup="this.value = this.value.toUpperCase();">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-12 mb-12 form-group">
+          <label for="ds_orgao">Sigla</label>
+          <input formControlName="sg_orgao" type="text" class="form-control" id="sg_orgao"
+            placeholder="Sigla" value="" [(ngModel)]="orgao.sg_orgao" required onkeyup="this.value = this.value.toUpperCase();">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-12 mb-12 form-group">
+          <div class="d-inline-block">
+            
+            <label for="nm_esfera">Esfera</label>
+            <select formControlName="nm_esfera" class="form-control" id="nm_esfera" type="select" [(ngModel)]="orgao.nm_esfera" required>
+              <option>FEDERAL</option>
+              <option>ESTADUAL</option>
+              <option>MUNICIPAL</option>
+            </select>
+            <!-- <input formControlName="nm_esfera" type="text" class="form-control" id="nm_esfera"
+              placeholder="Descrição do Orgão Responsável" value="" [(ngModel)]="orgao.nm_esfera" required
+              > -->  
+            </div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-md-12 mb-12 form-group">
+          <div class="d-inline-block">
+            <label for="sg_estado">Estado</label>
+            <select formControlName="sg_estado" class="form-control" id="sg_estado" 
+              placeholder="Estado" value="" [(ngModel)]="orgao.sg_estado" required>
+                <option value="AC">Acre</option>
+                <option value="AL">Alagoas</option>
+                <option value="AP">Amapá</option>
+                <option value="AM">Amazonas</option>
+                <option value="BA">Bahia</option>
+                <option value="CE">Ceará</option>
+                <option value="DF">Distrito Federal</option>
+                <option value="ES">Espírito Santo</option>
+                <option value="GO">Goiás</option>
+                <option value="MA">Maranhão</option>
+                <option value="MT">Mato Grosso</option>
+                <option value="MS">Mato Grosso do Sul</option>
+                <option value="MG">Minas Gerais</option>
+                <option value="PA">Pará</option>
+                <option value="PB">Paraíba</option>
+                <option value="PR">Paraná</option>
+                <option value="PE">Pernambuco</option>
+                <option value="PI">Piauí</option>
+                <option value="RJ">Rio de Janeiro</option>
+                <option value="RN">Rio Grande do Norte</option>
+                <option value="RS">Rio Grande do Sul</option>
+                <option value="RO">Rondônia</option>
+                <option value="RR">Roraima</option>
+                <option value="SC">Santa Catarina</option>
+                <option value="SP">São Paulo</option>
+                <option value="SE">Sergipe</option>
+                <option value="TO">Tocantins</option>
+            </select>
+          </div>
+          <!-- <input formControlName="sg_estado" type="text" class="form-control" id="sg_estado"
+            placeholder="Estado" value="" [(ngModel)]="orgao.sg_estado" required> -->
+        </div>
+      </div>
+      <div class="form-group">
+        <bfv-messages></bfv-messages>
+      </div>
+      <div class="text-right">
+        <button class="btn btn-danger" (click)="handleReset()" type="button">Cancelar</button>
+        <button class="btn btn-success ml-2" (click)="salvar()" type="submit" [ladda]="isLoading">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
