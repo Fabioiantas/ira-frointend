@@ -14,6 +14,10 @@ export class OrgaoService {
   listar(): any {
     return this.http.get(environment.baseUrl + '/auth/orgaos');
   }
+
+  Orgaolista(): any {
+    return this.http.get(environment.baseUrl + '/auth/orgaolista');
+  }
   
   add(orgao: Orgao) {
   

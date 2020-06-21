@@ -1,0 +1,124 @@
+<div class="app-page-title app-page-title-simple" style="padding-bottom: 15px;">
+  <div class="page-title-wrapper">
+    <div class="page-title-heading">
+      <div>
+        <div class="page-title-subheading opacity-10">
+          <nav class="" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a [routerLink]="">
+                  <fa name="home"></fa>
+                </a>
+              </li>
+              <li class="breadcrumb-item">
+                Licença Ambiental
+              </li>
+              <li class="active breadcrumb-item" aria-current="page">
+                Cadastrar Licença Ambiental
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main content -->
+<div class="tabs-animated tabs-animated-shadow card">
+  <div class="card-body">
+    <form [formGroup]="this.formGroup" class="needs-validation">
+      <h5 class="card-title">Cadastro de Licença Ambiental</h5>
+
+      <!-- INPUTS -->
+      <div class="form-row">
+
+        <div class="col-md-12 mb-12 form-group">
+          <label for="nm_entidade">Entidade</label>          
+          <ng-select [items]="listEntidade" bindLabel="nm_entidade"
+            formControlName="nm_entidade" name="id_entidade" placeholder="Buscar Entidade...">
+          </ng-select>
+        </div>
+
+        <div class="col-md-6 mb-6 form-group">
+          <label for="nm_atividade">Atividade</label>
+          <ng-select [items]="listTipoAtividade" bindLabel="nm_atividade"
+            formControlName="nm_atividade" name="id_atividade" placeholder="Buscar Atividade...">
+          </ng-select>
+        </div>
+
+        <div class="col-md-6 mb-6 form-group">
+          <label for="nm_">Tipo Licença</label>
+          <ng-select [items]="listTipoLicenca" bindLabel="nm_licenca"
+            formControlName="nm_licenca" name="id_licenca" placeholder="Buscar Tipo Licença...">
+          </ng-select>
+        </div>
+
+        <div class="col-md-12 mb-12 form-group">
+          <label for="nm_orgao">Orgão Responsável</label>
+
+          <ng-select [items]="listOrgao" bindLabel="nm_orgao"
+            formControlName="nm_orgao" name="id_orgao" placeholder="Buscar Orgão...">
+          </ng-select>
+
+        </div>
+
+        <div class="col-md-6 mb-6 form-group">
+          <label for="nr_protocolo">N° Protocolo</label>
+          <input formControlName="nr_protocolo" type="text" class="form-control" id="nr_protocolo"
+            formControlName="nr_protocolo" placeholder="N° Protocolo" required>
+        </div>
+        <div class="col-md-6 mb-6 form-group">
+          <label for="nr_protocolo">Data Emissão Protocolo</label>
+          <input class="form-control" (click)="dt_emissao_protocolo.toggle()" placeholder="dia/mês/ano"
+            name="dt_emissao_protocolo" formControlName="dt_emissao_protocolo" ngbDatepicker
+            #dt_emissao_protocolo="ngbDatepicker" autocomplete="off">
+        </div>
+
+        <div class="col-md-4 mb-4 form-group">
+          <label for="nr_licenca_ambiental">N° Licença</label>
+          <input formControlName="nr_licenca_ambiental" type="text" class="form-control" id="nr_licenca_ambiental"
+            placeholder="N° Licença" required>
+        </div>
+
+        <div class="col-md-4 mb-4 form-group">
+          <label for="dt_emissao">Data Emissão Licença</label>
+          <input class="form-control" (click)="dt_emissao.toggle()" placeholder="dia/mês/ano" name="dt_emissao"
+            formControlName="dt_emissao" ngbDatepicker #dt_emissao="ngbDatepicker" autocomplete="off">
+        </div>
+        <div class="col-md-4 mb-4 form-group">
+          <label for="dt_validade">Validade Licença</label>
+          <input class="form-control" (click)="dt_validade.toggle()" placeholder="dia/mês/ano" name="dt_validade"
+            formControlName="dt_validade" ngbDatepicker #dt_validade="ngbDatepicker" autocomplete="off">
+        </div>
+        <div class="col-md-6 mb-6 form-group">
+          <label for="ds_email_alerta">E-mail Alerta</label>
+          <input formControlName="ds_email_alerta" type="text" class="form-control" id="ds_email_alerta"
+            placeholder="Para cadastrar mais de um e-mail seprare por ';'" required>
+        </div>
+
+        <div class="col-md-2 mb-2 form-group">
+          <label for="nr_dias_limite_protocolo">Dias limite Protocolação</label>
+          <input class="form-control" id="nr_dias_limite_protocolo" type="number"
+            formControlName="nr_dias_limite_protocolo" name="nr_dias_limite_protocolo" required />
+        </div>
+        <div class="col-md-2 mb-2 form-group">
+          <label for="dt_protocolar_em">Data Próxima Protolação</label>
+          <input class="form-control" id="dt_protocolar_em" type="text" name="dt_protocolar_em" disabled />
+        </div>
+        <div class="col-md-2 mb-2 form-group">
+          <label for="nr_dias_protocolar">Dias Restantes</label>
+          <input class="form-control" id="nr_dias_protocolar" type="text" name="nr_dias_protocolar" disabled />
+        </div>
+
+      </div>
+      <div class="form-group">
+        <bfv-messages></bfv-messages>
+      </div>
+      <div class="text-right">
+        <button class="btn btn-danger" (click)="handleReset()" type="button">Cancelar</button>
+        <button class="btn btn-success ml-2" (click)="salvar()" type="submit" [ladda]="isLoading">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>

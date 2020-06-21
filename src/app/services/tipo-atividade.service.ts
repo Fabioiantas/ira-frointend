@@ -14,6 +14,10 @@ export class TipoAtividadeService {
   listar(): any {
     return this.http.get(environment.baseUrl + '/auth/tipoatividades');
   }
+  
+  listaAtividades(): any {
+    return this.http.get(environment.baseUrl + '/auth/tipoatividadelista');
+  }
    
   add(tipoAtividade: TipoAtividade) {
   

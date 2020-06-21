@@ -101,6 +101,7 @@ import { TipoAtividadeCadastroComponent } from './tipo-atividade/tipo-atividade-
 import { TipoLicencaCadastroComponent } from './tipo-licenca/tipo-licenca-cadastro/tipo-licenca-cadastro.component';
 import { OrgaoResponsavelCadastroComponent } from './orgao-responsavel/orgao-responsavel-cadastro/orgao-responsavel-cadastro.component';
 import { EntidadeCadastroComponent } from './entidade/entidade-cadastro/entidade-cadastro.component';
+import { LicencaAmbientalCadastroComponent } from './licenca-ambiental/licenca-ambiental-cadastro/licenca-ambiental-cadastro.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -169,7 +170,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     TipoAtividadeCadastroComponent,
     TipoLicencaCadastroComponent,
     OrgaoResponsavelCadastroComponent,
-    EntidadeCadastroComponent
+    EntidadeCadastroComponent,
+    LicencaAmbientalCadastroComponent
 
   ],
   imports: [

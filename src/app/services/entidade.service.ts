@@ -15,6 +15,10 @@ export class EntidadeService {
     return this.http.get(environment.baseUrl + '/auth/entidades');
   }
    
+  listaEntidades(): any {
+    return this.http.get(environment.baseUrl + '/auth/entidadeslist');
+  }
+
   add(entidade: Entidade) {
   
     return this.http.post<any>(environment.baseUrl + '/auth/entidade', entidade);

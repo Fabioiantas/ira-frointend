@@ -13,6 +13,10 @@ export class TipoLicencaService {
   listar(): any {
     return this.http.get(environment.baseUrl + '/auth/tipolicencas');
   }
+  
+  listaTipoLicenca(): any {
+    return this.http.get(environment.baseUrl + '/auth/tipolicencalista');
+  }
    
   add(tipoAtividade: TipoLicenca) {
   
