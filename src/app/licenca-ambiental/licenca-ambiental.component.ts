@@ -14,13 +14,13 @@ export class LicencaAmbientalComponent implements OnInit {
   rowsLicencaAmbiental: any[];
 
   columnsLicencaAmbiental = [
-    {name : 'Entidade', prop : 'nm_entidade', width : '35%', selecionado: true},
-    {name : 'N° L.A', prop : 'nr_licenca_ambiental', width : '35%', selecionado: true},
-    {name : 'Atividade', prop : 'nm_atividade', width : '35%', selecionado: true},
-    {name : 'Tipo', prop : 'nm_abreviado', width : '35%', selecionado: true},
-    {name : 'Validade', prop : 'dt_validade', width : '35%', selecionado: true},
-    {name : 'Orgão', prop : 'nm_orgao', width : '35%', selecionado: true},
-    {name : 'Situação', prop : 'ds_situacao', width : '35%', selecionado: true}
+    {name : 'Entidade', prop : 'nm_entidade', width : '50%', selecionado: true},
+    {name : 'N° L.A', prop : 'nr_licenca_ambiental', align: 'right', width : '10%', selecionado: true},
+    {name : 'Atividade', prop : 'nm_atividade', width : '20%', selecionado: true},
+    {name : 'Tipo', prop : 'nm_abreviado', width : '5%', selecionado: true},
+    {name : 'Validade', prop : 'dt_validade', width : '10%', selecionado: true},
+    {name : 'Orgão', prop : 'nm_orgao', width : '15%', selecionado: true},
+    {name : 'Situação', prop : 'ds_situacao', width : '10%', selecionado: true}
     /*{name : 'CNPJ', prop : 'nr_protocolo', width : '35%', selecionado: true},
     {name : 'CPF', prop : 'nr_protocolo_novo', width : '35%', selecionado: true},
     {name : 'Endereço', prop : 'id_licenca_pai', width : '35%', selecionado: true},

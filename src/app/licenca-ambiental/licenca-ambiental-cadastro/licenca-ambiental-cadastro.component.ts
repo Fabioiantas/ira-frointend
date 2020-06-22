@@ -34,25 +34,17 @@ export class LicencaAmbientalCadastroComponent implements OnInit {
     id: new FormControl(''),
     nr_licenca_ambiental: new FormControl(''),
     nr_protocolo: new FormControl(''),
-    //nr_protocolo_novo: new FormControl('', Validators.required),
-    //id_licenca_pai: new FormControl('', Validators.required),
-    dt_emissao: new FormControl(''),
-    dt_validade: new FormControl(''),
-    dt_emissao_protocolo: new FormControl(''),
-    dt_protocolacao: new FormControl(''),
-    dt_validade_protocolo: new FormControl(''),
+    dt_emissao: new FormControl(),
+    dt_validade: new FormControl(),
+    dt_emissao_protocolo: new FormControl(),
+    dt_protocolacao: new FormControl(),
+    dt_validade_protocolo: new FormControl(),
     nr_dias_limite_protocolo: new FormControl('', Validators.required),
     id_entidade: new FormControl('', Validators.required),
-    nm_entidade: new FormControl('', Validators.required),
     id_orgao: new FormControl('', Validators.required),
-    nm_orgao: new FormControl('', Validators.required),
     id_tipo_licenca: new FormControl('', Validators.required),
-    nm_licenca: new FormControl('', Validators.required),
-    nm_abreviado: new FormControl('', Validators.required),
     id_tipo_atividade: new FormControl('', Validators.required),
-    nm_atividade: new FormControl('', Validators.required),
     ds_email_alerta: new FormControl('', Validators.required)
-    // ds_situacao: new FormControl('', Validators.required)
   });
 
   constructor(private licencaAmbientalService: LicencaAmbientalService, 
@@ -82,6 +74,10 @@ export class LicencaAmbientalCadastroComponent implements OnInit {
       this.listTipoLicenca = tipoLicencas;
     });
 
+    this.orgaoService.Orgaolista().subscribe(orgao => {
+      this.listOrgao = orgao;
+    });
+
     
     if (this.params.id) {
       this.licencaAmbientalService.getLicencaById(this.params.id).subscribe(licencaAmbiental => {
@@ -93,7 +89,7 @@ export class LicencaAmbientalCadastroComponent implements OnInit {
           nr_protocolo_novo: this.licencaAmbiental[0].nr_protocolo_novo,
           id_licenca_pai: this.licencaAmbiental[0].id_licenca_pai,
           dt_emissao: new Date(this.licencaAmbiental[0].dt_emissao),
-          dt_validade: new Date(this.licencaAmbiental[0].dt_emissao),
+          dt_validade: new Date(this.licencaAmbiental[0].dt_validade),
           dt_emissao_protocolo: new Date(this.licencaAmbiental[0].dt_emissao_protocolo),
           // dt_protocolacao: new Date(this.licencaAmbiental[0].dt_protocolacao),
           dt_validade_protocolo: new Date(this.licencaAmbiental[0].dt_validade_protocolo),
@@ -115,6 +111,7 @@ export class LicencaAmbientalCadastroComponent implements OnInit {
   }
   
   salvar() {
+    console.log(JSON.stringify(this.formGroup.value));
     if (!this.formGroup.valid) { return; }  
       this.licencaAmbientalService[this.formGroup.value.id ? 'edit' : 'add'](this.formGroup.value).subscribe(() => {
         this.dialogBox.show('Licenca Ambiental salva com sucesso!', 'OK');
@@ -131,8 +128,8 @@ export class LicencaAmbientalCadastroComponent implements OnInit {
     console.log(this.formGroup.value);
   }
 
-  changeEntidade() {
-   console.log('id: ' + this.formGroup.getRawValue());
+  changeDias() {
+   console.log(this.formGroup.value); 
   }
 
 }

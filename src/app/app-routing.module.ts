@@ -36,6 +36,7 @@ import { TipoLicencaCadastroComponent } from './tipo-licenca/tipo-licenca-cadast
 import { EntidadeComponent } from './entidade/entidade.component';
 import { EntidadeCadastroComponent } from './entidade/entidade-cadastro/entidade-cadastro.component';
 import { LicencaAmbientalCadastroComponent } from './licenca-ambiental/licenca-ambiental-cadastro/licenca-ambiental-cadastro.component';
+import { LicencaEntidadeComponent } from './licenca-ambiental/licenca-entidade/licenca-entidade.component';
 
 const routes: Routes = [
   {
@@ -259,6 +260,24 @@ const routes: Routes = [
         data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
       }
 
+    ]
+  },
+  {
+    path: 'licencaentidade',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: LicencaEntidadeComponent,
+        data: { extraParameter: 'cadastroMenu' },
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'licencas/:id',
+        component: LicencaAmbientalCadastroComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
+      }
     ]
   },
 // #####################

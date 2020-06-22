@@ -1,0 +1,106 @@
+<div class="app-page-title app-page-title-simple" style="padding-bottom: 15px;">
+  <div class="page-title-wrapper">
+    <div class="page-title-heading">
+      <div>
+        <div class="page-title-subheading opacity-10">
+          <nav class="" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a [routerLink]="">
+                  <fa name="home"></fa>
+                </a>
+              </li>
+              <li class="breadcrumb-item">
+                Cadastro
+              </li>
+              <li class="active breadcrumb-item" aria-current="page">
+                Entidades
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main content -->
+<section class="content">
+  <div class="card-header-tab card-header">
+    <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
+      <i class="header-icon lnr-store mr-3 text-muted opacity-6"></i>
+      Entidades Licenciadas
+    </div>
+    <div class="btn-actions-pane-right">
+      <div class="btn-group-sm btn-group" role="group">
+        <a class="btn btn-warning" [routerLink]="['']">Licenciar</a>
+      </div>
+      <div class="btn-group-sm btn-group" role="group">
+        <a class="btn btn-primary" [routerLink]="['']">Protocolar</a>
+      </div>
+      <div class="btn-group-sm btn-group" role="group">
+        <a class="btn btn-success" [routerLink]="['']">Renovar</a>
+      </div>
+    </div>
+    <div class="btn-actions-pane-right">
+      <div class="btn-group-sm btn-group" role="group">
+        <a class="btn btn-success" [routerLink]="['/licencaambiental/adicionar']">Inserir Nova Licença</a>
+        <button class="btn btn-primary" type="button" (click)="editar(selected[0].id)">Editar</button>
+        <button class="btn btn-danger" type="button" (click)="remover()">Remover</button>
+      </div>
+    </div>
+  </div>
+  <div class="p-3 bg-white">
+    <div class="form-group form-inline mb-0">
+      <ngx-datatable-filter [margin]="'-6px'" [float]="'left'" [columns]="columnsLicencaEntidade"
+        [lista]="licencaEntidade" [table]="tableLicencaEntidade"></ngx-datatable-filter>
+    </div>
+  </div>
+
+  <ngx-datatable ngx-resize-watcher class="material striped" #tableLicencaEntidade 
+    [columns]="columnsLicencaEntidade" [selected]="selected"
+    [rows]="rowsLicencaEntidade"
+    [footerHeight]="40" 
+    [columnMode]="'force'" 
+    [selectionType]="'single'" 
+    [rowHeight]="'auto'" 
+    (activate)="activate($event)"
+    [messages]="{'emptyMessage': 'Nenhum resultado encontrado...', 'totalMessage': 'total'}" 
+    [limit]="5">
+    
+    <ngx-datatable-column name="Entidade" prop="nm_reduzido" [width]="100" [flexGrow]="1"></ngx-datatable-column>
+    <ngx-datatable-column name="Total Licenças" prop="nr_total_licenca" [width]="50" [flexGrow]="1"></ngx-datatable-column>
+    <ngx-datatable-column name="Protocolar" prop="nr_total_protocolar" [width]="50" [flexGrow]="1"></ngx-datatable-column>
+    <ngx-datatable-column name="Protocoladas Fora do Prazo" prop="nr_total_prot_fora_prazo" [width]="50" [flexGrow]="1"></ngx-datatable-column>
+    <ngx-datatable-column name="Total Vencidas" prop="nr_total_vencida" [width]="50" [flexGrow]="1"></ngx-datatable-column>
+    
+  </ngx-datatable>
+</section>
+
+
+<!-- <ngx-datatable-column name="N° L.A" prop="nr_licenca_ambiental" [width]="50" [flexGrow]="2"></ngx-datatable-column>
+<ngx-datatable-column name="Atividade" prop="nm_atividade" [flexGrow]="2"></ngx-datatable-column>
+<ngx-datatable-column name="Tipo" prop="nm_abreviado" [flexGrow]="2"></ngx-datatable-column>
+<ngx-datatable-column name="Validade" prop="dt_validade" [flexGrow]="2">
+  <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="rowsLicencaEntidade">
+    {{rowsLicencaEntidade[rowIndex].dt_validade| date:'dd/MM/yyyy'}}
+  </ng-template>
+</ngx-datatable-column>
+<ngx-datatable-column name="Orgão" prop="nm_orgao" [flexGrow]="2"></ngx-datatable-column>
+<ngx-datatable-column name="Situação" prop="ds_situacao" [flexGrow]="2"></ngx-datatable-column> -->
+<!-- <ngx-datatable-column name="Telefone" prop="ds_email_alerta" [flexGrow]="2"></ngx-datatable-column> -->
+<!-- <ngx-datatable-column name="Vigência" prop="vigencia" [flexGrow]="2">
+  <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+    {{row.dtIniVigencia | date:'d/MM/yyyy' }} - {{row.dtFimVigencia | date:'d/MM/yyyy' }}
+  </ng-template>
+</ngx-datatable-column>
+<ngx-datatable-column name="Período Programação" prop="dtIniProgramacao" [flexGrow]="1">
+  <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+    {{row.dtIniProgramacao| date:'d/MM/yyyy'}} - {{row.dtFimProgramacao| date:'d/MM/yyyy'}}
+  </ng-template>
+</ngx-datatable-column>
+<ngx-datatable-column name="Período Programação" prop="dtIniRetirada" [flexGrow]="1">
+  <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+    {{row.dtIniRetirada| date:'d/MM/yyyy'}} - {{row.dtFimRetirada| date:'d/MM/yyyy'}}
+  </ng-template>
+</ngx-datatable-column> -->

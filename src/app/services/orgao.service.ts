@@ -7,12 +7,17 @@ import { Orgao } from '../models/orgao';
 @Injectable({
   providedIn: 'root'
 })
+
 export class OrgaoService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
   listar(): any {
     return this.http.get(environment.baseUrl + '/auth/orgaos');
+  }
+
+  listaOrgao(): any {
+    return this.http.get(environment.baseUrl + '/auth/orgaolista');
   }
 
   Orgaolista(): any {
