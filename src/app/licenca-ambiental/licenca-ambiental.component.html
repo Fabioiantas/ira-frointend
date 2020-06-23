@@ -33,7 +33,7 @@
     </div>
     <div class="btn-actions-pane-right">
       <div class="btn-group-sm btn-group" role="group">
-        <a class="btn btn-warning" [routerLink]="['']">Licenciar</a>
+        <a class="btn btn-warning" (click)="licenciar(selected[0].id)">Licenciar</a>
       </div>
       <div class="btn-group-sm btn-group" role="group">
         <a class="btn btn-primary" [routerLink]="['']">Protocolar</a>

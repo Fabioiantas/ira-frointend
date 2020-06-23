@@ -27,7 +27,6 @@ export class LicencaAmbientalService {
     return this.http.delete(environment.baseUrl + '/auth/licenca/' + id);
   }
   
-  
   edit(licencaAmbiental: LicencaAmbiental) {
     return this.http.put(environment.baseUrl + '/auth/licenca', licencaAmbiental);
   }
@@ -39,4 +38,5 @@ export class LicencaAmbientalService {
   getLicencaById(id: any) {
     return this.http.get<LicencaAmbiental>(environment.baseUrl + '/auth/la/' + id);
   }
+
 }

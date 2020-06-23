@@ -68,6 +68,10 @@ export class LicencaAmbientalComponent implements OnInit {
     this.router.navigate(['/licencaambiental/adicionar/' + id])
   }
 
+  licenciar(id) {
+    this.router.navigate(['/licenciamento/' + id])
+  }
+
   editarForm(e){
     this.editar(this.selected[0].id);
   }
