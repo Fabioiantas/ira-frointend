@@ -20,13 +20,11 @@ export class SidebarComponent implements OnInit {
 
   private newInnerWidth: number;
   private innerWidth: number;
-  activeId = 'cadastroMenu';
+  activeId = 'licenciamentoMenu';
 
   toggleSidebar() {
     this.globals.toggleSidebar = !this.globals.toggleSidebar;
     window.dispatchEvent(new Event('fix-ngx-columns'));
-
-
   }
 
   sidebarHover() {
@@ -52,6 +50,6 @@ export class SidebarComponent implements OnInit {
     } else {
       this.globals.toggleSidebar = false;
     }
-
   }
+  
 }

@@ -19,7 +19,7 @@ export class LicencaAmbientalComponent implements OnInit {
     {name : 'Atividade', prop : 'nm_atividade', width : '20%', selecionado: true},
     {name : 'Tipo', prop : 'nm_abreviado', width : '5%', selecionado: true},
     {name : 'Validade', prop : 'dt_validade', width : '10%', selecionado: true},
-    {name : 'Orgão', prop : 'nm_orgao', width : '15%', selecionado: true},
+    {name : 'Orgão', prop : 'sg_orgao', width : '15%', selecionado: true},
     {name : 'Situação', prop : 'ds_situacao', width : '10%', selecionado: true}
     /*{name : 'CNPJ', prop : 'nr_protocolo', width : '35%', selecionado: true},
     {name : 'CPF', prop : 'nr_protocolo_novo', width : '35%', selecionado: true},
@@ -68,8 +68,20 @@ export class LicencaAmbientalComponent implements OnInit {
     this.router.navigate(['/licencaambiental/adicionar/' + id])
   }
 
-  licenciar(id) {
-    this.router.navigate(['/licenciamento/' + id])
+  licenciar(licenca) {
+    if (licenca.nr_licenca_ambiental === null) {
+      this.router.navigate(['/licenciamento/' + licenca.id]);
+    } else {
+      this.dialogBox.show('N° da Licença já informado.', 'WARNING');
+    }
+  }
+  
+  protocolar(licenca) {
+    if (licenca.nr_protocolo_novo === null) {
+      this.router.navigate(['/protocolacao/' + licenca.id]);
+    } else {
+      this.dialogBox.show('N° da Licença já protocolada.', 'WARNING');
+    }
   }
 
   editarForm(e){
@@ -81,5 +93,5 @@ export class LicencaAmbientalComponent implements OnInit {
       this.router.navigate(['/licencaambiental/adicionar/' + $event.row.id]);
     }
   }
-
+  
 }

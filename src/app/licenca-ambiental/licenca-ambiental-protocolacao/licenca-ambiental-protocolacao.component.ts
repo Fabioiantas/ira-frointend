@@ -1,25 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
-import { DialogBoxService } from 'src/app/_services/dialog-box.service';
 import * as moment from "moment";
-import { LicencaAmbientalService } from 'src/app/services/licenca-ambiental.service';
 import { LicencaAmbiental } from 'src/app/models/licencaAmbiental';
-import { stringify } from 'querystring';
-import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
-// import { ConsoleReporter } from 'jasmine';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { DialogBoxService } from 'src/app/_services/dialog-box.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { LicencaAmbientalService } from 'src/app/services/licenca-ambiental.service';
 
 @Component({
-  selector: 'app-licenca-ambiental-licenciamento',
-  templateUrl: './licenca-ambiental-licenciamento.component.html',
-  styleUrls: ['./licenca-ambiental-licenciamento.component.sass']
+  selector: 'app-licenca-ambiental-protocolacao',
+  templateUrl: './licenca-ambiental-protocolacao.component.html',
+  styleUrls: ['./licenca-ambiental-protocolacao.component.sass']
 })
-export class LicencaAmbientalLicenciamentoComponent implements OnInit {
+export class LicencaAmbientalProtocolacaoComponent implements OnInit {
   
   licencaAmbiental: LicencaAmbiental = new LicencaAmbiental();
   params: any;
   isLoading: any = false;
+  showProtocoloNovo: boolean = false;
   
+  //
+  nrLicencaAmbiental: string;
   nmEntidade: string;
   nmReduzido: string;
   nrCnpj: string;
@@ -31,18 +31,20 @@ export class LicencaAmbientalLicenciamentoComponent implements OnInit {
   dtEmissaoProtocolo: string;
   dtValidade: string;
   nrDiasLimite: number;
+  dsSituacaoLicenca: string;
 
 
   id: any;
   
   formGroup = new FormGroup({
     id: new FormControl(''),
-    nr_licenca_ambiental: new FormControl('',Validators.required),
-    dt_emissao: new FormControl('',Validators.required),
-    dt_validade: new FormControl('',Validators.required),
+    nr_licenca_ambiental: new FormControl(''),
+    dt_emissao: new FormControl(''),
+    dt_validade: new FormControl(''),
     nr_dias_limite_protocolo: new FormControl('', Validators.required),
     nr_protocolo: new FormControl(''),
-    dt_emissao_protocolo: new FormControl(),
+    nr_protocolo_novo: new FormControl('', Validators.required),
+    dt_emissao_protocolo: new FormControl('',Validators.required),
     dt_protocolacao: new FormControl(),
     dt_validade_protocolo: new FormControl(),
     id_entidade: new FormControl(''),
@@ -66,10 +68,11 @@ export class LicencaAmbientalLicenciamentoComponent implements OnInit {
     if (this.params.id) {
       this.licencaAmbientalService.getLicencaById(this.params.id).subscribe(licencaAmbiental => {
         this.licencaAmbiental = licencaAmbiental; 
-        if (this.licencaAmbiental[0].nr_licenca_ambiental !== null) {
-          this.dialogBox.show('N° da Licença já informado.', 'WARNING');
+        if (this.licencaAmbiental[0].nr_protocolo_novo !== null) {
+          this.dialogBox.show('Protocolo já informado.', 'WARNING');
           this.router.navigate(['/licenca']);
         }
+        this.nrLicencaAmbiental = licencaAmbiental[0].nr_licenca_ambiental;
         this.nmReduzido = licencaAmbiental[0].nm_reduzido;    
         this.nrCnpj = licencaAmbiental[0].nr_cnpj;       
         this.nmTipoLicenca   = licencaAmbiental[0].nm_licenca;       
@@ -81,6 +84,7 @@ export class LicencaAmbientalLicenciamentoComponent implements OnInit {
         this.dtEmissaoProtocolo = moment(licencaAmbiental[0].dt_emissao_protocolo).format("DD/MM/YYYY");   
         this.dtValidade = moment(licencaAmbiental[0].dt_validade).format("DD/MM/YYYY");   
         this.nrDiasLimite = licencaAmbiental[0].nr_dias_limite_protocolo;  
+        this.dsSituacaoLicenca = licencaAmbiental[0].ds_situacao;
         
         this.formGroup.patchValue({
           id: this.licencaAmbiental[0].id, 
@@ -107,14 +111,13 @@ export class LicencaAmbientalLicenciamentoComponent implements OnInit {
           ds_situacao: this.licencaAmbiental[0].ds_situacao
         });
       });
-      this.changeDias();
     }
   }
   
   salvar() {
     if (!this.formGroup.valid) { return; }  
-      this.licencaAmbientalService.licenciar(this.formGroup.value).subscribe(() => {
-        this.dialogBox.show('Licenca Ambiental licenciada com sucesso!', 'OK');
+      this.licencaAmbientalService.protocolar(this.formGroup.value).subscribe(() => {
+        this.dialogBox.show('Licença Protocolada com sucesso!', 'OK');
         this.router.navigate(['/licenca']);
       });
   }
@@ -126,19 +129,6 @@ export class LicencaAmbientalLicenciamentoComponent implements OnInit {
 
   handleValidSubmit() {
     console.log(this.formGroup.value);
-  }
-
-  changeDias() {
-    this.nrDiasLimite = this.formGroup.get('nr_dias_limite_protocolo').value;
-
-    let dtProt = moment(this.dtValidade, "DD/MM/YYYY").add(-this.nrDiasLimite, 'days').format("DD/MM/YYYY");
-    this.formGroup.get('dt_protocolar_em').setValue(dtProt);
-  }
-
-  onBlurMethod() {
-    this.nrDiasLimite = this.formGroup.get('nr_dias_limite_protocolo').value;
-    let dtProt = moment(this.dtValidade, "DD/MM/YYYY").add(-this.nrDiasLimite, 'days').format("DD/MM/YYYY");
-    this.formGroup.get('dt_protocolar_em').setValue(dtProt);
   }
 
 }

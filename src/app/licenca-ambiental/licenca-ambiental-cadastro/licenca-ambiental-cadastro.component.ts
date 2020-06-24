@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DialogBoxService } from 'src/app/_services/dialog-box.service';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, Data } from '@angular/router';
+import * as moment from "moment";
 import { LicencaAmbientalService } from 'src/app/services/licenca-ambiental.service';
 import { EntidadeService } from 'src/app/services/entidade.service';
 import { Entidade } from 'src/app/models/entidade';
@@ -12,6 +13,7 @@ import { TipoLicenca } from 'src/app/models/tipoLicenca';
 import { TipoLicencaService } from 'src/app/services/tipo-licenca.service';
 import { Orgao } from 'src/app/models/orgao';
 import { OrgaoService } from 'src/app/services/orgao.service';
+import { fakeAsync } from '@angular/core/testing';
 
 @Component({
   selector: 'app-licenca-ambiental-cadastro',
@@ -22,24 +24,29 @@ export class LicencaAmbientalCadastroComponent implements OnInit {
   licencaAmbiental: LicencaAmbiental = new LicencaAmbiental();
   params: any;
   isLoading: any = false;
-
+  showNovoP: boolean = false;
   id: any;
   
   listEntidade: Entidade[] = [];
   listTipoAtividade: TipoAtividade[] = [];
   listTipoLicenca: TipoLicenca[] = [];
   listOrgao: Orgao[] = [];
+
+  dtValidade: string;   
+  nrDiasLimite: number;  
   
   formGroup = new FormGroup({
     id: new FormControl(''),
     nr_licenca_ambiental: new FormControl(''),
     nr_protocolo: new FormControl(''),
+    nr_protocolo_novo: new FormControl(''),
     dt_emissao: new FormControl(),
     dt_validade: new FormControl(),
     dt_emissao_protocolo: new FormControl(),
     dt_protocolacao: new FormControl(),
     dt_validade_protocolo: new FormControl(),
     nr_dias_limite_protocolo: new FormControl('', Validators.required),
+    dt_protocolar_em: new FormControl(''),
     id_entidade: new FormControl('', Validators.required),
     id_orgao: new FormControl('', Validators.required),
     id_tipo_licenca: new FormControl('', Validators.required),
@@ -81,8 +88,12 @@ export class LicencaAmbientalCadastroComponent implements OnInit {
     
     if (this.params.id) {
       this.licencaAmbientalService.getLicencaById(this.params.id).subscribe(licencaAmbiental => {
-        this.licencaAmbiental = licencaAmbiental;        
-        this.formGroup.patchValue({
+          this.licencaAmbiental = licencaAmbiental;        
+          
+          this.dtValidade = moment(licencaAmbiental[0].dt_validade).format("DD/MM/YYYY");   
+          this.nrDiasLimite = licencaAmbiental[0].nr_dias_limite_protocolo;  
+          
+          this.formGroup.patchValue({
           id: this.licencaAmbiental[0].id, 
           nr_licenca_ambiental: this.licencaAmbiental[0].nr_licenca_ambiental,
           nr_protocolo: this.licencaAmbiental[0].nr_protocolo,
@@ -106,12 +117,19 @@ export class LicencaAmbientalCadastroComponent implements OnInit {
           ds_email_alerta: this.licencaAmbiental[0].ds_email_alerta,
           ds_situacao: this.licencaAmbiental[0].ds_situacao
         });
+        this.changeDias();
+        this.showNovoP = this.licencaAmbiental[0].nr_protocolo_novo !==null ? true : false;
+        if (this.showNovoP){
+          console.log('true');
+        }else{
+          console.log('false');
+        }
+
       });
     }
   }
   
   salvar() {
-    console.log(JSON.stringify(this.formGroup.value));
     if (!this.formGroup.valid) { return; }  
       this.licencaAmbientalService[this.formGroup.value.id ? 'edit' : 'add'](this.formGroup.value).subscribe(() => {
         this.dialogBox.show('Licenca Ambiental salva com sucesso!', 'OK');
@@ -129,7 +147,10 @@ export class LicencaAmbientalCadastroComponent implements OnInit {
   }
 
   changeDias() {
-   console.log(this.formGroup.value); 
+    this.nrDiasLimite = this.formGroup.get('nr_dias_limite_protocolo').value;
+    let dtProt = moment(this.dtValidade, "DD/MM/YYYY").add(-this.nrDiasLimite, 'days').format("DD/MM/YYYY");
+    console.log('dtProt '+dtProt);
+    this.formGroup.get('dt_protocolar_em').setValue(dtProt);
   }
 
 }

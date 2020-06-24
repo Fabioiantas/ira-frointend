@@ -38,6 +38,7 @@ import { EntidadeCadastroComponent } from './entidade/entidade-cadastro/entidade
 import { LicencaAmbientalCadastroComponent } from './licenca-ambiental/licenca-ambiental-cadastro/licenca-ambiental-cadastro.component';
 import { LicencaEntidadeComponent } from './licenca-ambiental/licenca-entidade/licenca-entidade.component';
 import { LicencaAmbientalLicenciamentoComponent } from './licenca-ambiental/licenca-ambiental-licenciamento/licenca-ambiental-licenciamento.component';
+import { LicencaAmbientalProtocolacaoComponent } from './licenca-ambiental/licenca-ambiental-protocolacao/licenca-ambiental-protocolacao.component';
 
 const routes: Routes = [
   {
@@ -119,20 +120,20 @@ const routes: Routes = [
       {
         path: '',
         component: LicencaAmbientalComponent,
-        data: { extraParameter: 'cadastroMenu' },
+        data: { extraParameter: 'licenciamentoMenu' },
         canActivate: [AuthGuard]
       },
       {
         path: 'adicionar',
         component: LicencaAmbientalComponent,
         canActivate: [AuthGuard],
-        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
+        data: { roles: [Role.Admin], extraParameter: 'licenciamentoMenu' }
       },
       {
         path: 'adicionar/:id',
         component: LicencaAmbientalComponent,
         canActivate: [AuthGuard],
-        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
+        data: { roles: [Role.Admin], extraParameter: 'licenciamentoMenu' }
       }
 
     ]
@@ -144,20 +145,20 @@ const routes: Routes = [
       {
         path: '',
         component: OrgaoResponsavelComponent,
-        data: { extraParameter: 'cadastroMenu' },
+        data: { extraParameter: 'licenciamentoMenu' },
         canActivate: [AuthGuard]
       },
       {
         path: 'adicionar',
         component: OrgaoResponsavelCadastroComponent,
         canActivate: [AuthGuard],
-        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
+        data: { roles: [Role.Admin], extraParameter: 'licenciamentoMenu' }
       },
       {
         path: 'adicionar/:id',
         component: OrgaoResponsavelCadastroComponent,
         canActivate: [AuthGuard],
-        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
+        data: { roles: [Role.Admin], extraParameter: 'licenciamentoMenu' }
       }
 
     ]
@@ -169,20 +170,20 @@ const routes: Routes = [
       {
         path: '',
         component: TipoAtividadeComponent,
-        data: { extraParameter: 'cadastroMenu' },
+        data: { extraParameter: 'licenciamentoMenu' },
         canActivate: [AuthGuard]
       },
       {
         path: 'adicionar',
         component: TipoAtividadeCadastroComponent,
         canActivate: [AuthGuard],
-        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
+        data: { roles: [Role.Admin], extraParameter: 'licenciamentoMenu' }
       },
       {
         path: 'adicionar/:id',
         component: TipoAtividadeComponent,
         canActivate: [AuthGuard],
-        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
+        data: { roles: [Role.Admin], extraParameter: 'licenciamentoMenu' }
       }
 
     ]
@@ -195,20 +196,20 @@ const routes: Routes = [
       {
         path: '',
         component: TipoLicencaComponent,
-        data: { extraParameter: 'cadastroMenu' },
+        data: { extraParameter: 'licenciamentoMenu' },
         canActivate: [AuthGuard]
       },
       {
         path: 'adicionar',
         component: TipoLicencaCadastroComponent,
         canActivate: [AuthGuard],
-        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
+        data: { roles: [Role.Admin], extraParameter: 'licenciamentoMenu' }
       },
       {
         path: 'adicionar/:id',
         component: TipoLicencaCadastroComponent,
         canActivate: [AuthGuard],
-        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
+        data: { roles: [Role.Admin], extraParameter: 'licenciamentoMenu' }
       }
 
     ]
@@ -220,20 +221,20 @@ const routes: Routes = [
       {
         path: '',
         component: EntidadeComponent,
-        data: { extraParameter: 'cadastroMenu' },
+        data: { extraParameter: 'licenciamentoMenu' },
         canActivate: [AuthGuard]
       },
       {
         path: 'adicionar',
         component: EntidadeCadastroComponent,
         canActivate: [AuthGuard],
-        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
+        data: { roles: [Role.Admin], extraParameter: 'licenciamentoMenu' }
       },
       {
         path: 'adicionar/:id',
         component: EntidadeCadastroComponent,
         canActivate: [AuthGuard],
-        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
+        data: { roles: [Role.Admin], extraParameter: 'licenciamentoMenu' }
       }
 
     ]
@@ -245,20 +246,20 @@ const routes: Routes = [
       {
         path: '',
         component: LicencaAmbientalComponent,
-        data: { extraParameter: 'cadastroMenu' },
+        data: { extraParameter: 'licenciamentoMenu' },
         canActivate: [AuthGuard]
       },
       {
         path: 'adicionar',
         component: LicencaAmbientalCadastroComponent,
         canActivate: [AuthGuard],
-        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
+        data: { roles: [Role.Admin], extraParameter: 'licenciamentoMenu' }
       },
       {
         path: 'adicionar/:id',
         component: LicencaAmbientalCadastroComponent,
         canActivate: [AuthGuard],
-        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
+        data: { roles: [Role.Admin], extraParameter: 'licenciamentoMenu' }
       }
 
     ]
@@ -270,14 +271,14 @@ const routes: Routes = [
       {
         path: '',
         component: LicencaEntidadeComponent,
-        data: { extraParameter: 'cadastroMenu' },
+        data: { extraParameter: 'licenciamentoMenu' },
         canActivate: [AuthGuard]
       },
       {
         path: 'licencas/:id',
         component: LicencaAmbientalCadastroComponent,
         canActivate: [AuthGuard],
-        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
+        data: { roles: [Role.Admin], extraParameter: 'licenciamentoMenu' }
       }
     ]
   },
@@ -288,14 +289,20 @@ const routes: Routes = [
       {
         path: '',
         component: LicencaAmbientalLicenciamentoComponent,
-        data: { extraParameter: 'cadastroMenu' },
+        data: { extraParameter: 'licenciamentoMenu' },
         canActivate: [AuthGuard]
-      },
+      }
+    ]
+  },
+  {
+    path: 'protocolacao/:id',
+    component: BaseLayoutComponent,
+    children: [
       {
-        path: 'licencas/:id',
-        component: LicencaAmbientalCadastroComponent,
-        canActivate: [AuthGuard],
-        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
+        path: '',
+        component: LicencaAmbientalProtocolacaoComponent,
+        data: { extraParameter: 'licenciamentoMenu' },
+        canActivate: [AuthGuard]
       }
     ]
   },
