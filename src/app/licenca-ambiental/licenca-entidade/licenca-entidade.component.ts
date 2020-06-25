@@ -38,4 +38,12 @@ export class LicencaEntidadeComponent implements OnInit {
     }
   }
 
+  editar(id) {
+    console.log(id);
+  }
+
+  remover() {
+
+  }
+
 }
