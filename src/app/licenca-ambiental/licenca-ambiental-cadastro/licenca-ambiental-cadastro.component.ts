@@ -14,6 +14,7 @@ import { TipoLicencaService } from 'src/app/services/tipo-licenca.service';
 import { Orgao } from 'src/app/models/orgao';
 import { OrgaoService } from 'src/app/services/orgao.service';
 import { fakeAsync } from '@angular/core/testing';
+import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
 
 @Component({
   selector: 'app-licenca-ambiental-cadastro',
@@ -99,11 +100,11 @@ export class LicencaAmbientalCadastroComponent implements OnInit {
           nr_protocolo: this.licencaAmbiental[0].nr_protocolo,
           nr_protocolo_novo: this.licencaAmbiental[0].nr_protocolo_novo,
           id_licenca_pai: this.licencaAmbiental[0].id_licenca_pai,
-          dt_emissao: new Date(this.licencaAmbiental[0].dt_emissao),
-          dt_validade: new Date(this.licencaAmbiental[0].dt_validade),
-          dt_emissao_protocolo: new Date(this.licencaAmbiental[0].dt_emissao_protocolo),
+          dt_emissao: this.licencaAmbiental[0].dt_emissao ? new Date(this.licencaAmbiental[0].dt_emissao) : null,
+          dt_validade: this.licencaAmbiental[0].dt_validade ? new Date(this.licencaAmbiental[0].dt_validade) : null,
+          dt_emissao_protocolo: this.licencaAmbiental[0].dt_emissao_protocolo ? new Date(this.licencaAmbiental[0].dt_emissao_protocolo) : null,
+          dt_validade_protocolo: this.licencaAmbiental[0].dt_validade_protocolo ? new Date(this.licencaAmbiental[0].dt_validade_protocolo) : null,
           // dt_protocolacao: new Date(this.licencaAmbiental[0].dt_protocolacao),
-          dt_validade_protocolo: new Date(this.licencaAmbiental[0].dt_validade_protocolo),
           nr_dias_limite_protocolo: this.licencaAmbiental[0].nr_dias_limite_protocolo,
           id_entidade: this.licencaAmbiental[0].id_entidade,
           nm_entidade: this.licencaAmbiental[0].nm_entidade,
@@ -130,6 +131,7 @@ export class LicencaAmbientalCadastroComponent implements OnInit {
   }
   
   salvar() {
+    console.log(this.formGroup.value);
     if (!this.formGroup.valid) { return; }  
       this.licencaAmbientalService[this.formGroup.value.id ? 'edit' : 'add'](this.formGroup.value).subscribe(() => {
         this.dialogBox.show('Licenca Ambiental salva com sucesso!', 'OK');
@@ -146,8 +148,18 @@ export class LicencaAmbientalCadastroComponent implements OnInit {
     console.log(this.formGroup.value);
   }
 
+  changeValidade() {
+    this.dtValidade = this.formGroup.get('dt_validade').value;
+    console.log('data:' + this.dtValidade);
+  }
   changeDias() {
+       
     this.nrDiasLimite = this.formGroup.get('nr_dias_limite_protocolo').value;
+    if (this.dtValidade === null) {
+      this.dtValidade = moment(this.formGroup.get('dt_validade').value).format('DD/MM/YYYY');
+    }
+    console.log('di:: ' + this.nrDiasLimite);
+    console.log('da:: ' + this.dtValidade);
     let dtProt = moment(this.dtValidade, "DD/MM/YYYY").add(-this.nrDiasLimite, 'days').format("DD/MM/YYYY");
     console.log('dtProt '+dtProt);
     this.formGroup.get('dt_protocolar_em').setValue(dtProt);

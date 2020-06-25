@@ -14,13 +14,14 @@ export class LicencaAmbientalComponent implements OnInit {
   rowsLicencaAmbiental: any[];
 
   columnsLicencaAmbiental = [
+    {name : 'N° Licenca Ambiental', prop : 'nr_licenca_ambiental', align: 'right', width : '10%', selecionado: true},
     {name : 'Entidade', prop : 'nm_entidade', width : '50%', selecionado: true},
-    {name : 'N° L.A', prop : 'nr_licenca_ambiental', align: 'right', width : '10%', selecionado: true},
     {name : 'Atividade', prop : 'nm_atividade', width : '20%', selecionado: true},
     {name : 'Tipo', prop : 'nm_abreviado', width : '5%', selecionado: true},
     {name : 'Validade', prop : 'dt_validade', width : '10%', selecionado: true},
     {name : 'Orgão', prop : 'sg_orgao', width : '15%', selecionado: true},
-    {name : 'Situação', prop : 'ds_situacao', width : '10%', selecionado: true}
+    {name : 'Situação', prop : 'ds_situacao', width : '10%', selecionado: true},
+    {name : 'id', prop : 'id', width : '50%', selecionado: true}
     /*{name : 'CNPJ', prop : 'nr_protocolo', width : '35%', selecionado: true},
     {name : 'CPF', prop : 'nr_protocolo_novo', width : '35%', selecionado: true},
     {name : 'Endereço', prop : 'id_licenca_pai', width : '35%', selecionado: true},
@@ -47,7 +48,6 @@ export class LicencaAmbientalComponent implements OnInit {
     this.licencaAmbientalService.getAll().subscribe((response) => {
       this.licencaAmbiental = [...response];
       this.rowsLicencaAmbiental = [...response];
-      console.log(this.rowsLicencaAmbiental[0].dt_validade);
     });
   }
 
@@ -77,10 +77,22 @@ export class LicencaAmbientalComponent implements OnInit {
   }
   
   protocolar(licenca) {
-    if (licenca.nr_protocolo_novo === null) {
-      this.router.navigate(['/protocolacao/' + licenca.id]);
+    if (licenca.nr_licenca_ambiental === null) {
+      this.dialogBox.show('Efetue o Licenciamento antes de Protocolar.', 'WARNING');
+    }else if (licenca.nr_protocolo_novo !== null) {
+      this.dialogBox.show('Licença já Protocolada.', 'WARNING');
     } else {
-      this.dialogBox.show('N° da Licença já protocolada.', 'WARNING');
+      this.router.navigate(['/protocolacao/' + licenca.id]);
+    }
+  }
+  
+  renova(licenca) {
+    if (licenca.nr_protocolo_novo === null) {
+      this.dialogBox.show('Antes de Renovar efetue a Protocolação da Licença.', 'WARNING');
+    }else if (licenca.nr_licenca_ambiental === null) {
+      this.dialogBox.show('Antes de Renovar efetue o Licenciamento.','WARNING');
+    } else {
+      this.router.navigate(['/renova/' + licenca.id]);
     }
   }
 

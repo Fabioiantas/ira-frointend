@@ -94,9 +94,13 @@ export class LicencaAmbientalProtocolacaoComponent implements OnInit {
           id_licenca_pai: this.licencaAmbiental[0].id_licenca_pai,
           dt_emissao: new Date(this.licencaAmbiental[0].dt_emissao),
           dt_validade: new Date(this.licencaAmbiental[0].dt_validade),
-          dt_emissao_protocolo: new Date(this.licencaAmbiental[0].dt_emissao_protocolo),
+          // dt_emissao_protocolo: new Date(this.licencaAmbiental[0].dt_emissao_protocolo),
+          // dt_validade_protocolo: new Date(this.licencaAmbiental[0].dt_validade_protocolo),
+
+           dt_emissao_protocolo: this.licencaAmbiental[0].dt_emissao_protocolo ? new Date(this.licencaAmbiental[0].dt_emissao_protocolo) : null,
+           dt_validade_protocolo: this.licencaAmbiental[0].dt_validade_protocolo ? new Date(this.licencaAmbiental[0].dt_validade_protocolo) : null,
+          
           // dt_protocolacao: new Date(this.licencaAmbiental[0].dt_protocolacao),
-          dt_validade_protocolo: new Date(this.licencaAmbiental[0].dt_validade_protocolo),
           nr_dias_limite_protocolo: this.licencaAmbiental[0].nr_dias_limite_protocolo,
           id_entidade: this.licencaAmbiental[0].id_entidade,
           nm_entidade: this.licencaAmbiental[0].nm_entidade,
@@ -115,6 +119,7 @@ export class LicencaAmbientalProtocolacaoComponent implements OnInit {
   }
   
   salvar() {
+    console.log(this.formGroup.getRawValue());
     if (!this.formGroup.valid) { return; }  
       this.licencaAmbientalService.protocolar(this.formGroup.value).subscribe(() => {
         this.dialogBox.show('Licença Protocolada com sucesso!', 'OK');

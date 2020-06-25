@@ -44,6 +44,10 @@ export class LicencaAmbientalService {
     return this.http.put<any>(environment.baseUrl + '/auth/licenciar', licencaAmbiental);
   }
   
+  renovar(licencaAmbiental: LicencaAmbiental) {
+    return this.http.post<any>(environment.baseUrl + '/auth/renova', licencaAmbiental);
+  }
+  
   protocolar(licencaAmbiental: LicencaAmbiental) {
     return this.http.put<any>(environment.baseUrl + '/auth/protocolar', licencaAmbiental);
   }

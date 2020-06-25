@@ -39,6 +39,7 @@ import { LicencaAmbientalCadastroComponent } from './licenca-ambiental/licenca-a
 import { LicencaEntidadeComponent } from './licenca-ambiental/licenca-entidade/licenca-entidade.component';
 import { LicencaAmbientalLicenciamentoComponent } from './licenca-ambiental/licenca-ambiental-licenciamento/licenca-ambiental-licenciamento.component';
 import { LicencaAmbientalProtocolacaoComponent } from './licenca-ambiental/licenca-ambiental-protocolacao/licenca-ambiental-protocolacao.component';
+import { LicencaAmbientalRenovaComponent } from './licenca-ambiental/licenca-ambiental-renova/licenca-ambiental-renova.component';
 
 const routes: Routes = [
   {
@@ -289,6 +290,18 @@ const routes: Routes = [
       {
         path: '',
         component: LicencaAmbientalLicenciamentoComponent,
+        data: { extraParameter: 'licenciamentoMenu' },
+        canActivate: [AuthGuard]
+      }
+    ]
+  },
+  {
+    path: 'renova/:id',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: LicencaAmbientalRenovaComponent,
         data: { extraParameter: 'licenciamentoMenu' },
         canActivate: [AuthGuard]
       }

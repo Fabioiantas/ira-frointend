@@ -39,7 +39,7 @@
         <a class="btn btn-primary" (click)="protocolar(selected[0])">Protocolar</a>
       </div>
       <div class="btn-group-sm btn-group" role="group">
-        <a class="btn btn-success" [routerLink]="['']">Renovar</a>
+        <a class="btn btn-success" (click)="renova(selected[0])">Renovar</a>
       </div>
     </div>
     <div class="btn-actions-pane-right">
@@ -66,10 +66,10 @@
     [rowHeight]="'40'" 
     (activate)="activate($event)"
     [messages]="{'emptyMessage': 'Nenhum resultado encontrado...', 'totalMessage': 'total'}" 
-    [limit]="5">
-    <ngx-datatable-column name="Entidade" prop="nm_entidade" [width]="500" [flexGrow]="2"></ngx-datatable-column>
+    [limit]="10">
+    <ngx-datatable-column name="Entidade" prop="nm_entidade" [width]="400" [flexGrow]="2"></ngx-datatable-column>
 
-    <ngx-datatable-column name="N° L.A" prop="nr_licenca_ambiental" [width]="70" [flexGrow]="2"></ngx-datatable-column>
+    <ngx-datatable-column name="N° L.A" prop="nr_licenca_ambiental" [width]="120" [flexGrow]="2"></ngx-datatable-column>
 
     <ngx-datatable-column name="Atividade" prop="nm_atividade" [width]="200" [flexGrow]="2"></ngx-datatable-column>
 
