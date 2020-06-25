@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DialogBoxService } from '../_services/dialog-box.service';
 import { LicencaAmbientalService } from '../services/licenca-ambiental.service';
+// import { ConsoleReporter } from 'jasmine';
 
 @Component({
   selector: 'app-licenca-ambiental',
@@ -22,19 +23,6 @@ export class LicencaAmbientalComponent implements OnInit {
     {name : 'Orgão', prop : 'sg_orgao', width : '15%', selecionado: true},
     {name : 'Situação', prop : 'ds_situacao', width : '10%', selecionado: true},
     {name : 'id', prop : 'id', width : '50%', selecionado: true}
-    /*{name : 'CNPJ', prop : 'nr_protocolo', width : '35%', selecionado: true},
-    {name : 'CPF', prop : 'nr_protocolo_novo', width : '35%', selecionado: true},
-    {name : 'Endereço', prop : 'id_licenca_pai', width : '35%', selecionado: true},
-    {name : 'E-mail', prop : 'dt_emissao', width : '35%', selecionado: true},*/
-    /*{name : 'Telefone', prop : 'dt_emissao_protocolo', width : '35%', selecionado: true},
-    {name : 'Telefone', prop : 'dt_protocolacao', width : '35%', selecionado: true},
-    {name : 'Telefone', prop : 'dt_validade_protocolo', width : '35%', selecionado: true},
-    {name : 'Telefone', prop : 'nr_dias_limite_protocolo', width : '35%', selecionado: true},
-    {name : 'Telefone', prop : 'id_entidade', width : '35%', selecionado: true},
-    {name : 'Telefone', prop : 'id_orgao', width : '35%', selecionado: true},
-    {name : 'Telefone', prop : 'id_tipo_licenca', width : '35%', selecionado: true},
-    {name : 'Telefone', prop : 'id_tipo_atividade', width : '35%', selecionado: true},
-    {name : 'Telefone', prop : 'ds_email_alerta', width : '35%', selecionado: true}*/
   ];
   constructor(private router: Router,
               private licencaAmbientalService: LicencaAmbientalService,
@@ -69,10 +57,12 @@ export class LicencaAmbientalComponent implements OnInit {
   }
 
   licenciar(licenca) {
-    if (licenca.nr_licenca_ambiental === null) {
-      this.router.navigate(['/licenciamento/' + licenca.id]);
-    } else {
-      this.dialogBox.show('N° da Licença já informado.', 'WARNING');
+    if (licenca !== null) {
+      if (licenca.nr_licenca_ambiental === null) {
+        this.router.navigate(['/licenciamento/' + licenca.id]);
+      } else {
+        this.dialogBox.show('N° da Licença já informado.', 'WARNING');
+      }
     }
   }
   
@@ -96,13 +86,25 @@ export class LicencaAmbientalComponent implements OnInit {
     }
   }
 
-  editarForm(e){
+  editarForm(e) {
     this.editar(this.selected[0].id);
   }
 
   activate($event) {
     if ($event.type === 'dblclick') {
       this.router.navigate(['/licencaambiental/adicionar/' + $event.row.id]);
+    }
+  }
+
+  getProximaAcao(situacao) {
+    if (situacao == 'VIGENTE') {
+      return 'Protocolar';
+    }
+  }
+  
+  getLinkAcao(situacao) {
+    if (situacao == 'VIGENTE') {
+      return '/protocolacao';
     }
   }
   

@@ -84,6 +84,12 @@
     <ngx-datatable-column name="Orgão" prop="sg_orgao" [flexGrow]="2"></ngx-datatable-column>
 
     <ngx-datatable-column name="Situação" prop="ds_situacao" [flexGrow]="2"></ngx-datatable-column>
+    
+    <ngx-datatable-column name="Próxima Ação" prop="ds_situacao" [flexGrow]="2">
+      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+       <a href="getLinkAcao(value)">{{getProximaAcao(value)}}</a>
+      </ng-template>
+    </ngx-datatable-column>
 
     <!-- <ngx-datatable-column name="Telefone" prop="ds_email_alerta" [flexGrow]="2"></ngx-datatable-column> -->
     <!-- <ngx-datatable-column name="Vigência" prop="vigencia" [flexGrow]="2">
