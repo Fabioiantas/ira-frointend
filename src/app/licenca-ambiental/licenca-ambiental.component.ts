@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DialogBoxService } from '../_services/dialog-box.service';
 import { LicencaAmbientalService } from '../services/licenca-ambiental.service';
-// import { ConsoleReporter } from 'jasmine';
+import * as moment from 'moment';
+import { LicencaEntidade } from '../models/licencaEntidade';
+import { MomentDateFormatter } from '../_helpers/MomentDateParse';
 
 @Component({
   selector: 'app-licenca-ambiental',
@@ -16,12 +18,14 @@ export class LicencaAmbientalComponent implements OnInit {
 
   columnsLicencaAmbiental = [
     {name : 'N° Licenca Ambiental', prop : 'nr_licenca_ambiental', align: 'right', width : '10%', selecionado: true},
-    {name : 'Entidade', prop : 'nm_entidade', width : '50%', selecionado: true},
+    //{name : 'Entidade', prop : 'nm_entidade', width : '50%', selecionado: true},
+    {name : 'Entidade', prop : 'nm_reduzido', width : '50%', selecionado: true},
     {name : 'Atividade', prop : 'nm_atividade', width : '20%', selecionado: true},
     {name : 'Tipo', prop : 'nm_abreviado', width : '5%', selecionado: true},
     {name : 'Validade', prop : 'dt_validade', width : '10%', selecionado: true},
     {name : 'Orgão', prop : 'sg_orgao', width : '15%', selecionado: true},
     {name : 'Situação', prop : 'ds_situacao', width : '10%', selecionado: true},
+    {name : 'Ação', prop : 'ds_acao', width : '10%', selecionado: true},
     {name : 'id', prop : 'id', width : '50%', selecionado: true}
   ];
   constructor(private router: Router,
@@ -58,10 +62,10 @@ export class LicencaAmbientalComponent implements OnInit {
 
   licenciar(licenca) {
     if (licenca !== null) {
-      if (licenca.nr_licenca_ambiental === null) {
-        this.router.navigate(['/licenciamento/' + licenca.id]);
-      } else {
+      if (licenca.nr_licenca_ambiental !== null) {
         this.dialogBox.show('N° da Licença já informado.', 'WARNING');
+      } else {
+        this.router.navigate(['/licenciamento/' + licenca.id]);
       }
     }
   }
@@ -69,7 +73,7 @@ export class LicencaAmbientalComponent implements OnInit {
   protocolar(licenca) {
     if (licenca.nr_licenca_ambiental === null) {
       this.dialogBox.show('Efetue o Licenciamento antes de Protocolar.', 'WARNING');
-    }else if (licenca.nr_protocolo_novo !== null) {
+    } else if (licenca.nr_protocolo_novo !== null) {
       this.dialogBox.show('Licença já Protocolada.', 'WARNING');
     } else {
       this.router.navigate(['/protocolacao/' + licenca.id]);
@@ -91,15 +95,32 @@ export class LicencaAmbientalComponent implements OnInit {
   }
 
   activate($event) {
+    if ($event.type === 'click' && $event.column.prop === 'ds_acao') {
+      this.acao($event.row);
+    }
     if ($event.type === 'dblclick') {
       this.router.navigate(['/licencaambiental/adicionar/' + $event.row.id]);
     }
   }
 
-  getProximaAcao(situacao) {
-    if (situacao == 'VIGENTE') {
-      return 'Protocolar';
-    }
+  acao (licenca) {
+    if (licenca.nr_licenca_ambiental === null && licenca.nr_protocolo_novo === null) {
+      this.router.navigate(['/licenciamento/' + licenca.id]);
+    } else if (licenca.nr_licenca_ambiental !== null && licenca.nr_protocolo_novo === null) {
+      this.router.navigate(['/protocolacao/' + licenca.id]);
+    } else {
+      this.router.navigate(['/renova/' + licenca.id]);
+    } 
+  }
+
+  getProximaAcao(licenca) {
+    if (licenca.nr_licenca_ambiental === null && licenca.nr_protocolo_novo === null) {
+      return 'Licenciar';
+    } else if (licenca.nr_licenca_ambiental !== null && licenca.nr_protocolo_novo === null) {
+      return 'Protocolar em ' + moment(licenca.dt_validade_protocolo).format('DD/MM/YYYY');
+    } else {
+      return 'Renovar';
+    } 
   }
   
   getLinkAcao(situacao) {

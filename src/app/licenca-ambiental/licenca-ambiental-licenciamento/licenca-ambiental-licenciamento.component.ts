@@ -29,6 +29,7 @@ export class LicencaAmbientalLicenciamentoComponent implements OnInit {
   sgOrgao: string;
   nrProtocolo: string;
   dtEmissaoProtocolo: string;
+  dtEmissao: string;
   dtValidade: string;
   nrDiasLimite: number;
 
@@ -77,9 +78,10 @@ export class LicencaAmbientalLicenciamentoComponent implements OnInit {
         this.nmOrgao         = licencaAmbiental[0].nm_orgao;       
         this.sgOrgao         = licencaAmbiental[0].sg_orgao;       
         this.nrProtocolo     = licencaAmbiental[0].nr_protocolo;       
-        // this.dtEmissaoProtocolo = licencaAmbiental[0].dt_emissao_protocolo;  
+       
         this.dtEmissaoProtocolo = moment(licencaAmbiental[0].dt_emissao_protocolo).format("DD/MM/YYYY");   
         this.dtValidade = moment(licencaAmbiental[0].dt_validade).format("DD/MM/YYYY");   
+        this.dtEmissao = moment(licencaAmbiental[0].dt_emissao).format("DD/MM/YYYY");   
         this.nrDiasLimite = licencaAmbiental[0].nr_dias_limite_protocolo;  
         
         this.formGroup.patchValue({
@@ -88,11 +90,12 @@ export class LicencaAmbientalLicenciamentoComponent implements OnInit {
           nr_protocolo: this.licencaAmbiental[0].nr_protocolo,
           nr_protocolo_novo: this.licencaAmbiental[0].nr_protocolo_novo,
           id_licenca_pai: this.licencaAmbiental[0].id_licenca_pai,
-          dt_emissao: new Date(this.licencaAmbiental[0].dt_emissao),
-          dt_validade: new Date(this.licencaAmbiental[0].dt_validade),
-          dt_emissao_protocolo: new Date(this.licencaAmbiental[0].dt_emissao_protocolo),
-          // dt_protocolacao: new Date(this.licencaAmbiental[0].dt_protocolacao),
-          dt_validade_protocolo: new Date(this.licencaAmbiental[0].dt_validade_protocolo),
+          
+          dt_emissao: this.licencaAmbiental[0].dt_emissao !== null ? new Date(this.licencaAmbiental[0].dt_emissao) : null,
+          dt_validade: this.licencaAmbiental[0].dt_validade !== null ? new Date(this.licencaAmbiental[0].dt_validade) : null,
+          dt_emissao_protocolo: this.licencaAmbiental[0].dt_emissao_protocolo ? new Date(this.licencaAmbiental[0].dt_emissao_protocolo) : null,
+          dt_validade_protocolo: this.licencaAmbiental[0].dt_validade_protocolo ? new Date(this.licencaAmbiental[0].dt_validade_protocolo) : null,
+          
           nr_dias_limite_protocolo: this.licencaAmbiental[0].nr_dias_limite_protocolo,
           id_entidade: this.licencaAmbiental[0].id_entidade,
           nm_entidade: this.licencaAmbiental[0].nm_entidade,
@@ -129,16 +132,19 @@ export class LicencaAmbientalLicenciamentoComponent implements OnInit {
   }
 
   changeDias() {
-    this.nrDiasLimite = this.formGroup.get('nr_dias_limite_protocolo').value;
-
-    let dtProt = moment(this.dtValidade, "DD/MM/YYYY").add(-this.nrDiasLimite, 'days').format("DD/MM/YYYY");
-    this.formGroup.get('dt_protocolar_em').setValue(dtProt);
+    if (this.formGroup.get('dt_validade').value) {
+      this.nrDiasLimite = this.formGroup.get('nr_dias_limite_protocolo').value;
+      let dtProt = moment(this.formGroup.get('dt_validade').value, "DD/MM/YYYY").add(-this.nrDiasLimite, 'days').format("DD/MM/YYYY");
+      this.formGroup.get('dt_protocolar_em').setValue(dtProt !== null ? dtProt : null);
+    }
   }
-
+  
   onBlurMethod() {
-    this.nrDiasLimite = this.formGroup.get('nr_dias_limite_protocolo').value;
-    let dtProt = moment(this.dtValidade, "DD/MM/YYYY").add(-this.nrDiasLimite, 'days').format("DD/MM/YYYY");
-    this.formGroup.get('dt_protocolar_em').setValue(dtProt);
+    if (this.formGroup.get('dt_validade').value) {
+      this.nrDiasLimite = this.formGroup.get('nr_dias_limite_protocolo').value;
+      let dtProt = moment(this.formGroup.get('dt_validade').value, "DD/MM/YYYY").add(-this.nrDiasLimite, 'days').format("DD/MM/YYYY");
+      this.formGroup.get('dt_protocolar_em').setValue(dtProt !== null ? dtProt : null);
+    }
   }
 
 }

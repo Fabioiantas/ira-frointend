@@ -58,36 +58,38 @@
   </div>
 
   <ngx-datatable ngx-resize-watcher class="bootstrap striped" #tableLicencaAmbiental 
-    [columns]="columnsLicencaAmbiental" [selected]="selected"
+    [columns]="columnsLicencaAmbiental" 
+    [selected]="selected"
     [rows]="rowsLicencaAmbiental"
     [footerHeight]="40" 
     [columnMode]="'force'" 
     [selectionType]="'single'" 
-    [rowHeight]="'40'" 
+    [rowHeight]="'50'" 
     (activate)="activate($event)"
     [messages]="{'emptyMessage': 'Nenhum resultado encontrado...', 'totalMessage': 'total'}" 
     [limit]="10">
-    <ngx-datatable-column name="Entidade" prop="nm_entidade" [width]="400" [flexGrow]="2"></ngx-datatable-column>
+    <ngx-datatable-column name="Entidade" prop="nm_reduzido" [width]="250" [flexGrow]="1"></ngx-datatable-column>
 
-    <ngx-datatable-column name="N° L.A" prop="nr_licenca_ambiental" [width]="120" [flexGrow]="2"></ngx-datatable-column>
+    <ngx-datatable-column name="N° L.A" prop="nr_licenca_ambiental" [width]="110" [flexGrow]="1"></ngx-datatable-column>
 
-    <ngx-datatable-column name="Atividade" prop="nm_atividade" [width]="200" [flexGrow]="2"></ngx-datatable-column>
+    <ngx-datatable-column name="Atividade" prop="nm_atividade" [width]="200" [flexGrow]="1"></ngx-datatable-column>
 
-    <ngx-datatable-column name="Tipo" prop="nm_abreviado" [flexGrow]="2"></ngx-datatable-column>
+    <ngx-datatable-column name="Tipo" prop="nm_abreviado" [width]="60" [flexGrow]="1"></ngx-datatable-column>
 
-    <ngx-datatable-column name="Validade" prop="dt_validade" [flexGrow]="2">
+    <ngx-datatable-column name="Validade" prop="dt_validade" [width]="90" [flexGrow]="1">
+
       <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="rowsLicencaAmbiental">
-        {{rowsLicencaAmbiental[rowIndex].dt_validade| date:'dd/MM/yyyy'}}
+        {{rowsLicencaAmbiental[rowIndex].dt_validade | date:'dd/MM/yyyy'}}
       </ng-template>
     </ngx-datatable-column>
 
-    <ngx-datatable-column name="Orgão" prop="sg_orgao" [flexGrow]="2"></ngx-datatable-column>
+    <ngx-datatable-column name="Orgão" prop="sg_orgao" [flexGrow]="1"></ngx-datatable-column>
 
-    <ngx-datatable-column name="Situação" prop="ds_situacao" [flexGrow]="2"></ngx-datatable-column>
+    <ngx-datatable-column name="Situação" prop="ds_situacao" [width]="100" [flexGrow]="1"></ngx-datatable-column>
     
-    <ngx-datatable-column name="Próxima Ação" prop="ds_situacao" [flexGrow]="2">
+    <ngx-datatable-column name="Próxima Ação" prop="ds_acao" [flexGrow]="1">
       <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-       <a href="getLinkAcao(value)">{{getProximaAcao(value)}}</a>
+          <a class="btn btn-outline-warning btn-xs">{{getProximaAcao(rowsLicencaAmbiental[rowIndex])}}</a>
       </ng-template>
     </ngx-datatable-column>
 
