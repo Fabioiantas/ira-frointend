@@ -31,7 +31,7 @@
       <i class="header-icon lnr-store mr-3 text-muted opacity-6"></i>
       Licenças Ambientais
     </div>
-    <div class="btn-actions-pane-right">
+    <!-- <div class="btn-actions-pane-right">
       <div class="btn-group-sm btn-group" role="group">
         <a class="btn btn-warning" (click)="licenciar(selected[0])">Licenciar</a>
       </div>
@@ -41,12 +41,13 @@
       <div class="btn-group-sm btn-group" role="group">
         <a class="btn btn-success" (click)="renova(selected[0])">Renovar</a>
       </div>
-    </div>
+    </div> -->
     <div class="btn-actions-pane-right">
       <div class="btn-group-sm btn-group" role="group">
         <a class="btn btn-success" [routerLink]="['/licencaambiental/adicionar']">Inserir Nova Licença</a>
         <button class="btn btn-primary" type="button" (click)="editar(selected[0].id)">Editar</button>
         <button class="btn btn-danger" type="button" (click)="remover()">Remover</button>
+        <button class="btn btn-info" type="button" (click)="detalhar()">Detalhar</button>
       </div>
     </div>
   </div>
