@@ -1,8 +1,8 @@
 <div [class]="'app-header header-shadow ' + (config$ | async).headerTheme">
-  <div class="logo-type">Portal Fármaco</div>
+  <div class="logo-type">Ira Ambiental</div>
   <div class="app-header__content">
     <div class="app-header-left">
-      
+
     </div>
     <div class="app-header-right">
       <div class="row">
@@ -10,7 +10,7 @@
           <app-search-box></app-search-box>
         </div>
         <div class="col-sm header-btn-lg">
-          <i class="fa fa-envelope-o icon-header"></i> farmaco@frisia.coop.br
+          <i class="fa fa-envelope-o icon-header"></i> {{userEmail}}
         </div>
         <div class="col-sm header-btn-lg">
           <app-dots style="margin-right: 10px;"></app-dots>

@@ -8,7 +8,7 @@ import { Color } from 'ng2-charts';
 })
 export class HomeComponent implements OnInit {
 
-  heading = 'Portal Fármaco Frísia';
+  heading = 'IRA - AMBIENTAL';
   subheading = 'Portal para programação de produtos farmacos.';
   icon = 'fa fa-medkit icon-gradient bg-tempting-azure';
   pageSize = 2;

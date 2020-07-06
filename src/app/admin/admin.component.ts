@@ -9,7 +9,7 @@ import { DialogBoxService } from '../_services/dialog-box.service';
 })
 export class AdminComponent implements OnInit {
   heading = 'Admin Page';
-  subheading = 'Portal para programação de produtos farmacos.';
+  subheading = 'Gerenciamento de Licenças Ambientais.';
   icon = 'fa fa-medkit icon-gradient bg-tempting-azure';
 
   closeResult: string;

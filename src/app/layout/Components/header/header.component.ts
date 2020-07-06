@@ -2,6 +2,7 @@ import {Component, HostBinding} from '@angular/core';
 import {select} from '@angular-redux/store';
 import {Observable} from 'rxjs';
 import {ThemeOptions} from '../../../theme-options';
+import { AuthenticationService } from 'src/app/_services/authentication.service';
 
 @Component({
   selector: 'app-header',
@@ -9,7 +10,16 @@ import {ThemeOptions} from '../../../theme-options';
 })
 export class HeaderComponent {
 
-  constructor(public globals: ThemeOptions) {
+  currentUser = atob(localStorage.getItem('user'));
+  userEmail: string;
+
+  constructor(public globals: ThemeOptions
+             ,private authenticationService: AuthenticationService) {
+  }
+
+  ngOnInit() {
+    //this.userEmail = this.currentUser.email;
+    // this.email = this.authenticationService.currentUserValue;
   }
 
   @HostBinding('class.isActive')
