@@ -1,6 +1,9 @@
 import { LicencaEntidadeService } from './../../services/licenca-entidade.service';
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { Color } from 'ng2-charts';
+import { LicencaAmbientalService } from 'src/app/services/licenca-ambiental.service';
+import { LicencaAmbiental } from 'src/app/models/licencaAmbiental';
+import { LicencaEntidade } from 'src/app/models/licencaEntidade';
 
 @Component({
   selector: 'app-home',
@@ -190,8 +193,11 @@ export class HomeComponent implements OnInit {
   totalVencidas: number;
   totalProtocolar: number;
   totalProtocoladas: number;
+  licencaVencidas: LicencaAmbiental;
+  licencaEntidade: LicencaEntidade;
 
-  constructor(private licencaEntidadeService: LicencaEntidadeService) { }
+  constructor(private licencaEntidadeService: LicencaEntidadeService,
+                      licencaAmbientalService: LicencaAmbientalService) { }
 
   ngOnInit() {
     this.setTotais();
@@ -213,6 +219,22 @@ export class HomeComponent implements OnInit {
     this.licencaEntidadeService.getTotalSituacao('PROTOCOLADA').subscribe(total => {
       this.totalProtocoladas = total[0].total;
     });
+
+    this.licencaEntidadeService.getLicencaSituacao('VENCIDA').subscribe(vencidas => {
+      this.licencaVencidas = vencidas;
+    });
+
+    this.licencaEntidadeService.getAll().subscribe(licencas => {
+      this.licencaEntidade = licencas;
+    });
+  }
+
+  public acao (licenca) {
+    this.licencaEntidadeService.acao(licenca);
+  }
+
+  public getProximaAcao(licenca): string {
+    return this.licencaEntidadeService.getProximaAcao(licenca);
   }
 
 }

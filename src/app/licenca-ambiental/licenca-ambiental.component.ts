@@ -3,8 +3,6 @@ import { Router } from '@angular/router';
 import { DialogBoxService } from '../_services/dialog-box.service';
 import { LicencaAmbientalService } from '../services/licenca-ambiental.service';
 import * as moment from 'moment';
-import { LicencaEntidade } from '../models/licencaEntidade';
-import { MomentDateFormatter } from '../_helpers/MomentDateParse';
 
 @Component({
   selector: 'app-licenca-ambiental',
@@ -69,7 +67,7 @@ export class LicencaAmbientalComponent implements OnInit {
       }
     }
   }
-  
+
   protocolar(licenca) {
     if (licenca.nr_licenca_ambiental === null) {
       this.dialogBox.show('Efetue o Licenciamento antes de Protocolar.', 'WARNING');
@@ -79,7 +77,7 @@ export class LicencaAmbientalComponent implements OnInit {
       this.router.navigate(['/protocolacao/' + licenca.id]);
     }
   }
-  
+
   renova(licenca) {
     if (licenca.nr_protocolo_novo === null) {
       this.dialogBox.show('Antes de Renovar efetue a Protocolação da Licença.', 'WARNING');
@@ -110,7 +108,7 @@ export class LicencaAmbientalComponent implements OnInit {
       this.router.navigate(['/protocolacao/' + licenca.id]);
     } else {
       this.router.navigate(['/renova/' + licenca.id]);
-    } 
+    }
   }
 
   getProximaAcao(licenca) {
@@ -120,13 +118,13 @@ export class LicencaAmbientalComponent implements OnInit {
       return 'Protocolar em ' + moment(licenca.dt_validade_protocolo).format('DD/MM/YYYY');
     } else {
       return 'Renovar';
-    } 
+    }
   }
-  
+
   getLinkAcao(situacao) {
     if (situacao == 'VIGENTE') {
       return '/protocolacao';
     }
   }
-  
+
 }
