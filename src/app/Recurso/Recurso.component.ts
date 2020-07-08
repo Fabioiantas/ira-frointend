@@ -12,7 +12,7 @@ declare var $: any;
   styleUrls: ['./Recurso.component.css']
 })
 export class RecursoComponent implements OnInit {
-  
+
   recursos: any = [];
   selected: any = [];
   rowsRecurso: any[];
@@ -39,8 +39,8 @@ export class RecursoComponent implements OnInit {
 
   remover() {
     if (this.selected) {
-      this.dialogBox.show("Confirma remoção do Recurso?","CONFIRM").then(sim=>{
-        if(sim){
+      this.dialogBox.show('Confirma remoção do Recurso?', 'CONFIRM').then(sim => {
+        if(sim) {
           this.recursoService.remove(this.selected[0].id).subscribe(data => {
             this.dialogBox.show('Recurso removido com sucesso!', 'OK');
             this.populaTable();
@@ -55,7 +55,7 @@ export class RecursoComponent implements OnInit {
     this.router.navigate(['/recurso/adicionar/' + id])
   }
 
-  editarForm(e){
+  editarForm(e) {
     this.editar(this.selected[0].id);
   }
 

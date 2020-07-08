@@ -14,8 +14,16 @@ export class LicencaEntidadeService {
     return this.http.get(environment.baseUrl + '/auth/licencaentidade');
   }
 
-  getTotalProtocolar(id):any {
+  getTotalProtocolar(id: string): any {
     return this.http.get(environment.baseUrl + '/auth/licencaprotocolar/' + id);
+  }
+
+  getTotalValidas(): any {
+    return this.http.get(environment.baseUrl + '/auth/getvalidas');
+  }
+
+  getTotalSituacao(situacao: string): any {
+    return this.http.get(environment.baseUrl + '/auth/gettotalsituacao/' + situacao);
   }
 
 

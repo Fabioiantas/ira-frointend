@@ -1,3 +1,4 @@
+import { LicencaEntidadeService } from './../../services/licenca-entidade.service';
 import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { Color } from 'ng2-charts';
 
@@ -185,9 +186,33 @@ export class HomeComponent implements OnInit {
     maintainAspectRatio: false
   };
 
-  constructor() { }
+  totalLicenca: number;
+  totalVencidas: number;
+  totalProtocolar: number;
+  totalProtocoladas: number;
+
+  constructor(private licencaEntidadeService: LicencaEntidadeService) { }
 
   ngOnInit() {
+    this.setTotais();
+  }
+
+  public setTotais() {
+    this.licencaEntidadeService.getTotalValidas().subscribe(total => {
+      this.totalLicenca = total[0].total;
+    });
+
+    this.licencaEntidadeService.getTotalSituacao('VENCIDA').subscribe(total => {
+      this.totalVencidas = total[0].total;
+    });
+
+    this.licencaEntidadeService.getTotalSituacao('PROTOCOLAR').subscribe(total => {
+      this.totalProtocolar = total[0].total;
+    });
+
+    this.licencaEntidadeService.getTotalSituacao('PROTOCOLADA').subscribe(total => {
+      this.totalProtocoladas = total[0].total;
+    });
   }
 
 }
