@@ -225,6 +225,7 @@ export class HomeComponent implements OnInit {
     });
 
     this.licencaEntidadeService.getAll().subscribe(licencas => {
+      console.log(JSON.stringify(licencas));
       this.licencaEntidade = licencas;
     });
   }

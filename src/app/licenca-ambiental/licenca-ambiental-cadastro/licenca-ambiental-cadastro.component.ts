@@ -13,8 +13,6 @@ import { TipoLicenca } from 'src/app/models/tipoLicenca';
 import { TipoLicencaService } from 'src/app/services/tipo-licenca.service';
 import { Orgao } from 'src/app/models/orgao';
 import { OrgaoService } from 'src/app/services/orgao.service';
-import { fakeAsync } from '@angular/core/testing';
-import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
 
 @Component({
   selector: 'app-licenca-ambiental-cadastro',
@@ -27,22 +25,22 @@ export class LicencaAmbientalCadastroComponent implements OnInit {
   isLoading: any = false;
   showNovoP: boolean = false;
   id: any;
-  
+
   listEntidade: Entidade[] = [];
   listTipoAtividade: TipoAtividade[] = [];
   listTipoLicenca: TipoLicenca[] = [];
   listOrgao: Orgao[] = [];
 
-  dtValidade: string;   
-  nrDiasLimite: number;  
-  
+  dtValidade: string;
+  nrDiasLimite: number;
+
   formGroup = new FormGroup({
     id: new FormControl(''),
     nr_licenca_ambiental: new FormControl(''),
     nr_protocolo: new FormControl(''),
     nr_protocolo_novo: new FormControl(''),
     dt_emissao: new FormControl(),
-    dt_validade: new FormControl(),
+    dt_validade: new FormControl(''),
     dt_emissao_protocolo: new FormControl(),
     dt_protocolacao: new FormControl(),
     dt_validade_protocolo: new FormControl(),
@@ -55,25 +53,25 @@ export class LicencaAmbientalCadastroComponent implements OnInit {
     ds_email_alerta: new FormControl('', Validators.required)
   });
 
-  constructor(private licencaAmbientalService: LicencaAmbientalService, 
+  constructor(private licencaAmbientalService: LicencaAmbientalService,
               private entidadeService: EntidadeService,
               private atividadeService: TipoAtividadeService,
               private tipoLicencaService: TipoLicencaService,
               private orgaoService: OrgaoService,
               private dialogBox: DialogBoxService,
-              private route: ActivatedRoute, 
+              private route: ActivatedRoute,
               private router: Router) { }
 
   ngOnInit() {
-    
+
     this.route.params.subscribe(data => {
       this.params = data;
     });
-    
+
     this.entidadeService.listaEntidades().subscribe(entidades => {
       this.listEntidade = entidades;
-    });  
-    
+    });
+
     this.atividadeService.listaAtividades().subscribe(tipoAtividades => {
       this.listTipoAtividade = tipoAtividades;
     });
@@ -86,16 +84,16 @@ export class LicencaAmbientalCadastroComponent implements OnInit {
       this.listOrgao = orgao;
     });
 
-    
+
     if (this.params.id) {
       this.licencaAmbientalService.getLicencaById(this.params.id).subscribe(licencaAmbiental => {
-          this.licencaAmbiental = licencaAmbiental;        
-          
-          this.dtValidade = moment(licencaAmbiental[0].dt_validade).format("DD/MM/YYYY");   
-          this.nrDiasLimite = licencaAmbiental[0].nr_dias_limite_protocolo;  
-          
+          this.licencaAmbiental = licencaAmbiental;
+
+          this.dtValidade = moment(licencaAmbiental[0].dt_validade).format("DD/MM/YYYY");
+          this.nrDiasLimite = licencaAmbiental[0].nr_dias_limite_protocolo;
+
           this.formGroup.patchValue({
-          id: this.licencaAmbiental[0].id, 
+          id: this.licencaAmbiental[0].id,
           nr_licenca_ambiental: this.licencaAmbiental[0].nr_licenca_ambiental,
           nr_protocolo: this.licencaAmbiental[0].nr_protocolo,
           nr_protocolo_novo: this.licencaAmbiental[0].nr_protocolo_novo,
@@ -129,10 +127,10 @@ export class LicencaAmbientalCadastroComponent implements OnInit {
       });
     }
   }
-  
+
   salvar() {
     console.log(this.formGroup.value);
-    if (!this.formGroup.valid) { return; }  
+    if (!this.formGroup.valid) { return; }
       this.licencaAmbientalService[this.formGroup.value.id ? 'edit' : 'add'](this.formGroup.value).subscribe(() => {
         this.dialogBox.show('Licenca Ambiental salva com sucesso!', 'OK');
         this.router.navigate(['/licenca']);
@@ -149,20 +147,17 @@ export class LicencaAmbientalCadastroComponent implements OnInit {
   }
 
   changeValidade() {
-    this.dtValidade = this.formGroup.get('dt_validade').value;
     console.log('data:' + this.dtValidade);
+    this.dtValidade = this.formGroup.get('dt_validade').value;
+
   }
+
   changeDias() {
-       
-    this.nrDiasLimite = this.formGroup.get('nr_dias_limite_protocolo').value;
-    if (this.dtValidade === null) {
-      this.dtValidade = moment(this.formGroup.get('dt_validade').value).format('DD/MM/YYYY');
+    if (this.formGroup.get('dt_validade').value !== null) {
+      this.formGroup.get('dt_protocolar_em').setValue(
+        moment(this.formGroup.get('dt_validade').value).add(- this.formGroup.get('nr_dias_limite_protocolo').value, 'days').format("DD/MM/YYYY")
+      );
     }
-    console.log('di:: ' + this.nrDiasLimite);
-    console.log('da:: ' + this.dtValidade);
-    let dtProt = moment(this.dtValidade, "DD/MM/YYYY").add(-this.nrDiasLimite, 'days').format("DD/MM/YYYY");
-    console.log('dtProt '+dtProt);
-    this.formGroup.get('dt_protocolar_em').setValue(dtProt);
   }
 
 }

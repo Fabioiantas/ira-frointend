@@ -70,37 +70,12 @@
 
     <ngx-datatable-column name="Entidade" prop="nm_reduzido" [width]="100" [flexGrow]="1"></ngx-datatable-column>
 
-    <ngx-datatable-column name="Total" prop="nr_total_licenca" [width]="5" [flexGrow]="1"></ngx-datatable-column>
-
-    <ngx-datatable-column name="Vigêntes" prop="nr_total_vigente" [width]="5" [flexGrow]="1">
-      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-          {{getTotais(rowsLicencaEntidade[rowIndex], 'VIGENTE')}}
-      </ng-template>
-    </ngx-datatable-column>
-
-    <ngx-datatable-column name="Protocolar" prop="nr_total_protocolar" [width]="5" [flexGrow]="1">
-      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-          {{getTotais(rowsLicencaEntidade[rowIndex], 'PROTOCOLAR')}}
-      </ng-template>
-    </ngx-datatable-column>
-
-    <ngx-datatable-column name="Protocoladas" prop="nr_total_protocolada" [width]="5" [flexGrow]="1">
-      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-          {{getTotais(rowsLicencaEntidade[rowIndex], 'PROTOCOLADA')}}
-      </ng-template>
-    </ngx-datatable-column>
-
-    <ngx-datatable-column name="Fora do Prazo" prop="nr_total_prot_fora_prazo" [width]="5" [flexGrow]="1">
-      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-          {{getTotais(rowsLicencaEntidade[rowIndex], 'PROT. FORA DO PRAZO')}}
-      </ng-template>
-    </ngx-datatable-column>
-
-    <ngx-datatable-column name="Vencidas" prop="nr_total_vencida" [width]="5" [flexGrow]="1">
-      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-          {{getTotais(rowsLicencaEntidade[rowIndex], 'VENCIDA')}}
-      </ng-template>
-    </ngx-datatable-column>
+    <ngx-datatable-column name="Total" prop="total" [width]="5" [flexGrow]="1"></ngx-datatable-column>
+    <ngx-datatable-column name="Vigêntes" prop="total_vigente" [width]="5" [flexGrow]="1"></ngx-datatable-column>
+    <ngx-datatable-column name="Protocolar" prop="total_protocolar" [width]="5" [flexGrow]="1"></ngx-datatable-column>
+    <ngx-datatable-column name="Protocolada" prop="total_protocolada" [width]="5" [flexGrow]="1"></ngx-datatable-column>
+    <ngx-datatable-column name="Prot Fora do Prazo" prop="total_fora_p" [width]="5" [flexGrow]="1"></ngx-datatable-column>
+    <ngx-datatable-column name="Vencidadas" prop="total_vencida" [width]="5" [flexGrow]="1"></ngx-datatable-column>
 
   </ngx-datatable>
 </section>

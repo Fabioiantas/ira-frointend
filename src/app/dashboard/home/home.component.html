@@ -118,7 +118,7 @@
     <div class="card mb-3">
       <div class="card-header-tab card-header">
         <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
-          <i class="header-icon lnr-laptop-phone mr-3 text-muted opacity-6"> </i>
+          <i class="header-icon lnr-apartment mr-3 text-muted opacity-6"> </i>
           Entidades
         </div>
         <div class="btn-actions-pane-right">
@@ -145,13 +145,13 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let licencas of licencaEntidade">
-              <th scope="row" class="text-center">{{ licencas.id }}</th>
+            <tr *ngFor="let licencas of licencaEntidade; let i=index">
+              <th scope="row" class="text-center">{{ i }}</th>
               <td>
-                <ngb-highlight [result]="licencas.nm_entidade" [term]="searchTerm"></ngb-highlight>
+                <ngb-highlight [result]="licencas.nm_reduzido" [term]="searchTerm"></ngb-highlight>
               </td>
               <td>
-                <ngb-highlight [result]="licencas.nr_total_licenca | number :'1.0-0'" [term]="searchTerm"></ngb-highlight>
+                <ngb-highlight [result]="licencas.total | number :'1.0-0'" [term]="searchTerm"></ngb-highlight>
               </td>
               <!-- <td>
                 <ngb-highlight [result]="country.population | number :'1.0-0'" [term]="searchTerm"></ngb-highlight>

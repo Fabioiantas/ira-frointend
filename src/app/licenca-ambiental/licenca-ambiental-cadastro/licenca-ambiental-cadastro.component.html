@@ -66,7 +66,7 @@
           <label for="nr_protocolo">N° Protocolo</label>
           <input *ngIf="!showNovoP" formControlName="nr_protocolo" type="text" class="form-control" id="nr_protocolo"
             formControlName="nr_protocolo" placeholder="N° Protocolo">
-          
+
           <input *ngIf="showNovoP" formControlName="nr_protocolo_novo" type="text" class="form-control" id="nr_protocolo_novo"
             placeholder="N° Protocolo">
         </div>
@@ -99,9 +99,11 @@
         </div>
         <div class="col-md-4 mb-4 form-group">
           <label for="dt_validade">Validade Licença</label>
+
           <input class="form-control" (click)="dt_validade.toggle()" placeholder="dia/mês/ano" name="dt_validade"
-            formControlName="dt_validade" (change)="changeValidade()" ngbDatepicker #dt_validade="ngbDatepicker" autocomplete="off">
-          <button class="btn btn-primary" (click)="dt_validade.toggle()" type="button">
+            formControlName="dt_validade" (change)="changeValidade()" ngbDatepicker #dt_validade="ngbDatepicker" autocomplete="off" disable>
+
+            <button class="btn btn-primary" (click)="dt_validade.toggle()" type="button">
             <i class="fa fa-calendar"></i>
           </button>
         </div>
