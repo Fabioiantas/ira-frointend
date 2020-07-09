@@ -29,40 +29,46 @@
   <div class="card-body">
     <form [formGroup]="this.formGroup" class="needs-validation">
       <h5 class="card-title">Cadastro de Entidade</h5>
-      
+
       <!-- INPUTS -->
       <div class="form-row">
-        
+
         <div class="col-md-12 mb-12 form-group">
           <label for="nm_entidade">Nome Entidade</label>
           <input formControlName="nm_entidade" type="text" class="form-control" id="nm_entidade"
             placeholder="Nome Entidade" value="" [(ngModel)]="entidade.nm_entidade" required>
         </div>
-        
+
+        <div class="col-md-12 mb-12 form-group">
+          <label for="nm_entidade">Nome Reduzido</label>
+          <input formControlName="nm_reduzido" type="text" class="form-control" id="nm_reduzido"
+            placeholder="Nome Reduzido" value="" [(ngModel)]="entidade.nm_reduzido" required>
+        </div>
+
         <div class="col-md-12 mb-12 form-group">
           <label for="nr_cnpj">CNPJ</label>
           <input formControlName="nr_cnpj" type="text" class="form-control" id="nr_cnpj"
             placeholder="CNPJ" value="" [(ngModel)]="entidade.nr_cnpj" required>
         </div>
-        
+
         <div class="col-md-12 mb-12 form-group">
           <label for="nr_cpf">CPF</label>
           <input formControlName="nr_cpf" type="text" class="form-control" id="nr_cpf"
             placeholder="CPF" value="" [(ngModel)]="entidade.nr_cpf" required>
         </div>
-        
+
         <div class="col-md-12 mb-12 form-group">
           <label for="email">E-mail</label>
           <input formControlName="email" type="text" class="form-control" id="email"
             placeholder="E-mail" value="" [(ngModel)]="entidade.email" required>
         </div>
-        
+
         <div class="col-md-12 mb-12 form-group">
           <label for="ds_endereco">Endereço Completo</label>
           <input formControlName="ds_endereco" type="text" class="form-control" id="ds_endereco"
             placeholder="Endereço" value="" [(ngModel)]="entidade.ds_endereco" required>
         </div>
-        
+
         <div class="col-md-12 mb-12 form-group">
           <label for="nr_telefone">Telefone para Contato</label>
           <input formControlName="nr_telefone" type="text" class="form-control" id="nr_telefone"

@@ -14,17 +14,18 @@ export class EntidadeCadastroComponent implements OnInit {
   formGroup = new FormGroup({
     id: new FormControl(''),
     nm_entidade: new FormControl('', Validators.required),
+    nm_reduzido: new FormControl('', Validators.required),
     nr_cnpj: new FormControl('',[
       Validators.required,
       Validators.pattern("[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}")
     ]),
-    nr_cpf: new FormControl('',[ 
+    nr_cpf: new FormControl('',[
       Validators.required,
       Validators.pattern("[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}")]
       ),
     ds_endereco: new FormControl('', Validators.required),
     email: new FormControl('',[
-      Validators.required, 
+      Validators.required,
       Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
     nr_telefone: new FormControl('', Validators.required)
   });
@@ -35,34 +36,36 @@ export class EntidadeCadastroComponent implements OnInit {
 
   id: any;
   nmEntidade: any;
+  nmReduzido: any;
   nrCnpj: any;
   nrCpf: any;
   dsEndereco: any;
   email: any;
   nrTelefone: any;
 
-  constructor(private entidadeService: EntidadeService, 
+  constructor(private entidadeService: EntidadeService,
               private dialogBox: DialogBoxService,
-              private route: ActivatedRoute, 
+              private route: ActivatedRoute,
               private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe(data => {
       this.params = data;
     });
-    
+
     if (this.params.id) {
       this.entidadeService.getById(this.params.id).subscribe(entidade => {
         this.entidade = entidade;
         this.formGroup.patchValue({
           id: entidade.id,
           nmEntidade: entidade.nm_entidade,
+          nmReduzido: entidade.nm_reduzido,
           nrCnpj: entidade.nr_cnpj,
           nrCpf: entidade.nr_cpf,
           dsEndereco: entidade.ds_endereco,
           email: entidade.email,
           nrTelefone: entidade.nr_telefone
-          
+
         });
       });
     }
@@ -71,7 +74,7 @@ export class EntidadeCadastroComponent implements OnInit {
   salvar() {
     if (!this.formGroup.valid) { return; }
     console.log(this.formGroup.value.id);
-    
+
     this.entidadeService[this.formGroup.value.id ? 'edit' : 'add'](this.formGroup.value).subscribe(() => {
       this.dialogBox.show('Entidade salva com sucesso!', 'OK');
       this.router.navigate(['/entidade']);

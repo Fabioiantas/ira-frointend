@@ -58,16 +58,16 @@
     </div>
   </div>
 
-  <ngx-datatable ngx-resize-watcher class="bootstrap striped" #tableLicencaAmbiental 
-    [columns]="columnsLicencaAmbiental" 
+  <ngx-datatable ngx-resize-watcher class="bootstrap striped" #tableLicencaAmbiental
+    [columns]="columnsLicencaAmbiental"
     [selected]="selected"
     [rows]="rowsLicencaAmbiental"
-    [footerHeight]="40" 
-    [columnMode]="'force'" 
-    [selectionType]="'single'" 
-    [rowHeight]="'50'" 
+    [footerHeight]="40"
+    [columnMode]="'force'"
+    [selectionType]="'single'"
+    [rowHeight]="'50'"
     (activate)="activate($event)"
-    [messages]="{'emptyMessage': 'Nenhum resultado encontrado...', 'totalMessage': 'total'}" 
+    [messages]="{'emptyMessage': 'Nenhum resultado encontrado...', 'totalMessage': 'total'}"
     [limit]="10">
     <ngx-datatable-column name="Entidade" prop="nm_reduzido" [width]="250" [flexGrow]="1"></ngx-datatable-column>
 
@@ -87,10 +87,10 @@
     <ngx-datatable-column name="Orgão" prop="sg_orgao" [flexGrow]="1"></ngx-datatable-column>
 
     <ngx-datatable-column name="Situação" prop="ds_situacao" [width]="100" [flexGrow]="1"></ngx-datatable-column>
-    
+
     <ngx-datatable-column name="Próxima Ação" prop="ds_acao" [flexGrow]="1">
       <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-          <a class="btn btn-outline-warning btn-xs">{{getProximaAcao(rowsLicencaAmbiental[rowIndex])}}</a>
+          <a class="btn btn-outline-warning btn-xs">{{getProximaAcao(row)}}</a>
       </ng-template>
     </ngx-datatable-column>
 

@@ -21,6 +21,7 @@ export class LicencaAmbientalComponent implements OnInit {
     {name : 'Atividade', prop : 'nm_atividade', width : '20%', selecionado: true},
     {name : 'Tipo', prop : 'nm_abreviado', width : '5%', selecionado: true},
     {name : 'Validade', prop : 'dt_validade', width : '10%', selecionado: true},
+    //{name : 'Validade Prot.', prop : 'dt_validade_protocolo', width : '10%', selecionado: true},
     {name : 'Orgão', prop : 'sg_orgao', width : '15%', selecionado: true},
     {name : 'Situação', prop : 'ds_situacao', width : '10%', selecionado: true},
     {name : 'Ação', prop : 'ds_acao', width : '10%', selecionado: true},
@@ -118,12 +119,6 @@ export class LicencaAmbientalComponent implements OnInit {
       return 'Protocolar em ' + moment(licenca.dt_validade_protocolo).format('DD/MM/YYYY');
     } else {
       return 'Renovar';
-    }
-  }
-
-  getLinkAcao(situacao) {
-    if (situacao == 'VIGENTE') {
-      return '/protocolacao';
     }
   }
 
