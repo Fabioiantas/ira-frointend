@@ -23,7 +23,7 @@ export class LicencaAmbientalCadastroComponent implements OnInit {
   licencaAmbiental: LicencaAmbiental = new LicencaAmbiental();
   params: any;
   isLoading: any = false;
-  showNovoP: boolean = false;
+  showNovoP = false;
   id: any;
 
   listEntidade: Entidade[] = [];
@@ -40,7 +40,7 @@ export class LicencaAmbientalCadastroComponent implements OnInit {
     nr_protocolo: new FormControl(''),
     nr_protocolo_novo: new FormControl(''),
     dt_emissao: new FormControl(),
-    dt_validade: new FormControl(''),
+    dt_validade: new FormControl(),
     dt_emissao_protocolo: new FormControl(),
     dt_protocolacao: new FormControl(),
     dt_validade_protocolo: new FormControl(),
@@ -100,8 +100,10 @@ export class LicencaAmbientalCadastroComponent implements OnInit {
           id_licenca_pai: this.licencaAmbiental[0].id_licenca_pai,
           dt_emissao: this.licencaAmbiental[0].dt_emissao ? new Date(this.licencaAmbiental[0].dt_emissao) : null,
           dt_validade: this.licencaAmbiental[0].dt_validade ? new Date(this.licencaAmbiental[0].dt_validade) : null,
-          dt_emissao_protocolo: this.licencaAmbiental[0].dt_emissao_protocolo ? new Date(this.licencaAmbiental[0].dt_emissao_protocolo) : null,
-          dt_validade_protocolo: this.licencaAmbiental[0].dt_validade_protocolo ? new Date(this.licencaAmbiental[0].dt_validade_protocolo) : null,
+          dt_emissao_protocolo: this.licencaAmbiental[0].dt_emissao_protocolo ?
+            new Date(this.licencaAmbiental[0].dt_emissao_protocolo) : null,
+          dt_validade_protocolo: this.licencaAmbiental[0].dt_validade_protocolo ?
+            new Date(this.licencaAmbiental[0].dt_validade_protocolo) : null,
           // dt_protocolacao: new Date(this.licencaAmbiental[0].dt_protocolacao),
           nr_dias_limite_protocolo: this.licencaAmbiental[0].nr_dias_limite_protocolo,
           id_entidade: this.licencaAmbiental[0].id_entidade,
@@ -116,14 +118,9 @@ export class LicencaAmbientalCadastroComponent implements OnInit {
           ds_email_alerta: this.licencaAmbiental[0].ds_email_alerta,
           ds_situacao: this.licencaAmbiental[0].ds_situacao
         });
-        this.changeDias();
-        this.showNovoP = this.licencaAmbiental[0].nr_protocolo_novo !==null ? true : false;
-        if (this.showNovoP){
-          console.log('true');
-        }else{
-          console.log('false');
-        }
 
+          this.changeDias();
+          this.showNovoP = this.licencaAmbiental[0].nr_protocolo_novo !==null ? true : false;
       });
     }
   }
@@ -131,7 +128,7 @@ export class LicencaAmbientalCadastroComponent implements OnInit {
   salvar() {
     console.log(this.formGroup.value);
     if (!this.formGroup.valid) { return; }
-      this.licencaAmbientalService[this.formGroup.value.id ? 'edit' : 'add'](this.formGroup.value).subscribe(() => {
+    this.licencaAmbientalService[this.formGroup.value.id ? 'edit' : 'add'](this.formGroup.value).subscribe(() => {
         this.dialogBox.show('Licenca Ambiental salva com sucesso!', 'OK');
         this.router.navigate(['/licenca']);
       });
@@ -155,7 +152,9 @@ export class LicencaAmbientalCadastroComponent implements OnInit {
   changeDias() {
     if (this.formGroup.get('dt_validade').value !== null) {
       this.formGroup.get('dt_protocolar_em').setValue(
-        moment(this.formGroup.get('dt_validade').value).add(- this.formGroup.get('nr_dias_limite_protocolo').value, 'days').format("DD/MM/YYYY")
+        moment(this.formGroup.get('dt_validade').value)
+        .add(- this.formGroup.get('nr_dias_limite_protocolo').value, 'days')
+        .format('DD/MM/YYYY')
       );
     }
   }

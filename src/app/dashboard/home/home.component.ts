@@ -196,8 +196,7 @@ export class HomeComponent implements OnInit {
   licencaVencidas: LicencaAmbiental;
   licencaEntidade: LicencaEntidade;
 
-  constructor(private licencaEntidadeService: LicencaEntidadeService,
-                      licencaAmbientalService: LicencaAmbientalService) { }
+  constructor(private licencaEntidadeService: LicencaEntidadeService) { }
 
   ngOnInit() {
     this.setTotais();
