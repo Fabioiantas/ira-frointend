@@ -1,4 +1,4 @@
-import {Component, HostBinding} from '@angular/core';
+import {Component, HostBinding, ɵConsole} from '@angular/core';
 import {select} from '@angular-redux/store';
 import {Observable} from 'rxjs';
 import {ThemeOptions} from '../../../theme-options';
@@ -10,7 +10,7 @@ import { AuthenticationService } from 'src/app/_services/authentication.service'
 })
 export class HeaderComponent {
 
-  currentUser = atob(localStorage.getItem('user'));
+  currentUser = JSON.parse(atob(localStorage.getItem('user')));
   userEmail: string;
 
   constructor(public globals: ThemeOptions
@@ -18,8 +18,7 @@ export class HeaderComponent {
   }
 
   ngOnInit() {
-    //this.userEmail = this.currentUser.email;
-    // this.email = this.authenticationService.currentUserValue;
+    this.userEmail = this.currentUser.email;
   }
 
   @HostBinding('class.isActive')

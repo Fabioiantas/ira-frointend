@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { DialogBoxService } from '../_services/dialog-box.service';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LicencaAmbientalService } from '../services/licenca-ambiental.service';
 import * as moment from 'moment';
 
@@ -12,7 +13,9 @@ import * as moment from 'moment';
 export class LicencaAmbientalComponent implements OnInit {
   licencaAmbiental: any = [];
   selected: any = [];
+  filha: any = [];
   rowsLicencaAmbiental: any[];
+  @ViewChild('detalhes') detalheTemplate;
 
   columnsLicencaAmbiental = [
     {name : 'N° Licenca Ambiental', prop : 'nr_licenca_ambiental', align: 'right', width : '10%', selecionado: true},
@@ -29,7 +32,8 @@ export class LicencaAmbientalComponent implements OnInit {
   ];
   constructor(private router: Router,
               private licencaAmbientalService: LicencaAmbientalService,
-              private dialogBox: DialogBoxService) { }
+              private dialogBox: DialogBoxService,
+              public modalService: NgbModal) { }
 
   ngOnInit() {
     this.populaTable();
@@ -39,6 +43,7 @@ export class LicencaAmbientalComponent implements OnInit {
     this.licencaAmbientalService.getAll().subscribe((response) => {
       this.licencaAmbiental = [...response];
       this.rowsLicencaAmbiental = [...response];
+      console.log(this.rowsLicencaAmbiental);
     });
   }
 
@@ -119,6 +124,15 @@ export class LicencaAmbientalComponent implements OnInit {
       return 'Protocolar em ' + moment(licenca.dt_validade_protocolo).format('DD/MM/YYYY');
     } else {
       return 'Renovar';
+    }
+  }
+
+  detalhar() {
+    if (this.selected.length > 0) {
+      this.licencaAmbientalService.getFilha(this.selected[0].id).subscribe(filha =>{
+        this.filha = filha;
+      });
+      this.modalService.open(this.detalheTemplate);
     }
   }
 

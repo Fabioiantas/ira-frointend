@@ -4,19 +4,21 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { AuthenticationService } from '../_services/authentication.service';
 import { DialogBoxService } from '../_services/dialog-box.service';
+import { Router } from '@angular/router';
 // import { ConsoleReporter } from 'jasmine';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
   constructor(private authenticationService: AuthenticationService,
-              private dialogBox: DialogBoxService) { }
+              private dialogBox: DialogBoxService,
+              private router: Router) { }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(catchError(err => {
       if ([401].indexOf(err.status) !== -1) {
         this.dialogBox.show('Usuário ou senha inválidos.', 'ERROR');
         this.authenticationService.logout();
-        location.reload(true);
+        // location.reload(true);
         return throwError(err.error.message);
       }
       if ([500].indexOf(err.status) !== -1) {
@@ -26,6 +28,11 @@ export class ErrorInterceptor implements HttpInterceptor {
       }
       if ([512].indexOf(err.status) !== -1) {
         this.dialogBox.show(err.error.message, 'ERROR');
+        return throwError(err.message);
+      }
+      if ([513].indexOf(err.status) !== -1) { //SESSAO EXPIRADA
+        this.dialogBox.show(err.error.message, 'ERROR');
+        this.router.navigate(['/login']);
         return throwError(err.message);
       }
       if ('0'.indexOf(err.status) !== -1) {

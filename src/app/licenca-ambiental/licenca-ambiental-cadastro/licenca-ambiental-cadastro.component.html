@@ -73,12 +73,14 @@
 
         <div class="col-md-6 mb-6 form-group">
           <label for="dt_emissao_protocolo">Data Emissão Protocolo</label>
+
           <input class="form-control" (click)="dt_emissao_protocolo.toggle()" placeholder="dia/mês/ano"
             name="dt_emissao_protocolo" formControlName="dt_emissao_protocolo" ngbDatepicker
             #dt_emissao_protocolo="ngbDatepicker" autocomplete="off">
           <button class="btn btn-primary" (click)="dt_emissao_protocolo.toggle()" type="button">
             <i class="fa fa-calendar"></i>
           </button>
+
         </div>
 
         <div class="col-md-4 mb-4 form-group">

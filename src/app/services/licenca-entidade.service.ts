@@ -31,6 +31,10 @@ export class LicencaEntidadeService {
     return this.http.get(environment.baseUrl + '/auth/getlicencasituacao/' + situacao);
   }
 
+  getVencidas(): any {
+    return this.http.get(environment.baseUrl + '/auth/getlicencasituacao');
+  }
+
   acao (licenca) {
     if (licenca.nr_licenca_ambiental === null && licenca.nr_protocolo_novo === null) {
       this.router.navigate(['/licenciamento/' + licenca.id]);

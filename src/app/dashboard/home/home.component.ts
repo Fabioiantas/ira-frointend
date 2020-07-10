@@ -219,12 +219,12 @@ export class HomeComponent implements OnInit {
       this.totalProtocoladas = total[0].total;
     });
 
-    this.licencaEntidadeService.getLicencaSituacao('VENCIDA').subscribe(vencidas => {
+    this.licencaEntidadeService.getVencidas().subscribe(vencidas => {
       this.licencaVencidas = vencidas;
+      console.log('venc: ' + JSON.stringify(vencidas));
     });
 
     this.licencaEntidadeService.getAll().subscribe(licencas => {
-      console.log(JSON.stringify(licencas));
       this.licencaEntidade = licencas;
     });
   }

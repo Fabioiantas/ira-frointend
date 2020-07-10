@@ -28,7 +28,7 @@
 <section class="content">
   <div class="card-header-tab card-header">
     <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
-      <i class="header-icon lnr-store mr-3 text-muted opacity-6"></i>
+      <i class="header-icon lnr-license mr-3 text-muted opacity-6"></i>
       Licenças Ambientais
     </div>
     <!-- <div class="btn-actions-pane-right">
@@ -112,3 +112,144 @@
     </ngx-datatable-column> -->
   </ngx-datatable>
 </section>
+
+<ng-template #detalhes let-c="close" let-d="dismiss">
+
+  <div class="main-card mb-3 card">
+    <div class="card-body">
+      <h5 class="card-title">Detalhes da Licença</h5>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card main-card mb-3">
+            <div class="card-header">
+              <p>{{selected[0].nm_entidade}}
+              {{selected[0].nr_cnpj}}
+              </p>
+            </div>
+            <div class="card-body">
+              <b>Atividade</b>
+              <p>{{selected[0].nm_atividade}}</p>
+              <b>Tipo Licença</b>
+              <p>{{selected[0].nm_licenca}}</p>
+              <b>Orgão Regulador</b>
+              <p>{{selected[0].nm_orgao}}</p>
+
+              <div class="row">
+                <div class="col-sm-4">
+                  <b>N° Licença:</b>
+                  <p>{{selected[0].nr_licenca_ambiental}}</p>
+                </div>
+                <div class="col-sm-4">
+                  <b>Emissão: </b>
+                  <p>{{selected[0].dt_emissao | date:'dd/MM/yyyy'}}</p>
+                </div>
+                <div class="col-sm-4">
+                  <b>Validade:</b>
+                  <p>{{selected[0].dt_validade | date:'dd/MM/yyyy'}}</p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-4">
+                  <b>N° Protocolo:</b>
+                  <p>{{selected[0].nr_protocolo}}</p>
+                </div>
+                <div class="col-sm-4">
+                  <b>Emissão: </b>
+                  <p>{{selected[0].dt_emissao_protocolo | date:'dd/MM/yyyy'}}</p>
+                </div>
+                <div class="col-sm-4">
+                  <b>Validade:</b>
+                  <p>{{selected[0].dt_validade_protocolo | date:'dd/MM/yyyy'}}</p>
+                </div>
+              </div>
+
+              <div class="row  border-bottom">
+                <div class="col-sm-4">
+                  <b>Dias Limite:</b>
+                  <p>{{selected[0].nr_dias_limite_protocolo}}</p>
+                </div>
+                <div class="col-sm-8">
+                  <b>E-mail Alerta:</b>
+                  <p>{{selected[0].ds_email_alerta}}</p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-6">
+                  <b>Cadastrada em:</b>
+                  <p>{{selected[0].created_at | date:'dd/MM/yyyy HH:mm:ss'}}</p>
+                </div>
+                <div class="col-sm-6">
+                  <b>Por:</b>
+                  <p>fulano</p>
+                </div>
+              </div>
+
+              <div class="row border-bottom">
+                <div class="col-sm-6">
+                  <b>Alterada em:</b>
+                  <p>{{selected[0].updated_at | date:'dd/MM/yyyy HH:mm:ss'}}</p>
+                </div>
+                <div class="col-sm-6">
+                  <b>Por:</b>
+                  <p>fulano</p>
+                </div>
+              </div>
+
+              <div class="row" *ngIf="filha.length > 0">
+                <div class="col-sm-4">
+                  <b>N° Anterior:</b>
+                  <p>{{filha[0].nr_licenca_ambiental}}</p>
+                </div>
+                <div class="col-sm-4">
+                  <b>Última Alteração:</b>
+                  <p>{{filha[0].updated_at | date:'dd/MM/yyyy HH:mm:ss'}}</p>
+                </div>
+                <div class="col-sm-4">
+                  <b>Última Por:</b>
+                  <p>Fulano@teste.com</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class="modal-header">
+    <h4 class="modal-title">Detalhes</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+
+    <p>
+      <b>ENTIDADE:</b> <br> {{selected[0].nm_entidade}}
+    </p>
+    <p *ngIf="selected[0].nr_cnpj !== null">
+      <b>CNPJ:</b> <br> {{selected[0].nr_cnpj}}
+    </p>
+    <p *ngIf="selected[0].nr_cpf !== null">
+     <b>CPF:</b> <br> {{selected[0].nr_cpf}}
+    </p>
+    <p>
+      <b>ATIVIDADE:</b> <br> {{selected[0].nm_atividade}}
+    </p>
+    <p>
+      <b>TIPO LICENÇA:</b> <br> {{selected[0].nm_licenca}}
+    </p>
+    <p>
+      <b>ORGÃO:</b> <br> {{selected[0].nm_orgao}}
+    </p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
+  </div> -->
+</ng-template>
+
+<!-- ############################## -->
+
+
