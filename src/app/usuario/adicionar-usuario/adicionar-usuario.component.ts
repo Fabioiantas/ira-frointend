@@ -12,13 +12,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AdicionarUsuarioComponent implements OnInit {
 
   formGroup = new FormGroup({
-    idUsuario: new FormControl(null),
-    nmUsuario: new FormControl('', Validators.required),
-    login: new FormControl('', Validators.required),
-    dsSenha: new FormControl('', Validators.required),
+    id: new FormControl(null),
+    name: new FormControl('', Validators.required),
+    password: new FormControl('', Validators.required),
+    password_confirmation: new FormControl('', Validators.required),
     email: new FormControl('', Validators.email),
-    telefone: new FormControl('', Validators.required),
-    ieSituacao: new FormControl('A', Validators.required)
+    ie_situacao: new FormControl('', Validators.required),
+    ie_administrador: new FormControl('', Validators.required)
   });
 
   params: any;
@@ -35,15 +35,12 @@ export class AdicionarUsuarioComponent implements OnInit {
     });
 
     if (this.params.id) {
-      this.usuarioService.getById(this.params.id).subscribe(dados => {
+      this.usuarioService.getById(this.params.id).subscribe(usuario => {
         this.formGroup.patchValue({
-          idUsuario: dados.idUsuario,
-          nmUsuario: dados.nmUsuario,
-          login: dados.login,
-          dsSenha: dados.dsSenha,
-          email: dados.email,
-          telefone: dados.telefone,
-          ieSituacao: dados.ieSituacao
+          id: usuario.id,
+          name: usuario.name,
+          password: usuario.password,
+          ie_situacao: usuario.ie_situacao
         });
       });
     }
@@ -56,7 +53,7 @@ export class AdicionarUsuarioComponent implements OnInit {
   salvar() {
     if (!this.formGroup.valid) { return; }
     this.isLoading = true;
-    this.usuarioService[this.formGroup.value.idUsuario ? 'edit' : 'add'](this.formGroup.value).subscribe(() => {
+    this.usuarioService[this.formGroup.value.id ? 'edit' : 'add'](this.formGroup.value).subscribe(() => {
       this.isLoading = false;
       this.dialogBox.show('Usuario salvo com sucesso!', 'OK');
       this.router.navigate(['/usuario']);

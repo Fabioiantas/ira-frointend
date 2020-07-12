@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { TipoLicenca } from 'src/app/models/tipolicenca';
+import { TipoLicenca } from 'src/app/models/TipoLicenca';
 import { TipoLicencaService } from 'src/app/services/tipo-licenca.service';
 import { DialogBoxService } from 'src/app/_services/dialog-box.service';
 
@@ -30,16 +30,16 @@ export class TipoLicencaCadastroComponent implements OnInit {
   nmAbreviado: any;
   dsInformacaoLicenca: any;
 
-  constructor(private tipoLicencaService: TipoLicencaService, 
+  constructor(private tipoLicencaService: TipoLicencaService,
               private dialogBox: DialogBoxService,
-              private route: ActivatedRoute, 
+              private route: ActivatedRoute,
               private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe(data => {
       this.params = data;
     });
-    
+
     if (this.params.id) {
       this.tipoLicencaService.getById(this.params.id).subscribe(tipoLicenca => {
         this.tipoLicenca = tipoLicenca;
@@ -56,7 +56,7 @@ export class TipoLicencaCadastroComponent implements OnInit {
   salvar() {
     if (!this.formGroup.valid) { return; }
     console.log(this.formGroup.value.id);
-    
+
     this.tipoLicencaService[this.formGroup.value.id ? 'edit' : 'add'](this.formGroup.value).subscribe(() => {
       this.dialogBox.show('Tipo Licença salva com sucesso!', 'OK');
       this.router.navigate(['/tipolicenca']);

@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DialogBoxService } from 'src/app/_services/dialog-box.service';
 import { ActivatedRoute, Router, Data } from '@angular/router';
-import * as moment from "moment";
+import * as moment from 'moment';
 import { LicencaAmbientalService } from 'src/app/services/licenca-ambiental.service';
 import { EntidadeService } from 'src/app/services/entidade.service';
 import { Entidade } from 'src/app/models/entidade';
 import { LicencaAmbiental } from 'src/app/models/licencaAmbiental';
 import { TipoAtividadeService } from 'src/app/services/tipo-atividade.service';
 import { TipoAtividade } from 'src/app/models/tipoatividade';
-import { TipoLicenca } from 'src/app/models/tipoLicenca';
+import { TipoLicenca } from 'src/app/models/TipoLicenca';
 import { TipoLicencaService } from 'src/app/services/tipo-licenca.service';
 import { Orgao } from 'src/app/models/orgao';
 import { OrgaoService } from 'src/app/services/orgao.service';
@@ -68,19 +68,19 @@ export class LicencaAmbientalCadastroComponent implements OnInit {
       this.params = data;
     });
 
-    this.entidadeService.listaEntidades().subscribe(entidades => {
+    this.entidadeService.listaEntidades().subscribe((entidades: Entidade[]) => {
       this.listEntidade = entidades;
     });
 
-    this.atividadeService.listaAtividades().subscribe(tipoAtividades => {
+    this.atividadeService.listaAtividades().subscribe((tipoAtividades: TipoAtividade[]) => {
       this.listTipoAtividade = tipoAtividades;
     });
 
-    this.tipoLicencaService.listaTipoLicenca().subscribe(tipoLicencas => {
+    this.tipoLicencaService.listaTipoLicenca().subscribe((tipoLicencas: TipoLicenca[]) => {
       this.listTipoLicenca = tipoLicencas;
     });
 
-    this.orgaoService.Orgaolista().subscribe(orgao => {
+    this.orgaoService.Orgaolista().subscribe((orgao: Orgao[]) => {
       this.listOrgao = orgao;
     });
 
@@ -89,7 +89,7 @@ export class LicencaAmbientalCadastroComponent implements OnInit {
       this.licencaAmbientalService.getLicencaById(this.params.id).subscribe(licencaAmbiental => {
           this.licencaAmbiental = licencaAmbiental;
 
-          this.dtValidade = moment(licencaAmbiental[0].dt_validade).format("DD/MM/YYYY");
+          this.dtValidade = moment(licencaAmbiental[0].dt_validade).format('DD/MM/YYYY');
           this.nrDiasLimite = licencaAmbiental[0].nr_dias_limite_protocolo;
 
           this.formGroup.patchValue({
@@ -120,7 +120,7 @@ export class LicencaAmbientalCadastroComponent implements OnInit {
         });
 
           this.changeDias();
-          this.showNovoP = this.licencaAmbiental[0].nr_protocolo_novo !==null ? true : false;
+          this.showNovoP = this.licencaAmbiental[0].nr_protocolo_novo !== null ? true : false;
       });
     }
   }

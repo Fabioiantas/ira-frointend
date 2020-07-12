@@ -1,10 +1,14 @@
 export class Usuario {
-  idUsuario: number;
-  nmUsuario: string;
-  dtCreated: Date;
-  login: string;
-  dsSenha: string;
+  id: number;
+  name: string;
+  password: string;
   email: string;
-  telefone: string;
-  ieSituacao: string;
+  // tslint:disable-next-line:variable-name
+  ie_situacao: string;
+  // tslint:disable-next-line:variable-name
+  ie_administrador: string;
+  // tslint:disable-next-line:variable-name
+  updated_at: Date;
+  // tslint:disable-next-line:variable-name
+  created_at: Date;
 }

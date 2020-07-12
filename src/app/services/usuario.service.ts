@@ -13,11 +13,11 @@ export class UsuarioService {
   constructor(private http: HttpClient, private router: Router) {}
 
   lista(): Observable<Usuario[]> {
-    return this.http.get<Usuario[]>(environment.baseUrl + '/users/list');
+    return this.http.get<Usuario[]>(environment.baseUrl + '/users');
   }
 
   add(usuario: Usuario) {
-    return this.http.post(environment.baseUrl + '/users/add', usuario);
+    return this.http.post(environment.baseUrl + '/register', usuario);
   }
 
   remove(usuario: Usuario) {

@@ -31,44 +31,54 @@
       <div class="form-row">
         <div class="col-md-12 mb-12 form-group">
           <label for="nmUsuario">Nome Usuário</label>
-          <input formControlName="nmUsuario" type="text" class="form-control" id="nmUsuario"
-            placeholder="Nome do Usuário" value="" required>
+          <input formControlName="name" type="text" class="form-control" id="name" placeholder="Nome do Usuário"
+            value="" required>
         </div>
       </div>
       <div class="form-row">
         <div class="col-md-6 mb-6 form-group">
           <label for="login">E-mail</label>
-          <input formControlName="email" type="email" class="form-control" id="email"
-            placeholder="E-mail" value="" required>
-        </div>
-        <div class="col-md-6 mb-6 form-group">
-          <label for="telefone">Telefone</label>
-          <input formControlName="telefone" type="text" class="form-control" id="telefone"
-            placeholder="Telefone" value="" required>
+          <input formControlName="email" type="email" class="form-control" id="email" placeholder="E-mail" value=""
+            required>
         </div>
       </div>
       <div class="form-row">
         <div class="col-md-6 mb-6 form-group">
-          <label for="login">Login</label>
-          <input formControlName="login" type="text" class="form-control" id="login"
-            placeholder="Login" value="" required>
+          <label for="password">Senha</label>
+          <input formControlName="password" type="password" class="form-control" id="password" placeholder="Senha"
+            value="" required>
         </div>
         <div class="col-md-6 mb-6 form-group">
-          <label for="dsSenha">Senha</label>
-          <input formControlName="dsSenha" type="password" class="form-control" id="dsSenha"
-            placeholder="Senha" value="" required>
+          <label for="password_confirmation">Confirmação da Senha</label>
+          <input formControlName="password_confirmation" type="password" class="form-control"
+            id="password_confirmation" placeholder="Repita a senha" value="" required>
         </div>
       </div>
       <div class="form-row">
         <div class="col-md-6 mb-6 form-group">
           <h5 class="card-title">Situação</h5>
           <div class="custom-radio custom-control">
-            <input formControlName="ieSituacao" type="radio" id="ieSituacaoAtivo" name="ieSituacao" class="custom-control-input" value="A">
-            <label for="ieSituacaoAtivo" class="custom-control-label">Ativo</label>
+            <input formControlName="ie_situacao" type="radio" id="ie_situacaoAtivo" name="ie_situacao"
+              class="custom-control-input" value="A">
+            <label for="ie_situacaoAtivo" class="custom-control-label">Ativo</label>
           </div>
           <div class="custom-radio custom-control">
-            <input formControlName="ieSituacao" type="radio" id="ieSituacaoInativo" name="ieSituacao" class="custom-control-input" value="I">
-            <label for="ieSituacaoInativo" class="custom-control-label">Inativo</label>
+            <input formControlName="ie_situacao" type="radio" id="ie_situacaoInativo" name="ie_situacao"
+              class="custom-control-input" value="I">
+            <label for="ie_situacaoInativo" class="custom-control-label">Inativo</label>
+          </div>
+        </div>
+        <div class="col-md-6 mb-6 form-group">
+          <h5 class="card-title">Administrador</h5>
+          <div class="custom-radio custom-control">
+            <input formControlName="ie_administrador" type="radio" id="ie_administradorAtivo" name="ie_administrador"
+              class="custom-control-input" value="S">
+            <label for="ie_administradorAtivo" class="custom-control-label">Sim</label>
+          </div>
+          <div class="custom-radio custom-control">
+            <input formControlName="ie_administrador" type="radio" id="ie_administradorInativo" name="ie_administrador"
+              class="custom-control-input" value="N">
+            <label for="ie_administradorInativo" class="custom-control-label">Não</label>
           </div>
         </div>
       </div>

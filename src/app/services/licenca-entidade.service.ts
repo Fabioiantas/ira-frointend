@@ -35,7 +35,7 @@ export class LicencaEntidadeService {
     return this.http.get(environment.baseUrl + '/auth/getlicencasituacao');
   }
 
-  acao (licenca) {
+  acao(licenca) {
     if (licenca.nr_licenca_ambiental === null && licenca.nr_protocolo_novo === null) {
       this.router.navigate(['/licenciamento/' + licenca.id]);
     } else if (licenca.nr_licenca_ambiental !== null && licenca.nr_protocolo_novo === null) {
@@ -45,7 +45,7 @@ export class LicencaEntidadeService {
     }
   }
 
-  getProximaAcao(licenca): string {
+  getProximaAcao(licenca: any): string {
     if (licenca.nr_licenca_ambiental === null && licenca.nr_protocolo_novo === null) {
       return 'Licenciar';
     } else if (licenca.nr_licenca_ambiental !== null && licenca.nr_protocolo_novo === null) {

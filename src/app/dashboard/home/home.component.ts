@@ -229,7 +229,7 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  public acao (licenca) {
+  public acao(licenca) {
     this.licencaEntidadeService.acao(licenca);
   }
 

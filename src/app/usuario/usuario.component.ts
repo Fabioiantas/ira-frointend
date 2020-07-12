@@ -12,8 +12,8 @@ export class UsuarioComponent implements OnInit {
   selected = [];
 
   columns =[
-    {name : 'Nome', prop : 'nome', width : '35%', selecionado: true},
-    {name : 'Data Criação', prop : 'dtCreated', width : '20%', selecionado: false}
+    {name : 'Nome', prop : 'name', width : '35%', selecionado: true},
+    {name : 'E-mail', prop : 'email', width : '20%', selecionado: false}
   ];
 
   constructor(private usuarioService: UsuarioService, private router: Router) {
