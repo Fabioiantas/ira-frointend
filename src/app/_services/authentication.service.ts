@@ -23,7 +23,6 @@ export class AuthenticationService {
   }
 
   login(credentials) {
-    console.log(environment.baseUrl);
     return this.http.post<any>(environment.baseUrl + '/login', { email: credentials.email, password: credentials.password })
       .pipe(map(user => {
         // login successful if there's a jwt token in the response
@@ -34,6 +33,10 @@ export class AuthenticationService {
         }
         return user;
       }));
+  }
+
+  getCurrentUser() {
+    return this.http.get<any>(environment.baseUrl + '/user');
   }
 
   logout() {

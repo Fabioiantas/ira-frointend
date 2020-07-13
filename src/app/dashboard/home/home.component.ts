@@ -221,7 +221,6 @@ export class HomeComponent implements OnInit {
 
     this.licencaEntidadeService.getVencidas().subscribe(vencidas => {
       this.licencaVencidas = vencidas;
-      console.log('venc: ' + JSON.stringify(vencidas));
     });
 
     this.licencaEntidadeService.getAll().subscribe(licencas => {

@@ -10,7 +10,6 @@ import { AuthenticationService } from 'src/app/_services/authentication.service'
 })
 export class HeaderComponent {
 
-  currentUser = JSON.parse(atob(localStorage.getItem('user')));
   userEmail: string;
 
   constructor(public globals: ThemeOptions
@@ -18,7 +17,9 @@ export class HeaderComponent {
   }
 
   ngOnInit() {
-    this.userEmail = this.currentUser.email;
+    this.authenticationService.getCurrentUser().subscribe(user => {
+      this.userEmail = user.user.email;
+    });
   }
 
   @HostBinding('class.isActive')
