@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UsuarioService } from '../services/usuario.service';
 
 @Component({
@@ -11,9 +12,13 @@ export class UsuarioComponent implements OnInit {
   rows: any;
   selected = [];
 
-  columns =[
+  columns = [
+    {name : 'ID', prop : 'id', width : '35%', selecionado: true},
     {name : 'Nome', prop : 'name', width : '35%', selecionado: true},
-    {name : 'E-mail', prop : 'email', width : '20%', selecionado: false}
+    {name : 'E-mail', prop : 'email', width : '20%', selecionado: false},
+    {name : 'Ativo', prop : 'ie_ativo', width : '20%', selecionado: false},
+    {name : 'Administrador', prop : 'ie_administrador', width : '20%', selecionado: false},
+    {name : 'Criado em', prop : 'created_at', width : '20%', selecionado: false}
   ];
 
   constructor(private usuarioService: UsuarioService, private router: Router) {

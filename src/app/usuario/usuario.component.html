@@ -32,7 +32,7 @@
     <div class="btn-actions-pane-right">
       <div class="btn-group-sm btn-group" role="group">
         <a class="btn btn-success" [routerLink]="['/usuario/adicionar']">Adicionar</a>
-        <button class="btn btn-primary" type="button" (click)="editar(selected[0].idUsuario)">Editar</button>
+        <button class="btn btn-primary" type="button" (click)="editar(selected[0].id)">Editar</button>
       </div>
     </div>
   </div>
@@ -46,16 +46,19 @@
     [columnMode]="'force'" [columns]="columns" [selected]="selected" [selectionType]="'single'" [rowHeight]="'auto'"
     (dblclick)="onDblclick($event)"
     [messages]="{'emptyMessage': 'Nenhum resultado encontrado...', 'totalMessage': 'total'}" [limit]="5">
-    <ngx-datatable-column name="Nome" prop="nmUsuario" [flexGrow]="2"></ngx-datatable-column>
-    <ngx-datatable-column name="Login" prop="login" [flexGrow]="2"></ngx-datatable-column>
+    <ngx-datatable-column name="Nome" prop="name" [flexGrow]="2"></ngx-datatable-column>
     <ngx-datatable-column name="E-mail" prop="email" [flexGrow]="2"></ngx-datatable-column>
-    <ngx-datatable-column name="Telefone" prop="telefone" [flexGrow]="2"></ngx-datatable-column>
-    <ngx-datatable-column name="Data Criação" prop="dtCreated" [flexGrow]="1">
+    <ngx-datatable-column name="Administrador" prop="ie_administrador" [flexGrow]="2">
+      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+        {{value == "S" ? "Sim" : "Não"}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Data Criação" prop="created_at" [flexGrow]="1">
       <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
         {{value | date:'dd/MM/yyyy'}}
       </ng-template>
     </ngx-datatable-column>
-    <ngx-datatable-column name="Situação" prop="ieSituacao" [flexGrow]="1">
+    <ngx-datatable-column name="Situação" prop="ie_situacao" [flexGrow]="1">
       <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
         {{value == "A" ? "Ativo" : "Inativo"}}
       </ng-template>

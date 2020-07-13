@@ -15,7 +15,7 @@ export class AdicionarUsuarioComponent implements OnInit {
     id: new FormControl(null),
     name: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
-    password_confirmation: new FormControl('', Validators.required),
+    password_confirmation: new FormControl('', [Validators.required]),
     email: new FormControl('', Validators.email),
     ie_situacao: new FormControl('', Validators.required),
     ie_administrador: new FormControl('', Validators.required)
@@ -36,11 +36,14 @@ export class AdicionarUsuarioComponent implements OnInit {
 
     if (this.params.id) {
       this.usuarioService.getById(this.params.id).subscribe(usuario => {
+        console.log(JSON.stringify(usuario));
         this.formGroup.patchValue({
           id: usuario.id,
           name: usuario.name,
-          password: usuario.password,
-          ie_situacao: usuario.ie_situacao
+          email: usuario.email,
+          ie_situacao: usuario.ie_situacao,
+          ie_administrador: usuario.ie_administrador,
+          password: usuario.password
         });
       });
     }

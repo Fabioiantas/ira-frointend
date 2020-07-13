@@ -25,11 +25,11 @@ export class UsuarioService {
   }
 
   edit(usuario: Usuario) {
-    return this.http.put(environment.baseUrl + '/users/edit', usuario);
+    return this.http.put(environment.baseUrl + '/user/', usuario);
   }
 
   getById(id: any) {
-    return this.http.get<Usuario>(environment.baseUrl + '/users/id/' + id);
+    return this.http.get<Usuario>(environment.baseUrl + '/user/' + id);
   }
 
 }
