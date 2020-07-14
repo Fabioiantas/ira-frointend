@@ -4,9 +4,9 @@ export class Usuario {
   password: string;
   email: string;
   // tslint:disable-next-line:variable-name
-  ie_situacao: string;
+  situacao: string;
   // tslint:disable-next-line:variable-name
-  ie_administrador: string;
+  role: string;
   // tslint:disable-next-line:variable-name
   updated_at: Date;
   // tslint:disable-next-line:variable-name

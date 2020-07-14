@@ -44,4 +44,8 @@ export class AuthenticationService {
     this.currentUserSubject.next(null);
     this.router.navigate(['/login']);
   }
+
+  recover(email: String) {
+    return this.http.get<any>(`${environment.baseUrl}/recover/${email}`);
+  }
 }

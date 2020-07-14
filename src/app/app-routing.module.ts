@@ -420,7 +420,7 @@ const routes: Routes = [
       {
         path: '',
         component: UsuarioComponent,
-        data: { extraParameter: 'cadastroMenu' },
+        data: {roles: [Role.Admin], extraParameter: 'cadastroMenu' },
         canActivate: [AuthGuard]
       },
       {

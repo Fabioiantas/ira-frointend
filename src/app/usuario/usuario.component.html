@@ -48,9 +48,9 @@
     [messages]="{'emptyMessage': 'Nenhum resultado encontrado...', 'totalMessage': 'total'}" [limit]="5">
     <ngx-datatable-column name="Nome" prop="name" [flexGrow]="2"></ngx-datatable-column>
     <ngx-datatable-column name="E-mail" prop="email" [flexGrow]="2"></ngx-datatable-column>
-    <ngx-datatable-column name="Administrador" prop="ie_administrador" [flexGrow]="2">
+    <ngx-datatable-column name="Administrador" prop="role" [flexGrow]="2">
       <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-        {{value == "S" ? "Sim" : "Não"}}
+        {{value == "Admin" ? "Sim" : "Não"}}
       </ng-template>
     </ngx-datatable-column>
     <ngx-datatable-column name="Data Criação" prop="created_at" [flexGrow]="1">
@@ -58,7 +58,7 @@
         {{value | date:'dd/MM/yyyy'}}
       </ng-template>
     </ngx-datatable-column>
-    <ngx-datatable-column name="Situação" prop="ie_situacao" [flexGrow]="1">
+    <ngx-datatable-column name="Situação" prop="situacao" [flexGrow]="1">
       <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
         {{value == "A" ? "Ativo" : "Inativo"}}
       </ng-template>

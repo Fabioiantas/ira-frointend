@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
+
   constructor(private authenticationService: AuthenticationService,
               private dialogBox: DialogBoxService,
               private router: Router) { }
@@ -18,7 +19,7 @@ export class ErrorInterceptor implements HttpInterceptor {
       if ([401].indexOf(err.status) !== -1) {
         this.dialogBox.show('Usuário ou senha inválidos.', 'ERROR');
         this.authenticationService.logout();
-        // location.reload(true);
+        location.reload(true);
         return throwError(err.error.message);
       }
       if ([500].indexOf(err.status) !== -1) {

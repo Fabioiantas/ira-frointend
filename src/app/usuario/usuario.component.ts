@@ -17,7 +17,7 @@ export class UsuarioComponent implements OnInit {
     {name : 'Nome', prop : 'name', width : '35%', selecionado: true},
     {name : 'E-mail', prop : 'email', width : '20%', selecionado: false},
     {name : 'Ativo', prop : 'ie_ativo', width : '20%', selecionado: false},
-    {name : 'Administrador', prop : 'ie_administrador', width : '20%', selecionado: false},
+    {name : 'Administrador', prop : 'role', width : '20%', selecionado: false},
     {name : 'Criado em', prop : 'created_at', width : '20%', selecionado: false}
   ];
 

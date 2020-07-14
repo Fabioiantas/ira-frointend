@@ -46,39 +46,39 @@
         <div class="col-md-6 mb-6 form-group">
           <label for="password">Senha</label>
           <input formControlName="password" type="password" class="form-control" id="password" placeholder="Senha"
-            value="" required>
+            value="">
         </div>
         <div class="col-md-6 mb-6 form-group">
           <label for="password_confirmation">Confirmação da Senha</label>
           <input formControlName="password_confirmation" type="password" class="form-control"
-            id="password_confirmation" placeholder="Repita a senha" value="" required>
+            id="password_confirmation" placeholder="Repita a senha" value="">
         </div>
       </div>
       <div class="form-row">
         <div class="col-md-6 mb-6 form-group">
           <h5 class="card-title">Situação</h5>
           <div class="custom-radio custom-control">
-            <input formControlName="ie_situacao" type="radio" id="ie_situacaoAtivo" name="ie_situacao"
+            <input formControlName="situacao" type="radio" id="situacaoAtivo" name="situacao"
               class="custom-control-input" value="A">
-            <label for="ie_situacaoAtivo" class="custom-control-label">Ativo</label>
+            <label for="situacaoAtivo" class="custom-control-label">Ativo</label>
           </div>
           <div class="custom-radio custom-control">
-            <input formControlName="ie_situacao" type="radio" id="ie_situacaoInativo" name="ie_situacao"
+            <input formControlName="situacao" type="radio" id="situacaoInativo" name="situacao"
               class="custom-control-input" value="I">
-            <label for="ie_situacaoInativo" class="custom-control-label">Inativo</label>
+            <label for="situacaoInativo" class="custom-control-label">Inativo</label>
           </div>
         </div>
         <div class="col-md-6 mb-6 form-group">
           <h5 class="card-title">Administrador</h5>
           <div class="custom-radio custom-control">
-            <input formControlName="ie_administrador" type="radio" id="ie_administradorAtivo" name="ie_administrador"
-              class="custom-control-input" value="S">
-            <label for="ie_administradorAtivo" class="custom-control-label">Sim</label>
+            <input formControlName="role" type="radio" id="roleAtivo" name="role"
+              class="custom-control-input" value="Admin">
+            <label for="roleAtivo" class="custom-control-label">Sim</label>
           </div>
           <div class="custom-radio custom-control">
-            <input formControlName="ie_administrador" type="radio" id="ie_administradorInativo" name="ie_administrador"
-              class="custom-control-input" value="N">
-            <label for="ie_administradorInativo" class="custom-control-label">Não</label>
+            <input formControlName="role" type="radio" id="roleInativo" name="role"
+              class="custom-control-input" value="User">
+            <label for="roleInativo" class="custom-control-label">Não</label>
           </div>
         </div>
       </div>
