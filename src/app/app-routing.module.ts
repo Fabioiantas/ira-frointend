@@ -189,7 +189,7 @@ const routes: Routes = [
 
     ]
   },
-  
+
   {
     path: 'tipolicenca',
     component: BaseLayoutComponent,
