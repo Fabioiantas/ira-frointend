@@ -27,8 +27,10 @@ export class RecursoCadastroComponent implements OnInit {
   dsRecurso: any;
 
   registro: any;
-  constructor(private recursoService: RecursoServiceService, private dialogBox: DialogBoxService,
-              private route: ActivatedRoute, private router: Router) {
+  constructor(private recursoService: RecursoServiceService,
+              private dialogBox: DialogBoxService,
+              private route: ActivatedRoute,
+              private router: Router) {
   }
 
   ngOnInit() {
@@ -51,7 +53,7 @@ export class RecursoCadastroComponent implements OnInit {
   handleValidSubmit() {
     console.log(this.formGroup.value);
   }
-  
+
   salvar() {
     if (!this.formGroup.valid) { return; }
     this.recursoService[this.formGroup.value.id ? 'edit' : 'add'](this.formGroup.value).subscribe(() => {

@@ -126,7 +126,6 @@ export class LicencaAmbientalCadastroComponent implements OnInit {
   }
 
   salvar() {
-    console.log(this.formGroup.value);
     if (!this.formGroup.valid) { return; }
     this.licencaAmbientalService[this.formGroup.value.id ? 'edit' : 'add'](this.formGroup.value).subscribe(() => {
         this.dialogBox.show('Licenca Ambiental salva com sucesso!', 'OK');
