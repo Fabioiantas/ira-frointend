@@ -48,4 +48,13 @@ export class AuthenticationService {
   recover(email) {
     return this.http.post<any>(environment.baseUrl + '/recover', email);
   }
+
+  sendResetPasswordLink(data) {
+    return this.http.post(environment.baseUrl + '/reset-password-request', data)
+  }
+
+  resetPassword(data) {
+    return this.http.post(environment.baseUrl + '/change-password', data)
+  }
+
 }

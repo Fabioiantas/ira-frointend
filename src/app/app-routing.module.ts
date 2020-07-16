@@ -40,6 +40,7 @@ import { LicencaEntidadeComponent } from './licenca-ambiental/licenca-entidade/l
 import { LicencaAmbientalLicenciamentoComponent } from './licenca-ambiental/licenca-ambiental-licenciamento/licenca-ambiental-licenciamento.component';
 import { LicencaAmbientalProtocolacaoComponent } from './licenca-ambiental/licenca-ambiental-protocolacao/licenca-ambiental-protocolacao.component';
 import { LicencaAmbientalRenovaComponent } from './licenca-ambiental/licenca-ambiental-renova/licenca-ambiental-renova.component';
+import { ResetPasswordComponent } from './login/reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -458,6 +459,13 @@ const routes: Routes = [
     children: [
       { path: 'login', component: LoginBoxedComponent, data: { extraParameter: '' } },
       { path: 'forgot-password-boxed', component: ForgotPasswordBoxedComponent, data: { extraParameter: '' } },
+    ]
+  },
+  {
+    path: '',
+    component: PagesLayoutComponent,
+    children: [
+      { path: 'reset-password', component: ResetPasswordComponent, data: { extraParameter: '' } },
     ]
   },
   {

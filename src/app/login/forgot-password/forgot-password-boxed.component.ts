@@ -16,18 +16,19 @@ export class ForgotPasswordBoxedComponent implements OnInit {
   });
 
   constructor(private authService: AuthenticationService,
-             private dialogBox: DialogBoxService,
-             private router: Router) { }
+              private dialogBox: DialogBoxService,
+              private router: Router) { }
 
   ngOnInit() {
   }
 
   recoverPass() {
-    this.authService.recover(this.formGroup.value).subscribe(data => {
+    this.authService.sendResetPasswordLink(this.formGroup.value).subscribe(data => {
       console.log(JSON.stringify(data));
       this.dialogBox.show('Instruções de recuperação enviada para o e-mail informado.','WARNING');
         this.router.navigate(['/login']);
     });
   }
+
 
 }
