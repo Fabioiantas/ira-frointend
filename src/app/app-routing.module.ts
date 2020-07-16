@@ -465,7 +465,7 @@ const routes: Routes = [
     path: '',
     component: PagesLayoutComponent,
     children: [
-      { path: 'reset-password', component: ResetPasswordComponent, data: { extraParameter: '' } },
+      { path: 'reset-password/:token', component: ResetPasswordComponent, data: { extraParameter: '' } },
     ]
   },
   {
