@@ -3,6 +3,7 @@ import {ThemeOptions} from '../../../theme-options';
 import {select} from '@angular-redux/store';
 import {Observable} from 'rxjs';
 import {ActivatedRoute} from '@angular/router';
+import { AuthenticationService } from 'src/app/_services/authentication.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -12,7 +13,7 @@ import {ActivatedRoute} from '@angular/router';
 export class SidebarComponent implements OnInit {
   public extraParameter: any;
 
-  constructor(public globals: ThemeOptions, private activatedRoute: ActivatedRoute) {
+  constructor(public globals: ThemeOptions, private activatedRoute: ActivatedRoute, private loginService: AuthenticationService) {
 
   }
 
@@ -51,5 +52,9 @@ export class SidebarComponent implements OnInit {
       this.globals.toggleSidebar = false;
     }
   }
-  
+
+  logout() {
+    this.loginService.logout();
+  }
+
 }

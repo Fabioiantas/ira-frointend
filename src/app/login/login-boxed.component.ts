@@ -32,6 +32,7 @@ export class LoginBoxedComponent implements OnInit {
       this.isLoading = false;
     }, (error) => {
       alert(error.error);
+      console.error(error);
       // this.modalService.open(this.loginBoxTemplate);
       this.isLoading = false;
     }
