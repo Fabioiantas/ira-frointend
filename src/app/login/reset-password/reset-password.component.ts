@@ -37,7 +37,7 @@ export class ResetPasswordComponent implements OnInit {
     this.authService.resetPassword(this.formGroup.value).subscribe(
       result => {
         this.dialogBox.show('Senha Alterada com sucesso!','WARNING');
-        this.formGroup.reset();
+        //this.formGroup.reset();
       }
     );
   }
