@@ -4,6 +4,8 @@ import { DialogBoxService } from '../_services/dialog-box.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { LicencaAmbientalService } from '../services/licenca-ambiental.service';
 import * as moment from 'moment';
+import { LicencaIap } from '../models/licencaIap';
+import { HttpRequest, HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-licenca-ambiental',
@@ -15,10 +17,12 @@ export class LicencaAmbientalComponent implements OnInit {
   selected: any = [];
   filha: any = [];
   rowsLicencaAmbiental: any[];
+  licecaIap: LicencaIap;
   @ViewChild('detalhes') detalheTemplate;
 
   columnsLicencaAmbiental = [
     {name : 'N° Licenca Ambiental', prop : 'nr_licenca_ambiental', align: 'right', width : '10%', selecionado: true},
+    {name : 'N° Protocolo', prop : 'nr_protocolo', align: 'right', width : '10%', selecionado: true},
     //{name : 'Entidade', prop : 'nm_entidade', width : '50%', selecionado: true},
     {name : 'Entidade', prop : 'nm_reduzido', width : '50%', selecionado: true},
     {name : 'Atividade', prop : 'nm_atividade', width : '20%', selecionado: true},
@@ -33,7 +37,8 @@ export class LicencaAmbientalComponent implements OnInit {
   constructor(private router: Router,
               private licencaAmbientalService: LicencaAmbientalService,
               private dialogBox: DialogBoxService,
-              public modalService: NgbModal) { }
+              public modalService: NgbModal,
+              private http: HttpClient) { }
 
   ngOnInit() {
     this.populaTable();
@@ -135,5 +140,22 @@ export class LicencaAmbientalComponent implements OnInit {
       this.modalService.open(this.detalheTemplate);
     }
   }
+
+  download(numProtocolo: string) {
+    if (numProtocolo === null) {
+      this.dialogBox.show('Número do protocolo não informado', 'ERROR');
+      return;
+    }
+    const numProt = numProtocolo.replace(/[^0-9]+/g,'');
+    const url_ = 'http://www.sga.pr.gov.br/sga-iap/consultarProcessoLicenciamento.do?action=exibirDocumentoLicenca&numProtocolo=' + numProt + '&indSia=true';
+    window.open(url_, "_blank");
+  }
+
+  /*consultarLicenca (licenca: any) {
+    this.licecaIap = licenca.nr_protocolo;
+    this.licencaAmbientalService.download(this.licecaIap).subscribe(data =>{
+      console.log('data ' + data);
+    });
+  }*/
 
 }
