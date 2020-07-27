@@ -108,6 +108,14 @@ import { LicencaAmbientalProtocolacaoComponent } from './licenca-ambiental/licen
 import { LicencaAmbientalRenovaComponent } from './licenca-ambiental/licenca-ambiental-renova/licenca-ambiental-renova.component';
 import { LicencaDetalheComponent } from './licenca-ambiental/licenca-detalhe/licenca-detalhe.component';
 import { ResetPasswordComponent } from './login/reset-password/reset-password.component';
+import { TipoCombustivelComponent } from './efeito-estufa/tipo-combustivel/tipo-combustivel.component';
+import { FonteEmissoraComponent } from './efeito-estufa/fonte-emissora/fonte-emissora.component';
+import { FonteEmissoraCadastroComponent } from './efeito-estufa/fonte-emissora/fonte-emissora-cadastro/fonte-emissora-cadastro.component';
+import { EscopoComponent } from './efeito-estufa/escopo/escopo.component';
+import { EscopoCadastroComponent } from './efeito-estufa/escopo/escopo-cadastro/escopo-cadastro.component';
+import { MonitoramentoGhgComponent } from './efeito-estufa/monitoramento-ghg/monitoramento-ghg.component';
+import { MonitoramentoGhgCadastroComponent } from './efeito-estufa/monitoramento-ghg/monitoramento-ghg-cadastro/monitoramento-ghg-cadastro.component';
+import { TipoCombustivelCadastroComponent } from './efeito-estufa/tipo-combustivel/tipo-combustivel-cadastro/tipo-combustivel-cadastro.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -183,7 +191,15 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     LicencaAmbientalProtocolacaoComponent,
     LicencaAmbientalRenovaComponent,
     LicencaDetalheComponent,
-    ResetPasswordComponent
+    ResetPasswordComponent,
+    TipoCombustivelComponent,
+    TipoCombustivelCadastroComponent,
+    FonteEmissoraComponent,
+    FonteEmissoraCadastroComponent,
+    EscopoComponent,
+    EscopoCadastroComponent,
+    MonitoramentoGhgComponent,
+    MonitoramentoGhgCadastroComponent
 
   ],
   imports: [
