@@ -23,12 +23,12 @@ export class LicencaAmbientalComponent implements OnInit {
   columnsLicencaAmbiental = [
     {name : 'N° Licenca Ambiental', prop : 'nr_licenca_ambiental', align: 'right', width : '10%', selecionado: true},
     {name : 'N° Protocolo', prop : 'nr_protocolo', align: 'right', width : '10%', selecionado: true},
-    //{name : 'Entidade', prop : 'nm_entidade', width : '50%', selecionado: true},
+    // {name : 'Entidade', prop : 'nm_entidade', width : '50%', selecionado: true},
     {name : 'Entidade', prop : 'nm_reduzido', width : '50%', selecionado: true},
     {name : 'Atividade', prop : 'nm_atividade', width : '20%', selecionado: true},
     {name : 'Tipo', prop : 'nm_abreviado', width : '5%', selecionado: true},
     {name : 'Validade', prop : 'dt_validade', width : '10%', selecionado: true},
-    //{name : 'Validade Prot.', prop : 'dt_validade_protocolo', width : '10%', selecionado: true},
+    // {name : 'Validade Prot.', prop : 'dt_validade_protocolo', width : '10%', selecionado: true},
     {name : 'Orgão', prop : 'sg_orgao', width : '15%', selecionado: true},
     {name : 'Situação', prop : 'ds_situacao', width : '10%', selecionado: true},
     {name : 'Ação', prop : 'ds_acao', width : '10%', selecionado: true},
@@ -54,8 +54,8 @@ export class LicencaAmbientalComponent implements OnInit {
 
   remover() {
     if (this.selected) {
-      this.dialogBox.show("Confirma remoção da Licença Ambiental?","CONFIRM").then(sim=>{
-        if(sim){
+      this.dialogBox.show('Confirma remoção da Licença Ambiental?', 'CONFIRM').then(sim => {
+        if(sim) {
           this.licencaAmbientalService.remove(this.selected[0].id).subscribe(data => {
             this.dialogBox.show('Licença removida com sucesso!', 'OK');
             this.populaTable();
@@ -92,7 +92,7 @@ export class LicencaAmbientalComponent implements OnInit {
   renova(licenca) {
     if (licenca.nr_protocolo_novo === null) {
       this.dialogBox.show('Antes de Renovar efetue a Protocolação da Licença.', 'WARNING');
-    }else if (licenca.nr_licenca_ambiental === null) {
+    } else if (licenca.nr_licenca_ambiental === null) {
       this.dialogBox.show('Antes de Renovar efetue o Licenciamento.','WARNING');
     } else {
       this.router.navigate(['/renova/' + licenca.id]);
@@ -140,22 +140,4 @@ export class LicencaAmbientalComponent implements OnInit {
       this.modalService.open(this.detalheTemplate);
     }
   }
-
-  download(numProtocolo: string) {
-    if (numProtocolo === null) {
-      this.dialogBox.show('Número do protocolo não informado', 'ERROR');
-      return;
-    }
-    const numProt = numProtocolo.replace(/[^0-9]+/g,'');
-    const url_ = 'http://www.sga.pr.gov.br/sga-iap/consultarProcessoLicenciamento.do?action=exibirDocumentoLicenca&numProtocolo=' + numProt + '&indSia=true';
-    window.open(url_, "_blank");
-  }
-
-  /*consultarLicenca (licenca: any) {
-    this.licecaIap = licenca.nr_protocolo;
-    this.licencaAmbientalService.download(this.licecaIap).subscribe(data =>{
-      console.log('data ' + data);
-    });
-  }*/
-
 }

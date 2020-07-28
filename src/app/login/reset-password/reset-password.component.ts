@@ -27,13 +27,11 @@ export class ResetPasswordComponent implements OnInit {
   constructor(private authService: AuthenticationService,
               private dialogBox: DialogBoxService,
               private router: Router,
-              private route: ActivatedRoute)
-  {
-  }
+              private route: ActivatedRoute) {  }
 
   ngOnInit() {
     this.route.params.subscribe(data => {
-      const token = JSON.parse('{"user":{},"token":"'+data.token+'"}');
+      const token = JSON.parse(`{"user":{},"token":"${data.token}"}`);
       localStorage.setItem('currentUser', JSON.stringify(
         token
       ));
@@ -47,7 +45,7 @@ export class ResetPasswordComponent implements OnInit {
   ResetPassword() {
     this.authService.resetPassword(this.formGroup.value).subscribe(
       result => {
-        this.dialogBox.show('Senha Alterada com sucesso!','WARNING');
+        this.dialogBox.show('Senha Alterada com sucesso!', 'WARNING');
         this.router.navigate(['/login']);
       }
     );
