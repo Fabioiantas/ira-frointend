@@ -3,8 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { LicencaAmbiental } from '../models/licencaAmbiental';
-
-import { LicencaAmbientalProtocolacaoComponent } from '../licenca-ambiental/licenca-ambiental-protocolacao/licenca-ambiental-protocolacao.component';
 import { LicencaIap } from '../models/licencaIap';
 
 @Injectable({
@@ -60,5 +58,4 @@ export class LicencaAmbientalService {
   download(licencaIap: LicencaIap) {
     return this.http.get<any>('http://www.protocolo.seap.pr.gov.br/protocolo/pesquisaGeral.do;?action=pesquisar&numProtocolo=152913591');
   }
-  // http://www.sga.pr.gov.br/sga-iap/consultarProcessoLicenciamento.do?action=verificarExistenciaDocumentoLicenca&numProtocolo=130671020&indSia=true&_dc=1595262293473
 }

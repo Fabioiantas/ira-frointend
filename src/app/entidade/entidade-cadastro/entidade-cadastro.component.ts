@@ -15,18 +15,18 @@ export class EntidadeCadastroComponent implements OnInit {
     id: new FormControl(''),
     nm_entidade: new FormControl('', Validators.required),
     nm_reduzido: new FormControl('', Validators.required),
-    nr_cnpj: new FormControl('',[
+    nr_cnpj: new FormControl('', [
       Validators.required,
-      Validators.pattern("[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}")
+      Validators.pattern('[0-9]{2}\.?[0-9]{3}\.?[0-9]{3}\/?[0-9]{4}\-?[0-9]{2}')
     ]),
-    nr_cpf: new FormControl('',[
+    nr_cpf: new FormControl('', [
       Validators.required,
-      Validators.pattern("[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}")]
+      Validators.pattern('[0-9]{3}\.?[0-9]{3}\.?[0-9]{3}\-?[0-9]{2}')]
       ),
     ds_endereco: new FormControl('', Validators.required),
-    email: new FormControl('',[
+    email: new FormControl('', [
       Validators.required,
-      Validators.pattern("^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$")]),
+      Validators.pattern('^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$')]),
     nr_telefone: new FormControl('', Validators.required)
   });
 

@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
 
+  sessao = true;
+
   constructor(private authenticationService: AuthenticationService,
               private dialogBox: DialogBoxService,
               private router: Router) { }
@@ -23,7 +25,6 @@ export class ErrorInterceptor implements HttpInterceptor {
         return throwError(err.error.message);
       }
       if ([500].indexOf(err.status) !== -1) {
-        console.log('err: ' + JSON.stringify(err))
         this.dialogBox.show(err.error.message, 'ERROR');
         return throwError(err.message);
       }
@@ -31,7 +32,8 @@ export class ErrorInterceptor implements HttpInterceptor {
         this.dialogBox.show(err.error.message, 'ERROR');
         return throwError(err.message);
       }
-      if ([513].indexOf(err.status) !== -1) { //SESSAO EXPIRADA
+      if ([513].indexOf(err.status) !== -1) { // SESSAO EXPIRADA
+        this.sessao = false;
         this.dialogBox.show(err.error.message, 'ERROR');
         this.router.navigate(['/login']);
         return throwError(err.message);
