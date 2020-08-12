@@ -65,7 +65,101 @@
                 </ng-template>
               </ngb-panel>
 
-              <!-- <ngb-panel id="monitoramentoMenu">
+
+              <ngb-panel id="geeMenu">
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link">
+                    <i class="vsm-icon-menu fa fa-industry"></i>
+                    <span class="vsm-title">Monitoramento GEE</span>
+                    <i class="vsm-arrow"></i>
+                  </button>
+                </ng-template>
+                <ng-template ngbPanelContent>
+                  <div class="vsm-dropdown">
+                    <div class="vsm-list">
+                      <div class="vsm-item">
+                        <a routerLinkActive="active-item" routerLink="/gee" class="vsm-link"><span
+                          class="vsm-title">Emissões</span></a>
+                      </div>
+
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-panel>
+
+
+              <!-- <ngb-panel id="geeMenu">
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link">
+                    <i class="vsm-icon-menu fa fa-industry"></i>
+                    <span class="vsm-title">Efeito Estufa</span>
+                    <i class="vsm-arrow"></i>
+                  </button>
+                </ng-template>
+
+                <ng-template ngbPanelContent>
+                  <div class="vsm-dropdown">
+                    <div class="vsm-list">
+                      <div class="vsm-item">
+                        <a routerLinkActive="active-item" routerLink="/gee" class="vsm-link"><span
+                          class="vsm-title">Emissões</span></a>
+                      </div>
+                      <div class="vsm-item">
+                        <a routerLinkActive="active-item" routerLink="/escopo" class="vsm-link"><span
+                          class="vsm-title">Escopos</span></a>
+                      </div>
+                      <div class="vsm-item">
+                        <a routerLinkActive="active-item" routerLink="/fonteemissao" class="vsm-link"><span
+                          class="vsm-title">Fontes de Emissões</span></a>
+                      </div>
+                      <div class="vsm-item">
+                        <a routerLinkActive="active-item" routerLink="/combustivel" class="vsm-link"><span
+                          class="vsm-title">Combustíveis</span></a>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-panel> -->
+
+              <ngb-panel id="cadastroMenu">
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link">
+                    <i class="vsm-icon-menu fa fa-cog"></i>
+                    <span class="vsm-title">Administração</span>
+                    <i class="vsm-arrow"></i>
+                  </button>
+                </ng-template>
+                <ng-template ngbPanelContent>
+                  <div class="vsm-dropdown">
+                    <div class="vsm-list">
+                      <div class="vsm-item">
+                        <a routerLinkActive="active-item" routerLink="/usuario" class="vsm-link"><span
+                          class="vsm-title">Usuário</span></a>
+                      </div>
+
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-panel>
+            </ngb-accordion>
+
+            <div class="vsm-item">
+              <a routerLink="/login" (click)="logout()" class="vsm-link">
+                <i class="vsm-icon-menu fa fa-sign-out"></i>
+                <span class="vsm-title">Sair</span>
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </perfect-scrollbar>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- <ngb-panel id="monitoramentoMenu">
                 <ng-template ngbPanelHeader>
                   <button ngbPanelToggle class="vsm-link">
                     <i class="vsm-icon-menu fa fa-calendar-check-o"></i>
@@ -114,47 +208,7 @@
                   </div>
                 </ng-template>
               </ngb-panel> -->
-              <ngb-panel id="residuosMenu">
-                <ng-template ngbPanelHeader>
-                  <button ngbPanelToggle class="vsm-link">
-                    <i class="vsm-icon-menu fa fa-industry"></i>
-                    <span class="vsm-title">Efeito Estufa</span>
-                    <i class="vsm-arrow"></i>
-                  </button>
-                </ng-template>
-
-                <ng-template ngbPanelContent>
-                  <div class="vsm-dropdown">
-                    <div class="vsm-list">
-                      <div class="vsm-item">
-                        <a routerLinkActive="active-item" routerLink="/programacao" class="vsm-link"><span
-                          class="vsm-title">Programação</span></a>
-                      </div>
-                      <div class="vsm-item">
-                        <a routerLinkActive="active-item" routerLink="/programacao-pendente" class="vsm-link"><span
-                          class="vsm-title">Programações Pendentes</span></a>
-                      </div>
-                    </div>
-                  </div>
-                </ng-template>
-              </ngb-panel>
-
-              <ngb-panel id="cadastroMenu">
-                <ng-template ngbPanelHeader>
-                  <button ngbPanelToggle class="vsm-link">
-                    <i class="vsm-icon-menu fa fa-cog"></i>
-                    <span class="vsm-title">Administração</span>
-                    <i class="vsm-arrow"></i>
-                  </button>
-                </ng-template>
-                <ng-template ngbPanelContent>
-                  <div class="vsm-dropdown">
-                    <div class="vsm-list">
-                      <div class="vsm-item">
-                        <a routerLinkActive="active-item" routerLink="/usuario" class="vsm-link"><span
-                          class="vsm-title">Usuário</span></a>
-                      </div>
-                      <!-- <div class="vsm-item">
+<!-- <div class="vsm-item">
                         <a routerLinkActive="active-item" routerLink="/produto" class="vsm-link"><span
                           class="vsm-title">Produtos</span></a>
                       </div>
@@ -170,22 +224,3 @@
                         <a routerLinkActive="active-item" routerLink="/tecnico" class="vsm-link"><span
                           class="vsm-title">Técnicos</span></a>
                       </div> -->
-                    </div>
-                  </div>
-                </ng-template>
-              </ngb-panel>
-            </ngb-accordion>
-
-            <div class="vsm-item">
-              <a routerLink="/login" (click)="logout()" class="vsm-link">
-                <i class="vsm-icon-menu fa fa-sign-out"></i>
-                <span class="vsm-title">Sair</span>
-              </a>
-            </div>
-
-          </div>
-        </div>
-      </perfect-scrollbar>
-    </div>
-  </div>
-</div>

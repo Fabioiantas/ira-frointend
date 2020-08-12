@@ -322,6 +322,8 @@ const routes: Routes = [
       }
     ]
   },
+
+  //###### GEE #######//
   {
     path: 'gee',
     component: BaseLayoutComponent,
@@ -329,17 +331,42 @@ const routes: Routes = [
       {
         path: '',
         component: GeeComponent,
-        data: { extraParameter: 'licenciamentoMenu' },
+        data: {roles: [Role.Admin], extraParameter: 'geeMenu' },
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'adicionar',
+        component: GeeCadastroComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'geeMenu' }
+      },
+      {
+        path: 'editar/:id',
+        component: GeeCadastroComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'geeMenu' }
+      }
+
+    ]
+  },
+  /*{
+    path: 'gee',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: GeeComponent,
+        data: { extraParameter: 'geeMenu' },
         canActivate: [AuthGuard]
       },
       {
         path: 'gee/:id',
         component: GeeCadastroComponent,
         canActivate: [AuthGuard],
-        data: { roles: [Role.Admin], extraParameter: 'licenciamentoMenu' }
+        data: { roles: [Role.Admin], extraParameter: 'geeMenu' }
       }
     ]
-  },
+  },*/
 // #####################
   {
     path: 'campanha',
