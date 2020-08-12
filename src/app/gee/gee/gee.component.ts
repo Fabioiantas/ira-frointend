@@ -13,14 +13,19 @@ export class GeeComponent implements OnInit {
   gee: any = [];
   selected: any = [];
   rowsGee: any[];
-
+  groups = [];
   columnsGee = [
     {name : 'Entidade', prop : 'nm_entidade', width : '35%', selecionado: true},
     {name : 'CNPJ', prop : 'nr_cnpj', width : '35%', selecionado: true}
   ];
+
+
   constructor(private router: Router,
               private geeService: GeeService,
               private dialogBox: DialogBoxService) { }
+
+
+
 
   ngOnInit() {
     this.populaTable();
@@ -30,6 +35,7 @@ export class GeeComponent implements OnInit {
     this.geeService.listar().subscribe((response) => {
       this.gee = [...response];
       this.rowsGee = [...response];
+      this.groups = [...response];
     });
   }
 

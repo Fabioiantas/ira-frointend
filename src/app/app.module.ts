@@ -119,6 +119,7 @@ import { GhgCadastroComponent } from './efeito-estufa/monitoramento-ghg/monitora
 import { CombustivelCadComponent } from './efeito-estufa/tipo-combustivel/tipo-combustivel-cadastro/tipo-combustivel-cadastro.component';
 import { GeeComponent } from './gee/gee/gee.component';
 import { GeeCadastroComponent } from './gee/gee/gee-cadastro/gee-cadastro/gee-cadastro.component';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -261,6 +262,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ColorPickerModule,
     DropzoneModule,
     NgxSpinnerModule,
+    AccordionModule.forRoot(),
   ],
   providers: [
     BsModalRef,

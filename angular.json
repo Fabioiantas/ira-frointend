@@ -27,6 +27,7 @@
               "src/assets/images"
             ],
             "styles": [
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss",
               "./node_modules/font-awesome/scss/font-awesome.scss",
               "./node_modules/@swimlane/ngx-datatable/release/themes/bootstrap.css",
