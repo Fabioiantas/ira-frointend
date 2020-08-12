@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LicencaAmbientalProtocolacaoComponent } from './licenca-ambiental-protocolacao.component';
+import { ProtocolacaoComponent } from './licenca-ambiental-protocolacao.component';
 
 describe('LicencaAmbientalProtocolacaoComponent', () => {
-  let component: LicencaAmbientalProtocolacaoComponent;
-  let fixture: ComponentFixture<LicencaAmbientalProtocolacaoComponent>;
+  let component: ProtocolacaoComponent;
+  let fixture: ComponentFixture<ProtocolacaoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LicencaAmbientalProtocolacaoComponent ]
+      declarations: [ ProtocolacaoComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LicencaAmbientalProtocolacaoComponent);
+    fixture = TestBed.createComponent(ProtocolacaoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

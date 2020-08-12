@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LicencaAmbientalLicenciamentoComponent } from './licenca-ambiental-licenciamento.component';
+import { LicenciamentoComponent } from './licenca-ambiental-licenciamento.component';
 
 describe('LicencaAmbientalLicenciamentoComponent', () => {
-  let component: LicencaAmbientalLicenciamentoComponent;
-  let fixture: ComponentFixture<LicencaAmbientalLicenciamentoComponent>;
+  let component: LicenciamentoComponent;
+  let fixture: ComponentFixture<LicenciamentoComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LicencaAmbientalLicenciamentoComponent ]
+      declarations: [ LicenciamentoComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LicencaAmbientalLicenciamentoComponent);
+    fixture = TestBed.createComponent(LicenciamentoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

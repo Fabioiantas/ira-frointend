@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './tipo-combustivel-cadastro.component.html',
   styleUrls: ['./tipo-combustivel-cadastro.component.sass']
 })
-export class TipoCombustivelCadastroComponent implements OnInit {
+export class CombustivelCadComponent implements OnInit {
 
   constructor() { }
 

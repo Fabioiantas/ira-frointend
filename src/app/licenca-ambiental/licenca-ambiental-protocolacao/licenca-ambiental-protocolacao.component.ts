@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as moment from "moment";
+import * as moment from 'moment';
 import { LicencaAmbiental } from 'src/app/models/licencaAmbiental';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { DialogBoxService } from 'src/app/_services/dialog-box.service';
@@ -11,13 +11,12 @@ import { LicencaAmbientalService } from 'src/app/services/licenca-ambiental.serv
   templateUrl: './licenca-ambiental-protocolacao.component.html',
   styleUrls: ['./licenca-ambiental-protocolacao.component.sass']
 })
-export class LicencaAmbientalProtocolacaoComponent implements OnInit {
-  
+export class ProtocolacaoComponent implements OnInit {
+
   licencaAmbiental: LicencaAmbiental = new LicencaAmbiental();
   params: any;
   isLoading: any = false;
-  showProtocoloNovo: boolean = false;
-  
+  showProtocoloNovo = false;
   //
   nrLicencaAmbiental: string;
   nmEntidade: string;
@@ -35,7 +34,7 @@ export class LicencaAmbientalProtocolacaoComponent implements OnInit {
 
 
   id: any;
-  
+
   formGroup = new FormGroup({
     id: new FormControl(''),
     nr_licenca_ambiental: new FormControl(''),
@@ -44,7 +43,7 @@ export class LicencaAmbientalProtocolacaoComponent implements OnInit {
     nr_dias_limite_protocolo: new FormControl('', Validators.required),
     nr_protocolo: new FormControl(''),
     nr_protocolo_novo: new FormControl('', Validators.required),
-    dt_emissao_protocolo: new FormControl('',Validators.required),
+    dt_emissao_protocolo: new FormControl('', Validators.required),
     dt_protocolacao: new FormControl(),
     dt_validade_protocolo: new FormControl(),
     id_entidade: new FormControl(''),
@@ -55,39 +54,39 @@ export class LicencaAmbientalProtocolacaoComponent implements OnInit {
     dt_protocolar_em: new FormControl('')
   });
 
-  constructor(private licencaAmbientalService: LicencaAmbientalService, 
+  constructor(private licencaAmbientalService: LicencaAmbientalService,
               private dialogBox: DialogBoxService,
-              private route: ActivatedRoute, 
+              private route: ActivatedRoute,
               private router: Router) { }
 
   ngOnInit() {
     this.route.params.subscribe(data => {
       this.params = data;
     });
-    
+
     if (this.params.id) {
       this.licencaAmbientalService.getLicencaById(this.params.id).subscribe(licencaAmbiental => {
-        this.licencaAmbiental = licencaAmbiental; 
+        this.licencaAmbiental = licencaAmbiental;
         if (this.licencaAmbiental[0].nr_protocolo_novo !== null) {
           this.dialogBox.show('Protocolo já informado.', 'WARNING');
           this.router.navigate(['/licenca']);
         }
         this.nrLicencaAmbiental = licencaAmbiental[0].nr_licenca_ambiental;
-        this.nmReduzido = licencaAmbiental[0].nm_reduzido;    
-        this.nrCnpj = licencaAmbiental[0].nr_cnpj;       
-        this.nmTipoLicenca   = licencaAmbiental[0].nm_licenca;       
-        this.nmTipoAtividade = licencaAmbiental[0].nm_atividade;       
-        this.nmOrgao         = licencaAmbiental[0].nm_orgao;       
-        this.sgOrgao         = licencaAmbiental[0].sg_orgao;       
-        this.nrProtocolo     = licencaAmbiental[0].nr_protocolo;       
-        // this.dtEmissaoProtocolo = licencaAmbiental[0].dt_emissao_protocolo;  
-        this.dtEmissaoProtocolo = moment(licencaAmbiental[0].dt_emissao_protocolo).format("DD/MM/YYYY");   
-        this.dtValidade = moment(licencaAmbiental[0].dt_validade).format("DD/MM/YYYY");   
-        this.nrDiasLimite = licencaAmbiental[0].nr_dias_limite_protocolo;  
+        this.nmReduzido = licencaAmbiental[0].nm_reduzido;
+        this.nrCnpj = licencaAmbiental[0].nr_cnpj;
+        this.nmTipoLicenca   = licencaAmbiental[0].nm_licenca;
+        this.nmTipoAtividade = licencaAmbiental[0].nm_atividade;
+        this.nmOrgao         = licencaAmbiental[0].nm_orgao;
+        this.sgOrgao         = licencaAmbiental[0].sg_orgao;
+        this.nrProtocolo     = licencaAmbiental[0].nr_protocolo;
+        // this.dtEmissaoProtocolo = licencaAmbiental[0].dt_emissao_protocolo;
+        this.dtEmissaoProtocolo = moment(licencaAmbiental[0].dt_emissao_protocolo).format('DD/MM/YYYY');
+        this.dtValidade = moment(licencaAmbiental[0].dt_validade).format('DD/MM/YYYY');
+        this.nrDiasLimite = licencaAmbiental[0].nr_dias_limite_protocolo;
         this.dsSituacaoLicenca = licencaAmbiental[0].ds_situacao;
-        
+
         this.formGroup.patchValue({
-          id: this.licencaAmbiental[0].id, 
+          id: this.licencaAmbiental[0].id,
           nr_licenca_ambiental: this.licencaAmbiental[0].nr_licenca_ambiental,
           nr_protocolo: this.licencaAmbiental[0].nr_protocolo,
           nr_protocolo_novo: this.licencaAmbiental[0].nr_protocolo_novo,
@@ -97,9 +96,11 @@ export class LicencaAmbientalProtocolacaoComponent implements OnInit {
           // dt_emissao_protocolo: new Date(this.licencaAmbiental[0].dt_emissao_protocolo),
           // dt_validade_protocolo: new Date(this.licencaAmbiental[0].dt_validade_protocolo),
 
-           dt_emissao_protocolo: this.licencaAmbiental[0].dt_emissao_protocolo ? new Date(this.licencaAmbiental[0].dt_emissao_protocolo) : null,
-           dt_validade_protocolo: this.licencaAmbiental[0].dt_validade_protocolo ? new Date(this.licencaAmbiental[0].dt_validade_protocolo) : null,
-          
+           dt_emissao_protocolo: this.licencaAmbiental[0].dt_emissao_protocolo ?
+             new Date(this.licencaAmbiental[0].dt_emissao_protocolo) : null,
+           dt_validade_protocolo: this.licencaAmbiental[0].dt_validade_protocolo ?
+             new Date(this.licencaAmbiental[0].dt_validade_protocolo) : null,
+
           // dt_protocolacao: new Date(this.licencaAmbiental[0].dt_protocolacao),
           nr_dias_limite_protocolo: this.licencaAmbiental[0].nr_dias_limite_protocolo,
           id_entidade: this.licencaAmbiental[0].id_entidade,
@@ -117,11 +118,11 @@ export class LicencaAmbientalProtocolacaoComponent implements OnInit {
       });
     }
   }
-  
+
   salvar() {
     console.log(this.formGroup.getRawValue());
-    if (!this.formGroup.valid) { return; }  
-      this.licencaAmbientalService.protocolar(this.formGroup.value).subscribe(() => {
+    if (!this.formGroup.valid) { return; }
+    this.licencaAmbientalService.protocolar(this.formGroup.value).subscribe(() => {
         this.dialogBox.show('Licença Protocolada com sucesso!', 'OK');
         this.router.navigate(['/licenca']);
       });

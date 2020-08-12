@@ -14,7 +14,7 @@ import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
   templateUrl: './licenca-ambiental-licenciamento.component.html',
   styleUrls: ['./licenca-ambiental-licenciamento.component.sass']
 })
-export class LicencaAmbientalLicenciamentoComponent implements OnInit {
+export class LicenciamentoComponent implements OnInit {
 
   licencaAmbiental: LicencaAmbiental = new LicencaAmbiental();
   params: any;
@@ -38,9 +38,9 @@ export class LicencaAmbientalLicenciamentoComponent implements OnInit {
 
   formGroup = new FormGroup({
     id: new FormControl(''),
-    nr_licenca_ambiental: new FormControl('',Validators.required),
-    dt_emissao: new FormControl('',Validators.required),
-    dt_validade: new FormControl('',Validators.required),
+    nr_licenca_ambiental: new FormControl('', Validators.required),
+    dt_emissao: new FormControl('', Validators.required),
+    dt_validade: new FormControl('', Validators.required),
     nr_dias_limite_protocolo: new FormControl('', Validators.required),
     nr_protocolo: new FormControl(''),
     dt_emissao_protocolo: new FormControl(),
@@ -79,9 +79,9 @@ export class LicencaAmbientalLicenciamentoComponent implements OnInit {
         this.sgOrgao         = licencaAmbiental[0].sg_orgao;
         this.nrProtocolo     = licencaAmbiental[0].nr_protocolo;
 
-        this.dtEmissaoProtocolo = moment(licencaAmbiental[0].dt_emissao_protocolo).format("DD/MM/YYYY");
-        this.dtValidade = moment(licencaAmbiental[0].dt_validade).format("DD/MM/YYYY");
-        this.dtEmissao = moment(licencaAmbiental[0].dt_emissao).format("DD/MM/YYYY");
+        this.dtEmissaoProtocolo = moment(licencaAmbiental[0].dt_emissao_protocolo).format('DD/MM/YYYY');
+        this.dtValidade = moment(licencaAmbiental[0].dt_validade).format('DD/MM/YYYY');
+        this.dtEmissao = moment(licencaAmbiental[0].dt_emissao).format('DD/MM/YYYY');
         this.nrDiasLimite = licencaAmbiental[0].nr_dias_limite_protocolo;
 
         this.formGroup.patchValue({
@@ -93,8 +93,10 @@ export class LicencaAmbientalLicenciamentoComponent implements OnInit {
 
           dt_emissao: this.licencaAmbiental[0].dt_emissao !== null ? new Date(this.licencaAmbiental[0].dt_emissao) : null,
           dt_validade: this.licencaAmbiental[0].dt_validade !== null ? new Date(this.licencaAmbiental[0].dt_validade) : null,
-          dt_emissao_protocolo: this.licencaAmbiental[0].dt_emissao_protocolo ? new Date(this.licencaAmbiental[0].dt_emissao_protocolo) : null,
-          dt_validade_protocolo: this.licencaAmbiental[0].dt_validade_protocolo ? new Date(this.licencaAmbiental[0].dt_validade_protocolo) : null,
+          dt_emissao_protocolo: this.licencaAmbiental[0].dt_emissao_protocolo ?
+            new Date(this.licencaAmbiental[0].dt_emissao_protocolo) : null,
+          dt_validade_protocolo: this.licencaAmbiental[0].dt_validade_protocolo ?
+            new Date(this.licencaAmbiental[0].dt_validade_protocolo) : null,
 
           nr_dias_limite_protocolo: this.licencaAmbiental[0].nr_dias_limite_protocolo,
           id_entidade: this.licencaAmbiental[0].id_entidade,
@@ -133,7 +135,7 @@ export class LicencaAmbientalLicenciamentoComponent implements OnInit {
   changeDias() {
     if (this.formGroup.get('dt_validade').value) {
       this.nrDiasLimite = this.formGroup.get('nr_dias_limite_protocolo').value;
-      const dtProt = moment(this.formGroup.get('dt_validade').value, 'DD/MM/YYYY').add(-this.nrDiasLimite, 'days').format("DD/MM/YYYY");
+      const dtProt = moment(this.formGroup.get('dt_validade').value, 'DD/MM/YYYY').add(-this.nrDiasLimite, 'days').format('DD/MM/YYYY');
       this.formGroup.get('dt_protocolar_em').setValue(dtProt !== null ? dtProt : null);
     }
   }
@@ -141,7 +143,7 @@ export class LicencaAmbientalLicenciamentoComponent implements OnInit {
   onBlurMethod() {
     if (this.formGroup.get('dt_validade').value) {
       this.nrDiasLimite = this.formGroup.get('nr_dias_limite_protocolo').value;
-      const dtProt = moment(this.formGroup.get('dt_validade').value, 'DD/MM/YYYY').add(-this.nrDiasLimite, 'days').format("DD/MM/YYYY");
+      const dtProt = moment(this.formGroup.get('dt_validade').value, 'DD/MM/YYYY').add(-this.nrDiasLimite, 'days').format('DD/MM/YYYY');
       this.formGroup.get('dt_protocolar_em').setValue(dtProt !== null ? dtProt : null);
     }
   }

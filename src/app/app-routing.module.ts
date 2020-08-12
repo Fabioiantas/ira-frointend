@@ -1,3 +1,4 @@
+import { GeeComponent } from './gee/gee/gee.component';
 import { RecursoComponent } from './Recurso/Recurso.component';
 import { ProgramacaoComponent } from './programacao/programacao.component';
 import { ProdutosLiberadosComponent } from './produtos-liberados/produtos-liberados.component';
@@ -37,10 +38,11 @@ import { EntidadeComponent } from './entidade/entidade.component';
 import { EntidadeCadastroComponent } from './entidade/entidade-cadastro/entidade-cadastro.component';
 import { LicencaAmbientalCadastroComponent } from './licenca-ambiental/licenca-ambiental-cadastro/licenca-ambiental-cadastro.component';
 import { LicencaEntidadeComponent } from './licenca-ambiental/licenca-entidade/licenca-entidade.component';
-import { LicencaAmbientalLicenciamentoComponent } from './licenca-ambiental/licenca-ambiental-licenciamento/licenca-ambiental-licenciamento.component';
-import { LicencaAmbientalProtocolacaoComponent } from './licenca-ambiental/licenca-ambiental-protocolacao/licenca-ambiental-protocolacao.component';
+import { LicenciamentoComponent } from './licenca-ambiental/licenca-ambiental-licenciamento/licenca-ambiental-licenciamento.component';
+import { ProtocolacaoComponent } from './licenca-ambiental/licenca-ambiental-protocolacao/licenca-ambiental-protocolacao.component';
 import { LicencaAmbientalRenovaComponent } from './licenca-ambiental/licenca-ambiental-renova/licenca-ambiental-renova.component';
 import { ResetPasswordComponent } from './login/reset-password/reset-password.component';
+import { GeeCadastroComponent } from './gee/gee/gee-cadastro/gee-cadastro/gee-cadastro.component';
 
 const routes: Routes = [
   {
@@ -290,7 +292,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: LicencaAmbientalLicenciamentoComponent,
+        component: LicenciamentoComponent,
         data: { extraParameter: 'licenciamentoMenu' },
         canActivate: [AuthGuard]
       }
@@ -314,9 +316,27 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: LicencaAmbientalProtocolacaoComponent,
+        component: ProtocolacaoComponent,
         data: { extraParameter: 'licenciamentoMenu' },
         canActivate: [AuthGuard]
+      }
+    ]
+  },
+  {
+    path: 'gee',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: GeeComponent,
+        data: { extraParameter: 'licenciamentoMenu' },
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'gee/:id',
+        component: GeeCadastroComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'licenciamentoMenu' }
       }
     ]
   },

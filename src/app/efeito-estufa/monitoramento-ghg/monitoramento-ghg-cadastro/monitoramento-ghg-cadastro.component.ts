@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './monitoramento-ghg-cadastro.component.html',
   styleUrls: ['./monitoramento-ghg-cadastro.component.sass']
 })
-export class MonitoramentoGhgCadastroComponent implements OnInit {
+export class GhgCadastroComponent implements OnInit {
 
   constructor() { }
 

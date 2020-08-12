@@ -103,8 +103,8 @@ import { OrgaoResponsavelCadastroComponent } from './orgao-responsavel/orgao-res
 import { EntidadeCadastroComponent } from './entidade/entidade-cadastro/entidade-cadastro.component';
 import { LicencaAmbientalCadastroComponent } from './licenca-ambiental/licenca-ambiental-cadastro/licenca-ambiental-cadastro.component';
 import { LicencaEntidadeComponent } from './licenca-ambiental/licenca-entidade/licenca-entidade.component';
-import { LicencaAmbientalLicenciamentoComponent } from './licenca-ambiental/licenca-ambiental-licenciamento/licenca-ambiental-licenciamento.component';
-import { LicencaAmbientalProtocolacaoComponent } from './licenca-ambiental/licenca-ambiental-protocolacao/licenca-ambiental-protocolacao.component';
+import { LicenciamentoComponent } from './licenca-ambiental/licenca-ambiental-licenciamento/licenca-ambiental-licenciamento.component';
+import { ProtocolacaoComponent } from './licenca-ambiental/licenca-ambiental-protocolacao/licenca-ambiental-protocolacao.component';
 import { LicencaAmbientalRenovaComponent } from './licenca-ambiental/licenca-ambiental-renova/licenca-ambiental-renova.component';
 import { LicencaDetalheComponent } from './licenca-ambiental/licenca-detalhe/licenca-detalhe.component';
 import { ResetPasswordComponent } from './login/reset-password/reset-password.component';
@@ -114,8 +114,11 @@ import { FonteEmissoraCadastroComponent } from './efeito-estufa/fonte-emissora/f
 import { EscopoComponent } from './efeito-estufa/escopo/escopo.component';
 import { EscopoCadastroComponent } from './efeito-estufa/escopo/escopo-cadastro/escopo-cadastro.component';
 import { MonitoramentoGhgComponent } from './efeito-estufa/monitoramento-ghg/monitoramento-ghg.component';
-import { MonitoramentoGhgCadastroComponent } from './efeito-estufa/monitoramento-ghg/monitoramento-ghg-cadastro/monitoramento-ghg-cadastro.component';
-import { TipoCombustivelCadastroComponent } from './efeito-estufa/tipo-combustivel/tipo-combustivel-cadastro/tipo-combustivel-cadastro.component';
+import { GhgCadastroComponent } from './efeito-estufa/monitoramento-ghg/monitoramento-ghg-cadastro/monitoramento-ghg-cadastro.component';
+// tslint:disable-next-line:max-line-length
+import { CombustivelCadComponent } from './efeito-estufa/tipo-combustivel/tipo-combustivel-cadastro/tipo-combustivel-cadastro.component';
+import { GeeComponent } from './gee/gee/gee.component';
+import { GeeCadastroComponent } from './gee/gee/gee-cadastro/gee-cadastro/gee-cadastro.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -187,19 +190,21 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     EntidadeCadastroComponent,
     LicencaAmbientalCadastroComponent,
     LicencaEntidadeComponent,
-    LicencaAmbientalLicenciamentoComponent,
-    LicencaAmbientalProtocolacaoComponent,
+    LicenciamentoComponent,
+    ProtocolacaoComponent,
     LicencaAmbientalRenovaComponent,
     LicencaDetalheComponent,
     ResetPasswordComponent,
     TipoCombustivelComponent,
-    TipoCombustivelCadastroComponent,
+    CombustivelCadComponent,
     FonteEmissoraComponent,
     FonteEmissoraCadastroComponent,
     EscopoComponent,
     EscopoCadastroComponent,
     MonitoramentoGhgComponent,
-    MonitoramentoGhgCadastroComponent
+    GhgCadastroComponent,
+    GeeComponent,
+    GeeCadastroComponent,
 
   ],
   imports: [

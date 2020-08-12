@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MonitoramentoGhgCadastroComponent } from './monitoramento-ghg-cadastro.component';
+import { GhgCadastroComponent } from './monitoramento-ghg-cadastro.component';
 
 describe('MonitoramentoGhgCadastroComponent', () => {
-  let component: MonitoramentoGhgCadastroComponent;
-  let fixture: ComponentFixture<MonitoramentoGhgCadastroComponent>;
+  let component: GhgCadastroComponent;
+  let fixture: ComponentFixture<GhgCadastroComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MonitoramentoGhgCadastroComponent ]
+      declarations: [ GhgCadastroComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MonitoramentoGhgCadastroComponent);
+    fixture = TestBed.createComponent(GhgCadastroComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
