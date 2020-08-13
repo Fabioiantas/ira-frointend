@@ -16,7 +16,9 @@ export class GeeComponent implements OnInit {
   groups = [];
   columnsGee = [
     {name : 'Entidade', prop : 'nm_entidade', width : '35%', selecionado: true},
-    {name : 'CNPJ', prop : 'nr_cnpj', width : '35%', selecionado: true}
+    {name : 'CNPJ', prop : 'nr_cnpj', width : '35%', selecionado: true},
+    {name : 'CO2 Fóssel', prop : 'qt_co2_fossel', width : '35%', selecionado: true},
+    {name : 'CO2 Bio', prop : 'qt_co2_bio', width : '35%', selecionado: true}
   ];
 
 
