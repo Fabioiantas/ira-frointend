@@ -41,8 +41,8 @@ export class GeeComponent implements OnInit {
 
   remover() {
     if (this.selected) {
-      this.dialogBox.show("Confirma remoção da gee?","CONFIRM").then(sim=>{
-        if(sim){
+      this.dialogBox.show('Confirma remoção da gee?', 'CONFIRM').then((sim: any) => {
+        if (sim) {
           this.geeService.remove(this.selected[0].id).subscribe(data => {
             this.dialogBox.show('gee removida com sucesso!', 'OK');
             this.populaTable();
@@ -52,11 +52,11 @@ export class GeeComponent implements OnInit {
     }
   }
 
-  editar(id) {
-    this.router.navigate(['/gee/adicionar/' + id])
+  editar(id: string) {
+    this.router.navigate(['/gee/adicionar/' + id]);
   }
 
-  editarForm(e){
+  editarForm() {
     this.editar(this.selected[0].id);
   }
 
@@ -64,6 +64,10 @@ export class GeeComponent implements OnInit {
     if ($event.type === 'dblclick') {
       this.router.navigate(['/gee/adicionar/' + $event.row.id]);
     }
+  }
+
+  add() {
+    alert('teste');
   }
 
 }

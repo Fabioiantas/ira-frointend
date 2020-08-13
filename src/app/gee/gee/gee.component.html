@@ -31,9 +31,10 @@
         class="header-icon fa fa-industry mr-3 text-muted opacity-6"></i>Gee</div>
     <div class="btn-actions-pane-right">
       <div class="btn-group-sm btn-group" role="group">
+        <a class="btn btn-dark" [routerLink]="['/gee/adicionar']">Emissões</a>
         <a class="btn btn-success" [routerLink]="['/gee/adicionar']">Adicionar</a>
         <button class="btn btn-primary" type="button" (click)="editar(selected[0].id)">Editar</button>
-        <button class="btn btn-dark" type="button" (click)="remover()">Remover</button>
+        <button class="btn btn-danger" type="button" (click)="remover()">Remover</button>
       </div>
     </div>
   </div>
@@ -48,19 +49,12 @@
       </ngx-datatable-filter>
     </div>
   </div>
-
-  <accordion>
-    <accordion-group *ngFor="let group of groups"
-      [heading]="group.nm_entidade">
-      {{ group?.propriedade_id }}
-    </accordion-group>
-  </accordion>
-
-  <!-- <ngx-datatable ngx-resize-watcher class="bootstrap striped" #tableGee
+  <ngx-datatable ngx-resize-watcher class="bootstrap striped" #tableGee
     [rows]="rowsGee"
     [footerHeight]="30"
-    [rowHeight]="40"
+    [rowHeight]="45"
     [columns]="columnsGee"
+    [columnMode]="'force'"
     [selected]="selected"
     [selectionType]="'single'"
     (activate)="activate($event)"
@@ -68,7 +62,7 @@
     [limit]="10">
     <ngx-datatable-column name="Entidade" prop="nm_entidade" [width]="350" [flexGrow]="1"></ngx-datatable-column>
     <ngx-datatable-column name="CNPJ" prop="nr_cnpj" [flexGrow]="1"></ngx-datatable-column>
-  </ngx-datatable> -->
+</ngx-datatable>
 </section>
 
 
