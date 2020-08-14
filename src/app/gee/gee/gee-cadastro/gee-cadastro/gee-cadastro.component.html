@@ -1,4 +1,4 @@
-<!-- <div class="app-inner-layout chat-layout">
+<div class="app-inner-layout chat-layout">
   <div class="app-inner-layout__header">
     <div class="app-page-title">
       <div class="page-title-wrapper">
@@ -16,7 +16,7 @@
         <div class="page-title-actions">
           Status:
           <button type="button" class="ml-2 btn badge-info">
-            {{getStatusIntegracao(programacao?.ieSituacaoIntegracao)}}
+
           </button>
         </div>
       </div>
@@ -34,12 +34,12 @@
                 <span class="hamburger-box"><span class="hamburger-inner"></span></span>
               </button>
             </div>
-            <h4 class="mb-0 text-nowrap title">Dados da Programação
-              <div class="opacity-7 mt-2">Última atualização: <span class="opacity-8">{{programacao?.dtAtualizacao | date:'d/MM/yyyy H:mm:ss'}}</span></div>
+            <h4 class="mb-0 text-nowrap title">Emissões GEE
+              <!-- <div class="opacity-7 mt-2">Última atualização: <span class="opacity-8">{{programacao?.dtAtualizacao | date:'d/MM/yyyy H:mm:ss'}}</span></div> -->
             </h4>
           </div>
           <div class="pane-right">
-            <button type="button" (click)="salvar()" class="btn-shadow btn btn-dark" *ngIf="programacao?.idProgramacao">
+            <button type="button" (click)="salvar()" class="btn-shadow btn btn-dark" *ngIf="monitoramentoGee?.id">
               <fa name="star"></fa> Reprocessar
             </button>
           </div>
@@ -56,15 +56,15 @@
                 </div>
               </div>
 
-              <div *ngIf="!loading && !programacao?.idProgramacao && filterForm.valid" class="text-center mt-3">
-                <h6>Programação para o cooperado não foi iniciada, para iniciar pressione o botão abaixo;</h6>
+              <div *ngIf="!loading && !monitoramentoGee?.id && filterForm.valid" class="text-center mt-3">
+                <h6>Não foram encontradas emissões cadastradas, para iniciar pressione o botão abaixo;</h6>
                 <button (click)="create()" class="mb-2 mr-2 mt-4 btn-icon btn-pill btn btn-outline-success"><i
-                    class="pe-7s-plus btn-icon-wrapper"></i>Iniciar Programação</button>
+                    class="pe-7s-plus btn-icon-wrapper"></i>Emissões</button>
               </div>
 
-              <!--Programação-->
-              <div *ngIf="!loading && programacao?.idProgramacao">
-                <div class="row mt-3">
+              <!--Emissoes-->
+              <div *ngIf="!loading && monitoramentoGee?.id">
+                <!-- <div class="row mt-3">
                   <div class="col">
                     <ng-select name="tipoPagamento" [items]="tipoPagamentos" bindLabel="dsTipoPagamento"
                       [(ngModel)]="programacao.idTipoPagamento" bindValue="idTipoPagamento"
@@ -77,11 +77,11 @@
                       placeholder="Forma de Pagamento..." [clearable]="false">
                     </ng-select>
                   </div>
-                </div>
+                </div> -->
 
                 <div class="row mt-4 mb-2">
                   <div class="col-sm-12">
-                    <h5 class="card-title ml-1">Itens do Orçamento</h5>
+                    <h5 class="card-title ml-1">Emissões</h5>
                   </div>
                 </div>
 
@@ -92,9 +92,9 @@
                         <thead>
                           <tr [ngClass]="{'table-active': !isAddEdit}">
                             <th class="text-center"></th>
-                            <th width="40%">Produto</th>
-                            <th class="text-center qtd-input">Quantidade</th>
-                            <th class="text-center">C.P</th>
+                            <th width="40%">Data</th>
+                            <th class="text-center qtd-input">UN.</th>
+                            <th class="text-center">Consumo Total</th>
                             <th class="text-center">Status</th>
                             <th class="text-right"></th>
                           </tr>
@@ -106,17 +106,21 @@
                               <i class="pe-7s-close btn-icon-wrapper text-danger" style="font-size: 43px; margin-right: 0px;" (click)="closeEdit()"></i>
                             </td>
                             <td>
-                              <ng-select name="produto" [items]="produtosLiberados" bindLabel="produto.dsProduto"
+                              <!-- <ng-select name="produto" [items]="produtosLiberados" bindLabel="produto.dsProduto"
                                 bindValue="produto.idProduto" [(ngModel)]="itemProgramacao.idProduto"
                                 placeholder="Produto..." [clearable]="false">
-                              </ng-select>
+                              </ng-select> -->
+                              <input class="form-control" (click)="dt_amostra.toggle()" placeholder="dia/mês/ano"
+                                name="dt_amostra" formControlName="amostrasGee.dt_amostra" ngbDatepicker
+                                #dt_amostra="ngbDatepicker" autocomplete="off">
                             </td>
                             <td class="text-center align-middle">
-                              <input class="form-control" name="text" placeholder="Quantidade" type="text"
-                                [(ngModel)]="itemProgramacao.qtProduto">
+                              <input class="form-control" name="text" placeholder="UN." type="text"
+                                [(ngModel)]="amostrasGee.cd_unidade_padrao">
                             </td>
                             <td class="text-center">
-                              106
+                              <input class="form-control" name="text" placeholder="Consumo total" type="text"
+                              [(ngModel)]="amostrasGee.qt_comsumo_total">
                             </td>
                             <td class="text-center icons">
                               <i class="pe-7s-check btn-icon-wrapper text-success" style="font-size: 33px; margin-right: 0px;" (click)="addItem()"></i>
@@ -125,9 +129,9 @@
                             </td>
                           </tr>
 
-                          <tr *ngIf="!programacao?.itens?.length">
+                          <tr *ngIf="!amostrasGee?.length">
                             <td colspan="6" class="text-center">
-                              <h6 class="mt-3">Nenhum produto adicionado ao orçamento</h6>
+                              <h6 class="mt-3">Nenhuma amosrtra adicionada</h6>
                               <button *ngIf="!isAddEdit"
                                 class="mb-2 mr-2 mt-3 btn-icon btn-pill btn btn-outline-success"
                                 style="margin-right: 7px;" (click)="add()"><i
@@ -135,19 +139,19 @@
                             </td>
                           </tr>
 
-                          <tr *ngFor="let item of programacao.itens; let i = index">
+                          <tr *ngFor="let gee of amostrasGee; let i = index">
                             <td class="text-center text-muted">{{i+1}}</td>
                             <td>
                               <div class="widget-content p-0">
                                 <div class="widget-content-wrapper">
                                   <div class="widget-content-left flex2">
-                                    <div class="widget-heading">{{item.produto.dsProduto}}</div>
-                                    <div class="widget-subheading opacity-7">Medicamento Veterinário</div>
+                                    <div class="widget-heading">{{gee.dt_amostra | date:'dd/MM/yyyy'}}</div>
+                                    <!-- <div class="widget-subheading opacity-7">Medicamento Veterinário</div> -->
                                   </div>
                                 </div>
                               </div>
                             </td>
-                            <td class="text-center">{{item.qtProduto}}</td>
+                            <td class="text-center">{{gee.cd_unidade_padrao}}</td>
                             <td class="text-center">106</td>
                             <td class="text-center">
                               <div class="badge badge-warning">Em Análise</div>
@@ -167,7 +171,7 @@
                 </div>
               </div>
 
-              <!-- FIM Programação-->
+              <!-- FIM emissoes-->
 
             </div>
           </div>
@@ -180,30 +184,39 @@
       <div class="app-inner-layout__sidebar-header">
         <form [formGroup]="filterForm">
           <ul class="nav flex-column filter-programacao">
-            <li class="nav-item-header nav-item pt-3">Fitrar Programação</li>
+            <li class="nav-item-header nav-item pt-3">Inserir Emissões Gee</li>
+
             <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
-              <label class="mb-0 pl-1">Filial:</label>
-              <ng-select [items]="filiais" (change)="changeFilial()" bindLabel="nmFilial" formControlName="filial"
-                name="filial" placeholder="Buscar Filial...">
+              <label class="mb-0 pl-1">Escopo:</label>
+              <ng-select [items]="escopos" bindLabel="nm_escopo" formControlName="escopo"
+                name="escopo" placeholder="Buscar Escopo...">
               </ng-select>
             </li>
+
             <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
-              <label class="mb-0 pl-1">Cooperado:</label>
-              <ng-select [items]="cooperados" [virtualScroll]="true" (change)="changeCooperado()" bindLabel="nmPessoa"
-                formControlName="pessoa" name="pessoa" placeholder="Buscar Cooperado...">
+              <label class="mb-0 pl-1">Entidade:</label>
+              <ng-select [items]="entidades" (change)="changeEntidade()" bindLabel="nm_entidade" formControlName="entidade"
+                name="entidade" placeholder="Buscar Entidade...">
               </ng-select>
             </li>
+
             <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
               <label class="mb-0 pl-1">Propriedade:</label>
-              <ng-select [items]="propriedades" [virtualScroll]="true" (change)="findProgramacao()"
-                bindLabel="nmPropriedade" formControlName="propriedade" name="propriedade"
-                placeholder="Buscar Propriedade...">
+              <ng-select [items]="propriedades" bindLabel="nm_propriedade"
+                formControlName="propriedade" name="propriedade" placeholder="Buscar Propriedade...">
               </ng-select>
             </li>
             <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
-              <label class="mb-0 pl-1">Campanha:</label>
-              <ng-select [items]="campanhas" [virtualScroll]="true" (change)="findProgramacao()" bindLabel="nmCampanha"
-                formControlName="campanha" name="campanha" placeholder="Buscar Campanha...">
+              <label class="mb-0 pl-1">Fonte Emissão:</label>
+              <ng-select [items]="fonteEmissoes" (change)="changeFonteEmissao()"
+                bindLabel="nm_fonte_emissao" formControlName="fonteEmissao" name="fonteEmissao"
+                placeholder="Buscar Fonte...">
+              </ng-select>
+            </li>
+            <li class="pt-1 pb-1 pl-3 pr-3 nav-item" *ngIf="showCombustivel">
+              <label class="mb-0 pl-1">Combustível:</label>
+              <ng-select [items]="combustiveis" [virtualScroll]="true" (change)="findMonitoramento()" bindLabel="nm_combustivel"
+                formControlName="tipoCombustivel" name="tipoCombustivel" placeholder="Buscar Combustível...">
               </ng-select>
             </li>
           </ul>
@@ -216,4 +229,4 @@
     </div>
     <!--//Sidebar Filter-->
   </div>
-</div> -->
+</div>
