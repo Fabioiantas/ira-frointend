@@ -1,13 +1,14 @@
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
+import * as moment from 'moment';
+import { DialogBoxService } from './../../../../_services/dialog-box.service';
 import { FonteEmissao } from './../../../../models/fonteEmissao';
 import { EscopoGee } from './../../../../models/escopoGee';
 import { FilterGee } from './../../../../models/filter-gee';
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { EntidadeService } from 'src/app/services/entidade.service';
 import { Entidade } from 'src/app/models/entidade';
 import { Propriedade } from 'src/app/models/propriedade';
 import { PropriedadeService } from 'src/app/services/propriedade.service';
-import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
 import { FonteEmissaoService } from 'src/app/services/fonte-emissao.service';
 import { CombustivelService } from 'src/app/services/combustivel.service';
 import { TipoCombustivel } from 'src/app/models/tipoCombustivel';
@@ -44,6 +45,7 @@ export class GeeCadastroComponent implements OnInit {
   combustiveis: TipoCombustivel;
   monitoramentoGee: MonitoramentoGee;
   amostrasGee: AmostraGee;
+  amostras: AmostraGee;
   showCombustivel = false;
   isAddEdit = false;
 
@@ -55,6 +57,7 @@ export class GeeCadastroComponent implements OnInit {
               private ecopoService: EscopoGeeService,
               private monitoramentoGeeService: MonitoramentoGeeService,
               private amostraGeeService: AmostraService,
+              private dialogBox: DialogBoxService,
               private formBuilder: FormBuilder) { }
 
   ngOnInit() {
@@ -97,11 +100,11 @@ export class GeeCadastroComponent implements OnInit {
   changeEntidade() {
     this.propriedadeService.byEntidade(this.filterForm.value.entidade.entidade_id).subscribe((propriedades: Propriedade) => {
       this.propriedades = propriedades;
-    })
+    });
   }
 
-  changeFonteEmissao () {
-    if (this.filterForm.value.fonteEmissao.nm_classificacao == 'M') {
+  changeFonteEmissao() {
+    if (this.filterForm.value.fonteEmissao.nm_classificacao === 'M') {
       this.filterForm.get('tipoCombustivel').clearValidators();
       this.filterForm.get('tipoCombustivel').updateValueAndValidity();
       this.showCombustivel = false;
@@ -116,12 +119,28 @@ export class GeeCadastroComponent implements OnInit {
 
   closeEdit() {
     this.isAddEdit = false;
-    // this.itemProgramacao = new ItemProgramacao();
+    this.amostras = new AmostraGee();
   }
 
   add() {
     this.isAddEdit = true;
-    // this.itemProgramacao = new ItemProgramacao();
+    this.amostras = new AmostraGee();
+  }
+
+  addItem() {
+    if (!this.amostras.dt_amostra || !this.amostras.cd_unidade_padrao || !this.amostras.qt_consumo_total) {
+      return this.dialogBox.show('É nescessário preencher todos os campos', 'Warning');
+    }
+    this.loading = true;
+    this.amostras.monitoramento_gee_id = this.monitoramentoGee.id;
+
+    this.amostras.dt_amostra = moment(this.amostras.dt_amostra).format('YYYY-MM-DD');
+    this.amostraGeeService.salvar(this.amostras).subscribe(data => {
+      this.loading = false;
+      this.isAddEdit = false;
+      this.amostras = new AmostraGee();
+      this.findMonitoramento();
+    }, () => this.loading = false);
   }
 
   findMonitoramento() {
@@ -137,10 +156,10 @@ export class GeeCadastroComponent implements OnInit {
   }
 
   findAmostras(id: any) {
-    this.amostraGeeService.findAmostra(id).subscribe(amostras =>{
+    this.amostraGeeService.findAmostra(id).subscribe(amostras => {
       this.amostrasGee = amostras;
-      console.log(this.amostrasGee);
-    })
+      console.log('a: ' + this.amostrasGee);
+    });
   }
 
 }

@@ -92,42 +92,36 @@
                         <thead>
                           <tr [ngClass]="{'table-active': !isAddEdit}">
                             <th class="text-center"></th>
-                            <th width="40%">Data</th>
-                            <th class="text-center qtd-input">UN.</th>
-                            <th class="text-center">Consumo Total</th>
-                            <th class="text-center">Status</th>
+                            <th width="30%">Data</th>
+                            <th class="text-center" width="20%">Un.</th>
+                            <th class="text-center qtd-input">Consumo</th>
                             <th class="text-right"></th>
                           </tr>
                         </thead>
                         <tbody>
-
+                          <!-- CAMPOS EDIT -->
                           <tr class="table-active" *ngIf="isAddEdit">
                             <td class="text-center text-muted icons">
                               <i class="pe-7s-close btn-icon-wrapper text-danger" style="font-size: 43px; margin-right: 0px;" (click)="closeEdit()"></i>
                             </td>
                             <td>
-                              <!-- <ng-select name="produto" [items]="produtosLiberados" bindLabel="produto.dsProduto"
-                                bindValue="produto.idProduto" [(ngModel)]="itemProgramacao.idProduto"
-                                placeholder="Produto..." [clearable]="false">
-                              </ng-select> -->
-                              <input class="form-control" (click)="dt_amostra.toggle()" placeholder="dia/mês/ano"
-                                name="dt_amostra" formControlName="amostrasGee.dt_amostra" ngbDatepicker
+                              <input (click)="dt_amostra.toggle()" placeholder="dia/mês/ano"
+                                name="dt_amostra" [(ngModel)]="amostras.dt_amostra" ngbDatepicker
                                 #dt_amostra="ngbDatepicker" autocomplete="off">
                             </td>
                             <td class="text-center align-middle">
-                              <input class="form-control" name="text" placeholder="UN." type="text"
-                                [(ngModel)]="amostrasGee.cd_unidade_padrao">
+                              <input name="cd_unidade_padrao" placeholder="UN." type="text"
+                                [(ngModel)]="amostras.cd_unidade_padrao">
                             </td>
                             <td class="text-center">
-                              <input class="form-control" name="text" placeholder="Consumo total" type="text"
-                              [(ngModel)]="amostrasGee.qt_comsumo_total">
+                              <input name="qt_consumo_total" placeholder="Consumo total" type="text"
+                              [(ngModel)]="amostras.qt_consumo_total">
                             </td>
                             <td class="text-center icons">
                               <i class="pe-7s-check btn-icon-wrapper text-success" style="font-size: 33px; margin-right: 0px;" (click)="addItem()"></i>
                             </td>
-                            <td class="text-right icons">
-                            </td>
                           </tr>
+                          <!-- CAMPOS EDIT -->
 
                           <tr *ngIf="!amostrasGee?.length">
                             <td colspan="6" class="text-center">
@@ -139,6 +133,7 @@
                             </td>
                           </tr>
 
+                          <!-- DADOS DA TABLE -->
                           <tr *ngFor="let gee of amostrasGee; let i = index">
                             <td class="text-center text-muted">{{i+1}}</td>
                             <td>
@@ -152,10 +147,10 @@
                               </div>
                             </td>
                             <td class="text-center">{{gee.cd_unidade_padrao}}</td>
-                            <td class="text-center">106</td>
-                            <td class="text-center">
+                            <td class="text-center">{{gee.qt_consumo_total}}</td>
+                            <!-- <td class="text-center">
                               <div class="badge badge-warning">Em Análise</div>
-                            </td>
+                            </td> -->
                             <td class="text-right icons">
                               <i (click)="add()" *ngIf="!isAddEdit && i==0" class="pe-7s-plus text-success touch"></i>
                               <i class="pe-7s-tools text-primary" (click)="editarItem(item)"></i>
@@ -230,3 +225,8 @@
     <!--//Sidebar Filter-->
   </div>
 </div>
+
+<!-- <ng-select name="produto" [items]="produtosLiberados" bindLabel="produto.dsProduto"
+                                bindValue="produto.idProduto" [(ngModel)]="itemProgramacao.idProduto"
+                                placeholder="Produto..." [clearable]="false">
+                              </ng-select> -->
