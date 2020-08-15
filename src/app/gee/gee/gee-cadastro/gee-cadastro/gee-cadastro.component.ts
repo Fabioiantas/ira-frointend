@@ -97,6 +97,32 @@ export class GeeCadastroComponent implements OnInit {
     }
   }
 
+  removerAmostra(amostra: AmostraGee) {
+    this.dialogBox.show('Tem certeza que deseja remover a amostra?', 'Confirm').then((sim) => {
+      if (sim) {
+        this.loading = true;
+        this.amostraGeeService.remover(amostra.id).subscribe(data => {
+          this.loading = false;
+          this.findMonitoramento();
+        }, () => this.loading = false);
+      }
+    });
+  }
+
+  // editarItem(amostra: AmostraGee) {
+  //   const initialState = {
+  //     itemProgramacao: item,
+  //     filterProgramacao: this.filterForm.value,
+  //     programacao: this.programacao,
+  //     produtosLiberados: this.produtosLiberados
+  //   };
+  //   this.modalService.show(EditarItemProgramacaoComponent, { initialState, backdrop: 'static', class: 'modal-md'})
+  //   .content.onClose.subscribe(itemReturn => {
+  //     item = itemReturn;
+  //     this.findProgramacao();
+  //   });
+  // }
+
   changeEntidade() {
     this.propriedadeService.byEntidade(this.filterForm.value.entidade.entidade_id).subscribe((propriedades: Propriedade) => {
       this.propriedades = propriedades;
@@ -158,7 +184,6 @@ export class GeeCadastroComponent implements OnInit {
   findAmostras(id: any) {
     this.amostraGeeService.findAmostra(id).subscribe(amostras => {
       this.amostrasGee = amostras;
-      console.log('a: ' + this.amostrasGee);
     });
   }
 
