@@ -1,0 +1,189 @@
+<div class="app-inner-layout chat-layout">
+  <div class="app-inner-layout__header">
+    <div class="app-page-title">
+      <div class="page-title-wrapper">
+        <div class="page-title-heading">
+          <div class="page-title-icon">
+            <i class="icon pe-7s-car text-info"></i>
+          </div>
+          <div>
+            {{fonte.nm_fonte_emissao}}
+            <div class="page-title-subheading">
+              {{fonte.nm_combustivel}}
+            </div>
+          </div>
+        </div>
+        <div class="page-title-actions">
+          Status:
+          <button type="button" class="ml-2 btn badge-info">
+
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="app-inner-layout__wrapper" [ngClass]="{'open-mobile-menu' : toggleMobileSidebar}">
+    <div class="app-inner-layout__content card">
+      <div class="table-responsive">
+        <div class="app-inner-layout__top-pane">
+          <div class="pane-left">
+            <div class="mobile-app-menu-btn">
+              <button type="button" class="hamburger hamburger--elastic" [ngClass]="{'is-active' : toggleMobileSidebar}"
+                (click)="toggleMobileSidebar = !toggleMobileSidebar">
+                <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+              </button>
+            </div>
+            <h4 class="mb-0 text-nowrap title">Emissões GEE
+              <!-- <div class="opacity-7 mt-2">Última atualização: <span class="opacity-8">{{programacao?.dtAtualizacao | date:'d/MM/yyyy H:mm:ss'}}</span></div> -->
+            </h4>
+          </div>
+          <div class="pane-right">
+            <button type="button" (click)="salvar()" class="btn-shadow btn btn-dark" *ngIf="monitoramentoGee?.id">
+              <fa name="star"></fa> Reprocessar
+            </button>
+            <button type="button" (click)="add()" class="btn-shadow btn btn-success" *ngIf="monitoramentoGee?.id">
+              <fa name="plus-circle"></fa> Inserir
+            </button>
+          </div>
+        </div>
+        <div class="app-inner-layout__bottom-pane d-block" style="padding: 0px;">
+          <div class="mb-0 form-group" style="width: 100%;">
+            <div class="col-sm-12">
+
+              <div class="loader-wrapper d-flex justify-content-center align-items-center" *ngIf="loading">
+                <div class="loader">
+                  <div class="ball-scale-ripple">
+                    <div></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- <div *ngIf="!loading && !monitoramentoGee?.id && filterForm.valid" class="text-center mt-3">
+                <h6>Não foram encontradas emissões cadastradas, para iniciar pressione o botão abaixo;</h6>
+                <button (click)="create()" class="mb-2 mr-2 mt-4 btn-icon btn-pill btn btn-outline-success"><i
+                    class="pe-7s-plus btn-icon-wrapper"></i>Emissões</button>
+              </div> -->
+
+              <!--adicionar-->
+              <div>
+                <!-- <div class="row mt-12" *ngIf="isAddEdit">
+                  <div class="col-sm-3">
+                    <input placeholder="yyyy-mm-dd" [(ngModel)]="amostras.dt_amostra" name="dt_amostra" ngbDatepicker
+                      #d="ngbDatepicker" readonly>
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary fa fa-calendar" (click)="d.toggle()"
+                        type="button"></button>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <input name="cd_unidade_padrao" placeholder="UN." type="text" [(ngModel)]="amostras.cd_unidade_padrao">
+                  </div>
+                  <div class="col-sm-3">
+                    <input name="qt_consumo_total" placeholder="Consumo total" type="text" [(ngModel)]="amostras.qt_consumo_total">
+                  </div>
+                  <div class="col-sm-2 text-right icons">
+                    <i class="pe-7s-check btn-icon-wrapper text-success" style="font-size: 33px; margin-right: 0px;"
+                      (click)="addItem()"></i>
+                  </div>
+                  <div class="col-sm-1 text-right icons">
+                      <i class="pe-7s-close btn-icon-wrapper text-danger hover" style="font-size: 43px; margin-right: 0px;"
+                        (click)="closeEdit()"></i>
+                  </div>
+                </div> -->
+
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="table-responsive" style="min-height: 500px;">
+                      <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                        <thead>
+                          <tr [ngClass]="{'table-active': !isAddEdit}">
+                            <th class="text-center"></th>
+                            <th width="10%">Data</th>
+                            <th class="text-center" width="10%">Un.</th>
+                            <th class="text-center qtd-input">Consumo</th>
+                            <th class="text-center qtd-input">CO2 Fóssel</th>
+                            <th class="text-center qtd-input">CO2 Bio</th>
+                            <th class="text-right"></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <!-- CAMPOS EDIT -->
+                          <!-- <tr class="table-active" *ngIf="isAddEdit">
+                            <td class="text-center text-muted icons">
+                              <i class="pe-7s-close btn-icon-wrapper text-danger"
+                                style="font-size: 43px; margin-right: 0px;" (click)="closeEdit()"></i>
+                            </td>
+                            <td>
+                              <input placeholder="dd/mm/aaaa" name="dt_amostra" [(ngModel)]="amostras.dt_amostra"
+                                ngbDatepicker #d="ngbDatepicker" readonly>
+                                <div class="input-group-append">
+                                  <button class="btn btn-outline-secondary fa fa-calendar" (click)="d.toggle()"
+                                    type="button"></button>
+                              </div>
+                            </td>
+                            <td class="text-center align-middle">
+                              <input name="cd_unidade_padrao" placeholder="UN." type="text"
+                                [(ngModel)]="amostras.cd_unidade_padrao">
+                            </td>
+                            <td class="text-center">
+                              <input name="qt_consumo_total" placeholder="Consumo total" type="text"
+                                [(ngModel)]="amostras.qt_consumo_total">
+                            </td>
+                            <td class="text-center icons">
+                              <i class="pe-7s-check btn-icon-wrapper text-success"
+                                style="font-size: 33px; margin-right: 0px;" (click)="addItem()"></i>
+                            </td>
+                          </tr> -->
+                          <!-- CAMPOS EDIT -->
+
+                          <tr *ngIf="!amostrasGee?.length">
+                            <td colspan="6" class="text-center">
+                              <h6 class="mt-3">Nenhuma amosrtra adicionada</h6>
+                              <button *ngIf="!isAddEdit"
+                                class="mb-2 mr-2 mt-3 btn-icon btn-pill btn btn-outline-success"
+                                style="margin-right: 7px;" (click)="add()"><i
+                                  class="pe-7s-check btn-icon-wrapper"></i>Inserir</button>
+                            </td>
+                          </tr>
+
+                          <!-- DADOS DA TABLE -->
+                          <tr *ngFor="let gee of amostrasGee; let i = index">
+                            <td class="text-center text-muted">{{i+1}}</td>
+                            <td>
+                              <div class="widget-content p-0">
+                                <div class="widget-content-wrapper">
+                                  <div class="widget-content-left flex2">
+                                    <div class="widget-heading">{{gee.dt_amostra | date:'dd/MM/yyyy'}}</div>
+                                  </div>
+                                </div>
+                              </div>
+                            </td>
+                            <td class="text-center">{{gee.cd_unidade_padrao}}</td>
+                            <td class="text-center">{{gee.qt_consumo_total}}</td>
+                            <td class="text-center">{{gee.qt_total_co2_fossel | number}}</td>
+                            <td class="text-center">{{gee.qt_total_co2_bio | number}}</td>
+                            <td class="text-right icons">
+                              <!-- <i (click)="add()" *ngIf="!isAddEdit && i==0" class="pe-7s-plus text-success touch"></i> -->
+                              <i class="pe-7s-tools text-primary" (click)="editarItem(gee)"></i>
+                              <i class="pe-7s-trash text-danger" (click)="removerAmostra(gee)"></i>
+                            </td>
+                          </tr>
+
+                        </tbody>
+                      </table>
+                      <div class="divider"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- FIM emissoes-->
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

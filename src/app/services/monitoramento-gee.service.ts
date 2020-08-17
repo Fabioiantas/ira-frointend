@@ -20,4 +20,8 @@ export class MonitoramentoGeeService {
   findMonitoramento(filter: FilterGee): Observable<MonitoramentoGee> {
     return this.http.post<MonitoramentoGee>(environment.baseUrl + '/auth/findgee', filter);
   }
+
+  findFonte(id: any): Observable<any> {
+    return this.http.get<MonitoramentoGee>(environment.baseUrl + '/auth/geefonte/' + id);
+  }
 }

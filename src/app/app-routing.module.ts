@@ -44,6 +44,7 @@ import { ProtocolacaoComponent } from './licenca-ambiental/licenca-ambiental-pro
 import { LicencaAmbientalRenovaComponent } from './licenca-ambiental/licenca-ambiental-renova/licenca-ambiental-renova.component';
 import { ResetPasswordComponent } from './login/reset-password/reset-password.component';
 import { GeeCadastroComponent } from './gee/gee-cadastro/gee-cadastro.component';
+import { GeeFonteCadastroComponent } from './gee/gee-fonte-cadastro/gee-fonte-cadastro.component';
 
 const routes: Routes = [
   {
@@ -342,8 +343,20 @@ const routes: Routes = [
         data: { roles: [Role.Admin], extraParameter: 'geeMenu' }
       },
       {
+        path: 'fontes',
+        component: FonteEntidadeComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'geeMenu' }
+      },
+      {
         path: 'fontes/:id',
         component: FonteEntidadeComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'geeMenu' }
+      },
+      {
+        path: 'fontes-cadastro/:id',
+        component: GeeFonteCadastroComponent,
         canActivate: [AuthGuard],
         data: { roles: [Role.Admin], extraParameter: 'geeMenu' }
       }

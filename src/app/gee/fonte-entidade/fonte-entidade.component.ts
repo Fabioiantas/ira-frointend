@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { GeeService } from 'src/app/services/gee.service';
 import { DialogBoxService } from 'src/app/_services/dialog-box.service';
+import { EntidadeService } from 'src/app/services/entidade.service';
+import { Entidade } from 'src/app/models/entidade';
 
 @Component({
   selector: 'app-fonte-entidade',
@@ -10,6 +12,8 @@ import { DialogBoxService } from 'src/app/_services/dialog-box.service';
 })
 export class FonteEntidadeComponent implements OnInit {
   fonteEntidade: any = [];
+  entidades: any;
+  entidade: any;
   selected: any = [];
   rowsFonteEntidade: any[];
   groups = [];
@@ -29,23 +33,37 @@ export class FonteEntidadeComponent implements OnInit {
   constructor(private router: Router,
               private route: ActivatedRoute,
               private geeService: GeeService,
-              private dialogBox: DialogBoxService) { }
+              private dialogBox: DialogBoxService,
+              private entidadeService: EntidadeService) { }
 
 
 
   ngOnInit() {
+    this.populaEntidades();
     this.route.params.subscribe(data => {
       this.params = data;
-      this.populaTable();
+      if (this.params.id) {
+        this.populaTable(this.params.id);
+      }
     });
   }
 
-  populaTable() {
-    this.geeService.listaFonteEntidade(this.params.id).subscribe((response) => {
+  populaEntidades() {
+    this.entidadeService.listaEntidades().subscribe(entidades => {
+      this.entidades = entidades;
+    })
+  }
+
+  populaTable(id: any) {
+    this.geeService.listaFonteEntidade(id).subscribe((response) => {
       this.fonteEntidade = [...response];
       this.rowsFonteEntidade = [...response];
       this.groups = [...response];
-      this.nmReduzido = response[0].nm_reduzido;
+      if (this.rowsFonteEntidade.length) {
+        this.nmReduzido = this.rowsFonteEntidade[0].nm_reduzido;
+      } else {
+        this.nmReduzido = null;
+      }
     });
   }
 
@@ -53,6 +71,15 @@ export class FonteEntidadeComponent implements OnInit {
     if ($event.type === 'dblclick') {
       this.router.navigate(['/gee/adicionar/' + $event.row.id]);
     }
+  }
+
+  changeEntidade (){
+    if (this.entidade)
+      this.populaTable(this.entidade.entidade_id);
+  }
+
+  inserirEmissao() {
+      this.router.navigate(['/gee/fontes-cadastro/' + 1]);
   }
 
 }

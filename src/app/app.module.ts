@@ -122,6 +122,7 @@ import { GeeCadastroComponent } from './gee/gee-cadastro/gee-cadastro.component'
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { AmostraEditarComponent } from './gee/amostra-editar/amostra-editar.component';
 import { FonteEntidadeComponent } from './gee/fonte-entidade/fonte-entidade.component';
+import { GeeFonteCadastroComponent } from './gee/gee-fonte-cadastro/gee-fonte-cadastro.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -210,6 +211,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     GeeCadastroComponent,
     AmostraEditarComponent,
     FonteEntidadeComponent,
+    GeeFonteCadastroComponent,
 
   ],
   imports: [

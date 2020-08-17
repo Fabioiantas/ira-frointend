@@ -31,7 +31,7 @@
         class="header-icon fa fa-industry mr-3 text-muted opacity-6"></i>{{nmReduzido}}</div>
     <div class="btn-actions-pane-right">
       <div class="btn-group-sm btn-group" role="group">
-        <a class="btn btn-success" [routerLink]="['/gee/adicionar']">Inserir Emissão</a>
+        <a class="btn btn-success" (click)="inserirEmissao()">Inserir Emissão</a>
         <!-- <button class="btn btn-primary" type="button" (click)="editar(selected[0].id)">Editar</button> -->
         <!-- <button class="btn btn-danger" type="button" (click)="remover()">Remover</button> -->
       </div>
@@ -46,8 +46,24 @@
         [lista]="fonteEntidade"
         [table]="tableFonteEntidade">
       </ngx-datatable-filter>
+
+      <label class="mb-1 pl-2">Entidade:</label>
+      <ng-select class="large"
+        [items]="entidades"
+        [width]="175"
+        [(ngModel)]="entidade"
+        [virtualScroll]="true"
+        (change)="changeEntidade()"
+        bindLabel="nm_entidade"
+        name="entidade" placeholder="Buscar Entidade...">
+      </ng-select>
     </div>
+    <div class="">
+
+    </div>
+
   </div>
+
   <ngx-datatable ngx-resize-watcher class="bootstrap striped" #tableFonteEntidade
     [rows]="rowsFonteEntidade"
     [footerHeight]="30"
