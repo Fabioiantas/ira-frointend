@@ -11,10 +11,10 @@
                 </a>
               </li>
               <li class="breadcrumb-item">
-                Cadastro
+                Emissões Gee
               </li>
               <li class="active breadcrumb-item" aria-current="page">
-                Emissões GEE
+                Entidades Monitoradas
               </li>
             </ol>
           </nav>
@@ -28,13 +28,13 @@
 <section class="content">
   <div class="card-header-tab card-header">
     <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i
-        class="header-icon fa fa-industry mr-3 text-muted opacity-6"></i>Gee</div>
+        class="header-icon fa fa-industry mr-3 text-muted opacity-6"></i>Entidades Monitoradas</div>
     <div class="btn-actions-pane-right">
       <div class="btn-group-sm btn-group" role="group">
-        <a class="btn btn-dark" [routerLink]="['/gee/adicionar']">Adcionar Emissões</a>
+        <a class="btn btn-outline-warning" (click)="fontes(selected[0].id)">Fontes Entidade</a>
         <a class="btn btn-success" [routerLink]="['/gee/adicionar']">Nova Fonte Emissão</a>
-        <button class="btn btn-primary" type="button" (click)="editar(selected[0].id)">Editar</button>
-        <button class="btn btn-danger" type="button" (click)="remover()">Remover</button>
+        <!-- <button class="btn btn-primary" type="button" (click)="editar(selected[0].id)">Editar</button> -->
+        <!-- <button class="btn btn-danger" type="button" (click)="remover()">Remover</button> -->
       </div>
     </div>
   </div>
@@ -60,7 +60,7 @@
     (activate)="activate($event)"
     [messages]="{'emptyMessage': 'Nenhum resultado encontrado...', 'totalMessage': 'total'}"
     [limit]="10">
-    <ngx-datatable-column name="Entidade" prop="nm_entidade" [width]="350" [flexGrow]="1"></ngx-datatable-column>
+    <ngx-datatable-column name="Entidade" prop="nm_reduzido" [width]="175" [flexGrow]="1"></ngx-datatable-column>
     <ngx-datatable-column name="CNPJ" prop="nr_cnpj" [flexGrow]="1"></ngx-datatable-column>
     <ngx-datatable-column name="Total CO2 Fóssel" prop="qt_total_fossel" [flexGrow]="1"></ngx-datatable-column>
     <ngx-datatable-column name="Total CO2 Bio" prop="qt_total_bio" [flexGrow]="1"></ngx-datatable-column>

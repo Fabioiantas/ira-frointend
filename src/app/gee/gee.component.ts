@@ -15,7 +15,7 @@ export class GeeComponent implements OnInit {
   rowsGee: any[];
   groups = [];
   columnsGee = [
-    {name : 'Entidade', prop : 'nm_entidade', width : '35%', selecionado: true},
+    {name : 'Entidade', prop : 'nm_reduzido', width : '35%', selecionado: true},
     {name : 'CNPJ', prop : 'nr_cnpj', width : '35%', selecionado: true},
     {name : 'CO2 Fóssel', prop : 'qt_co2_fossel', width : '35%', selecionado: true},
     {name : 'CO2 Bio', prop : 'qt_co2_bio', width : '35%', selecionado: true}
@@ -70,6 +70,10 @@ export class GeeComponent implements OnInit {
 
   add() {
     alert('teste');
+  }
+
+  fontes(id: string) {
+    this.router.navigate(['/gee/fontes/' + id]);
   }
 
 }

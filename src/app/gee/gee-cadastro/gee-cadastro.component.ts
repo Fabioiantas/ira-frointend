@@ -1,10 +1,8 @@
+import { AmostraEditarComponent } from './../amostra-editar/amostra-editar.component';
+import { MonitoramentoGee } from './../../models/monitoramentoGee';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import * as moment from 'moment';
-import { DialogBoxService } from './../../../../_services/dialog-box.service';
-import { FonteEmissao } from './../../../../models/fonteEmissao';
-import { EscopoGee } from './../../../../models/escopoGee';
-import { FilterGee } from './../../../../models/filter-gee';
 import { EntidadeService } from 'src/app/services/entidade.service';
 import { Entidade } from 'src/app/models/entidade';
 import { Propriedade } from 'src/app/models/propriedade';
@@ -14,9 +12,13 @@ import { CombustivelService } from 'src/app/services/combustivel.service';
 import { TipoCombustivel } from 'src/app/models/tipoCombustivel';
 import { EscopoGeeService } from 'src/app/services/escopo-gee.service';
 import { MonitoramentoGeeService } from 'src/app/services/monitoramento-gee.service';
-import { MonitoramentoGee } from 'src/app/models/monitoramentoGee';
 import { AmostraService } from 'src/app/services/amostra.service';
 import { AmostraGee } from 'src/app/models/amostraGee';
+import { FilterGee } from 'src/app/models/filter-gee';
+import { EscopoGee } from 'src/app/models/escopoGee';
+import { FonteEmissao } from 'src/app/models/fonteEmissao';
+import { DialogBoxService } from 'src/app/_services/dialog-box.service';
+import { BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-gee-cadastro',
@@ -58,6 +60,7 @@ export class GeeCadastroComponent implements OnInit {
               private monitoramentoGeeService: MonitoramentoGeeService,
               private amostraGeeService: AmostraService,
               private dialogBox: DialogBoxService,
+              private modalService: BsModalService,
               private formBuilder: FormBuilder) { }
 
   ngOnInit() {
@@ -97,6 +100,20 @@ export class GeeCadastroComponent implements OnInit {
     }
   }
 
+  editarItem(amostra: AmostraGee) {
+    // amostra.dt_amostra = moment(amostra.dt_amostra).format('DD/MM/YYYY');
+    const initialState = {
+      amostraGee: amostra,
+      filteGee: this.filterForm.value,
+      MonitoramentoGee: this.monitoramentoGee,
+    };
+    this.modalService.show(AmostraEditarComponent, { initialState, backdrop: 'static', class: 'modal-md'})
+    .content.onClose.subscribe((amostraReturn: AmostraGee) => {
+      amostra = amostraReturn;
+      this.findMonitoramento();
+    });
+  }
+
   removerAmostra(amostra: AmostraGee) {
     this.dialogBox.show('Tem certeza que deseja remover a amostra?', 'Confirm').then((sim) => {
       if (sim) {
@@ -108,20 +125,6 @@ export class GeeCadastroComponent implements OnInit {
       }
     });
   }
-
-  // editarItem(amostra: AmostraGee) {
-  //   const initialState = {
-  //     itemProgramacao: item,
-  //     filterProgramacao: this.filterForm.value,
-  //     programacao: this.programacao,
-  //     produtosLiberados: this.produtosLiberados
-  //   };
-  //   this.modalService.show(EditarItemProgramacaoComponent, { initialState, backdrop: 'static', class: 'modal-md'})
-  //   .content.onClose.subscribe(itemReturn => {
-  //     item = itemReturn;
-  //     this.findProgramacao();
-  //   });
-  // }
 
   changeEntidade() {
     this.propriedadeService.byEntidade(this.filterForm.value.entidade.entidade_id).subscribe((propriedades: Propriedade) => {
@@ -149,8 +152,8 @@ export class GeeCadastroComponent implements OnInit {
   }
 
   add() {
-    this.isAddEdit = true;
     this.amostras = new AmostraGee();
+    this.isAddEdit = true;
   }
 
   addItem() {

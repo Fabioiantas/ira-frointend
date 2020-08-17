@@ -65,26 +65,31 @@
                     class="pe-7s-plus btn-icon-wrapper"></i>Emissões</button>
               </div>
 
-              <!--Emissoes-->
+              <!--adicionar-->
               <div *ngIf="!loading && monitoramentoGee?.id">
-                <!-- <div class="row mt-3">
-                  <div class="col">
-                    <ng-select name="tipoPagamento" [items]="tipoPagamentos" bindLabel="dsTipoPagamento"
-                      [(ngModel)]="programacao.idTipoPagamento" bindValue="idTipoPagamento"
-                      placeholder="Tipo de Pagamento..." [clearable]="false">
-                    </ng-select>
+                <div class="row mt-12" *ngIf="isAddEdit">
+                  <div class="col-sm-3">
+                    <input placeholder="yyyy-mm-dd" [(ngModel)]="amostras.dt_amostra" name="dt_amostra" ngbDatepicker
+                      #d="ngbDatepicker" readonly>
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary fa fa-calendar" (click)="d.toggle()"
+                        type="button"></button>
+                    </div>
                   </div>
-                  <div class="col">
-                    <ng-select name="condicaoPagamento" [items]="condicoesPagamento" bindLabel="dsCondicaoPagamento"
-                      bindValue="idCondicaoPagamento" [(ngModel)]="programacao.idCondicaoPagamento"
-                      placeholder="Forma de Pagamento..." [clearable]="false">
-                    </ng-select>
+                  <div class="col-sm-3">
+                    <input name="cd_unidade_padrao" placeholder="UN." type="text" [(ngModel)]="amostras.cd_unidade_padrao">
                   </div>
-                </div> -->
-
-                <div class="row mt-4 mb-2">
-                  <div class="col-sm-12">
-                    <h5 class="card-title ml-1">Emissões</h5>
+                  <div class="col-sm-3">
+                    <input name="qt_consumo_total" placeholder="Consumo total" type="text" [(ngModel)]="amostras.qt_consumo_total">
+                  </div>
+                  <!-- BUTTONS -->
+                  <div class="col-sm-2 text-right icons">
+                    <i class="pe-7s-check btn-icon-wrapper text-success" style="font-size: 33px; margin-right: 0px;"
+                      (click)="addItem()"></i>
+                  </div>
+                  <div class="col-sm-1 text-right icons">
+                      <i class="pe-7s-close btn-icon-wrapper text-danger hover" style="font-size: 43px; margin-right: 0px;"
+                        (click)="closeEdit()"></i>
                   </div>
                 </div>
 
@@ -98,22 +103,25 @@
                             <th width="10%">Data</th>
                             <th class="text-center" width="10%">Un.</th>
                             <th class="text-center qtd-input">Consumo</th>
-                            <th *ngIf="!isAddEdit" class="text-center qtd-input">CO2 Fóssel</th>
-                            <th *ngIf="!isAddEdit" class="text-center qtd-input">CO2 Bio</th>
-                            <th *ngIf="!isAddEdit" class="text-right"></th>
+                            <th class="text-center qtd-input">CO2 Fóssel</th>
+                            <th class="text-center qtd-input">CO2 Bio</th>
+                            <th class="text-right"></th>
                           </tr>
                         </thead>
                         <tbody>
                           <!-- CAMPOS EDIT -->
-                          <tr class="table-active" *ngIf="isAddEdit">
+                          <!-- <tr class="table-active" *ngIf="isAddEdit">
                             <td class="text-center text-muted icons">
                               <i class="pe-7s-close btn-icon-wrapper text-danger"
                                 style="font-size: 43px; margin-right: 0px;" (click)="closeEdit()"></i>
                             </td>
                             <td>
-                              <input (click)="dt_amostra.toggle()" placeholder="dia/mês/ano" name="dt_amostra"
-                                [(ngModel)]="amostras.dt_amostra" ngbDatepicker #dt_amostra="ngbDatepicker"
-                                autocomplete="off">
+                              <input placeholder="dd/mm/aaaa" name="dt_amostra" [(ngModel)]="amostras.dt_amostra"
+                                ngbDatepicker #d="ngbDatepicker" readonly>
+                                <div class="input-group-append">
+                                  <button class="btn btn-outline-secondary fa fa-calendar" (click)="d.toggle()"
+                                    type="button"></button>
+                              </div>
                             </td>
                             <td class="text-center align-middle">
                               <input name="cd_unidade_padrao" placeholder="UN." type="text"
@@ -127,7 +135,7 @@
                               <i class="pe-7s-check btn-icon-wrapper text-success"
                                 style="font-size: 33px; margin-right: 0px;" (click)="addItem()"></i>
                             </td>
-                          </tr>
+                          </tr> -->
                           <!-- CAMPOS EDIT -->
 
                           <tr *ngIf="!amostrasGee?.length">
@@ -156,10 +164,10 @@
                             <td class="text-center">{{gee.qt_consumo_total}}</td>
                             <td class="text-center">{{gee.qt_total_co2_fossel | number}}</td>
                             <td class="text-center">{{gee.qt_total_co2_bio | number}}</td>
-                            <td *ngIf="!isAddEdit" class="text-right icons">
+                            <td class="text-right icons">
                               <!-- <i (click)="add()" *ngIf="!isAddEdit && i==0" class="pe-7s-plus text-success touch"></i> -->
-                              <i class="pe-7s-tools text-primary" (click)="editarItem(item)"></i>
-                              <i class="pe-7s-trash text-danger" (click)="removerItem(item)"></i>
+                              <i class="pe-7s-tools text-primary" (click)="editarItem(gee)"></i>
+                              <i class="pe-7s-trash text-danger" (click)="removerAmostra(gee)"></i>
                             </td>
                           </tr>
 
@@ -235,3 +243,19 @@
                                 bindValue="produto.idProduto" [(ngModel)]="itemProgramacao.idProduto"
                                 placeholder="Produto..." [clearable]="false">
                               </ng-select> -->
+
+
+<!-- <div class="row mt-3">
+                  <div class="col">
+                    <ng-select name="tipoPagamento" [items]="tipoPagamentos" bindLabel="dsTipoPagamento"
+                      [(ngModel)]="programacao.idTipoPagamento" bindValue="idTipoPagamento"
+                      placeholder="Tipo de Pagamento..." [clearable]="false">
+                    </ng-select>
+                  </div>
+                  <div class="col">
+                    <ng-select name="condicaoPagamento" [items]="condicoesPagamento" bindLabel="dsCondicaoPagamento"
+                      bindValue="idCondicaoPagamento" [(ngModel)]="programacao.idCondicaoPagamento"
+                      placeholder="Forma de Pagamento..." [clearable]="false">
+                    </ng-select>
+                  </div>
+                </div> -->

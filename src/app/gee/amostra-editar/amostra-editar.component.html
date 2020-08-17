@@ -1,0 +1,66 @@
+<div class="modal-header">
+  <h5 class="modal-title pull-left">Editar Item Programação</h5>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="d-flex justify-content-center align-items-center" *ngIf="loading">
+    <div class="loader">
+      <div class="ball-scale-ripple">
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <form *ngIf="!loading">
+    <!-- <div class="row">
+      <div class="col-md-4">
+        <label class="mt-2">Data Amostra:</label>
+        <input (click)="dt_amostra.toggle()" placeholder="dia/mês/ano" name="dt_amostra"
+          [(ngModel)]="amostraGee.dt_amostra" ngbDatepicker #dt_amostra="ngbDatepicker" autocomplete="off">
+        <button class="btn btn-primary" (click)="dt_amostra.toggle()" type="button">
+          <i class="fa fa-calendar"></i>
+        </button>
+      </div>
+      <div class="col-md-4">
+        <label class="mt-2">UN:</label>
+        <input name="cd_unidade_padrao" placeholder="UN." type="text" [(ngModel)]="amostraGee.cd_unidade_padrao">
+      </div>
+      <div class="col-md-4">
+        <label class="mt-2">Consumo:</label>
+        <input name="qt_consumo_total" placeholder="Consumo total" type="number"
+          [(ngModel)]="amostraGee.qt_consumo_total">
+      </div>
+    </div> -->
+
+
+    <!-- aaaa -->
+    <div class="col-md-6 mb-6 form-group">
+      <label class="mt-2">Data Amostra:</label>
+      <!-- <input (click)="dt_amostra.toggle()" placeholder="dia/mês/ano" name="dt_amostra"
+        [(ngModel)]="amostraGee.dt_amostra" ngbDatepicker #dt_amostra="ngbDatepicker" autocomplete="off">
+      <button class="btn btn-primary" (click)="dt_amostra.toggle()" type="button">
+        <i class="fa fa-calendar"></i>
+      </button> -->
+      <input placeholder="yyyy-mm-dd"
+             name="dt_amostra" [(ngModel)]="amostraGee.dt_amostra" ngbDatepicker #d="ngbDatepicker" readonly>
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary fa fa-calendar" (click)="d.toggle()" type="button"></button>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4 form-group">
+      <label class="mt-2">UN:</label>
+      <input name="cd_unidade_padrao" placeholder="Un." type="text"
+        [(ngModel)]="amostraGee.cd_unidade_padrao">
+    </div>
+    <div class="col-md-4 mb-4 form-group">
+      <label class="mt-2">Consumo:</label>
+      <input name="qt_consumo_total" placeholder="Consumo total" type="number"
+        [(ngModel)]="amostraGee.qt_consumo_total">
+    </div>
+  </form>
+</div>
+<div class="modal-footer" style="clear: both;">
+  <button type="button" class="btn btn-default btn-sm" (click)="closeModal()">Fechar</button>
+  <button type="button" class="btn btn-primary btn-sm" (click)="salvar()">Salvar</button>
+</div>

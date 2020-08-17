@@ -19,6 +19,10 @@ export class GeeService {
     return this.http.get(`${environment.baseUrl}/auth/geeslist`);
   }
 
+  listaFonteEntidade(id: any): any {
+    return this.http.get(`${environment.baseUrl}/auth/geeslistfe/` + id);
+  }
+
   add(gee: Gee) {
 
     return this.http.post<any>(environment.baseUrl + '/auth/gee', gee);

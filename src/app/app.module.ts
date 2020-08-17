@@ -117,9 +117,11 @@ import { MonitoramentoGhgComponent } from './efeito-estufa/monitoramento-ghg/mon
 import { GhgCadastroComponent } from './efeito-estufa/monitoramento-ghg/monitoramento-ghg-cadastro/monitoramento-ghg-cadastro.component';
 // tslint:disable-next-line:max-line-length
 import { CombustivelCadComponent } from './efeito-estufa/tipo-combustivel/tipo-combustivel-cadastro/tipo-combustivel-cadastro.component';
-import { GeeComponent } from './gee/gee/gee.component';
-import { GeeCadastroComponent } from './gee/gee/gee-cadastro/gee-cadastro/gee-cadastro.component';
+import { GeeComponent } from './gee/gee.component';
+import { GeeCadastroComponent } from './gee/gee-cadastro/gee-cadastro.component';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { AmostraEditarComponent } from './gee/amostra-editar/amostra-editar.component';
+import { FonteEntidadeComponent } from './gee/fonte-entidade/fonte-entidade.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -206,6 +208,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     GhgCadastroComponent,
     GeeComponent,
     GeeCadastroComponent,
+    AmostraEditarComponent,
+    FonteEntidadeComponent,
 
   ],
   imports: [
@@ -283,7 +287,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ThemeOptions
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  entryComponents: [DialogBoxComponent],
+  entryComponents: [DialogBoxComponent, AmostraEditarComponent],
   bootstrap: [AppComponent]
 })
 
