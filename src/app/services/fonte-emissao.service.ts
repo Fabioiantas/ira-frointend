@@ -10,7 +10,15 @@ export class FonteEmissaoService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  getList(): any{
+  getList(): any {
     return this.http.get(environment.baseUrl + '/auth/fonteemissoes');
+  }
+
+  list(): any {
+    return this.http.get(environment.baseUrl + '/auth/fontes');
+  }
+
+  remove(id: any) {
+    return this.http.delete(environment.baseUrl + '/auth/fonteemisao/' + id);
   }
 }

@@ -90,7 +90,7 @@ import { OptionsDrawerComponent } from './themeOptions/options-drawer/options-dr
 import { RecursoCadastroComponent } from './Recurso/recurso-cadastro/recurso-cadastro.component';
 import { ParametroComponent } from './parametro/parametro.component';
 import { ParametroCadastroComponent } from './parametro/parametro-cadastro/parametro-cadastro.component';
-import { FonteEmissaoComponent } from './fonte-emissao/fonte-emissao.component';
+// import { FonteEmissaoComponent } from './fonte-emissao/fonte-emissao.component';
 import { LicencaAmbientalComponent } from './licenca-ambiental/licenca-ambiental.component';
 import { TipoAtividadeComponent } from './tipo-atividade/tipo-atividade.component';
 import { TipoLicencaComponent } from './tipo-licenca/tipo-licenca.component';
@@ -123,6 +123,11 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { AmostraEditarComponent } from './gee/amostra-editar/amostra-editar.component';
 import { FonteEntidadeComponent } from './gee/fonte-entidade/fonte-entidade.component';
 import { GeeFonteCadastroComponent } from './gee/gee-fonte-cadastro/gee-fonte-cadastro.component';
+import { CombustivelComponent } from './gee/combustivel/combustivel.component';
+import { FonteEmissaoCadastroComponent } from './gee/fonte-emissao/fonte-emissao-cadastro/fonte-emissao-cadastro.component';
+import { CombustivelCadastroComponent } from './gee/combustivel/combustivel-cadastro/combustivel-cadastro.component';
+import { EscopoCadastroGeeComponent } from './gee/escopo/escopo-cadastro-gee/escopo-cadastro-gee.component';
+import { FonteEmissaoComponent } from './gee/fonte-emissao/fonte-emissao.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -212,6 +217,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AmostraEditarComponent,
     FonteEntidadeComponent,
     GeeFonteCadastroComponent,
+    CombustivelComponent,
+    FonteEmissaoCadastroComponent,
+    CombustivelCadastroComponent,
+    EscopoCadastroGeeComponent,
 
   ],
   imports: [

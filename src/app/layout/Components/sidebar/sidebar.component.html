@@ -1,12 +1,12 @@
 <div [class]="'app-sidebar sidebar-shadow ' + (config$ | async).sidebarTheme" (mouseover)="sidebarHover()"
-     (mouseout)="sidebarHover()">
+  (mouseout)="sidebarHover()">
   <div class="app-header__logo">
     <div class="logo-type">IRA - Ambiental</div>
     <div class="header__pane ml-auto">
       <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
-              [ngClass]="{'is-active' : globals.toggleSidebar}" (click)="toggleSidebar()">
+        [ngClass]="{'is-active' : globals.toggleSidebar}" (click)="toggleSidebar()">
         <span class="hamburger-box">
-            <span class="hamburger-inner"></span>
+          <span class="hamburger-inner"></span>
         </span>
       </button>
     </div>
@@ -32,33 +32,33 @@
                     <i class="vsm-arrow"></i>
                   </button>
                 </ng-template>
-
+                <!-- --MENU -->
                 <ng-template ngbPanelContent>
                   <div class="vsm-dropdown">
                     <div class="vsm-list">
                       <div class="vsm-item">
                         <a routerLinkActive="active-item" routerLink="/licenca" class="vsm-link"><span
-                          class="vsm-title">Licenças Ambientais</span></a>
+                            class="vsm-title">Licenças Ambientais</span></a>
                       </div>
                       <div class="vsm-item">
                         <a routerLinkActive="active-item" routerLink="/licencaentidade" class="vsm-link"><span
-                          class="vsm-title">Licenças Entidades</span></a>
+                            class="vsm-title">Licenças Entidades</span></a>
                       </div>
                       <div class="vsm-item">
                         <a routerLinkActive="active-item" routerLink="/entidade" class="vsm-link"><span
-                          class="vsm-title">Entidades</span></a>
+                            class="vsm-title">Entidades</span></a>
                       </div>
                       <div class="vsm-item">
                         <a routerLinkActive="active-item" routerLink="/tipolicenca" class="vsm-link"><span
-                          class="vsm-title">Tipo Licença</span></a>
+                            class="vsm-title">Tipo Licença</span></a>
                       </div>
                       <div class="vsm-item">
                         <a routerLinkActive="active-item" routerLink="/tipoatividade" class="vsm-link"><span
-                          class="vsm-title">Atividades</span></a>
+                            class="vsm-title">Atividades</span></a>
                       </div>
                       <div class="vsm-item">
                         <a routerLinkActive="active-item" routerLink="/orgao" class="vsm-link"><span
-                          class="vsm-title">Orgãos</span></a>
+                            class="vsm-title">Orgãos</span></a>
                       </div>
                     </div>
                   </div>
@@ -78,8 +78,20 @@
                   <div class="vsm-dropdown">
                     <div class="vsm-list">
                       <div class="vsm-item">
-                        <a routerLinkActive="active-item" routerLink="/gee" class="vsm-link"><span
-                          class="vsm-title">Emissões</span></a>
+                        <a routerLinkActive="active-item" routerLink="/gee" class="vsm-link"><span class="vsm-title">
+                            Entidades Monitoradas</span></a>
+                      </div>
+                      <div class="vsm-item">
+                        <a routerLinkActive="active-item" routerLink="/escopo" class="vsm-link"><span class="vsm-title">
+                            Escopo</span></a>
+                      </div>
+                      <div class="vsm-item">
+                        <a routerLinkActive="active-item" routerLink="/fonte-emissao" class="vsm-link"><span class="vsm-title">
+                            Fonte Emissão</span></a>
+                      </div>
+                      <div class="vsm-item">
+                        <a routerLinkActive="active-item" routerLink="/combustivel" class="vsm-link"><span class="vsm-title">
+                            Combustível</span></a>
                       </div>
 
                     </div>
@@ -134,7 +146,7 @@
                     <div class="vsm-list">
                       <div class="vsm-item">
                         <a routerLinkActive="active-item" routerLink="/usuario" class="vsm-link"><span
-                          class="vsm-title">Usuário</span></a>
+                            class="vsm-title">Usuário</span></a>
                       </div>
 
                     </div>
@@ -184,7 +196,7 @@
                 </ng-template>
               </ngb-panel> -->
 
-              <!-- <ngb-panel id="residuosMenu">
+<!-- <ngb-panel id="residuosMenu">
                 <ng-template ngbPanelHeader>
                   <button ngbPanelToggle class="vsm-link">
                     <i class="vsm-icon-menu fa fa-calendar-check-o"></i>

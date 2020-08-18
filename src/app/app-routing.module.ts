@@ -45,6 +45,13 @@ import { LicencaAmbientalRenovaComponent } from './licenca-ambiental/licenca-amb
 import { ResetPasswordComponent } from './login/reset-password/reset-password.component';
 import { GeeCadastroComponent } from './gee/gee-cadastro/gee-cadastro.component';
 import { GeeFonteCadastroComponent } from './gee/gee-fonte-cadastro/gee-fonte-cadastro.component';
+// import { FonteEmissaoComponent } from './fonte-emissao/fonte-emissao.component';
+import { FonteEmissaoCadastroComponent } from './gee/fonte-emissao/fonte-emissao-cadastro/fonte-emissao-cadastro.component';
+import { CombustivelComponent } from './gee/combustivel/combustivel.component';
+import { CombustivelCadastroComponent } from './gee/combustivel/combustivel-cadastro/combustivel-cadastro.component';
+import { EscopoComponent } from './efeito-estufa/escopo/escopo.component';
+import { EscopoCadastroGeeComponent } from './gee/escopo/escopo-cadastro-gee/escopo-cadastro-gee.component';
+import { FonteEmissaoComponent } from './gee/fonte-emissao/fonte-emissao.component';
 
 const routes: Routes = [
   {
@@ -361,6 +368,79 @@ const routes: Routes = [
         data: { roles: [Role.Admin], extraParameter: 'geeMenu' }
       }
 
+    ]
+  },
+  {
+    path: 'fonte-emissao',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: FonteEmissaoComponent,
+        data: { extraParameter: 'geeMenu' },
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'adicionar',
+        component: FonteEmissaoCadastroComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'geeMenu' }
+      },
+      {
+        path: 'adicionar/:id',
+        component: FonteEmissaoCadastroComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'geeMenu' }
+      }
+
+    ]
+  },
+  {
+    path: 'combustivel',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: CombustivelComponent,
+        data: { extraParameter: 'geeMenu' },
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'adicionar',
+        component: CombustivelCadastroComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'geeMenu' }
+      },
+      {
+        path: 'adicionar/:id',
+        component: FonteEmissaoCadastroComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'geeMenu' }
+      }
+    ]
+  },
+  {
+    path: 'escopo',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: EscopoComponent,
+        data: { extraParameter: 'geeMenu' },
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'adicionar',
+        component: EscopoCadastroGeeComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'geeMenu' }
+      },
+      {
+        path: 'adicionar/:id',
+        component: FonteEmissaoCadastroComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'geeMenu' }
+      }
     ]
   },
 // #####################
