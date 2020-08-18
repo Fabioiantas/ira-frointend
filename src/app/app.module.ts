@@ -108,15 +108,9 @@ import { ProtocolacaoComponent } from './licenca-ambiental/licenca-ambiental-pro
 import { LicencaAmbientalRenovaComponent } from './licenca-ambiental/licenca-ambiental-renova/licenca-ambiental-renova.component';
 import { LicencaDetalheComponent } from './licenca-ambiental/licenca-detalhe/licenca-detalhe.component';
 import { ResetPasswordComponent } from './login/reset-password/reset-password.component';
-import { TipoCombustivelComponent } from './efeito-estufa/tipo-combustivel/tipo-combustivel.component';
-import { FonteEmissoraComponent } from './efeito-estufa/fonte-emissora/fonte-emissora.component';
-import { FonteEmissoraCadastroComponent } from './efeito-estufa/fonte-emissora/fonte-emissora-cadastro/fonte-emissora-cadastro.component';
-import { EscopoComponent } from './efeito-estufa/escopo/escopo.component';
-import { EscopoCadastroComponent } from './efeito-estufa/escopo/escopo-cadastro/escopo-cadastro.component';
-import { MonitoramentoGhgComponent } from './efeito-estufa/monitoramento-ghg/monitoramento-ghg.component';
-import { GhgCadastroComponent } from './efeito-estufa/monitoramento-ghg/monitoramento-ghg-cadastro/monitoramento-ghg-cadastro.component';
+
 // tslint:disable-next-line:max-line-length
-import { CombustivelCadComponent } from './efeito-estufa/tipo-combustivel/tipo-combustivel-cadastro/tipo-combustivel-cadastro.component';
+
 import { GeeComponent } from './gee/gee.component';
 import { GeeCadastroComponent } from './gee/gee-cadastro/gee-cadastro.component';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
@@ -128,6 +122,7 @@ import { FonteEmissaoCadastroComponent } from './gee/fonte-emissao/fonte-emissao
 import { CombustivelCadastroComponent } from './gee/combustivel/combustivel-cadastro/combustivel-cadastro.component';
 import { EscopoCadastroGeeComponent } from './gee/escopo/escopo-cadastro-gee/escopo-cadastro-gee.component';
 import { FonteEmissaoComponent } from './gee/fonte-emissao/fonte-emissao.component';
+import { EscopoComponent } from './gee/escopo/escopo.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -204,14 +199,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     LicencaAmbientalRenovaComponent,
     LicencaDetalheComponent,
     ResetPasswordComponent,
-    TipoCombustivelComponent,
-    CombustivelCadComponent,
-    FonteEmissoraComponent,
-    FonteEmissoraCadastroComponent,
     EscopoComponent,
-    EscopoCadastroComponent,
-    MonitoramentoGhgComponent,
-    GhgCadastroComponent,
     GeeComponent,
     GeeCadastroComponent,
     AmostraEditarComponent,

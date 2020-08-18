@@ -49,9 +49,9 @@ import { GeeFonteCadastroComponent } from './gee/gee-fonte-cadastro/gee-fonte-ca
 import { FonteEmissaoCadastroComponent } from './gee/fonte-emissao/fonte-emissao-cadastro/fonte-emissao-cadastro.component';
 import { CombustivelComponent } from './gee/combustivel/combustivel.component';
 import { CombustivelCadastroComponent } from './gee/combustivel/combustivel-cadastro/combustivel-cadastro.component';
-import { EscopoComponent } from './efeito-estufa/escopo/escopo.component';
 import { EscopoCadastroGeeComponent } from './gee/escopo/escopo-cadastro-gee/escopo-cadastro-gee.component';
 import { FonteEmissaoComponent } from './gee/fonte-emissao/fonte-emissao.component';
+import { EscopoComponent } from './gee/escopo/escopo.component';
 
 const routes: Routes = [
   {
