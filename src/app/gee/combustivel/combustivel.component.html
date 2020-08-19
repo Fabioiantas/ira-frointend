@@ -39,24 +39,37 @@
   </div>
   <div class="p-3 bg-white">
     <div class="form-group form-inline mb-0">
-      <ngx-datatable-filter [margin]="'-6px'" [float]="'left'" [columns]="columnsCombustivel" [lista]="fonteEmissoes"
+      <ngx-datatable-filter [margin]="'-6px'" [float]="'left'" [columns]="columnsCombustivel" [lista]="combustiveis"
         [table]="tableCombustivel"></ngx-datatable-filter>
     </div>
   </div>
 
-  <ngx-datatable ngx-resize-watcher class="bootstrap striped" #tableCombustivel [rows]="rowsCombustivel" [footerHeight]="80"
-    [columnMode]="'force'" [columns]="columnsCombustivel" [selected]="selected" [selectionType]="'single'" [rowHeight]="'auto'"
+  <ngx-datatable ngx-resize-watcher class="bootstrap striped" #tableCombustivel
+    [rows]="rowsCombustivel"
+    [footerHeight]="50"
+    [columnMode]="'force'"
+    [columns]="columnsCombustivel"
+    [selected]="selected"
+    [selectionType]="'single'"
+    [rowHeight]="'auto'"
     (activate)="activate($event)"
     [messages]="{'emptyMessage': 'Nenhum resultado encontrado...', 'totalMessage': 'total'}" [limit]="5">
-    <ngx-datatable-column name="Fonte" prop="nm_fonte_emissao" [flexGrow]="2"></ngx-datatable-column>
-    <ngx-datatable-column name="Class." prop="nm_classificacao" [flexGrow]="2"></ngx-datatable-column>
-    <ngx-datatable-column name="UN" prop="cd_unidade_consumo" [flexGrow]="2"></ngx-datatable-column>
-    <ngx-datatable-column name="Consumo" prop="qt_consumo" [flexGrow]="2"></ngx-datatable-column>
-    <ngx-datatable-column name="co2" prop="nr_fator_co2_movel" [flexGrow]="2"></ngx-datatable-column>
-    <ngx-datatable-column name="n2o" prop="nr_fator_n2o_movel" [flexGrow]="2"></ngx-datatable-column>
-    <ngx-datatable-column name="ch4" prop="nr_fator_ch4_movel" [flexGrow]="2"></ngx-datatable-column>
-    <ngx-datatable-column name="F. fóssel" prop="nr_fator_movel_fossel" [flexGrow]="2"></ngx-datatable-column>
-    <ngx-datatable-column name="F. Bio" prop="nr_fator_movel_bio" [flexGrow]="2"></ngx-datatable-column>
+    <ngx-datatable-column name="Combutível" prop="nm_combustivel" [flexGrow]="2"></ngx-datatable-column>
+    <ngx-datatable-column name="UN." prop="cd_unidade_padrao" [flexGrow]="2"></ngx-datatable-column>
+
+    <ngx-datatable-column name="CO2 Bio" prop="nr_fator_co2_bio" [flexGrow]="2"></ngx-datatable-column>
+    <ngx-datatable-column name="N2O Bio" prop="nr_fator_n2o_bio" [flexGrow]="2"></ngx-datatable-column>
+    <ngx-datatable-column name="CH4 Bio" prop="nr_fator_ch4_bio" [flexGrow]="2"></ngx-datatable-column>
+    <ngx-datatable-column name="CO2 Fóssel" prop="nr_fator_co2_fossel" [flexGrow]="2"></ngx-datatable-column>
+    <ngx-datatable-column name="N2O Fóssel" prop="nr_fator_n2o_fossel" [flexGrow]="2"></ngx-datatable-column>
+    <ngx-datatable-column name="CH4 Fóssel" prop="nr_fator_ch4_fossel" [flexGrow]="2"></ngx-datatable-column>
+
+
+    <!-- <ngx-datatable-column name="CO2 Móvel" prop="nr_fator_co2_movel" [flexGrow]="2"></ngx-datatable-column>
+    <ngx-datatable-column name="N2O Móvel" prop="nr_fator_n2o_movel" [flexGrow]="2"></ngx-datatable-column>
+    <ngx-datatable-column name="CH4 Móvel" prop="nr_fator_ch4_movel" [flexGrow]="2"></ngx-datatable-column>
+    <ngx-datatable-column name="F. Fóssel" prop="nr_fator_movel_fossel" [flexGrow]="2"></ngx-datatable-column>
+    <ngx-datatable-column name="F. Bio" prop="nr_fator_movel_bio" [flexGrow]="2"></ngx-datatable-column> -->
     <ngx-datatable-column name="Mistura" prop="tipo_combustivel_mistura_id" [flexGrow]="2"></ngx-datatable-column>
 
   </ngx-datatable>

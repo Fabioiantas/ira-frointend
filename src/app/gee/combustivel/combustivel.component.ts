@@ -44,6 +44,7 @@ export class CombustivelComponent implements OnInit {
     this.combustivelService.list().subscribe((response) => {
       this.combustiveis = [...response];
       this.rowsCombustivel = [...response];
+      console.log(JSON.stringify(response));
     });
   }
 

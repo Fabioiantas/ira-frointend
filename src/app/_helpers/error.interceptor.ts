@@ -34,8 +34,8 @@ export class ErrorInterceptor implements HttpInterceptor {
       }
       if ([513].indexOf(err.status) !== -1) { // SESSAO EXPIRADA
         this.sessao = false;
-        this.dialogBox.show(err.error.message, 'ERROR');
-        this.router.navigate(['/login']);
+        this.router.navigate(['/login'], { queryParams: { message: err.error.message } });
+        // this.dialogBox.show(err.error.message, 'ERROR');
         return throwError(err.message);
       }
       if ('0'.indexOf(err.status) !== -1) {

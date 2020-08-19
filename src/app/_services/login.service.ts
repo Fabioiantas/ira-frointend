@@ -12,6 +12,7 @@ export class LoginService {
   constructor(private http: HttpClient, private router: Router) {}
 
   login(credentials): Observable<any>{
-    return this.http.get<any>(environment.baseUrl + '/api-farmacos/login?user='+credentials.email+"&password="+credentials.password, {responseType: 'text' as 'json'});
+    // tslint:disable-next-line:max-line-length
+    return this.http.get<any>(environment.baseUrl + '/api-farmacos/login?user='+ credentials.email + "&password="+ credentials.password, {responseType: 'text' as 'json'});
   }
 }
