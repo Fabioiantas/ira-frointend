@@ -413,7 +413,7 @@ const routes: Routes = [
       },
       {
         path: 'adicionar/:id',
-        component: FonteEmissaoCadastroComponent,
+        component: CombustivelCadastroComponent,
         canActivate: [AuthGuard],
         data: { roles: [Role.Admin], extraParameter: 'geeMenu' }
       }

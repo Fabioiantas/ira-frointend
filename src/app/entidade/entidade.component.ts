@@ -41,8 +41,8 @@ export class EntidadeComponent implements OnInit {
 
   remover() {
     if (this.selected) {
-      this.dialogBox.show("Confirma remoção da Entidade?","CONFIRM").then(sim=>{
-        if(sim){
+      this.dialogBox.show('Confirma remoção da Entidade?', 'CONFIRM').then(sim => {
+        if (sim) {
           this.entidadeService.remove(this.selected[0].id).subscribe(data => {
             this.dialogBox.show('Entidade removida com sucesso!', 'OK');
             this.populaTable();
@@ -53,10 +53,10 @@ export class EntidadeComponent implements OnInit {
   }
 
   editar(id) {
-    this.router.navigate(['/entidade/adicionar/' + id])
+    this.router.navigate(['/entidade/adicionar/' + id]);
   }
 
-  editarForm(e){
+  editarForm(e) {
     this.editar(this.selected[0].id);
   }
 
