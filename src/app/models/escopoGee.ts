@@ -3,7 +3,7 @@ export class EscopoGee {
   // tslint:disable-next-line:variable-name
   nm_escopo: string;
   // tslint:disable-next-line:variable-name
-  ds_escopor: string;
+  ds_escopo: string;
 }
 
 

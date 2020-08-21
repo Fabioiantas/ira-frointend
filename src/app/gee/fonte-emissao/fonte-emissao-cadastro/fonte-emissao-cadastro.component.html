@@ -1,3 +1,107 @@
-<p>
-  fonte-emissao-cadastro works!
-</p>
+<div class="app-page-title app-page-title-simple" style="padding-bottom: 15px;">
+  <div class="page-title-wrapper">
+    <div class="page-title-heading">
+      <div>
+        <div class="page-title-subheading opacity-10">
+          <nav class="" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a [routerLink]="">
+                  <fa name="home"></fa>
+                </a>
+              </li>
+              <li class="breadcrumb-item">
+                Combustível
+              </li>
+              <li class="active breadcrumb-item" aria-current="page">
+                Cadastrar Combustível
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main content -->
+<div class="tabs-animated tabs-animated-shadow card">
+  <div class="card-body">
+    <form [formGroup]="this.formGroup" class="needs-validation">
+      <h5 class="card-title">Cadastrar Fonte de Emissão GEE</h5>
+
+      <!-- INPUTS -->
+      <div class="form-row">
+        <div class="col-md-6 mb-6 form-group">
+          <label for="nm_fonte_emissao">Nome Fonte</label>
+          <input formControlName="nm_fonte_emissao" type="text" class="form-control" id="nm_fonte_emissao"
+            placeholder="Nome Fonte" value="" [(ngModel)]="fonteEmissao.nm_fonte_emissao" required>
+        </div>
+        <div class="col-md-6 mb-6 form-group">
+          <label for="nm_classificacao">Classificação</label>
+          <input formControlName="nm_classificacao" type="text" class="form-control" id="nm_classificacao" onkeyup="this.value = this.value.toUpperCase();"
+            placeholder="Nome Reduzido" value="" [(ngModel)]="fonteEmissao.nm_classificacao" required>
+        </div>
+        <div class="col-md-6 mb-6 form-group">
+          <label for="cd_unidade_consumo">UN. Consumo</label>
+          <input formControlName="cd_unidade_consumo" type="text" class="form-control" id="cd_unidade_consumo" onkeyup="this.value = this.value.toUpperCase();"
+            placeholder="UN" value="" [(ngModel)]="fonteEmissao.cd_unidade_consumo" required>
+        </div>
+        <div class="col-md-6 mb-6 form-group">
+          <label for="qt_consumo">Consumo</label>
+          <input formControlName="qt_consumo" type="text" class="form-control" id="qt_consumo"
+            placeholder="UN" value="" [(ngModel)]="fonteEmissao.qt_consumo" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-4 mb-4 form-group">
+          <label for="nr_fator_co2_movel" class="text-danger">Fator CO2 Móvel</label>
+          <input formControlName="nr_fator_co2_movel" type="number" class="form-control" id="nr_fator_co2_movel"
+            placeholder="CO2  Fóssel" value="" [(ngModel)]="fonteEmissao.nr_fator_co2_movel" required>
+        </div>
+        <div class="col-md-4 mb-4 form-group">
+          <label for="nr_fator_ch4_movel" class="text-danger">Fator CH4 Móvel</label>
+          <input formControlName="nr_fator_ch4_movel" type="number" class="form-control" id="nr_fator_ch4_movel"
+            placeholder="CH4 Fóssel" value="" [(ngModel)]="fonteEmissao.nr_fator_ch4_movel" required>
+        </div>
+        <div class="col-md-4 mb-4 form-group">
+          <label for="nr_fator_n2o_movel" class="text-danger">Fator N2O Móvel</label>
+          <input formControlName="nr_fator_n2o_movel" type="number" class="form-control" id="nr_fator_n2o_movel"
+            placeholder="N2O  Fóssel" value="" [(ngModel)]="fonteEmissao.nr_fator_n2o_movel" required>
+        </div>
+      </div>
+
+
+      <div class="form-row">
+        <div class="col-md-6 mb-6 form-group">
+          <label for="nr_fator_movel_fossel" class="text-success">Fator Móvel Fóssel</label>
+          <input formControlName="nr_fator_movel_fossel" type="number" class="form-control" id="nr_fator_movel_fossel"
+            placeholder="CH4 Fóssel" value="" [(ngModel)]="fonteEmissao.nr_fator_movel_fossel" required>
+        </div>
+
+        <div class="col-md-6 mb-6 form-group">
+          <label for="nr_fator_movel_bio" class="text-success">Fator Móvel Bio</label>
+          <input formControlName="nr_fator_movel_bio" type="number" class="form-control" id="nr_fator_movel_bio"
+            placeholder="N2O  Fóssel" value="" [(ngModel)]="fonteEmissao.nr_fator_movel_bio" required>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="col-md-12 mb-12 form-group">
+          <label for="tipo_combustivel_m_id">Mistura</label>
+          <ng-select [items]="listFonteEmissao" bindValue="tipo_combustivel_m_id" bindLabel="nm_combustivel"
+            formControlName="tipo_combustivel_m_id" name="tipo_combustivel_m_id" placeholder="Buscar Mistura...">
+          </ng-select>
+        </div>
+      </div>
+      <div class="form-group">
+        <bfv-messages></bfv-messages>
+      </div>
+      <div class="text-right">
+        <button class="btn btn-danger" (click)="handleReset()" type="button">Cancelar</button>
+        <button class="btn btn-success ml-2" (click)="salvar()" type="submit" [ladda]="isLoading">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>

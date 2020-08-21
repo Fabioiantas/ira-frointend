@@ -56,7 +56,7 @@ export class EscopoComponent implements OnInit {
 
   activate($event) {
     if ($event.type === 'dblclick') {
-      this.router.navigate(['/recurso/adicionar/' + $event.row.id]);
+      this.router.navigate(['/escopo/adicionar/' + $event.row.id]);
     }
   }
 

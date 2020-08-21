@@ -31,7 +31,7 @@
         class="header-icon lnr-store mr-3 text-muted opacity-6"></i> FonteEmissaos </div>
     <div class="btn-actions-pane-right">
       <div class="btn-group-sm btn-group" role="group">
-        <a class="btn btn-success" [routerLink]="['/recurso/adicionar']">Adicionar</a>
+        <a class="btn btn-success" [routerLink]="['/fonte-emissao/adicionar']">Adicionar</a>
         <button class="btn btn-primary" type="button" (click)="editar(selected[0].id)">Editar</button>
         <button class="btn btn-dark" type="button" (click)="remover()">Remover</button>
       </div>
@@ -57,7 +57,7 @@
     <ngx-datatable-column name="ch4" prop="nr_fator_ch4_movel" [flexGrow]="2"></ngx-datatable-column>
     <ngx-datatable-column name="F. fóssel" prop="nr_fator_movel_fossel" [flexGrow]="2"></ngx-datatable-column>
     <ngx-datatable-column name="F. Bio" prop="nr_fator_movel_bio" [flexGrow]="2"></ngx-datatable-column>
-    <ngx-datatable-column name="Mistura" prop="tipo_combustivel_mistura_id" [flexGrow]="2"></ngx-datatable-column>
+    <ngx-datatable-column name="Mistura" prop="tipo_combustivel_m_id" [flexGrow]="2"></ngx-datatable-column>
     <!-- <ngx-datatable-column name="Vigência" prop="vigencia" [flexGrow]="2">
       <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
         {{row.dtIniVigencia | date:'d/MM/yyyy' }} - {{row.dtFimVigencia | date:'d/MM/yyyy' }}

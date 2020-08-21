@@ -437,7 +437,7 @@ const routes: Routes = [
       },
       {
         path: 'adicionar/:id',
-        component: FonteEmissaoCadastroComponent,
+        component: EscopoCadastroGeeComponent,
         canActivate: [AuthGuard],
         data: { roles: [Role.Admin], extraParameter: 'geeMenu' }
       }

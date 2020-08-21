@@ -10,7 +10,7 @@ export class FonteEmissao {
   nr_fator_ch4_movel: number;
   nr_fator_movel_fossel: number;
   nr_fator_movel_bio: number;
-  tipo_combustivel_mistura_id: BigInteger;
+  tipo_combustivel_m_id: BigInteger;
 }
 
 

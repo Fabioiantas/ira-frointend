@@ -32,88 +32,93 @@
 
       <!-- INPUTS -->
       <div class="form-row">
-
         <div class="col-md-6 mb-6 form-group">
           <label for="nm_combustivel">Nome Combustivel</label>
           <input formControlName="nm_combustivel" type="text" class="form-control" id="nm_combustivel"
             placeholder="Nome Combustivel" value="" [(ngModel)]="combustivel.nm_combustivel" required>
         </div>
-
         <div class="col-md-6 mb-6 form-group">
           <label for="cd_unidade_padrao">UN.</label>
-          <input formControlName="cd_unidade_padrao" type="text" class="form-control" id="cd_unidade_padrao"
+          <input formControlName="cd_unidade_padrao" type="text" class="form-control" id="cd_unidade_padrao" onkeyup="this.value = this.value.toUpperCase();"
             placeholder="Nome Reduzido" value="" [(ngModel)]="combustivel.cd_unidade_padrao" required>
         </div>
-
+      </div>
+      <div class="form-row">
         <div class="col-md-4 mb-4 form-group">
-          <label for="nr_fator_co2_bio">Fator CO2 Biogênico</label>
+          <label for="nr_fator_co2_bio" class="text-info">Fator CO2 Biogênico</label>
           <input formControlName="nr_fator_co2_bio" type="number" class="form-control" id="nr_fator_co2_bio"
             placeholder="CO2 Bio" value="" [(ngModel)]="combustivel.nr_fator_co2_bio" required>
         </div>
         <div class="col-md-4 mb-4 form-group">
-          <label for="nr_fator_ch4_bio">Fator CH4 Biogênico</label>
+          <label for="nr_fator_ch4_bio" class="text-info">Fator CH4 Biogênico</label>
           <input formControlName="nr_fator_ch4_bio" type="number" class="form-control" id="nr_fator_ch4_bio"
             placeholder="CH4 Bio" value="" [(ngModel)]="combustivel.nr_fator_ch4_bio" required>
         </div>
         <div class="col-md-4 mb-4 form-group">
-          <label for="nr_fator_n2o_bio">Fator N2O Biogênico</label>
+          <label for="nr_fator_n2o_bio" class="text-info">Fator N2O Biogênico</label>
           <input formControlName="nr_fator_n2o_bio" type="number" class="form-control" id="nr_fator_n2o_bio"
             placeholder="N2O Bio" value="" [(ngModel)]="combustivel.nr_fator_n2o_bio" required>
         </div>
+      </div>
+
+      <div class="form-row">
         <div class="col-md-4 mb-4 form-group">
-          <label for="nr_fator_co2_fossel">Fator CO2 Fóssel</label>
+          <label for="nr_fator_co2_fossel" class="text-success">Fator CO2 Fóssel</label>
           <input formControlName="nr_fator_co2_fossel" type="number" class="form-control" id="nr_fator_co2_fossel"
             placeholder="CO2  Fóssel" value="" [(ngModel)]="combustivel.nr_fator_co2_fossel" required>
         </div>
         <div class="col-md-4 mb-4 form-group">
-          <label for="nr_fator_ch4_fossel">Fator CH4 Fóssel</label>
+          <label for="nr_fator_ch4_fossel" class="text-success">Fator CH4 Fóssel</label>
           <input formControlName="nr_fator_ch4_fossel" type="number" class="form-control" id="nr_fator_ch4_fossel"
             placeholder="CH4 Fóssel" value="" [(ngModel)]="combustivel.nr_fator_ch4_fossel" required>
         </div>
         <div class="col-md-4 mb-4 form-group">
-          <label for="nr_fator_n2o_fossel">Fator N2O Fóssel</label>
+          <label for="nr_fator_n2o_fossel" class="text-success">Fator N2O Fóssel</label>
           <input formControlName="nr_fator_n2o_fossel" type="number" class="form-control" id="nr_fator_n2o_fossel"
             placeholder="N2O  Fóssel" value="" [(ngModel)]="combustivel.nr_fator_n2o_fossel" required>
         </div>
+      </div>
 
-
+      <div class="form-row">
         <div class="col-md-4 mb-4 form-group">
-          <label for="nr_fator_co2_movel">Fator CO2 Móvel</label>
+          <label for="nr_fator_co2_movel" class="text-danger">Fator CO2 Móvel</label>
           <input formControlName="nr_fator_co2_movel" type="number" class="form-control" id="nr_fator_co2_movel"
             placeholder="CO2  Fóssel" value="" [(ngModel)]="combustivel.nr_fator_co2_movel" required>
         </div>
         <div class="col-md-4 mb-4 form-group">
-          <label for="nr_fator_ch4_movel">Fator CH4 Móvel</label>
+          <label for="nr_fator_ch4_movel" class="text-danger">Fator CH4 Móvel</label>
           <input formControlName="nr_fator_ch4_movel" type="number" class="form-control" id="nr_fator_ch4_movel"
             placeholder="CH4 Fóssel" value="" [(ngModel)]="combustivel.nr_fator_ch4_movel" required>
         </div>
         <div class="col-md-4 mb-4 form-group">
-          <label for="nr_fator_n2o_movel">Fator N2O Móvel</label>
+          <label for="nr_fator_n2o_movel" class="text-danger">Fator N2O Móvel</label>
           <input formControlName="nr_fator_n2o_movel" type="number" class="form-control" id="nr_fator_n2o_movel"
             placeholder="N2O  Fóssel" value="" [(ngModel)]="combustivel.nr_fator_n2o_movel" required>
         </div>
+      </div>
 
 
+      <div class="form-row">
         <div class="col-md-6 mb-6 form-group">
-          <label for="nr_fator_movel_fossel">Fator Móvel Fóssel</label>
+          <label for="nr_fator_movel_fossel" class="text-warning">Fator Móvel Fóssel</label>
           <input formControlName="nr_fator_movel_fossel" type="number" class="form-control" id="nr_fator_movel_fossel"
             placeholder="CH4 Fóssel" value="" [(ngModel)]="combustivel.nr_fator_movel_fossel" required>
         </div>
 
         <div class="col-md-6 mb-6 form-group">
-          <label for="nr_fator_movel_bio">Fator Móvel Bio</label>
+          <label for="nr_fator_movel_bio" class="text-warning">Fator Móvel Bio</label>
           <input formControlName="nr_fator_movel_bio" type="number" class="form-control" id="nr_fator_movel_bio"
             placeholder="N2O  Fóssel" value="" [(ngModel)]="combustivel.nr_fator_movel_bio" required>
         </div>
+      </div>
 
+      <div class="form-row">
         <div class="col-md-12 mb-12 form-group">
           <label for="tipo_combustivel_m_id">Combustivel Mistura</label>
           <ng-select [items]="listCombustivel" bindValue="tipo_combustivel_m_id" bindLabel="nm_combustivel"
             formControlName="tipo_combustivel_m_id" name="tipo_combustivel_m_id" placeholder="Buscar Mistura...">
           </ng-select>
         </div>
-
-
       </div>
       <div class="form-group">
         <bfv-messages></bfv-messages>
@@ -125,4 +130,3 @@
     </form>
   </div>
 </div>
-

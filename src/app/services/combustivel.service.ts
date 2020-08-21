@@ -19,6 +19,10 @@ export class CombustivelService {
     return this.http.get(environment.baseUrl + '/auth/combustiveisl');
   }
 
+  listM(): any{
+    return this.http.get(environment.baseUrl + '/auth/combustiveism');
+  }
+
   remove(id) {
     return this.http.delete(environment.baseUrl + '/auth/combustivel/' + id);
   }

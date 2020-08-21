@@ -23,7 +23,7 @@ export class FonteEmissaoComponent implements OnInit {
     {name : 'ch4', prop : 'nr_fator_ch4_movel', width : '20%', selecionado: false},
     {name : 'Fóseel', prop : 'nr_fator_movel_fossel', width : '20%', selecionado: false},
     {name : 'Bio', prop : 'nr_fator_movel_bio', width : '20%', selecionado: false},
-    {name : 'Bio M.', prop : 'tipo_combustivel_mistura_id', width : '20%', selecionado: false}
+    {name : 'Bio M.', prop : 'tipo_combustivel_m_id', width : '20%', selecionado: false}
   ];
   constructor(private router: Router,
               private dialogBox: DialogBoxService,
@@ -56,7 +56,7 @@ export class FonteEmissaoComponent implements OnInit {
 
   editar(id) {
     console.log('editar: ' + id);
-    this.router.navigate(['/recurso/adicionar/' + id]);
+    this.router.navigate(['/fonte-emissao/adicionar/' + id]);
   }
 
   editarForm(e) {
@@ -65,7 +65,7 @@ export class FonteEmissaoComponent implements OnInit {
 
   activate($event) {
     if ($event.type === 'dblclick') {
-      this.router.navigate(['/recurso/adicionar/' + $event.row.id]);
+      this.router.navigate(['/fonte-emissao/adicionar/' + $event.row.id]);
     }
   }
 

@@ -15,20 +15,20 @@ export class CombustivelComponent implements OnInit {
   rowsCombustivel: any[];
 
   columnsCombustivel = [
-    {name : 'Fonte', prop : 'nm_combustivel', width : '35%', selecionado: true},
-    {name : 'Class.', prop : 'cd_unidade_padrao', width : '20%', selecionado: false},
-    {name : 'UN.', prop : 'nr_fator_co2_bio', width : '20%', selecionado: false},
-    {name : 'co2', prop : 'nr_fator_n2o_bio', width : '20%', selecionado: false},
-    {name : 'n2o', prop : 'nr_fator_ch4_bio', width : '20%', selecionado: false},
-    {name : 'UN.', prop : 'nr_fator_co2_fossel', width : '20%', selecionado: false},
-    {name : 'co2', prop : 'nr_fator_n2o_fossel', width : '20%', selecionado: false},
-    {name : 'n2o', prop : 'nr_fator_ch4_fossel', width : '20%', selecionado: false},
-    {name : 'ch4', prop : 'nr_fator_co2_movel', width : '20%', selecionado: false},
-    {name : 'Fóseel', prop : 'nr_fator_n2o_movel', width : '20%', selecionado: false},
-    {name : 'Bio', prop : 'nr_fator_ch4_movel', width : '20%', selecionado: false},
-    {name : 'Bio M.', prop : 'nr_fator_movel_fossel', width : '20%', selecionado: false},
-    {name : 'Bio M.', prop : 'nr_fator_movel_bio', width : '20%', selecionado: false},
-    {name : 'Bio M.', prop : 'tipo_combustivel_mistura_id', width : '20%', selecionado: false}
+    {name : 'Combustível', prop : 'nm_combustivel', width : '35%', selecionado: true},
+    {name : 'UN.', prop : 'cd_unidade_padrao', width : '20%', selecionado: false},
+    {name : 'CO2 Bio', prop : 'nr_fator_co2_bio', width : '20%', selecionado: false},
+    {name : 'N2O Bio', prop : 'nr_fator_n2o_bio', width : '20%', selecionado: false},
+    {name : 'CH4 Bio', prop : 'nr_fator_ch4_bio', width : '20%', selecionado: false},
+    {name : 'CO2 Fóssel', prop : 'nr_fator_co2_fossel', width : '20%', selecionado: false},
+    {name : 'N20 Fóssel', prop : 'nr_fator_n2o_fossel', width : '20%', selecionado: false},
+    {name : 'CH4 Fóssel', prop : 'nr_fator_ch4_fossel', width : '20%', selecionado: false},
+    {name : 'CO2 Móvel', prop : 'nr_fator_co2_movel', width : '20%', selecionado: false},
+    {name : 'N2O Móvel', prop : 'nr_fator_n2o_movel', width : '20%', selecionado: false},
+    {name : 'CH4 Móvel', prop : 'nr_fator_ch4_movel', width : '20%', selecionado: false},
+    {name : 'F. Móvel Fóssel', prop : 'nr_fator_movel_fossel', width : '20%', selecionado: false},
+    {name : 'F. Móvel Bio', prop : 'nr_fator_movel_bio', width : '20%', selecionado: false},
+    {name : 'Bio Mistura.', prop : 'tipo_combustivel_m_id', width : '20%', selecionado: false}
   ];
 
 
@@ -44,7 +44,6 @@ export class CombustivelComponent implements OnInit {
     this.combustivelService.list().subscribe((response) => {
       this.combustiveis = [...response];
       this.rowsCombustivel = [...response];
-      console.log(JSON.stringify(response));
     });
   }
 
@@ -62,7 +61,6 @@ export class CombustivelComponent implements OnInit {
   }
 
   editar(id) {
-    console.log('editar: ' + id);
     this.router.navigate(['/combustivel/adicionar/' + id]);
   }
 

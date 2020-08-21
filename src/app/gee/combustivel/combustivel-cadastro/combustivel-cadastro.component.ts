@@ -14,24 +14,24 @@ export class CombustivelCadastroComponent implements OnInit {
 
   params: any;
   combustivel: TipoCombustivel = new TipoCombustivel();
-  listCombustivel: TipoCombustivel = new TipoCombustivel();
+  listCombustivel: any;
 
   formGroup = new FormGroup({
     id: new FormControl(''),
     nm_combustivel: new FormControl('', Validators.required),
     cd_unidade_padrao: new FormControl('', Validators.required),
-    nr_fator_co2_bio: new FormControl('', Validators.required),
-    nr_fator_ch4_bio: new FormControl('', Validators.required),
-    nr_fator_n2o_bio: new FormControl('', Validators.required),
-    nr_fator_co2_fossel: new FormControl('', Validators.required),
-    nr_fator_ch4_fossel: new FormControl('', Validators.required),
-    nr_fator_n2o_fossel: new FormControl('', Validators.required),
-    nr_fator_co2_movel: new FormControl('', Validators.required),
-    nr_fator_ch4_movel: new FormControl('', Validators.required),
-    nr_fator_n2o_movel: new FormControl('', Validators.required),
-    nr_fator_movel_bio: new FormControl('', Validators.required),
-    nr_fator_movel_fossel: new FormControl('', Validators.required),
-    tipo_combustivel_m_id: new FormControl('', Validators.required)
+    nr_fator_co2_bio: new FormControl(''),
+    nr_fator_ch4_bio: new FormControl(''),
+    nr_fator_n2o_bio: new FormControl(''),
+    nr_fator_co2_fossel: new FormControl(''),
+    nr_fator_ch4_fossel: new FormControl(''),
+    nr_fator_n2o_fossel: new FormControl(''),
+    nr_fator_co2_movel: new FormControl(''),
+    nr_fator_ch4_movel: new FormControl(''),
+    nr_fator_n2o_movel: new FormControl(''),
+    nr_fator_movel_bio: new FormControl(''),
+    nr_fator_movel_fossel: new FormControl(''),
+    tipo_combustivel_m_id: new FormControl('')
   });
 
   constructor(private combustivelService: CombustivelService,
@@ -48,6 +48,7 @@ export class CombustivelCadastroComponent implements OnInit {
       this.combustivelService.getById(this.params.id).subscribe(combustivel => {
         this.combustivel = combustivel;
         this.formGroup.patchValue({
+          id: combustivel.id,
           nm_combustivel:  combustivel.nm_combustivel,
           cd_unidade_padrao:  combustivel.cd_unidade_padrao,
           nr_fator_co2_bio:  combustivel.nr_fator_co2_bio,
@@ -66,15 +67,14 @@ export class CombustivelCadastroComponent implements OnInit {
       });
     }
 
-    this.combustivelService.getList().subscribe(combustiveis => {
+    this.combustivelService.listM().subscribe(combustiveis => {
       this.listCombustivel = combustiveis;
+      console.log('listCombustivel ' + JSON.stringify(this.listCombustivel));;
     });
   }
 
   salvar() {
     if (!this.formGroup.valid) { return; }
-    console.log(this.formGroup.value.id);
-
     this.combustivelService[this.formGroup.value.id ? 'edit' : 'add'](this.formGroup.value).subscribe(() => {
       this.dialogBox.show('Combustivel salvo com sucesso!', 'OK');
       this.router.navigate(['/combustivel']);
