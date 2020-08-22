@@ -28,6 +28,7 @@ export class CombustivelComponent implements OnInit {
     {name : 'CH4 Móvel', prop : 'nr_fator_ch4_movel', width : '20%', selecionado: false},
     {name : 'F. Móvel Fóssel', prop : 'nr_fator_movel_fossel', width : '20%', selecionado: false},
     {name : 'F. Móvel Bio', prop : 'nr_fator_movel_bio', width : '20%', selecionado: false},
+    {name : 'Bio Mistura.', prop : 'tipo_combustivel_m_id', width : '20%', selecionado: false},
     {name : 'Bio Mistura.', prop : 'tipo_combustivel_m_id', width : '20%', selecionado: false}
   ];
 
