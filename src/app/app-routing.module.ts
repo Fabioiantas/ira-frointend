@@ -52,6 +52,7 @@ import { CombustivelCadastroComponent } from './gee/combustivel/combustivel-cada
 import { EscopoCadastroGeeComponent } from './gee/escopo/escopo-cadastro-gee/escopo-cadastro-gee.component';
 import { FonteEmissaoComponent } from './gee/fonte-emissao/fonte-emissao.component';
 import { EscopoComponent } from './gee/escopo/escopo.component';
+import { FonteEmissoraComponent } from './Monitoramento-Recursos/fonte-emissora/fonte-emissora.component';
 
 const routes: Routes = [
   {
@@ -443,6 +444,57 @@ const routes: Routes = [
       }
     ]
   },
+  // ###### MONITORAMENTO RECURSOS AMBIENTAIS #######//
+  {
+    path: 'fonteemissora',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: FonteEmissoraComponent,
+        data: { extraParameter: 'geeMenu' },
+        canActivate: [AuthGuard]
+      }/*,
+      {
+        path: 'adicionar',
+        component: EscopoCadastroGeeComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'geeMenu' }
+      },
+      {
+        path: 'adicionar/:id',
+        component: EscopoCadastroGeeComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'geeMenu' }
+      }*/
+    ]
+  },
+  {
+    path: 'paraemetro',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: ParametroComponent,
+        data: { extraParameter: 'geeMenu' },
+        canActivate: [AuthGuard]
+      }/*,
+      {
+        path: 'adicionar',
+        component: EscopoCadastroGeeComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'geeMenu' }
+      },
+      {
+        path: 'adicionar/:id',
+        component: EscopoCadastroGeeComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'geeMenu' }
+      }*/
+    ]
+  },
+
+
 // #####################
   {
     path: 'campanha',

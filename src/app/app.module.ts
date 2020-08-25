@@ -123,6 +123,8 @@ import { CombustivelCadastroComponent } from './gee/combustivel/combustivel-cada
 import { EscopoCadastroGeeComponent } from './gee/escopo/escopo-cadastro-gee/escopo-cadastro-gee.component';
 import { FonteEmissaoComponent } from './gee/fonte-emissao/fonte-emissao.component';
 import { EscopoComponent } from './gee/escopo/escopo.component';
+import { ProcessoAnaliseComponent } from './Monitoramento-Recursos/processo-analise/processo-analise.component';
+import { FonteEmissoraComponent } from './Monitoramento-Recursos/fonte-emissora/fonte-emissora.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -209,6 +211,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FonteEmissaoCadastroComponent,
     CombustivelCadastroComponent,
     EscopoCadastroGeeComponent,
+    ProcessoAnaliseComponent,
+    FonteEmissoraComponent,
 
   ],
   imports: [

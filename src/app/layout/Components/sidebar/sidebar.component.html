@@ -70,7 +70,7 @@
                 <ng-template ngbPanelHeader>
                   <button ngbPanelToggle class="vsm-link">
                     <i class="vsm-icon-menu fa fa-industry"></i>
-                    <span class="vsm-title">Monitoramento GEE</span>
+                    <span class="vsm-title">Emissões GEE</span>
                     <i class="vsm-arrow"></i>
                   </button>
                 </ng-template>
@@ -92,6 +92,34 @@
                       <div class="vsm-item">
                         <a routerLinkActive="active-item" routerLink="/combustivel" class="vsm-link"><span class="vsm-title">
                             Combustível</span></a>
+                      </div>
+
+                    </div>
+                  </div>
+                </ng-template>
+              </ngb-panel>
+              <ngb-panel id="mRecursoMenu">
+                <ng-template ngbPanelHeader>
+                  <button ngbPanelToggle class="vsm-link">
+                    <i class="vsm-icon-menu fa fa-globe"></i>
+                    <span class="vsm-title">Recursos Monitorados</span>
+                    <i class="vsm-arrow"></i>
+                  </button>
+                </ng-template>
+                <ng-template ngbPanelContent>
+                  <div class="vsm-dropdown">
+                    <div class="vsm-list">
+                      <div class="vsm-item">
+                        <a routerLinkActive="active-item" routerLink="/escopo" class="vsm-link"><span class="vsm-title">
+                            Fonte Emissora</span></a>
+                      </div>
+                      <div class="vsm-item">
+                        <a routerLinkActive="active-item" routerLink="/parametro" class="vsm-link"><span class="vsm-title">
+                            Parâmetros</span></a>
+                      </div>
+                      <div class="vsm-item">
+                        <a routerLinkActive="active-item" routerLink="/combustivel" class="vsm-link"><span class="vsm-title">
+                            Processo Análise</span></a>
                       </div>
 
                     </div>
