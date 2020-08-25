@@ -25,9 +25,6 @@ import { ForgotPasswordBoxedComponent } from './login/forgot-password/forgot-pas
 import { CampanhasComponent } from './campanhas/campanhas.component';
 import { AdicionarProdutoComponent } from './produto/adicionar-produto/adicionar-produto.component';
 import { ProgramacaoPendenteAnaliseComponent } from './programacao-pendente-analise/programacao-pendente-analise.component';
-import { RecursoCadastroComponent } from './Recurso/recurso-cadastro/recurso-cadastro.component';
-import { ParametroComponent } from './parametro/parametro.component';
-import { ParametroCadastroComponent } from './parametro/parametro-cadastro/parametro-cadastro.component';
 import { LicencaAmbientalComponent } from './licenca-ambiental/licenca-ambiental.component';
 import { OrgaoResponsavelComponent } from './orgao-responsavel/orgao-responsavel.component';
 import { OrgaoResponsavelCadastroComponent } from './orgao-responsavel/orgao-responsavel-cadastro/orgao-responsavel-cadastro.component';
@@ -53,6 +50,10 @@ import { EscopoCadastroGeeComponent } from './gee/escopo/escopo-cadastro-gee/esc
 import { FonteEmissaoComponent } from './gee/fonte-emissao/fonte-emissao.component';
 import { EscopoComponent } from './gee/escopo/escopo.component';
 import { FonteEmissoraComponent } from './Monitoramento-Recursos/fonte-emissora/fonte-emissora.component';
+import { ParametroComponent } from './Monitoramento-Recursos/parametro/parametro.component';
+import { ParametroCadastroComponent } from './Monitoramento-Recursos/parametro/parametro-cadastro/parametro-cadastro.component';
+import { RecursoCadastroComponent } from './Monitoramento-Recursos/recurso/recurso-cadastro/recurso-cadastro.component';
+import { ProcessoAnaliseComponent } from './Monitoramento-Recursos/processo-analise/processo-analise.component';
 
 const routes: Routes = [
   {
@@ -75,58 +76,6 @@ const routes: Routes = [
     ]
   },
 // ############## ROTAS
-  {
-    path: 'recurso',
-    component: BaseLayoutComponent,
-    children: [
-      {
-        path: '',
-        component: RecursoComponent,
-        data: { extraParameter: 'cadastroMenu' },
-        canActivate: [AuthGuard]
-      },
-      {
-        path: 'adicionar',
-        component: RecursoCadastroComponent,
-        canActivate: [AuthGuard],
-        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
-      },
-      {
-        path: 'adicionar/:id',
-        component: RecursoCadastroComponent,
-        canActivate: [AuthGuard],
-        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
-      }
-
-    ]
-  },
-
-  {
-    path: 'parametro',
-    component: BaseLayoutComponent,
-    children: [
-      {
-        path: '',
-        component: ParametroComponent,
-        data: { extraParameter: 'cadastroMenu' },
-        canActivate: [AuthGuard]
-      },
-      {
-        path: 'adicionar',
-        component: ParametroCadastroComponent,
-        canActivate: [AuthGuard],
-        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
-      },
-      {
-        path: 'adicionar/:id',
-        component: ParametroCadastroComponent,
-        canActivate: [AuthGuard],
-        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
-      }
-
-    ]
-  },
-
   {
     path: 'licenca',
     component: BaseLayoutComponent,
@@ -444,7 +393,34 @@ const routes: Routes = [
       }
     ]
   },
-  // ###### MONITORAMENTO RECURSOS AMBIENTAIS #######//
+
+  // #################################################//
+  // ###### MONITORAMENTO -RECURSOS AMBIENTAIS #######//
+  // #################################################//
+  {
+    path: 'recurso',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: RecursoComponent,
+        data: { extraParameter: 'mRecursoMenu' },
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'adicionar',
+        component: RecursoCadastroComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'mRecursoMenu' }
+      },
+      {
+        path: 'adicionar/:id',
+        component: RecursoCadastroComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'mRecursoMenu' }
+      }
+    ]
+  },
   {
     path: 'fonteemissora',
     component: BaseLayoutComponent,
@@ -452,7 +428,7 @@ const routes: Routes = [
       {
         path: '',
         component: FonteEmissoraComponent,
-        data: { extraParameter: 'geeMenu' },
+        data: { extraParameter: 'mRecursoMenu' },
         canActivate: [AuthGuard]
       }/*,
       {
@@ -470,30 +446,53 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'paraemetro',
+    path: 'parametro',
     component: BaseLayoutComponent,
     children: [
       {
         path: '',
         component: ParametroComponent,
-        data: { extraParameter: 'geeMenu' },
+        data: { extraParameter: 'mRecursoMenu' },
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'adicionar',
+        component: ParametroCadastroComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'mRecursoMenu' }
+      },
+      {
+        path: 'adicionar/:id',
+        component: ParametroCadastroComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'mRecursoMenu' }
+      }
+    ]
+  },
+  {
+    path: 'processo',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: ProcessoAnaliseComponent,
+        data: { extraParameter: 'mRecursoMenu' },
         canActivate: [AuthGuard]
       }/*,
       {
         path: 'adicionar',
-        component: EscopoCadastroGeeComponent,
+        component: ParametroCadastroComponent,
         canActivate: [AuthGuard],
-        data: { roles: [Role.Admin], extraParameter: 'geeMenu' }
+        data: { roles: [Role.Admin], extraParameter: 'mRecursoMenu' }
       },
       {
         path: 'adicionar/:id',
-        component: EscopoCadastroGeeComponent,
+        component: ParametroCadastroComponent,
         canActivate: [AuthGuard],
-        data: { roles: [Role.Admin], extraParameter: 'geeMenu' }
+        data: { roles: [Role.Admin], extraParameter: 'mRecursoMenu' }
       }*/
     ]
   },
-
 
 // #####################
   {

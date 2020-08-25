@@ -8,7 +8,7 @@ import { DialogBoxService } from 'src/app/_services/dialog-box.service';
 @Component({
   selector: 'app-parametro-cadastro',
   templateUrl: './parametro-cadastro.component.html',
-  styleUrls: ['./parametro-cadastro.component.sass']
+  styleUrls: ['parametro-cadastro.component.sass']
 })
 export class ParametroCadastroComponent implements OnInit {
 
@@ -26,13 +26,13 @@ export class ParametroCadastroComponent implements OnInit {
   nmParametro: any;
   dsParametro: any;
 
-  constructor(private recursoService: ParametroService, 
+  constructor(private recursoService: ParametroService,
               private dialogBox: DialogBoxService,
-              private route: ActivatedRoute, 
+              private route: ActivatedRoute,
               private router: Router) { }
 
   ngOnInit() {
-    
+
     this.route.params.subscribe(data => {
       this.params = data;
     });
@@ -51,7 +51,7 @@ export class ParametroCadastroComponent implements OnInit {
   salvar() {
     if (!this.formGroup.valid) { return; }
     console.log(this.formGroup.value.id);
-    
+
     this.recursoService[this.formGroup.value.id ? 'edit' : 'add'](this.formGroup.value).subscribe(() => {
       this.dialogBox.show('Parâmetro salvo com sucesso!', 'OK');
       this.router.navigate(['/parametro']);

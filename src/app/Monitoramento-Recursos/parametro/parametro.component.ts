@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DialogBoxService } from '../_services/dialog-box.service';
-
-import { ParametroService } from '../services/parametro.service';
+import { ParametroService } from 'src/app/services/parametro.service';
+import { DialogBoxService } from 'src/app/_services/dialog-box.service';
 
 declare var $: any;
 

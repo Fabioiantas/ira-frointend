@@ -3,4 +3,3 @@ export class Parametro {
     nm_parametro: string;
     ds_parametro: string;
   }
-  

@@ -87,9 +87,6 @@ import { ProdutosLiberadosComponent } from './produtos-liberados/produtos-libera
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { ProgramacaoPendenteAnaliseComponent } from './programacao-pendente-analise/programacao-pendente-analise.component';
 import { OptionsDrawerComponent } from './themeOptions/options-drawer/options-drawer.component';
-import { RecursoCadastroComponent } from './Recurso/recurso-cadastro/recurso-cadastro.component';
-import { ParametroComponent } from './parametro/parametro.component';
-import { ParametroCadastroComponent } from './parametro/parametro-cadastro/parametro-cadastro.component';
 // import { FonteEmissaoComponent } from './fonte-emissao/fonte-emissao.component';
 import { LicencaAmbientalComponent } from './licenca-ambiental/licenca-ambiental.component';
 import { TipoAtividadeComponent } from './tipo-atividade/tipo-atividade.component';
@@ -125,6 +122,9 @@ import { FonteEmissaoComponent } from './gee/fonte-emissao/fonte-emissao.compone
 import { EscopoComponent } from './gee/escopo/escopo.component';
 import { ProcessoAnaliseComponent } from './Monitoramento-Recursos/processo-analise/processo-analise.component';
 import { FonteEmissoraComponent } from './Monitoramento-Recursos/fonte-emissora/fonte-emissora.component';
+import { RecursoCadastroComponent } from './Monitoramento-Recursos/recurso/recurso-cadastro/recurso-cadastro.component';
+import { ParametroComponent } from './Monitoramento-Recursos/parametro/parametro.component';
+import { ParametroCadastroComponent } from './Monitoramento-Recursos/parametro/parametro-cadastro/parametro-cadastro.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
