@@ -9,7 +9,7 @@ declare var $;
   templateUrl: './app.component.html',
 })
 export class AppComponent implements OnInit {
-  title = 'Ira Ambiental';
+  title = 'Sistema Ambiental';
 
   constructor(public router: Router){
     setTheme('bs4');

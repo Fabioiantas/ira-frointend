@@ -78,8 +78,8 @@ export class FonteEntidadeComponent implements OnInit {
       this.populaTable(this.entidade.entidade_id);
   }
 
-  inserirEmissao() {
-      this.router.navigate(['/gee/fontes-cadastro/' + 1]);
+  inserirEmissao(id: any) {
+      this.router.navigate(['/gee/fontes-cadastro/' + id]);
   }
 
 }

@@ -42,7 +42,7 @@
         [table]="tableUsuarios"></ngx-datatable-filter>
     </div>
   </div>
-  <ngx-datatable ngx-resize-watcher class="bootstrap striped" #tableUsuarios [rows]="rows" [footerHeight]="80"
+  <ngx-datatable ngx-resize-watcher class="bootstrap striped" #tableUsuarios [rows]="rows" [footerHeight]="25"
     [columnMode]="'force'" [columns]="columns" [selected]="selected" [selectionType]="'single'" [rowHeight]="'auto'"
     (dblclick)="onDblclick($event)"
     [messages]="{'emptyMessage': 'Nenhum resultado encontrado...', 'totalMessage': 'total'}" [limit]="5">

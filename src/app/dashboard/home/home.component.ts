@@ -12,7 +12,7 @@ import { LicencaEntidade } from 'src/app/models/licencaEntidade';
 })
 export class HomeComponent implements OnInit {
 
-  heading = 'IRA - AMBIENTAL';
+  heading = 'SISTEMA - AMBIENTAL';
   subheading = 'Portal para programação de produtos farmacos.';
   icon = 'fa fa-medkit icon-gradient bg-tempting-azure';
   pageSize = 2;

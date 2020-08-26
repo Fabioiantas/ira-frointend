@@ -1,7 +1,7 @@
 // Sidebar Base
 
 // Variables
-$primaryColor: #4285f4 !default;
+$primaryColor: $green !default;
 $baseBg: #2a2a2e !default;
 $darkenBg: darken($baseBg, 5%) !default;
 $lightenBg: lighten($baseBg, 5%) !default;
@@ -63,6 +63,7 @@ $sidebar-box-shadow: 7px 0 60px rgba(0, 0, 0, 0.05);
     .app-sidebar-scroll {
       width: 100%;
       height: 100%;
+      background-color: #2E8B57;
     }
   }
 
@@ -102,7 +103,7 @@ $sidebar-box-shadow: 7px 0 60px rgba(0, 0, 0, 0.05);
   padding: 1.7rem $layout-spacer-x $layout-spacer-x;
 
   %side-link-hover {
-    background: #194b73;
+    background:#3CB371;
     color: $menu-color;
   }
 

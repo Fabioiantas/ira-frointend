@@ -44,10 +44,10 @@
     </div>
   </div>
 
-  <ngx-datatable ngx-resize-watcher class="bootstrap striped" #tableOrgao [rows]="rowsOrgao" [footerHeight]="80"
+  <ngx-datatable ngx-resize-watcher class="bootstrap striped" #tableOrgao [rows]="rowsOrgao"
     [columnMode]="'force'" [columns]="columnsOrgao" [selected]="selected" [selectionType]="'single'" [rowHeight]="'auto'"
-    (activate)="activate($event)"
-    [messages]="{'emptyMessage': 'Nenhum resultado encontrado...', 'totalMessage': 'total'}" [limit]="5">
+    (activate)="activate($event)" [footerHeight]="25"
+    [messages]="{'emptyMessage': 'Nenhum resultado encontrado...', 'totalMessage': 'total'}" [limit]="10">
     <ngx-datatable-column name="Nome Orgao" prop="nm_orgao" [flexGrow]="2"></ngx-datatable-column>
     <ngx-datatable-column name="Sigla" prop="sg_orgao" [flexGrow]="2"></ngx-datatable-column>
     <ngx-datatable-column name="Esfera" prop="nm_esfera" [flexGrow]="2"></ngx-datatable-column>

@@ -44,7 +44,7 @@
     </div>
   </div>
 
-  <ngx-datatable ngx-resize-watcher class="bootstrap striped" #tableTipoLicenca [rows]="rowsTipoLicenca" [footerHeight]="80"
+  <ngx-datatable ngx-resize-watcher class="bootstrap striped" #tableTipoLicenca [rows]="rowsTipoLicenca" [footerHeight]="25"
     [columnMode]="'force'" [columns]="columnsTipoLicenca" [selected]="selected" [selectionType]="'single'" [rowHeight]="'auto'"
     (activate)="activate($event)"
     [messages]="{'emptyMessage': 'Nenhum resultado encontrado...', 'totalMessage': 'total'}" [limit]="5">

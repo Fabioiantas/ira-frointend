@@ -31,7 +31,7 @@
         class="header-icon fa fa-industry mr-3 text-muted opacity-6"></i>{{nmReduzido}}</div>
     <div class="btn-actions-pane-right">
       <div class="btn-group-sm btn-group" role="group">
-        <a class="btn btn-success" (click)="inserirEmissao()">Inserir Emissão</a>
+        <a class="btn btn-success" (click)="inserirEmissao(selected[0].monitoramento_gee_id)">Inserir Emissão</a>
         <!-- <button class="btn btn-primary" type="button" (click)="editar(selected[0].id)">Editar</button> -->
         <!-- <button class="btn btn-danger" type="button" (click)="remover()">Remover</button> -->
       </div>
@@ -66,7 +66,7 @@
 
   <ngx-datatable ngx-resize-watcher class="bootstrap striped" #tableFonteEntidade
     [rows]="rowsFonteEntidade"
-    [footerHeight]="30"
+    [footerHeight]="25"
     [rowHeight]="45"
     [columns]="columnsFonteEntidade"
     [columnMode]="'force'"

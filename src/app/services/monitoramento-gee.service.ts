@@ -14,14 +14,20 @@ export class MonitoramentoGeeService {
   constructor(private http: HttpClient, private router: Router) { }
 
   create(filter: FilterGee): Observable<MonitoramentoGee> {
-    return this.http.post<MonitoramentoGee>(environment.baseUrl + '/auth/gee', filter);
+    return this.http.post<MonitoramentoGee>(`${environment.baseUrl}/auth/gee`, filter);
   }
 
   findMonitoramento(filter: FilterGee): Observable<MonitoramentoGee> {
-    return this.http.post<MonitoramentoGee>(environment.baseUrl + '/auth/findgee', filter);
+    return this.http.post<MonitoramentoGee>(`${environment.baseUrl}/auth/findgee`, filter);
   }
 
   findFonte(id: any): Observable<any> {
-    return this.http.get<MonitoramentoGee>(environment.baseUrl + '/auth/geefonte/' + id);
+    return this.http.get<MonitoramentoGee>(`${environment.baseUrl}/auth/geefonte/${id}`);
   }
+
+  findById(id: any): Observable<any> {
+    return this.http.get<MonitoramentoGee>(`${environment.baseUrl}/auth/gee/${id}`);
+  }
+
+
 }

@@ -1,7 +1,9 @@
 <div [class]="'app-sidebar sidebar-shadow ' + (config$ | async).sidebarTheme" (mouseover)="sidebarHover()"
   (mouseout)="sidebarHover()">
   <div class="app-header__logo">
-    <div class="logo-type">IRA - Ambiental</div>
+    <div class="logo-type">
+      <img src="/assets/images/sidebar/terra.png" width="48" height="48" alt="terra">
+      Ambiental</div>
     <div class="header__pane ml-auto">
       <button type="button" class="hamburger close-sidebar-btn hamburger--elastic"
         [ngClass]="{'is-active' : globals.toggleSidebar}" (click)="toggleSidebar()">
