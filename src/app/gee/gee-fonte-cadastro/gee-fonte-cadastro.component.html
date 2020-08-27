@@ -44,7 +44,7 @@
       </div>
       <div class="col-sm-3 form-group">
         <label for="cd_unidade_padrao">Unidade Consumo: </label>
-        <input name="cd_unidade_padrao" placeholder="UN." type="text" [(ngModel)]="amostraGee.cd_unidade_padrao">
+        <input name="cd_unidade_padrao" placeholder="UN." type="text" [(ngModel)]="amostraGee.cd_unidade_padrao" onkeyup="this.value = this.value.toUpperCase();">
       </div>
       <div class="col-sm-2 form-group">
         <label for="qt_consumo_total">Consumo: </label>

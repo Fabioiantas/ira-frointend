@@ -5,9 +5,10 @@ import * as moment from 'moment';
 @Injectable()
 export class NgbDatePTParserFormatter extends NgbDateParserFormatter {
 
-  readonly DT_FORMAT = 'DD/MM/YYYY';
+  readonly DT_FORMAT = 'DD-MM-YYYY';
 
   parse(value: string): NgbDateStruct {
+    console.log('NgbDatePTParserFormatter: ' + value);
     if (value) {
       value = value.trim();
     }
@@ -15,8 +16,9 @@ export class NgbDatePTParserFormatter extends NgbDateParserFormatter {
   }
 
   format(date: NgbDateStruct): string {
+    console.log('NgbDatePTParserFormatter: ' + date);
     if (!date) { return ''; }
-    const mdt = moment([date.year, date.month - 1, date.day]);
+    const mdt = moment([date.year, date.month, date.day]);
     if (!mdt.isValid()) { return ''; }
     return mdt.format(this.DT_FORMAT);
   }
