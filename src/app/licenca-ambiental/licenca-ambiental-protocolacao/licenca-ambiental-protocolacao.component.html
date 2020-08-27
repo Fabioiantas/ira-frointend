@@ -27,10 +27,10 @@
 <!-- Main content -->
 <div class="tabs-animated tabs-animated-shadow card">
   <div class="card-body">
-    
+
     <form [formGroup]="this.formGroup" class="needs-validation">
       <h5 class="card-title">Protocolação de Licença Ambiental</h5>
-      
+
       <div class="form-row">
         <div class="col-md-2 col-xl-2">
           <div class="card mb-3 widget-content">
@@ -44,7 +44,7 @@
             </div>
           </div>
         </div>
-        
+
           <div class="col-md-3 col-xl-3">
             <div class="card mb-3 widget-content">
               <div class="widget-content-outer">
@@ -57,7 +57,7 @@
               </div>
             </div>
           </div>
-          
+
           <div class="col-md-4 col-xl-4">
             <div class="card mb-3 widget-content">
               <div class="widget-content-outer">
@@ -94,14 +94,14 @@
         <div class="col-md-4 mb-4 form-group">
           <label for="dt_emissao_protocolo">Data Emissão Protocolo</label>
           <input class="form-control" (click)="dt_emissao_protocolo.toggle()" placeholder="dia/mês/ano" name="dt_emissao_protocolo"
-            formControlName="dt_emissao_protocolo" ngbDatepicker #dt_emissao_protocolo="ngbDatepicker" autocomplete="off" required>
+            formControlName="dt_emissao_protocolo" ngbDatepicker #dt_emissao_protocolo="ngbDatepicker" autocomplete="off" required readonly>
             <div class="input-group-append">
               <button class="btn btn-primary" (click)="dt_emissao_protocolo.toggle()" type="button">
                 <i class="fa fa-calendar"></i>
               </button>
             </div>
         </div>
-        
+
       </div>
       <div class="form-group">
         <bfv-messages></bfv-messages>

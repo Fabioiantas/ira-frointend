@@ -76,7 +76,7 @@
 
           <input class="form-control" (click)="dt_emissao_protocolo.toggle()" placeholder="dia/mês/ano"
             name="dt_emissao_protocolo" formControlName="dt_emissao_protocolo" ngbDatepicker
-            #dt_emissao_protocolo="ngbDatepicker" autocomplete="off">
+            #dt_emissao_protocolo="ngbDatepicker" autocomplete="off" readonly>
           <button class="btn btn-primary" (click)="dt_emissao_protocolo.toggle()" type="button">
             <i class="fa fa-calendar"></i>
           </button>
@@ -92,7 +92,7 @@
         <div class="col-md-4 mb-4 form-group">
           <label for="dt_emissao">Data Emissão Licença</label>
           <input class="form-control" (click)="dt_emissao.toggle()" placeholder="dia/mês/ano" name="dt_emissao"
-            formControlName="dt_emissao" ngbDatepicker #dt_emissao="ngbDatepicker" autocomplete="off">
+            formControlName="dt_emissao" ngbDatepicker #dt_emissao="ngbDatepicker" autocomplete="off" readonly>
           <div class="input-group-append">
             <button class="btn btn-primary" (click)="dt_emissao.toggle()" type="button">
               <i class="fa fa-calendar"></i>
@@ -103,7 +103,7 @@
           <label for="dt_validade">Validade Licença</label>
 
           <input class="form-control" (click)="dt_validade.toggle()" placeholder="dia/mês/ano" name="dt_validade"
-            formControlName="dt_validade" (change)="changeValidade()" ngbDatepicker #dt_validade="ngbDatepicker" autocomplete="off" disable>
+            formControlName="dt_validade" (change)="changeValidade()" ngbDatepicker #dt_validade="ngbDatepicker" autocomplete="off" readonly>
 
             <button class="btn btn-primary" (click)="dt_validade.toggle()" type="button">
             <i class="fa fa-calendar"></i>

@@ -42,7 +42,6 @@ export class AmostraEditarComponent implements OnInit {
       return this.dialogBox.show('É nescessário preencher todos os campos', 'Warning');
     }
     this.loading = true;
-    this.amostraGee.dt_amostra = this.amostraGee.dt_amostra = moment(this.amostraGee.dt_amostra).format('YYYY-MM-DD');
     this.amostraService.editar(this.amostraGee).subscribe(data => {
       this.loading = false;
       this.closeModal();

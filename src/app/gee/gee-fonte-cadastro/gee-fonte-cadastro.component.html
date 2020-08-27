@@ -33,24 +33,25 @@
   </div>
   <div class="p-3 bg-white">
     <div class="form-group form-inline mb-0">
-      <div class="col-sm-3 mb-4 form-group">
-        <label for="dt_amostra">Data:</label>
-        <input placeholder="yyyy-mm-dd" [(ngModel)]="amostraGee.dt_amostra" name="dt_amostra" ngbDatepicker
-          #d="ngbDatepicker" readonly>
-        <div class="input-group-append">
-          <button class="btn btn-outline-secondary fa fa-calendar" (click)="d.toggle()" type="button"></button>
-        </div>
+      <div class="col-sm-3 form-group">
+        <label for="dt_amostra">Data Amostragem:</label>
+          <input (click)="dt_amostra.toggle()" placeholder="dia/mês/ano"
+            name="dt_amostra"  ngbDatepicker [(ngModel)]="amostraGee.dt_amostra"
+            #dt_amostra="ngbDatepicker" autocomplete="off" readonly>
+          <button class="btn btn-primary btn-sm" (click)="dt_amostra.toggle()" type="button">
+            <i class="fa fa-calendar"></i>
+          </button>
       </div>
-      <div class="col-sm-3 mb-4 form-group">
-        <label for="cd_unidade_padrao">UN.:</label>
+      <div class="col-sm-3 form-group">
+        <label for="cd_unidade_padrao">Unidade Consumo: </label>
         <input name="cd_unidade_padrao" placeholder="UN." type="text" [(ngModel)]="amostraGee.cd_unidade_padrao">
       </div>
-      <div class="col-sm-3 mb-4 form-group">
-        <label for="qt_consumo_total">Consumo:</label>
+      <div class="col-sm-2 form-group">
+        <label for="qt_consumo_total">Consumo: </label>
         <input name="qt_consumo_total" placeholder="Consumo total" type="text"
           [(ngModel)]="amostraGee.qt_consumo_total">
       </div>
-      <div class="col-sm-2 text-right icons">
+      <div class="col-sm-1 mb--2 icons">
         <i class="pe-7s-check btn-icon-wrapper text-success" style="font-size: 33px; margin-right: 0px;"
           (click)="addItem()"></i>
       </div>

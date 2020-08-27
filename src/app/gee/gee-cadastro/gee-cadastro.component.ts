@@ -163,7 +163,6 @@ export class GeeCadastroComponent implements OnInit {
     this.loading = true;
     this.amostras.monitoramento_gee_id = this.monitoramentoGee.id;
 
-    this.amostras.dt_amostra = moment(this.amostras.dt_amostra).format('YYYY-MM-DD');
     this.amostraGeeService.salvar(this.amostras).subscribe(data => {
       this.loading = false;
       this.isAddEdit = false;

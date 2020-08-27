@@ -17,7 +17,6 @@ export class GeeFonteCadastroComponent implements OnInit {
   amostras: AmostraGee;
   amostraGee: AmostraGee;
   monitoramentoGee: MonitoramentoGee;
-  monitoramento_gee_id: number;
   fonte: any;
   params: any;
   isAddEdit: boolean;
@@ -65,7 +64,6 @@ export class GeeFonteCadastroComponent implements OnInit {
     }
     this.loading = true;
     this.amostraGee.monitoramento_gee_id = this.monitoramentoGee.id;
-    this.amostraGee.dt_amostra = moment(this.amostraGee.dt_amostra).format('YYYY-MM-DD');
     this.amostraGeeService.salvar(this.amostraGee).subscribe(data => {
       this.loading = false;
       this.isAddEdit = false;

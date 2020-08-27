@@ -37,11 +37,6 @@
     <!-- aaaa -->
     <div class="col-md-6 mb-6 form-group">
       <label class="mt-2">Data Amostra:</label>
-      <!-- <input (click)="dt_amostra.toggle()" placeholder="dia/mês/ano" name="dt_amostra"
-        [(ngModel)]="amostraGee.dt_amostra" ngbDatepicker #dt_amostra="ngbDatepicker" autocomplete="off">
-      <button class="btn btn-primary" (click)="dt_amostra.toggle()" type="button">
-        <i class="fa fa-calendar"></i>
-      </button> -->
       <input placeholder="yyyy-mm-dd"
              name="dt_amostra" [(ngModel)]="amostraGee.dt_amostra" ngbDatepicker #d="ngbDatepicker" readonly>
       <div class="input-group-append">
