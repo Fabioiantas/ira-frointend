@@ -15,7 +15,7 @@ export class ParametroCadastroComponent implements OnInit {
   formGroup = new FormGroup({
     id: new FormControl(''),
     nm_parametro: new FormControl('', Validators.required),
-    ds_parametro: new FormControl('', Validators.required)
+    sg_parametro: new FormControl('', Validators.required)
   });
 
   parametro: Parametro = new Parametro();
@@ -42,7 +42,7 @@ export class ParametroCadastroComponent implements OnInit {
         this.formGroup.patchValue({
           id: parametro.id,
           nmCampanha: parametro.nm_parametro,
-          descCampanha: parametro.ds_parametro
+          descCampanha: parametro.sg_parametro
         });
       });
     }

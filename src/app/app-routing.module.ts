@@ -54,6 +54,8 @@ import { ParametroComponent } from './Monitoramento-Recursos/parametro/parametro
 import { ParametroCadastroComponent } from './Monitoramento-Recursos/parametro/parametro-cadastro/parametro-cadastro.component';
 import { RecursoCadastroComponent } from './Monitoramento-Recursos/recurso/recurso-cadastro/recurso-cadastro.component';
 import { ProcessoAnaliseComponent } from './Monitoramento-Recursos/processo-analise/processo-analise.component';
+import { ProcessoAnaliseCadastroComponent } from './Monitoramento-Recursos/processo-analise/processo-analise-cadastro/processo-analise-cadastro.component';
+import { FonteEmissoraCadastroComponent } from './Monitoramento-Recursos/fonte-emissora/fonte-emissora-cadastro/fonte-emissora-cadastro.component';
 
 const routes: Routes = [
   {
@@ -430,19 +432,19 @@ const routes: Routes = [
         component: FonteEmissoraComponent,
         data: { extraParameter: 'mRecursoMenu' },
         canActivate: [AuthGuard]
-      }/*,
+      },
       {
         path: 'adicionar',
-        component: EscopoCadastroGeeComponent,
+        component: FonteEmissoraCadastroComponent,
         canActivate: [AuthGuard],
-        data: { roles: [Role.Admin], extraParameter: 'geeMenu' }
+        data: { roles: [Role.Admin], extraParameter: 'mRecursoMenu' }
       },
       {
         path: 'adicionar/:id',
-        component: EscopoCadastroGeeComponent,
+        component: FonteEmissoraCadastroComponent,
         canActivate: [AuthGuard],
-        data: { roles: [Role.Admin], extraParameter: 'geeMenu' }
-      }*/
+        data: { roles: [Role.Admin], extraParameter: 'mRecursoMenu' }
+      }
     ]
   },
   {
@@ -478,19 +480,19 @@ const routes: Routes = [
         component: ProcessoAnaliseComponent,
         data: { extraParameter: 'mRecursoMenu' },
         canActivate: [AuthGuard]
-      }/*,
+      },
       {
         path: 'adicionar',
-        component: ParametroCadastroComponent,
+        component: ProcessoAnaliseCadastroComponent,
         canActivate: [AuthGuard],
         data: { roles: [Role.Admin], extraParameter: 'mRecursoMenu' }
       },
       {
         path: 'adicionar/:id',
-        component: ParametroCadastroComponent,
+        component: ProcessoAnaliseCadastroComponent,
         canActivate: [AuthGuard],
         data: { roles: [Role.Admin], extraParameter: 'mRecursoMenu' }
-      }*/
+      }
     ]
   },
 

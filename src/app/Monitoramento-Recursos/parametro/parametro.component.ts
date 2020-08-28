@@ -18,7 +18,7 @@ export class ParametroComponent implements OnInit {
 
   columnsParametro = [
     {name : 'Parâmetro', prop : 'nm_parametro', width : '35%', selecionado: true},
-    {name : 'Descrição', prop : 'ds_parametro', width : '20%', selecionado: false}
+    {name : 'Sigla', prop : 'sg_parametro', width : '20%', selecionado: false}
   ];
 
   constructor(private router: Router,

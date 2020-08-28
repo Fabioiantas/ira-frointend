@@ -11,10 +11,10 @@
                 </a>
               </li>
               <li class="breadcrumb-item">
-                Parâmetro
+                Processo
               </li>
               <li class="active breadcrumb-item" aria-current="page">
-                Cadastrar Parâmetro
+                Cadastrar Processo
               </li>
             </ol>
           </nav>
@@ -28,19 +28,19 @@
 <div class="tabs-animated tabs-animated-shadow card">
   <div class="card-body">
     <form [formGroup]="this.formGroup" class="needs-validation">
-      <h5 class="card-title">Cadastro de Parâmetro</h5>
+      <h5 class="card-title">Cadastro de Processo</h5>
       <div class="form-row">
         <div class="col-md-12 mb-12 form-group">
-          <label for="nm_parametro">Nome Parâmetro</label>
-          <input formControlName="nm_parametro" type="text" class="form-control" id="nm_parametro"
-            placeholder="Nome do Parâmetro" value="" [(ngModel)]="parametro.nm_parametro" required>
+          <label for="nm_processo">Nome Processo</label>
+          <input formControlName="nm_processo" type="text" class="form-control" id="nm_processo"
+            placeholder="Nome do Processo" value="" [(ngModel)]="processo.nm_processo" required>
         </div>
       </div>
       <div class="form-row">
         <div class="col-md-12 mb-12 form-group">
-          <label for="sg_parametro">Sigla</label>
-          <input formControlName="sg_parametro" type="text" class="form-control" id="sg_parametro"
-            placeholder="Descrição do Parâmetro" value="" [(ngModel)]="parametro.sg_parametro" required>
+          <label for="ds_processo">Descrição</label>
+          <input formControlName="ds_processo" type="text" class="form-control" id="ds_processo"
+            placeholder="Descrição do Processo" value="" [(ngModel)]="processo.ds_processo" required>
         </div>
       </div>
       <div class="form-group">

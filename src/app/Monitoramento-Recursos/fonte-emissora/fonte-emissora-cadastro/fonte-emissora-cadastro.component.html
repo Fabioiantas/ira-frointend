@@ -11,10 +11,10 @@
                 </a>
               </li>
               <li class="breadcrumb-item">
-                Parâmetro
+                FonteEmissora
               </li>
               <li class="active breadcrumb-item" aria-current="page">
-                Cadastrar Parâmetro
+                Cadastrar FonteEmissora
               </li>
             </ol>
           </nav>
@@ -28,19 +28,31 @@
 <div class="tabs-animated tabs-animated-shadow card">
   <div class="card-body">
     <form [formGroup]="this.formGroup" class="needs-validation">
-      <h5 class="card-title">Cadastro de Parâmetro</h5>
+      <h5 class="card-title">Cadastro de Fontes Emissoras</h5>
       <div class="form-row">
         <div class="col-md-12 mb-12 form-group">
-          <label for="nm_parametro">Nome Parâmetro</label>
-          <input formControlName="nm_parametro" type="text" class="form-control" id="nm_parametro"
-            placeholder="Nome do Parâmetro" value="" [(ngModel)]="parametro.nm_parametro" required>
+          <label for="nm_fonte_emissora">Nome Fonte</label>
+          <input formControlName="nm_fonte_emissora" type="text" class="form-control" id="nm_fonte_emissora"
+            placeholder="Nome do FonteEmissora" [(ngModel)]="fonteEmissora.nm_fonte_emissora" required>
+        </div>
+      </div>
+
+
+      <div class="form-row">
+        <div class="col-md-12 mb-12 form-group">
+          <label for="ds_fonte_emissora">Descrição</label>
+          <input formControlName="ds_fonte_emissora" type="text" class="form-control" id="ds_fonte_emissora"
+            placeholder="Descrição do FonteEmissora" value="" [(ngModel)]="fonteEmissora.ds_fonte_emissora" required>
         </div>
       </div>
       <div class="form-row">
         <div class="col-md-12 mb-12 form-group">
-          <label for="sg_parametro">Sigla</label>
-          <input formControlName="sg_parametro" type="text" class="form-control" id="sg_parametro"
-            placeholder="Descrição do Parâmetro" value="" [(ngModel)]="parametro.sg_parametro" required>
+          <label for="nm_classificacao">Classificação</label>
+          <select formControlName="nm_classificacao" class="form-control" id="nm_classificacao" type="select"
+                   [(ngModel)]="fonteEmissora.nm_classificacao" required>
+              <option value="E">Estacionária</option>
+              <option value="M">Móvel</option>
+            </select>
         </div>
       </div>
       <div class="form-group">

@@ -68,7 +68,7 @@ export class LicencaAmbientalCadastroComponent implements OnInit {
       this.params = data;
     });
 
-    this.entidadeService.listaEntidades().subscribe((entidades: Entidade[]) => {
+    this.entidadeService.listaEntidadesLa().subscribe((entidades: any) => {
       this.listEntidade = entidades;
     });
 

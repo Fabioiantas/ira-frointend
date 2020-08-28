@@ -126,12 +126,14 @@ export class GeeCadastroComponent implements OnInit {
   }
 
   changeEntidade() {
+    this.isAddEdit = false;
     this.propriedadeService.byEntidade(this.filterForm.value.entidade.entidade_id).subscribe((propriedades: Propriedade) => {
       this.propriedades = propriedades;
     });
   }
 
   changeFonteEmissao() {
+    this.isAddEdit = false;
     if (this.filterForm.value.fonteEmissao.nm_classificacao === 'M') {
       this.filterForm.get('tipoCombustivel').clearValidators();
       this.filterForm.get('tipoCombustivel').updateValueAndValidity();
@@ -189,4 +191,7 @@ export class GeeCadastroComponent implements OnInit {
     });
   }
 
+  changeQuilometragem() {
+     this.amostras.qt_consumo_total = this.amostras.qt_quilometragem_total / this.filterForm.value.fonteEmissao.qt_consumo;
+  }
 }
