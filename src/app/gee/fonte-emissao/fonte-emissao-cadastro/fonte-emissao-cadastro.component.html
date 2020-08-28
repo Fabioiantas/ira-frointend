@@ -43,9 +43,14 @@
             placeholder="Nome Reduzido" value="" [(ngModel)]="fonteEmissao.nm_classificacao" required>
         </div>
         <div class="col-md-6 mb-6 form-group">
-          <label for="cd_unidade_consumo">UN. Consumo</label>
-          <input formControlName="cd_unidade_consumo" type="text" class="form-control" id="cd_unidade_consumo" onkeyup="this.value = this.value.toUpperCase();"
-            placeholder="UN" value="" [(ngModel)]="fonteEmissao.cd_unidade_consumo" required>
+          <label for="cd_unidade_consumo">Unidade Consumo</label>
+            <select formControlName="cd_unidade_consumo" class="form-control" id="cd_unidade_consumo" type="select"
+                   [(ngModel)]="fonteEmissao.cd_unidade_consumo" required>
+              <option>KM/L</option>
+              <option>KM/M3</option>
+            </select>
+          <!-- <input formControlName="cd_unidade_consumo" type="text" class="form-control" id="cd_unidade_consumo" onkeyup="this.value = this.value.toUpperCase();"
+            placeholder="UN" value="" [(ngModel)]="fonteEmissao.cd_unidade_consumo" required> -->
         </div>
         <div class="col-md-6 mb-6 form-group">
           <label for="qt_consumo">Consumo</label>

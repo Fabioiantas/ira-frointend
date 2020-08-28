@@ -67,31 +67,58 @@
 
               <!--adicionar-->
               <div *ngIf="!loading && monitoramentoGee?.id">
-                <div class="row mt-12" *ngIf="isAddEdit">
-                  <div class="col-sm-3">
-                    <input placeholder="yyyy-mm-dd" [(ngModel)]="amostras.dt_amostra" name="dt_amostra" ngbDatepicker
+
+                <div class="row mx-md-n5" *ngIf="isAddEdit">
+                  <div class="col py-3 px-md-5">
+                    {{amostras.cd_unidade_padrao == "L" ?  "LITROS" : "M³"}}
+                    <input name="qt_consumo_total" placeholder="Consumo total" type="text" [(ngModel)]="amostras.qt_consumo_total">
+                  </div>
+                  <div class="col py-3 px-md-5">
+                    {{amostras.cd_unidade_padrao == "L" ?  "LITROS" : "M³"}}
+                    <input name="qt_consumo_total" placeholder="Consumo total" type="text" [(ngModel)]="amostras.qt_consumo_total">
+                  </div>
+                  <div class="col py-3 px-md-5">
+                    Data Amostragem
+                    <input placeholder="DD/MM/AAAA" [(ngModel)]="amostras.dt_amostra" name="dt_amostra" ngbDatepicker
                       #d="ngbDatepicker" readonly>
                     <div class="input-group-append">
                       <button class="btn btn-outline-secondary fa fa-calendar" (click)="d.toggle()"
                         type="button"></button>
                     </div>
                   </div>
-                  <div class="col-sm-3">
-                    <input name="cd_unidade_padrao" placeholder="UN." type="text" [(ngModel)]="amostras.cd_unidade_padrao">
-                  </div>
-                  <div class="col-sm-3">
-                    <input name="qt_consumo_total" placeholder="Consumo total" type="text" [(ngModel)]="amostras.qt_consumo_total">
-                  </div>
-                  <!-- BUTTONS -->
-                  <div class="col-sm-2 text-right icons">
+                  <div class="col py-3 px-md-5">
                     <i class="pe-7s-check btn-icon-wrapper text-success" style="font-size: 33px; margin-right: 0px;"
                       (click)="addItem()"></i>
-                  </div>
-                  <div class="col-sm-1 text-right icons">
-                      <i class="pe-7s-close btn-icon-wrapper text-danger hover" style="font-size: 43px; margin-right: 0px;"
-                        (click)="closeEdit()"></i>
+                    <i class="pe-7s-close-circle btn-icon-wrapper text-danger hover" style="font-size: 33px; margin-right: 0px;"
+                    (click)="closeEdit()"></i>
                   </div>
                 </div>
+
+                <!-- <div class="row ml-1" *ngIf="isAddEdit">
+
+                  <div class="col-md-1">
+                    <input name="qt_consumo_total" placeholder="Consumo total" type="text" [(ngModel)]="amostras.qt_consumo_total">
+                  </div>
+                  <div class="col-mx-1">
+                    <input name="cd_unidade_padrao" placeholder="UN." type="text" [(ngModel)]="amostras.cd_unidade_padrao" readonly>
+                  </div>
+
+                  <div class="col-md-4">
+                    <input placeholder="DD/MM/AAAA" [(ngModel)]="amostras.dt_amostra" name="dt_amostra" ngbDatepicker
+                      #d="ngbDatepicker" readonly>
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary fa fa-calendar" (click)="d.toggle()"
+                        type="button"></button>
+                    </div>
+                  </div>
+                  BUTTONS
+                  <div class="col-md-2 text-right icons">
+                    <i class="pe-7s-check btn-icon-wrapper text-success" style="font-size: 33px; margin-right: 0px;"
+                      (click)="addItem()"></i>
+                    <i class="pe-7s-close-circle btn-icon-wrapper text-danger hover" style="font-size: 33px; margin-right: 0px;"
+                    (click)="closeEdit()"></i>
+                  </div>
+                </div> -->
 
                 <div class="row">
                   <div class="col-md-12">

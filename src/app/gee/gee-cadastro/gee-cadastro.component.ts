@@ -2,7 +2,6 @@ import { AmostraEditarComponent } from './../amostra-editar/amostra-editar.compo
 import { MonitoramentoGee } from './../../models/monitoramentoGee';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import * as moment from 'moment';
 import { EntidadeService } from 'src/app/services/entidade.service';
 import { Entidade } from 'src/app/models/entidade';
 import { Propriedade } from 'src/app/models/propriedade';
@@ -153,6 +152,7 @@ export class GeeCadastroComponent implements OnInit {
 
   add() {
     this.amostras = new AmostraGee();
+    this.amostras.cd_unidade_padrao = this.filterForm.value.fonteEmissao.cd_unidade_calculo;
     this.isAddEdit = true;
   }
 
