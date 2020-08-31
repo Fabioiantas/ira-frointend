@@ -56,6 +56,7 @@ import { RecursoCadastroComponent } from './Monitoramento-Recursos/recurso/recur
 import { ProcessoAnaliseComponent } from './Monitoramento-Recursos/processo-analise/processo-analise.component';
 import { ProcessoAnaliseCadastroComponent } from './Monitoramento-Recursos/processo-analise/processo-analise-cadastro/processo-analise-cadastro.component';
 import { FonteEmissoraCadastroComponent } from './Monitoramento-Recursos/fonte-emissora/fonte-emissora-cadastro/fonte-emissora-cadastro.component';
+import { MonitoramentoCadastroComponent } from './Monitoramento-Recursos/monitoramento-cadastro/monitoramento-cadastro.component';
 
 const routes: Routes = [
   {
@@ -484,6 +485,30 @@ const routes: Routes = [
       {
         path: 'adicionar',
         component: ProcessoAnaliseCadastroComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'mRecursoMenu' }
+      },
+      {
+        path: 'adicionar/:id',
+        component: ProcessoAnaliseCadastroComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'mRecursoMenu' }
+      }
+    ]
+  },
+  {
+    path: 'monitoramento',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: MonitoramentoCadastroComponent,
+        data: { extraParameter: 'mRecursoMenu' },
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'adicionar',
+        component: MonitoramentoCadastroComponent,
         canActivate: [AuthGuard],
         data: { roles: [Role.Admin], extraParameter: 'mRecursoMenu' }
       },

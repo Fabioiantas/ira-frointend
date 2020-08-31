@@ -1,10 +1,21 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { FilterGee } from 'src/app/models/filter-gee';
 import { FonteEmissora } from 'src/app/models/fonte-emissora';
 import { Recurso } from 'src/app/models/recurso';
 import { Propriedade } from 'src/app/models/propriedade';
 import { Entidade } from 'src/app/models/entidade';
+import { EntidadeService } from 'src/app/services/entidade.service';
+import { PropriedadeService } from 'src/app/services/propriedade.service';
+import { FonteEmissoraService } from 'src/app/services/fonte-emissora.service';
+import { DialogBoxService } from 'src/app/_services/dialog-box.service';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { MonitoramentoRecursoService } from 'src/app/services/monitoramento-recurso.service';
+import { MonitoramentoRecurso } from 'src/app/models/monitoramentoRecurso';
+import { MonitoramentoRecursoAmostra } from 'src/app/models/monitoramentoRecursoAmostra';
+import { ProcessoAnalise } from 'src/app/models/processoAnalise';
+import { RecursoServiceService } from 'src/app/services/recurso-service.service';
+import { ProcessoAnaliseService } from 'src/app/services/processo-analise.service';
 
 @Component({
   selector: 'app-monitoramento-cadastro',
@@ -12,8 +23,8 @@ import { Entidade } from 'src/app/models/entidade';
   styleUrls: ['./monitoramento-cadastro.component.sass']
 })
 export class MonitoramentoCadastroComponent implements OnInit {
-  heading = 'Fonte de Emissão GEE';
-  subheading = 'Adicionar nova Fonte de Emissão.';
+  heading = 'Recursos Monitorados';
+  subheading = 'Adicionar novo Monitoramento';
   icon = 'lnr lnr-earth';
   toggleMobileSidebar: any;
 
@@ -27,49 +38,48 @@ export class MonitoramentoCadastroComponent implements OnInit {
 
   entidades: Entidade;
   propriedades: Propriedade;
-  recurso: Recurso;
+  recursos: Recurso;
+  processos: ProcessoAnalise;
   fonteEmissoras: FonteEmissora;
-  monitoramentoRecurso: Monit
-  amostrasGee: AmostraGee;
-  amostras: AmostraGee;
+  monitoramentoRecurso: MonitoramentoRecurso;
+
   showCombustivel = false;
   isAddEdit = false;
 
 
   constructor(private entidadeService: EntidadeService,
               private propriedadeService: PropriedadeService,
-              private fonteEmissaoService: FonteEmissaoService,
-              private combustivelService: CombustivelService,
-              private ecopoService: EscopoGeeService,
-              private monitoramentoGeeService: MonitoramentoGeeService,
-              private amostraGeeService: AmostraService,
+              private fonteEmissoraService: FonteEmissoraService,
+              private monitoramentoRecursoService: MonitoramentoRecursoService,
+              private recursoService: RecursoServiceService,
+              private processoService: ProcessoAnaliseService,
               private dialogBox: DialogBoxService,
               private modalService: BsModalService,
               private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.filterForm = this.formBuilder.group({
-      escopo: [null, Validators.required],
       entidade: [null, Validators.required],
       propriedade: [null, Validators.required],
-      fonteEmissao: [null, Validators.required],
-      tipoCombustivel: [null, Validators.required]
-    });
-
-    this.ecopoService.getList().subscribe((escopos: EscopoGee) => {
-      this.escopos = escopos;
+      recurso: [null, Validators.required],
+      processo: [null, Validators.required],
+      fonteEmissora: [null, Validators.required]
     });
 
     this.entidadeService.listaEntidades().subscribe((entidades: Entidade) => {
       this.entidades = entidades;
     });
 
-    this.fonteEmissaoService.getList().subscribe((fonteEmissoes: FonteEmissao) => {
-      this.fonteEmissoes = fonteEmissoes;
+    this.fonteEmissoraService.listar().subscribe((fonte: FonteEmissora) => {
+      this.fonteEmissoras = fonte;
     });
 
-    this.combustivelService.getList().subscribe((combustiveis: TipoCombustivel) => {
-      this.combustiveis = combustiveis;
+    this.recursoService.listar().subscribe((recurso: Recurso) => {
+      this.recursos = recurso;
+    });
+
+    this.processoService.listar().subscribe((processo: ProcessoAnalise) => {
+      this.processos = processo;
     });
 
   }
@@ -77,28 +87,28 @@ export class MonitoramentoCadastroComponent implements OnInit {
   create() {
     if (this.filterForm.valid) {
       this.loading = true;
-      this.monitoramentoGeeService.create(this.filterForm.value).subscribe(data => {
+      this.monitoramentoRecursoService.create(this.filterForm.value).subscribe(data => {
         this.loading = false;
-        this.monitoramentoGee = data;
+        this.monitoramentoRecurso = data;
       }, () => this.loading = false);
     }
   }
 
-  editarItem(amostra: AmostraGee) {
-    // amostra.dt_amostra = moment(amostra.dt_amostra).format('DD/MM/YYYY');
+ /* editarItem(amostra: MonitoramentoRecurso) {
+    amostra.dt_amostra = moment(amostra.dt_amostra).format('DD/MM/YYYY');
     const initialState = {
       amostraGee: amostra,
       filteGee: this.filterForm.value,
-      MonitoramentoGee: this.monitoramentoGee,
+      MonitoramentoGee: this.mon,
     };
     this.modalService.show(AmostraEditarComponent, { initialState, backdrop: 'static', class: 'modal-md'})
-    .content.onClose.subscribe((amostraReturn: AmostraGee) => {
+    .content.onClose.subscribe((amostraReturn: MonitoramentoRecursoAmostra) => {
       amostra = amostraReturn;
       this.findMonitoramento();
     });
-  }
+  }*/
 
-  removerAmostra(amostra: AmostraGee) {
+  /*removerAmostra(amostra: MonitoramentoRecursoAmostra) {
     this.dialogBox.show('Tem certeza que deseja remover a amostra?', 'Confirm').then((sim) => {
       if (sim) {
         this.loading = true;
@@ -108,7 +118,7 @@ export class MonitoramentoCadastroComponent implements OnInit {
         }, () => this.loading = false);
       }
     });
-  }
+  }*/
 
   changeEntidade() {
     this.isAddEdit = false;
@@ -117,9 +127,9 @@ export class MonitoramentoCadastroComponent implements OnInit {
     });
   }
 
-  changeFonteEmissao() {
+  changeFonteEmissora() {
     this.isAddEdit = false;
-    if (this.filterForm.value.fonteEmissao.nm_classificacao === 'M') {
+    if (this.filterForm.value.fonteEmissora.nm_classificacao === 'M') {
       this.filterForm.get('tipoCombustivel').clearValidators();
       this.filterForm.get('tipoCombustivel').updateValueAndValidity();
       this.showCombustivel = false;
@@ -132,18 +142,18 @@ export class MonitoramentoCadastroComponent implements OnInit {
     }
   }
 
-  closeEdit() {
+  /*closeEdit() {
     this.isAddEdit = false;
-    this.amostras = new AmostraGee();
-  }
+    this.amostras = new MonitoramentoRecursoAmostra();
+  }*/
 
-  add() {
-    this.amostras = new AmostraGee();
-    this.amostras.cd_unidade_padrao = this.filterForm.value.fonteEmissao.cd_unidade_calculo;
+  /*add() {
+    this.amostras = new MonitoramentoRecursoAmostra();
+    this.amostras.cd_unidade_padrao = this.filterForm.value.fonteEmissora.cd_unidade_calculo;
     this.isAddEdit = true;
-  }
+  }*/
 
-  addItem() {
+  /*addItem() {
     if (!this.amostras.dt_amostra || !this.amostras.cd_unidade_padrao || !this.amostras.qt_consumo_total) {
       return this.dialogBox.show('É nescessário preencher todos os campos', 'Warning');
     }
@@ -153,31 +163,27 @@ export class MonitoramentoCadastroComponent implements OnInit {
     this.amostraGeeService.salvar(this.amostras).subscribe(data => {
       this.loading = false;
       this.isAddEdit = false;
-      this.amostras = new AmostraGee();
+      this.amostras = new MonitoramentoRecursoAmostra();
       this.findMonitoramento();
     }, () => this.loading = false);
-  }
+  }*/
 
   findMonitoramento() {
-    this.monitoramentoGee = null;
+    this.monitoramentoRecurso = null;
     if (this.filterForm.valid) {
       this.loading = true;
-      this.monitoramentoGeeService.findMonitoramento(this.filterForm.value).subscribe(data => {
+      this.monitoramentoRecursoService.findMonitoramento(this.filterForm.value).subscribe(data => {
         this.loading = false;
-        this.monitoramentoGee = data;
-        this.findAmostras(this.monitoramentoGee.id);
+        this.monitoramentoRecurso = data;
+        this.findAmostras(this.monitoramentoRecurso.id);
       });
     }
   }
 
   findAmostras(id: any) {
-    this.amostraGeeService.findAmostra(id).subscribe(amostras => {
+   /* this.amostraGeeService.findAmostra(id).subscribe(amostras => {
       this.amostrasGee = amostras;
-    });
-  }
-
-  changeQuilometragem() {
-     this.amostras.qt_consumo_total = this.amostras.qt_quilometragem_total / this.filterForm.value.fonteEmissao.qt_consumo;
+    });*/
   }
 
 }

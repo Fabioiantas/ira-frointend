@@ -34,7 +34,7 @@
                 <span class="hamburger-box"><span class="hamburger-inner"></span></span>
               </button>
             </div>
-            <h4 class="mb-0 text-nowrap title">Emissões GEE
+            <h4 class="mb-0 text-nowrap title">Amostras
               <!-- <div class="opacity-7 mt-2">Última atualização: <span class="opacity-8">{{programacao?.dtAtualizacao | date:'d/MM/yyyy H:mm:ss'}}</span></div> -->
             </h4>
           </div>
@@ -68,7 +68,7 @@
               <!--adicionar-->
               <div *ngIf="!loading && monitoramentoRecurso?.id">
 
-                <div class="row mx-md-n5" *ngIf="isAddEdit">
+                <!-- <div class="row mx-md-n5" *ngIf="isAddEdit">
                   <div class="col-sm-2 py-3 px-md-5">
                     Km Total
                     <input name="qt_quilometragem_total" placeholder="Km" type="text"
@@ -94,7 +94,7 @@
                     <i class="pe-7s-close-circle btn-icon-wrapper text-danger hover"
                       style="font-size: 33px; margin-right: 0px;" (click)="closeEdit()"></i>
                   </div>
-                </div>
+                </div> -->
 
                 <div class="row">
                   <div class="col-md-12">
@@ -129,15 +129,15 @@
                               <div class="widget-content p-0">
                                 <div class="widget-content-wrapper">
                                   <div class="widget-content-left flex2">
-                                    <div class="widget-heading">{{gee.dt_amostra | date:'dd/MM/yyyy'}}</div>
+                                    <div class="widget-heading">data:</div>
                                   </div>
                                 </div>
                               </div>
                             </td>
-                            <td class="text-center">{{monitoramento.cd_unidade_padrao}}</td>
-                            <td class="text-center">{{monitoramento.qt_consumo_total}}</td>
-                            <td class="text-center">{{monitoramento.qt_total_co2_fossel | number}}</td>
-                            <td class="text-center">{{monitoramento.qt_total_co2_bio | number}}</td>
+                            <td class="text-center"></td>
+                            <td class="text-center"></td>
+                            <td class="text-center"></td>
+                            <td class="text-center"></td>
                             <td class="text-right icons">
                               <!-- <i (click)="add()" *ngIf="!isAddEdit && i==0" class="pe-7s-plus text-success touch"></i> -->
                               <i class="pe-7s-tools text-primary" (click)="editarItem(monitoramento)"></i>
@@ -167,13 +167,6 @@
             <li class="nav-item-header nav-item pt-3">Inserir Emissões Gee</li>
 
             <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
-              <label class="mb-0 pl-1">Escopo:</label>
-              <ng-select [items]="escopos" bindLabel="nm_escopo" formControlName="escopo" name="escopo"
-                placeholder="Buscar Escopo...">
-              </ng-select>
-            </li>
-
-            <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
               <label class="mb-0 pl-1">Entidade:</label>
               <ng-select [items]="entidades" (change)="changeEntidade()" bindLabel="nm_entidade"
                 formControlName="entidade" name="entidade" placeholder="Buscar Entidade...">
@@ -187,14 +180,21 @@
               </ng-select>
             </li>
             <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
-              <label class="mb-0 pl-1">Fonte Emissão:</label>
-              <ng-select [items]="fonteEmissoes" (change)="changeFonteEmissao()" bindLabel="nm_fonte_emissao"
+              <label class="mb-0 pl-1">Recurso:</label>
+              <ng-select [items]="recursos" (change)="changeFonteEmissao()" bindLabel="nm_fonte_emissao"
                 formControlName="fonteEmissao" name="fonteEmissao" placeholder="Buscar Fonte...">
               </ng-select>
             </li>
+            <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
+              <label class="mb-0 pl-1">Processo:</label>
+              <ng-select [items]="processos" [virtualScroll]="true" (change)="findMonitoramento()"
+                bindLabel="nm_combustivel" formControlName="tipoCombustivel" name="tipoCombustivel"
+                placeholder="Buscar Combustível...">
+              </ng-select>
+            </li>
             <li class="pt-1 pb-1 pl-3 pr-3 nav-item" *ngIf="showCombustivel">
-              <label class="mb-0 pl-1">Combustível:</label>
-              <ng-select [items]="combustiveis" [virtualScroll]="true" (change)="findMonitoramento()"
+              <label class="mb-0 pl-1">Fonte Emissora:</label>
+              <ng-select [items]="fonteEmissoras" [virtualScroll]="true" (change)="findMonitoramento()"
                 bindLabel="nm_combustivel" formControlName="tipoCombustivel" name="tipoCombustivel"
                 placeholder="Buscar Combustível...">
               </ng-select>
