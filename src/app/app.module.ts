@@ -127,6 +127,7 @@ import { ParametroComponent } from './Monitoramento-Recursos/parametro/parametro
 import { ParametroCadastroComponent } from './Monitoramento-Recursos/parametro/parametro-cadastro/parametro-cadastro.component';
 import { ProcessoAnaliseCadastroComponent } from './Monitoramento-Recursos/processo-analise/processo-analise-cadastro/processo-analise-cadastro.component';
 import { FonteEmissoraCadastroComponent } from './Monitoramento-Recursos/fonte-emissora/fonte-emissora-cadastro/fonte-emissora-cadastro.component';
+import { MonitoramentoCadastroComponent } from './Monitoramento-Recursos/monitoramento-cadastro/monitoramento-cadastro.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -217,6 +218,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FonteEmissoraComponent,
     ProcessoAnaliseCadastroComponent,
     FonteEmissoraCadastroComponent,
+    MonitoramentoCadastroComponent,
 
   ],
   imports: [
