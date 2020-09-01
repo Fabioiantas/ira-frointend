@@ -17,8 +17,8 @@ export class MonitoramentoRecursoService {
     return this.http.post<MonitoramentoRecurso>(`${environment.baseUrl}/auth/monitoramento`, filter);
   }
 
-  findMonitoramento(filter: FilterMonitoramentoRecurso): Observable<MonitoramentoRecurso> {
-    return this.http.post<MonitoramentoRecurso>(`${environment.baseUrl}/auth/findmonitoramento`, filter);
+  findLaudos(filter: FilterMonitoramentoRecurso): Observable<MonitoramentoRecurso> {
+    return this.http.post<MonitoramentoRecurso>(`${environment.baseUrl}/auth/laudos`, filter);
   }
 
   findFonte(id: any): Observable<any> {

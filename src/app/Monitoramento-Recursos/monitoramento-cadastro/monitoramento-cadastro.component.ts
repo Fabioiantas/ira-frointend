@@ -134,7 +134,7 @@ export class MonitoramentoCadastroComponent implements OnInit {
       this.filterForm.get('tipoCombustivel').updateValueAndValidity();
       this.showCombustivel = false;
       this.filterForm.get('tipoCombustivel').setValue(null);
-      this.findMonitoramento();
+      // this.findMonitoramento();
     } else {
       this.showCombustivel = true;
       this.filterForm.get('tipoCombustivel').setValidators([Validators.required]);
@@ -168,11 +168,11 @@ export class MonitoramentoCadastroComponent implements OnInit {
     }, () => this.loading = false);
   }*/
 
-  findMonitoramento() {
+  findLaudos() {
     this.monitoramentoRecurso = null;
     if (this.filterForm.valid) {
       this.loading = true;
-      this.monitoramentoRecursoService.findMonitoramento(this.filterForm.value).subscribe(data => {
+      this.monitoramentoRecursoService.findLaudos(this.filterForm.value).subscribe(data => {
         this.loading = false;
         this.monitoramentoRecurso = data;
         this.findAmostras(this.monitoramentoRecurso.id);

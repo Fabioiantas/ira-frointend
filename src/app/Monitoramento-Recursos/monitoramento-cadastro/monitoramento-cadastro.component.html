@@ -181,22 +181,22 @@
             </li>
             <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
               <label class="mb-0 pl-1">Recurso:</label>
-              <ng-select [items]="recursos" (change)="changeFonteEmissao()" bindLabel="nm_fonte_emissao"
-                formControlName="fonteEmissao" name="fonteEmissao" placeholder="Buscar Fonte...">
+              <ng-select [items]="recursos" (change)="changeRecurso()" bindLabel="nm_recurso"
+                formControlName="recurso" name="recurso" placeholder="Buscar Recurso...">
               </ng-select>
             </li>
             <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
               <label class="mb-0 pl-1">Processo:</label>
-              <ng-select [items]="processos" [virtualScroll]="true" (change)="findMonitoramento()"
-                bindLabel="nm_combustivel" formControlName="tipoCombustivel" name="tipoCombustivel"
-                placeholder="Buscar Combustível...">
+              <ng-select [items]="processos" [virtualScroll]="true"
+                bindLabel="nm_processo" formControlName="processo" name="nm_processo"
+                placeholder="Buscar Processo...">
               </ng-select>
             </li>
-            <li class="pt-1 pb-1 pl-3 pr-3 nav-item" *ngIf="showCombustivel">
+            <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
               <label class="mb-0 pl-1">Fonte Emissora:</label>
-              <ng-select [items]="fonteEmissoras" [virtualScroll]="true" (change)="findMonitoramento()"
-                bindLabel="nm_combustivel" formControlName="tipoCombustivel" name="tipoCombustivel"
-                placeholder="Buscar Combustível...">
+              <ng-select [items]="fonteEmissoras" [virtualScroll]="true" (change)="findLaudos()"
+                bindLabel="nm_fonte_emissora" formControlName="fonteEmissora" name="fonteEmissora"
+                placeholder="Buscar Fonte...">
               </ng-select>
             </li>
           </ul>
