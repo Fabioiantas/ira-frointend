@@ -10,4 +10,6 @@ export class MonitoramentoRecurso {
   tipo_recurso_id: BigInteger;
   // tslint:disable-next-line:variable-name
   fonte_emissora_id: BigInteger;
+  monitoramento: any;
+  laudos: import("c:/xampp/htdocs/ira-frointend/src/app/models/monitoramentoLaudo").MonitoramentoLaudo;
 }

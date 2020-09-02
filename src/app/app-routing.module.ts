@@ -57,6 +57,7 @@ import { ProcessoAnaliseComponent } from './Monitoramento-Recursos/processo-anal
 import { ProcessoAnaliseCadastroComponent } from './Monitoramento-Recursos/processo-analise/processo-analise-cadastro/processo-analise-cadastro.component';
 import { FonteEmissoraCadastroComponent } from './Monitoramento-Recursos/fonte-emissora/fonte-emissora-cadastro/fonte-emissora-cadastro.component';
 import { MonitoramentoCadastroComponent } from './Monitoramento-Recursos/monitoramento-cadastro/monitoramento-cadastro.component';
+import { MonitoramentoAmostraCadastroComponent } from './Monitoramento-Recursos/monitoramento-amostra-cadastro/monitoramento-amostra-cadastro.component';
 
 const routes: Routes = [
   {
@@ -515,6 +516,12 @@ const routes: Routes = [
       {
         path: 'adicionar/:id',
         component: ProcessoAnaliseCadastroComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'mRecursoMenu' }
+      },
+      {
+        path: 'amostra/:id',
+        component: MonitoramentoAmostraCadastroComponent,
         canActivate: [AuthGuard],
         data: { roles: [Role.Admin], extraParameter: 'mRecursoMenu' }
       }

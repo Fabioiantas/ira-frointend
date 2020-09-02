@@ -5,7 +5,7 @@ import * as moment from 'moment';
 @Injectable()
 export class NgbDatePTParserFormatter extends NgbDateParserFormatter {
 
-  readonly DT_FORMAT = 'DD-MM-YYYY';
+  readonly DT_FORMAT = 'YYYY-MM-DD';
 
   parse(value: string): NgbDateStruct {
     console.log('NgbDatePTParserFormatter: ' + value);

@@ -17,6 +17,10 @@ export class RecursoServiceService {
     return this.http.get(environment.baseUrl + '/auth/recursos');
   }
 
+  list(): any {
+    return this.http.get(environment.baseUrl + '/auth/recursolist');
+  }
+
   add(recurso: Recurso) {
 
     return this.http.post<any>(environment.baseUrl + '/auth/recurso', recurso);

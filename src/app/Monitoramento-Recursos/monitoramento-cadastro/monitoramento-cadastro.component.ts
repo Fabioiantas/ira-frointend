@@ -16,12 +16,15 @@ import { MonitoramentoRecursoAmostra } from 'src/app/models/monitoramentoRecurso
 import { ProcessoAnalise } from 'src/app/models/processoAnalise';
 import { RecursoServiceService } from 'src/app/services/recurso-service.service';
 import { ProcessoAnaliseService } from 'src/app/services/processo-analise.service';
+import { MonitoramentoLaudo } from 'src/app/models/monitoramentoLaudo';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-monitoramento-cadastro',
   templateUrl: './monitoramento-cadastro.component.html',
   styleUrls: ['./monitoramento-cadastro.component.sass']
 })
+
 export class MonitoramentoCadastroComponent implements OnInit {
   heading = 'Recursos Monitorados';
   subheading = 'Adicionar novo Monitoramento';
@@ -32,7 +35,7 @@ export class MonitoramentoCadastroComponent implements OnInit {
   searching = false;
   searchFailed = false;
   filterForm: FormGroup;
-  filter: FilterGee = new FilterGee();
+  selected: any = [];
   produtoSelecionado = null;
   loading = false;
 
@@ -42,10 +45,20 @@ export class MonitoramentoCadastroComponent implements OnInit {
   processos: ProcessoAnalise;
   fonteEmissoras: FonteEmissora;
   monitoramentoRecurso: MonitoramentoRecurso;
+  laudos: MonitoramentoLaudo;
+  rowsLaudo: any;
+  laudo: MonitoramentoLaudo;
+  filter:any;
 
   showCombustivel = false;
   isAddEdit = false;
 
+  columnsLaudo = [
+    {name : 'Data', prop : 'dt_laudo', width : '35%', selecionado: true},
+    {name : 'N° Laudo', prop : 'nr_laudo', width : '20%', selecionado: false},
+    {name : 'Empresa', prop : 'nm_empresa_responsavel', width : '20%', selecionado: false},
+    {name : 'Descrição', prop : 'nm_monitoramento', width : '20%', selecionado: false}
+  ];
 
   constructor(private entidadeService: EntidadeService,
               private propriedadeService: PropriedadeService,
@@ -55,7 +68,8 @@ export class MonitoramentoCadastroComponent implements OnInit {
               private processoService: ProcessoAnaliseService,
               private dialogBox: DialogBoxService,
               private modalService: BsModalService,
-              private formBuilder: FormBuilder) { }
+              private formBuilder: FormBuilder,
+              private router: Router) { }
 
   ngOnInit() {
     this.filterForm = this.formBuilder.group({
@@ -70,18 +84,17 @@ export class MonitoramentoCadastroComponent implements OnInit {
       this.entidades = entidades;
     });
 
-    this.fonteEmissoraService.listar().subscribe((fonte: FonteEmissora) => {
+    this.fonteEmissoraService.list().subscribe((fonte: FonteEmissora) => {
       this.fonteEmissoras = fonte;
     });
 
-    this.recursoService.listar().subscribe((recurso: Recurso) => {
+    this.recursoService.list().subscribe((recurso: Recurso) => {
       this.recursos = recurso;
     });
 
-    this.processoService.listar().subscribe((processo: ProcessoAnalise) => {
+    this.processoService.list().subscribe((processo: ProcessoAnalise) => {
       this.processos = processo;
     });
-
   }
 
   create() {
@@ -147,26 +160,29 @@ export class MonitoramentoCadastroComponent implements OnInit {
     this.amostras = new MonitoramentoRecursoAmostra();
   }*/
 
-  /*add() {
-    this.amostras = new MonitoramentoRecursoAmostra();
-    this.amostras.cd_unidade_padrao = this.filterForm.value.fonteEmissora.cd_unidade_calculo;
+  add() {
+    this.laudo = new MonitoramentoLaudo();
     this.isAddEdit = true;
-  }*/
+  }
 
-  /*addItem() {
-    if (!this.amostras.dt_amostra || !this.amostras.cd_unidade_padrao || !this.amostras.qt_consumo_total) {
+  addLaudo() {
+    if (!this.laudo.dt_laudo || !this.laudo.nr_laudo) {
       return this.dialogBox.show('É nescessário preencher todos os campos', 'Warning');
     }
     this.loading = true;
-    this.amostras.monitoramento_gee_id = this.monitoramentoGee.id;
+    this.laudo.monitoramento_id = this.monitoramentoRecurso.id;
 
-    this.amostraGeeService.salvar(this.amostras).subscribe(data => {
+    this.monitoramentoRecursoService.createLaudo(this.laudo).subscribe(data => {
       this.loading = false;
       this.isAddEdit = false;
-      this.amostras = new MonitoramentoRecursoAmostra();
-      this.findMonitoramento();
+      this.laudo = new MonitoramentoLaudo;
+      this.findLaudos();
     }, () => this.loading = false);
-  }*/
+  }
+
+  addAmostra($id: any) {
+    this.router.navigate([`/monitoramento/amostra/${$id}`]);
+  }
 
   findLaudos() {
     this.monitoramentoRecurso = null;
@@ -174,8 +190,11 @@ export class MonitoramentoCadastroComponent implements OnInit {
       this.loading = true;
       this.monitoramentoRecursoService.findLaudos(this.filterForm.value).subscribe(data => {
         this.loading = false;
-        this.monitoramentoRecurso = data;
-        this.findAmostras(this.monitoramentoRecurso.id);
+        if (data){
+          this.monitoramentoRecurso = data.monitoramento;
+          this.laudos = data.laudos;
+          this.rowsLaudo = data.laudos;
+        }
       });
     }
   }
@@ -184,6 +203,12 @@ export class MonitoramentoCadastroComponent implements OnInit {
    /* this.amostraGeeService.findAmostra(id).subscribe(amostras => {
       this.amostrasGee = amostras;
     });*/
+  }
+
+  activate($event) {
+    if ($event.type === 'dblclick') {
+      // this.router.navigate(['/fonteemissora/adicionar/' + $event.row.id]);
+    }
   }
 
 }

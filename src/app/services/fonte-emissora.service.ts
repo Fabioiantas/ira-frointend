@@ -15,6 +15,10 @@ export class FonteEmissoraService {
     return this.http.get(environment.baseUrl + '/auth/fonteemissoras');
   }
 
+  list(): any {
+    return this.http.get(environment.baseUrl + '/auth/fonteemissoralist');
+  }
+
   add(fonteemissora: FonteEmissora) {
 
     return this.http.post<any>(environment.baseUrl + '/auth/fonteemissora', fonteemissora);

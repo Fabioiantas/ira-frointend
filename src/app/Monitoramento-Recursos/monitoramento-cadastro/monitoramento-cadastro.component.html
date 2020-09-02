@@ -34,16 +34,17 @@
                 <span class="hamburger-box"><span class="hamburger-inner"></span></span>
               </button>
             </div>
-            <h4 class="mb-0 text-nowrap title">Amostras
+            <h4 class="mb-0 text-nowrap title">Laudos Ambientais
               <!-- <div class="opacity-7 mt-2">Última atualização: <span class="opacity-8">{{programacao?.dtAtualizacao | date:'d/MM/yyyy H:mm:ss'}}</span></div> -->
             </h4>
+
           </div>
           <div class="pane-right">
-            <button type="button" (click)="salvar()" class="btn-shadow btn btn-dark" *ngIf="monitoramentoRecurso?.id">
-              <fa name="star"></fa> Reprocessar
-            </button>
             <button type="button" (click)="add()" class="btn-shadow btn btn-success" *ngIf="monitoramentoRecurso?.id">
-              <fa name="plus-circle"></fa> Inserir
+              <fa name="plus-circle"></fa> Novo Laudo
+            </button>
+            <button type="button" (click)="addAmostra(selected[0].id)" class="btn-shadow btn btn-info" *ngIf="laudos?.length">
+              <fa name="plus-circle"></fa> Inserir Resultados
             </button>
           </div>
         </div>
@@ -68,20 +69,16 @@
               <!--adicionar-->
               <div *ngIf="!loading && monitoramentoRecurso?.id">
 
-                <!-- <div class="row mx-md-n5" *ngIf="isAddEdit">
+                <div class="row mx-md-n5" *ngIf="isAddEdit">
                   <div class="col-sm-2 py-3 px-md-5">
-                    Km Total
-                    <input name="qt_quilometragem_total" placeholder="Km" type="text"
-                      [(ngModel)]="amostras.qt_quilometragem_total" (change)="changeQuilometragem()">
+                    N° Laudo
+                    <input name="nr_laudo" placeholder="N° do Laudo" type="text"
+                      [(ngModel)]="laudo.nr_laudo">
                   </div>
+
                   <div class="col-sm-2 py-3 px-md-5">
-                    {{amostras.cd_unidade_padrao == "L" ?  "LITROS" : "M³"}}
-                    <input name="qt_consumo_total" placeholder="Consumo total" type="text"
-                      [(ngModel)]="amostras.qt_consumo_total">
-                  </div>
-                  <div class="col-sm-2 py-3 px-md-5">
-                    Data Amostragem
-                    <input placeholder="DD/MM/AAAA" [(ngModel)]="amostras.dt_amostra" name="dt_amostra" ngbDatepicker
+                    Data
+                    <input placeholder="DD/MM/AAAA" [(ngModel)]="laudo.dt_laudo" name="dt_laudo" ngbDatepicker
                       #d="ngbDatepicker" readonly>
                     <div class="input-group-append">
                       <button class="btn btn-outline-secondary fa fa-calendar" (click)="d.toggle()"
@@ -90,31 +87,55 @@
                   </div>
                   <div class="col-sm-2 py-4 px-md-5 icons">
                     <i class="pe-7s-check btn-icon-wrapper text-success" style="font-size: 33px; margin-right: 0px;"
-                      (click)="addItem()"></i>
+                      (click)="addLaudo()"></i>
                     <i class="pe-7s-close-circle btn-icon-wrapper text-danger hover"
                       style="font-size: 33px; margin-right: 0px;" (click)="closeEdit()"></i>
                   </div>
-                </div> -->
+                </div>
 
                 <div class="row">
                   <div class="col-md-12">
                     <div class="table-responsive" style="min-height: 500px;">
-                      <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+                      <div class="p-3 bg-white">
+                        <div class="form-group form-inline mb-0">
+                          <ngx-datatable-filter [margin]="'-6px'" [float]="'left'" [columns]="columnsLaudo" [lista]="laudos"
+                            [table]="tableLaudo"></ngx-datatable-filter>
+                        </div>
+                      </div>
+                      <ngx-datatable ngx-resize-watcher
+                        class="bootstrap striped"
+                        #tableLaudo
+                        [rows]="rowsLaudo"
+                        [footerHeight]="25"
+                        [columnMode]="'force'"
+                        [columns]="columnsLaudo"
+                        [selected]="selected"
+                        [selectionType]="'single'"
+                        [rowHeight]="'auto'"
+                        (activate)="activate($event)"
+                        [messages]="{'emptyMessage': 'Nenhum resultado encontrado...', 'totalMessage': 'total'}"
+                        [limit]="15">
+                        <ngx-datatable-column name="Data" prop="dt_laudo" [width]="50" [flexGrow]="2"></ngx-datatable-column>
+                        <ngx-datatable-column name="Nº Laudo" prop="nr_laudo" [width]="50" [flexGrow]="2"></ngx-datatable-column>
+                        <ngx-datatable-column name="Empresa" prop="nm_empresa_responsavel" [flexGrow]="2"></ngx-datatable-column>
+                        <ngx-datatable-column name="Descrição" prop="nm_monitoramento" [flexGrow]="2"></ngx-datatable-column>
+
+                      </ngx-datatable>
+
+
+                      <!-- <table class="align-middle mb-0 table table-borderless table-striped table-hover" #tableLaudos>
                         <thead>
                           <tr [ngClass]="{'table-active': !isAddEdit}">
                             <th class="text-center"></th>
-                            <th width="10%">Data</th>
-                            <th class="text-center" width="10%">Un.</th>
-                            <th class="text-center qtd-input">Consumo</th>
-                            <th class="text-center qtd-input">CO2 Fóssel</th>
-                            <th class="text-center qtd-input">CO2 Bio</th>
+                            <th width="10%" class="text-center">Data</th>
+                            <th class="text-right" width="10%">Laudo N°</th>
                             <th class="text-right"></th>
                           </tr>
                         </thead>
                         <tbody>
-                          <tr *ngIf="!amostrasGee?.length">
+                          <tr *ngIf="!laudos?.length">
                             <td colspan="6" class="text-center">
-                              <h6 class="mt-3">Nenhuma amosrtra adicionada</h6>
+                              <h6 class="mt-3">Nenhum Laudo adicionado</h6>
                               <button *ngIf="!isAddEdit"
                                 class="mb-2 mr-2 mt-3 btn-icon btn-pill btn btn-outline-success"
                                 style="margin-right: 7px;" (click)="add()"><i
@@ -122,31 +143,20 @@
                             </td>
                           </tr>
 
-                          <!-- DADOS DA TABLE -->
-                          <tr *ngFor="let gee of amostrasGee; let i = index">
+
+                          <tr *ngFor="let lau of laudos; let i = index">
                             <td class="text-center text-muted">{{i+1}}</td>
-                            <td>
-                              <div class="widget-content p-0">
-                                <div class="widget-content-wrapper">
-                                  <div class="widget-content-left flex2">
-                                    <div class="widget-heading">data:</div>
-                                  </div>
-                                </div>
-                              </div>
-                            </td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
-                            <td class="text-center"></td>
+                            <td class="text-center">{{lau.dt_laudo}} </td>
+                            <td class="text-right">{{lau.nr_laudo}} </td>
                             <td class="text-right icons">
-                              <!-- <i (click)="add()" *ngIf="!isAddEdit && i==0" class="pe-7s-plus text-success touch"></i> -->
+                              <i (click)="add()" *ngIf="!isAddEdit && i==0" class="pe-7s-plus text-success touch"></i>
                               <i class="pe-7s-tools text-primary" (click)="editarItem(monitoramento)"></i>
                               <i class="pe-7s-trash text-danger" (click)="removerAmostra(monitoramento)"></i>
                             </td>
                           </tr>
 
                         </tbody>
-                      </table>
+                      </table> -->
                       <div class="divider"></div>
                     </div>
                   </div>
@@ -181,7 +191,7 @@
             </li>
             <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
               <label class="mb-0 pl-1">Recurso:</label>
-              <ng-select [items]="recursos" (change)="changeRecurso()" bindLabel="nm_recurso"
+              <ng-select [items]="recursos" bindLabel="nm_recurso"
                 formControlName="recurso" name="recurso" placeholder="Buscar Recurso...">
               </ng-select>
             </li>

@@ -15,6 +15,10 @@ export class ProcessoAnaliseService {
     return this.http.get(environment.baseUrl + '/auth/processos');
   }
 
+  list(): any {
+    return this.http.get(environment.baseUrl + '/auth/processolist');
+  }
+
   add(processo: ProcessoAnalise) {
 
     return this.http.post<any>(environment.baseUrl + '/auth/processo', processo);

@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { FilterMonitoramentoRecurso } from '../models/filter-monitoramento-recurso';
 import { environment } from 'src/environments/environment';
 import { MonitoramentoRecurso } from '../models/monitoramentoRecurso';
+import { MonitoramentoLaudo } from '../models/monitoramentoLaudo';
 
 @Injectable({
   providedIn: 'root'
@@ -17,8 +18,12 @@ export class MonitoramentoRecursoService {
     return this.http.post<MonitoramentoRecurso>(`${environment.baseUrl}/auth/monitoramento`, filter);
   }
 
+  createLaudo(laudo: MonitoramentoLaudo): Observable<MonitoramentoLaudo> {
+    return this.http.post<MonitoramentoLaudo>(`${environment.baseUrl}/auth/laudo`, laudo);
+  }
+
   findLaudos(filter: FilterMonitoramentoRecurso): Observable<MonitoramentoRecurso> {
-    return this.http.post<MonitoramentoRecurso>(`${environment.baseUrl}/auth/laudos`, filter);
+    return this.http.post<MonitoramentoRecurso>(`${environment.baseUrl}/auth/findlaudos`, filter);
   }
 
   findFonte(id: any): Observable<any> {
