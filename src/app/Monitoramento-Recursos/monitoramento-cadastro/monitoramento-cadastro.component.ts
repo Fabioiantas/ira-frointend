@@ -72,6 +72,7 @@ export class MonitoramentoCadastroComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+    this.isAddEdit = true;
     this.filterForm = this.formBuilder.group({
       entidade: [null, Validators.required],
       propriedade: [null, Validators.required],
@@ -103,6 +104,7 @@ export class MonitoramentoCadastroComponent implements OnInit {
       this.monitoramentoRecursoService.create(this.filterForm.value).subscribe(data => {
         this.loading = false;
         this.monitoramentoRecurso = data;
+        this.isAddEdit = true;
       }, () => this.loading = false);
     }
   }
@@ -175,7 +177,7 @@ export class MonitoramentoCadastroComponent implements OnInit {
     this.monitoramentoRecursoService.createLaudo(this.laudo).subscribe(data => {
       this.loading = false;
       this.isAddEdit = false;
-      this.laudo = new MonitoramentoLaudo;
+      this.laudo = new MonitoramentoLaudo();
       this.findLaudos();
     }, () => this.loading = false);
   }
