@@ -6,6 +6,7 @@ import { FilterMonitoramentoRecurso } from '../models/filter-monitoramento-recur
 import { environment } from 'src/environments/environment';
 import { MonitoramentoRecurso } from '../models/monitoramentoRecurso';
 import { MonitoramentoLaudo } from '../models/monitoramentoLaudo';
+import { MonitoramentoRecursoAmostra } from '../models/monitoramentoRecursoAmostra';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,10 @@ export class MonitoramentoRecursoService {
     return this.http.post<MonitoramentoLaudo>(`${environment.baseUrl}/auth/laudo`, laudo);
   }
 
+  createAmostra(amostra: MonitoramentoRecursoAmostra): Observable<MonitoramentoRecursoAmostra> {
+    return this.http.post<MonitoramentoRecursoAmostra>(`${environment.baseUrl}/auth/resultado`, amostra);
+  }
+
   findLaudos(filter: FilterMonitoramentoRecurso): Observable<MonitoramentoRecurso> {
     return this.http.post<MonitoramentoRecurso>(`${environment.baseUrl}/auth/findlaudos`, filter);
   }
@@ -32,5 +37,10 @@ export class MonitoramentoRecursoService {
 
   findById(id: any): Observable<any> {
     return this.http.get<MonitoramentoRecurso>(`${environment.baseUrl}/auth/monitoramento/${id}`);
+  }
+
+  //AMOSTRAS
+  findAmostras(id: any): Observable<any> {
+    return this.http.get<MonitoramentoRecursoAmostra>(`${environment.baseUrl}/auth/resultado/${id}`);
   }
 }

@@ -16,21 +16,25 @@ export class ParametroService {
   listar(): any {
     return this.http.get(environment.baseUrl + '/auth/parametros');
   }
-  
+
+  list(): any {
+    return this.http.get(environment.baseUrl + '/auth/parametrolist');
+  }
+
   add(parametro: Parametro) {
-  
+
     return this.http.post<any>(environment.baseUrl + '/auth/parametro', parametro);
   }
-  
+
   remove(id) {
     return this.http.delete(environment.baseUrl + '/auth/parametro/' + id);
   }
-  
-  
+
+
   edit(parametro: Parametro) {
     return this.http.put(environment.baseUrl + '/auth/parametro', parametro);
   }
-  
+
   getById(id: any) {
     return this.http.get<Parametro>(environment.baseUrl + '/auth/parametro/' + id);
   }

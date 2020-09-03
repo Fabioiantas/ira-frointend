@@ -514,12 +514,6 @@ const routes: Routes = [
         data: { roles: [Role.Admin], extraParameter: 'mRecursoMenu' }
       },
       {
-        path: 'adicionar/:id',
-        component: ProcessoAnaliseCadastroComponent,
-        canActivate: [AuthGuard],
-        data: { roles: [Role.Admin], extraParameter: 'mRecursoMenu' }
-      },
-      {
         path: 'amostra/:id',
         component: MonitoramentoAmostraCadastroComponent,
         canActivate: [AuthGuard],
