@@ -14,7 +14,7 @@ import { ParametroService } from 'src/app/services/parametro.service';
 export class MonitoramentoAmostraCadastroComponent implements OnInit {
   fonte: any;
   params: any;
-  isAddEdit: boolean;
+  isAddEdit = false;
   loading: boolean;
   amostras: MonitoramentoRecursoAmostra;
   amostraLaudo: MonitoramentoRecursoAmostra;
@@ -36,10 +36,19 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
       this.populaTable(this.params.id);
     }
   }
-  populaParametros() {
-    this.parametroService.list().subscribe(param => {
-      this.parametrosList = param;
-    });
+
+inserirResultado() {
+  this.isAddEdit = true;
+}
+
+cancelar() {
+  this.isAddEdit = false;
+}
+
+populaParametros() {
+  this.parametroService.list().subscribe(param => {
+    this.parametrosList = param;
+  });
   }
 
   populaTable(id: any) {

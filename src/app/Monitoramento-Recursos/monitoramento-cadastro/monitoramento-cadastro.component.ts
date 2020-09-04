@@ -48,7 +48,7 @@ export class MonitoramentoCadastroComponent implements OnInit {
   laudos: MonitoramentoLaudo;
   rowsLaudo: any;
   laudo: MonitoramentoLaudo;
-  filter:any;
+  filter: any;
 
   showCombustivel = false;
   isAddEdit = false;
@@ -72,7 +72,6 @@ export class MonitoramentoCadastroComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
-    this.isAddEdit = true;
     this.filterForm = this.formBuilder.group({
       entidade: [null, Validators.required],
       propriedade: [null, Validators.required],
@@ -99,6 +98,7 @@ export class MonitoramentoCadastroComponent implements OnInit {
   }
 
   create() {
+    this.laudo = new MonitoramentoLaudo();
     if (this.filterForm.valid) {
       this.loading = true;
       this.monitoramentoRecursoService.create(this.filterForm.value).subscribe(data => {
@@ -157,10 +157,10 @@ export class MonitoramentoCadastroComponent implements OnInit {
     }
   }
 
-  /*closeEdit() {
+  closeEdit() {
     this.isAddEdit = false;
-    this.amostras = new MonitoramentoRecursoAmostra();
-  }*/
+    this.laudo = new MonitoramentoLaudo();
+  }
 
   add() {
     this.laudo = new MonitoramentoLaudo();
@@ -192,7 +192,7 @@ export class MonitoramentoCadastroComponent implements OnInit {
       this.loading = true;
       this.monitoramentoRecursoService.findLaudos(this.filterForm.value).subscribe(data => {
         this.loading = false;
-        if (data){
+        if (data) {
           this.monitoramentoRecurso = data.monitoramento;
           this.laudos = data.laudos;
           this.rowsLaudo = data.laudos;
