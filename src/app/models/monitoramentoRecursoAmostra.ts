@@ -13,6 +13,8 @@ export class MonitoramentoRecursoAmostra {
   // tslint:disable-next-line:variable-name
   parametro_id: BigInteger;
   // tslint:disable-next-line:variable-name
+  sg_parametro: string;
+  // tslint:disable-next-line:variable-name
   cd_unidade_padrao: string;
   // tslint:disable-next-line:variable-name
   nr_padrao_inicial: number;

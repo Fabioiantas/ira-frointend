@@ -69,7 +69,37 @@
               <!--adicionar-->
               <div *ngIf="!loading && monitoramentoRecurso?.id">
 
-                <div class="row mx-md-n5" *ngIf="isAddEdit">
+                <div class="form-row" *ngIf="isAddEdit">
+                  <div class="form-group col-md-3 mb-n5">
+                    <label for="dt_laudo">Data</label>
+                    <input placeholder="DD/MM/AAAA" [(ngModel)]="laudo.dt_laudo" name="dt_laudo" ngbDatepicker
+                      #d="ngbDatepicker" readonly>
+                    <!-- <div class="input-group-append"> -->
+                      <button class="btn btn-outline-secondary fa fa-calendar" (click)="d.toggle()"
+                        type="button"></button>
+                    <!-- </div> -->
+                  </div>
+
+                  <div class="form-group col-md-2">
+                    <label for="nr_laudo">Nº Laudo</label>
+                    <input name="nr_laudo" placeholder="N° do Laudo" type="text"
+                      [(ngModel)]="laudo.nr_laudo">
+                  </div>
+
+                  <div class="form-group col-md-2">
+                    <label for="nm_empresa_responsavel">Empresa</label>
+                    <input name="nm_empresa_responsavel" placeholder="Empresa" type="text"
+                      [(ngModel)]="laudo.nm_empresa_responsavel">
+                  </div>
+
+                  <div class="form-group col-md-2">
+                    <label for="nm_monitoramento">Monitoramento</label>
+                    <input name="nm_monitoramento" placeholder="Descrição" type="text"
+                      [(ngModel)]="laudo.nm_monitoramento">
+                  </div>
+                </div>
+
+                <!-- <div class="row mx-md-n5" *ngIf="isAddEdit">
                   <div class="col-sm-3 py-3 px-md-5">
                     <label for="nr_laudo">Nº Laudo</label>
                     <input name="nr_laudo" placeholder="N° do Laudo" type="text"
@@ -91,7 +121,9 @@
                     <i class="pe-7s-close-circle btn-icon-wrapper text-danger hover"
                       style="font-size: 33px; margin-right: 0px;" (click)="closeEdit()"></i>
                   </div>
-                </div>
+                </div> -->
+
+
 
                 <div class="row">
                   <div class="col-md-12">

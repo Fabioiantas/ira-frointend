@@ -35,7 +35,7 @@
 
     <div *ngIf="isAddEdit">
       <div class="form-row">
-        <div class="form-group col-md-2">
+        <!-- <div class="form-group col-md-2">
           <label for="dt_amostra">Data</label>
           <input class="form-control form-control-sm" (click)="dt_amostra.toggle()" placeholder="dia/mês/ano"
             name="dt_amostra" ngbDatepicker [(ngModel)]="amostraLaudo.dt_amostra" #dt_amostra="ngbDatepicker"
@@ -43,7 +43,7 @@
           <button class="btn btn-primary btn-sm" (click)="dt_amostra.toggle()" type="button">
             <i class="fa fa-calendar"></i>
           </button>
-        </div>
+        </div> -->
         <div class="form-group col-md-4">
           <label for="parametro_id">Parâmetro</label>
           <!-- <ng-select class="form-control form-control-sm" [items]="parametrosList" bindValue="parametro_id" bindLabel="sg_parametro"
@@ -106,7 +106,7 @@
           <thead>
             <tr [ngClass]="{'table-active': !isAddEdit}">
               <th class="text-center"></th>
-              <th width="10%">Data</th>
+              <!-- <th width="10%">Data</th> -->
               <th class="text-center" width="10%">Parâmetro</th>
               <th class="text-center qtd-input">Un.</th>
               <th class="text-center qtd-input">Padrão I.</th>
@@ -130,7 +130,7 @@
             <tr *ngFor="let am of amostras; let i = index">
               <td class="text-center text-muted">{{i+1}}</td>
 
-              <td>
+              <!-- <td>
                 <div class="widget-content p-0">
                   <div class="widget-content-wrapper">
                     <div class="widget-content-left flex2">
@@ -138,8 +138,8 @@
                     </div>
                   </div>
                 </div>
-              </td>
-              <td class="text-center">{{am.parametro_id}}</td>
+              </td> -->
+              <td class="text-center">{{am.sg_parametro}}</td>
               <td class="text-center">{{am.cd_unidade_padrao}}</td>
               <td class="text-center">{{am.nr_padrao_inicial | number}}</td>
               <td class="text-center">{{am.nr_padrao_final | number}}</td>

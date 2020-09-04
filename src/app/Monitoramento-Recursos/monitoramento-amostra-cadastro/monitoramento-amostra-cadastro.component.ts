@@ -58,8 +58,8 @@ populaParametros() {
   }
 
     addAmostra() {
-    if (!this.amostraLaudo.dt_amostra || !this.amostraLaudo.cd_unidade_padrao || !this.amostraLaudo.parametro_id ||
-      !this.amostraLaudo.dt_amostra || !this.amostraLaudo.ds_operador || !this.amostraLaudo.nr_padrao_inicial) {
+    if (!this.amostraLaudo.cd_unidade_padrao || !this.amostraLaudo.parametro_id ||
+      !this.amostraLaudo.ds_operador || !this.amostraLaudo.nr_padrao_inicial) {
       return this.dialogBox.show('É nescessário preencher todos os campos', 'Warning');
     }
     this.loading = true;
