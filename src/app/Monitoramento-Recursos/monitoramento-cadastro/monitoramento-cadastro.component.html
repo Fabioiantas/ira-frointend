@@ -1,5 +1,5 @@
 <div class="app-inner-layout chat-layout">
-  <div class="app-inner-layout__header">
+  <!-- <div class="app-inner-layout__header">
     <div class="app-page-title">
       <div class="page-title-wrapper">
         <div class="page-title-heading">
@@ -21,7 +21,7 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <div class="app-inner-layout__wrapper" [ngClass]="{'open-mobile-menu' : toggleMobileSidebar}">
     <div class="app-inner-layout__content card">
@@ -43,12 +43,13 @@
             <button type="button" (click)="add()" class="btn-shadow btn btn-success" *ngIf="monitoramentoRecurso?.id">
               <fa name="plus-circle"></fa> Novo Laudo
             </button>
-            <button type="button" (click)="addAmostra(selected[0].id)" class="btn-shadow btn btn-info" *ngIf="laudos?.length">
+            <button type="button" (click)="addAmostra(selected[0].id)" class="btn-shadow btn btn-info"
+              *ngIf="laudos?.length">
               <fa name="plus-circle"></fa> Inserir Resultados
             </button>
           </div>
         </div>
-        <div class="app-inner-layout__bottom-pane d-block" style="padding: 0px;">
+        <div class="app-inner-layout__bottom-pane d-flex" style="padding: 0px;">
           <div class="mb-0 form-group" style="width: 100%;">
             <div class="col-sm-12">
 
@@ -70,40 +71,132 @@
               <div *ngIf="!loading && monitoramentoRecurso?.id">
 
                 <div class="form-row" *ngIf="isAddEdit">
-                  <div class="form-group col-md-3 mb-n5">
+                  <div class="form-group col-sm-6">
                     <label for="dt_laudo">Data</label>
-                    <input placeholder="DD/MM/AAAA" [(ngModel)]="laudo.dt_laudo" name="dt_laudo" ngbDatepicker
-                      #d="ngbDatepicker" readonly>
-                    <!-- <div class="input-group-append"> -->
-                      <button class="btn btn-outline-secondary fa fa-calendar" (click)="d.toggle()"
+                    <input class="form-control form-control-sm" placeholder="DD/MM/AAAA" [(ngModel)]="laudo.dt_laudo"
+                      name="dt_laudo" ngbDatepicker #d="ngbDatepicker" readonly>
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary fa fa-calendar btn-sm" (click)="d.toggle()"
                         type="button"></button>
-                    <!-- </div> -->
+                    </div>
                   </div>
 
-                  <div class="form-group col-md-2">
-                    <label for="nr_laudo">Nº Laudo</label>
-                    <input name="nr_laudo" placeholder="N° do Laudo" type="text"
-                      [(ngModel)]="laudo.nr_laudo">
-                  </div>
-
-                  <div class="form-group col-md-2">
-                    <label for="nm_empresa_responsavel">Empresa</label>
-                    <input name="nm_empresa_responsavel" placeholder="Empresa" type="text"
-                      [(ngModel)]="laudo.nm_empresa_responsavel">
-                  </div>
-
-                  <div class="form-group col-md-2">
+                  <div class="form-group col-sm-6">
                     <label for="nm_monitoramento">Monitoramento</label>
-                    <input name="nm_monitoramento" placeholder="Descrição" type="text"
-                      [(ngModel)]="laudo.nm_monitoramento">
+                    <input class="form-control form-control-sm" name="nm_monitoramento" placeholder="Descrição"
+                      type="text" [(ngModel)]="laudo.nm_monitoramento">
                   </div>
                 </div>
 
-                <!-- <div class="row mx-md-n5" *ngIf="isAddEdit">
+                <div class="form-row" *ngIf="isAddEdit">
+                  <div class="form-group col-sm-6">
+                    <label for="nm_empresa_responsavel">Empresa</label>
+                    <input class="form-control form-control-sm" name="nm_empresa_responsavel" placeholder="Empresa"
+                      type="text" [(ngModel)]="laudo.nm_empresa_responsavel">
+                  </div>
+                  <div class="form-group col-sm-6">
+                    <label for="nr_laudo">Nº Laudo</label>
+                    <input class="form-control form-control-sm" name="nr_laudo" placeholder="N° do Laudo" type="text"
+                      [(ngModel)]="laudo.nr_laudo">
+                  </div>
+                  <div class="form-row icons">
+                    <i class="pe-7s-check btn-icon-wrapper text-success" style="font-size: 33px; margin-right: 0px;"
+                      (click)="addLaudo()"></i>
+                    <i class="pe-7s-close-circle btn-icon-wrapper text-danger hover"
+                      style="font-size: 33px; margin-right: 0px;" (click)="closeEdit()"></i>
+                  </div>
+                </div>
+
+                <div class="col-md-12">
+                  <div class="table-responsive" style="min-height: 500px;">
+                    <div class="p-3 bg-white" *ngIf="!isAddEdit">
+                      <div class="form-group form-inline mb-0">
+                        <ngx-datatable-filter [margin]="'-6px'" [float]="'left'" [columns]="columnsLaudo"
+                          [lista]="laudos" [table]="tableLaudo"></ngx-datatable-filter>
+                      </div>
+                    </div>
+                    <ngx-datatable ngx-resize-watcher class="bootstrap striped" #tableLaudo [rows]="rowsLaudo"
+                      [footerHeight]="25" [columnMode]="'force'" [columns]="columnsLaudo" [selected]="selected"
+                      [selectionType]="'single'" [rowHeight]="'auto'" (activate)="activate($event)"
+                      [messages]="{'emptyMessage': 'Nenhum resultado encontrado...', 'totalMessage': 'total'}"
+                      [limit]="15">
+                      <ngx-datatable-column name="Data" prop="dt_laudo" [width]="50" [flexGrow]="2">
+                      </ngx-datatable-column>
+                      <ngx-datatable-column name="Nº Laudo" prop="nr_laudo" [width]="50" [flexGrow]="2">
+                      </ngx-datatable-column>
+                      <ngx-datatable-column name="Empresa" prop="nm_empresa_responsavel" [flexGrow]="2">
+                      </ngx-datatable-column>
+                      <ngx-datatable-column name="Descrição" prop="nm_monitoramento" [flexGrow]="2">
+                      </ngx-datatable-column>
+                    </ngx-datatable>
+                    <div class="divider"></div>
+                  </div>
+                </div>
+              </div>
+              <!-- FIM emissoes-->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Sidebar Filter Programação-->
+    <div class="app-inner-layout__sidebar card">
+      <div class="app-inner-layout__sidebar-header">
+        <form [formGroup]="filterForm">
+          <ul class="nav flex-column filter-programacao">
+            <li class="nav-item-header nav-item pt-3">Monitorameto de Recursos Ambientais</li>
+
+            <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
+              <label class="mb-0 pl-1">Entidade:</label>
+              <ng-select [items]="entidades" (change)="changeEntidade()" bindLabel="nm_entidade"
+                formControlName="entidade" name="entidade" placeholder="Buscar Entidade...">
+              </ng-select>
+            </li>
+
+            <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
+              <label class="mb-0 pl-1">Propriedade:</label>
+              <ng-select [items]="propriedades" (change)="changePropriedade()" bindLabel="nm_propriedade" formControlName="propriedade"
+                name="propriedade" placeholder="Buscar Propriedade...">
+              </ng-select>
+            </li>
+            <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
+              <label class="mb-0 pl-1">Recurso:</label>
+              <ng-select [items]="recursos" (change)="changeRecurso()" bindLabel="nm_recurso" formControlName="recurso" name="recurso"
+                placeholder="Buscar Recurso...">
+              </ng-select>
+            </li>
+            <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
+              <label class="mb-0 pl-1">Processo:</label>
+              <ng-select [items]="processos" [virtualScroll]="true" (change)="changeProcesso()" bindLabel="nm_processo" formControlName="processo"
+                name="nm_processo" placeholder="Buscar Processo...">
+              </ng-select>
+            </li>
+            <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
+              <label class="mb-0 pl-1">Fonte Emissora:</label>
+              <ng-select [items]="fonteEmissoras" [virtualScroll]="true" (change)="findLaudos()"
+                bindLabel="nm_fonte_emissora" formControlName="fonteEmissora" name="fonteEmissora"
+                placeholder="Buscar Fonte...">
+              </ng-select>
+            </li>
+          </ul>
+        </form>
+      </div>
+      <div class="app-inner-layout__sidebar-footer pt-3 pb-3 pl-3 pr-3">
+        <button class="btn-wide btn-pill btn btn-success btn-sm btn-block" (click)="findLaudos()"
+          [ladda]="loading">Filtrar</button>
+        <button class="btn-wide btn-pill btn btn-danger btn-sm btn-block" (click)="cleanFilter()"
+          [ladda]="loadingC">Limpar</button>
+      </div>
+    </div>
+    <!--//Sidebar Filter-->
+  </div>
+</div>
+
+<!-- <div class="row mx-md-n5" *ngIf="isAddEdit">
                   <div class="col-sm-3 py-3 px-md-5">
                     <label for="nr_laudo">Nº Laudo</label>
-                    <input name="nr_laudo" placeholder="N° do Laudo" type="text"
-                      [(ngModel)]="laudo.nr_laudo">
+                    <input name="nr_laudo" placeholder="N° do Laudo" type="text" [(ngModel)]="laudo.nr_laudo">
                   </div>
 
                   <div class="col-sm-3 py-3 px-md-5">
@@ -122,133 +215,3 @@
                       style="font-size: 33px; margin-right: 0px;" (click)="closeEdit()"></i>
                   </div>
                 </div> -->
-
-
-
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="table-responsive" style="min-height: 500px;">
-                      <div class="p-3 bg-white">
-                        <div class="form-group form-inline mb-0">
-                          <ngx-datatable-filter [margin]="'-6px'" [float]="'left'" [columns]="columnsLaudo" [lista]="laudos"
-                            [table]="tableLaudo"></ngx-datatable-filter>
-                        </div>
-                      </div>
-                      <ngx-datatable ngx-resize-watcher
-                        class="bootstrap striped"
-                        #tableLaudo
-                        [rows]="rowsLaudo"
-                        [footerHeight]="25"
-                        [columnMode]="'force'"
-                        [columns]="columnsLaudo"
-                        [selected]="selected"
-                        [selectionType]="'single'"
-                        [rowHeight]="'auto'"
-                        (activate)="activate($event)"
-                        [messages]="{'emptyMessage': 'Nenhum resultado encontrado...', 'totalMessage': 'total'}"
-                        [limit]="15">
-                        <ngx-datatable-column name="Data" prop="dt_laudo" [width]="50" [flexGrow]="2"></ngx-datatable-column>
-                        <ngx-datatable-column name="Nº Laudo" prop="nr_laudo" [width]="50" [flexGrow]="2"></ngx-datatable-column>
-                        <ngx-datatable-column name="Empresa" prop="nm_empresa_responsavel" [flexGrow]="2"></ngx-datatable-column>
-                        <ngx-datatable-column name="Descrição" prop="nm_monitoramento" [flexGrow]="2"></ngx-datatable-column>
-
-                      </ngx-datatable>
-
-
-                      <!-- <table class="align-middle mb-0 table table-borderless table-striped table-hover" #tableLaudos>
-                        <thead>
-                          <tr [ngClass]="{'table-active': !isAddEdit}">
-                            <th class="text-center"></th>
-                            <th width="10%" class="text-center">Data</th>
-                            <th class="text-right" width="10%">Laudo N°</th>
-                            <th class="text-right"></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr *ngIf="!laudos?.length">
-                            <td colspan="6" class="text-center">
-                              <h6 class="mt-3">Nenhum Laudo adicionado</h6>
-                              <button *ngIf="!isAddEdit"
-                                class="mb-2 mr-2 mt-3 btn-icon btn-pill btn btn-outline-success"
-                                style="margin-right: 7px;" (click)="add()"><i
-                                  class="pe-7s-check btn-icon-wrapper"></i>Inserir</button>
-                            </td>
-                          </tr>
-
-
-                          <tr *ngFor="let lau of laudos; let i = index">
-                            <td class="text-center text-muted">{{i+1}}</td>
-                            <td class="text-center">{{lau.dt_laudo}} </td>
-                            <td class="text-right">{{lau.nr_laudo}} </td>
-                            <td class="text-right icons">
-                              <i (click)="add()" *ngIf="!isAddEdit && i==0" class="pe-7s-plus text-success touch"></i>
-                              <i class="pe-7s-tools text-primary" (click)="editarItem(monitoramento)"></i>
-                              <i class="pe-7s-trash text-danger" (click)="removerAmostra(monitoramento)"></i>
-                            </td>
-                          </tr>
-
-                        </tbody>
-                      </table> -->
-                      <div class="divider"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- FIM emissoes-->
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!--Sidebar Filter Programação-->
-    <div class="app-inner-layout__sidebar card">
-      <div class="app-inner-layout__sidebar-header">
-        <form [formGroup]="filterForm">
-          <ul class="nav flex-column filter-programacao">
-            <li class="nav-item-header nav-item pt-3">Inserir Emissões Gee</li>
-
-            <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
-              <label class="mb-0 pl-1">Entidade:</label>
-              <ng-select [items]="entidades" (change)="changeEntidade()" bindLabel="nm_entidade"
-                formControlName="entidade" name="entidade" placeholder="Buscar Entidade...">
-              </ng-select>
-            </li>
-
-            <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
-              <label class="mb-0 pl-1">Propriedade:</label>
-              <ng-select [items]="propriedades" bindLabel="nm_propriedade" formControlName="propriedade"
-                name="propriedade" placeholder="Buscar Propriedade...">
-              </ng-select>
-            </li>
-            <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
-              <label class="mb-0 pl-1">Recurso:</label>
-              <ng-select [items]="recursos" bindLabel="nm_recurso"
-                formControlName="recurso" name="recurso" placeholder="Buscar Recurso...">
-              </ng-select>
-            </li>
-            <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
-              <label class="mb-0 pl-1">Processo:</label>
-              <ng-select [items]="processos" [virtualScroll]="true"
-                bindLabel="nm_processo" formControlName="processo" name="nm_processo"
-                placeholder="Buscar Processo...">
-              </ng-select>
-            </li>
-            <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
-              <label class="mb-0 pl-1">Fonte Emissora:</label>
-              <ng-select [items]="fonteEmissoras" [virtualScroll]="true" (change)="findLaudos()"
-                bindLabel="nm_fonte_emissora" formControlName="fonteEmissora" name="fonteEmissora"
-                placeholder="Buscar Fonte...">
-              </ng-select>
-            </li>
-          </ul>
-        </form>
-      </div>
-      <div class="app-inner-layout__sidebar-footer pt-3 pb-3 pl-3 pr-3">
-        <button class="btn-wide btn-pill btn btn-success btn-sm btn-block" (click)="filtrar()"
-          [ladda]="loading">Filtrar</button>
-      </div>
-    </div>
-    <!--//Sidebar Filter-->
-  </div>
-</div>

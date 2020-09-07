@@ -10,7 +10,7 @@ import { FonteEmissora } from './fonte-emissora';
 export class FilterMonitoramentoRecurso {
   entidade: Entidade;
   propriedade: Propriedade;
-  processoAnalise: ProcessoAnalise;
-  tipoRecurso: Recurso;
+  processo: ProcessoAnalise;
+  recurso: Recurso;
   fonteEmissora: FonteEmissora;
 }

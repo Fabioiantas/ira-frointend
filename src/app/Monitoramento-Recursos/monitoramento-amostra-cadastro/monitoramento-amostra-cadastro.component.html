@@ -11,10 +11,12 @@
                 </a>
               </li>
               <li class="breadcrumb-item">
-                Cadastro
+                <a [routerLink]="" (click)="monitoramento()">
+                  Monitoramento
+                </a>
               </li>
               <li class="active breadcrumb-item" aria-current="page">
-                Amostras
+                Resultados
               </li>
             </ol>
           </nav>
@@ -120,9 +122,9 @@
             <tr *ngIf="!amostras?.length">
               <td colspan="6" class="text-center">
                 <h6 class="mt-3">Nenhuma amostra adicionada</h6>
-                <button *ngIf="!isAddEdit" class="mb-2 mr-2 mt-3 btn-icon btn-pill btn btn-outline-success"
+                <!-- <button *ngIf="!isAddEdit" class="mb-2 mr-2 mt-3 btn-icon btn-pill btn btn-outline-success"
                   style="margin-right: 7px;" (click)="add()"><i
-                    class="pe-7s-check btn-icon-wrapper"></i>Inserir</button>
+                    class="pe-7s-check btn-icon-wrapper"></i>Inserir</button> -->
               </td>
             </tr>
 

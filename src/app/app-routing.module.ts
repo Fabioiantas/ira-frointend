@@ -508,7 +508,7 @@ const routes: Routes = [
         canActivate: [AuthGuard]
       },
       {
-        path: 'adicionar',
+        path: 'monitoramento/:id',
         component: MonitoramentoCadastroComponent,
         canActivate: [AuthGuard],
         data: { roles: [Role.Admin], extraParameter: 'mRecursoMenu' }

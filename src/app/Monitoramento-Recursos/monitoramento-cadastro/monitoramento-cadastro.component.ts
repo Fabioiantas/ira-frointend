@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { FilterGee } from 'src/app/models/filter-gee';
 import { FonteEmissora } from 'src/app/models/fonte-emissora';
 import { Recurso } from 'src/app/models/recurso';
 import { Propriedade } from 'src/app/models/propriedade';
@@ -12,12 +11,13 @@ import { DialogBoxService } from 'src/app/_services/dialog-box.service';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { MonitoramentoRecursoService } from 'src/app/services/monitoramento-recurso.service';
 import { MonitoramentoRecurso } from 'src/app/models/monitoramentoRecurso';
-import { MonitoramentoRecursoAmostra } from 'src/app/models/monitoramentoRecursoAmostra';
 import { ProcessoAnalise } from 'src/app/models/processoAnalise';
 import { RecursoServiceService } from 'src/app/services/recurso-service.service';
 import { ProcessoAnaliseService } from 'src/app/services/processo-analise.service';
 import { MonitoramentoLaudo } from 'src/app/models/monitoramentoLaudo';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
+import { FilterMonitoramentoRecurso } from 'src/app/models/filter-monitoramento-recurso';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-monitoramento-cadastro',
@@ -34,10 +34,13 @@ export class MonitoramentoCadastroComponent implements OnInit {
   model: any;
   searching = false;
   searchFailed = false;
+  filterMonitoramento: FilterMonitoramentoRecurso = new FilterMonitoramentoRecurso();
   filterForm: FormGroup;
   selected: any = [];
   produtoSelecionado = null;
   loading = false;
+  loadingC = false;
+  params: any;
 
   entidades: Entidade;
   propriedades: Propriedade;
@@ -48,8 +51,6 @@ export class MonitoramentoCadastroComponent implements OnInit {
   laudos: MonitoramentoLaudo;
   rowsLaudo: any;
   laudo: MonitoramentoLaudo;
-  filter: any;
-
   showCombustivel = false;
   isAddEdit = false;
 
@@ -66,19 +67,42 @@ export class MonitoramentoCadastroComponent implements OnInit {
               private monitoramentoRecursoService: MonitoramentoRecursoService,
               private recursoService: RecursoServiceService,
               private processoService: ProcessoAnaliseService,
+              private data: DataService,
               private dialogBox: DialogBoxService,
               private modalService: BsModalService,
               private formBuilder: FormBuilder,
-              private router: Router) { }
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.filterForm = this.formBuilder.group({
-      entidade: [null, Validators.required],
-      propriedade: [null, Validators.required],
-      recurso: [null, Validators.required],
-      processo: [null, Validators.required],
-      fonteEmissora: [null, Validators.required]
+    this.route.queryParams.subscribe(param => {
+      this.params = param;
     });
+
+    this.data.currentFilter.subscribe(filter => {
+      if (filter) {
+        this.filterMonitoramento = filter.value;
+      }
+      console.log(this.filterMonitoramento.entidade);
+    });
+    if (this.filterMonitoramento) {
+      this.filterForm = this.formBuilder.group({
+        entidade: [this.filterMonitoramento.entidade, Validators.required],
+        propriedade: [this.filterMonitoramento.propriedade, Validators.required],
+        recurso: [this.filterMonitoramento.recurso, Validators.required],
+        processo: [this.filterMonitoramento.processo, Validators.required],
+        fonteEmissora: [this.filterMonitoramento.fonteEmissora, Validators.required]
+      });
+      this.findLaudos();
+    } else {
+      this.filterForm = this.formBuilder.group({
+        entidade: [null, Validators.required],
+        propriedade: [null, Validators.required],
+        recurso: [null, Validators.required],
+        processo: [null, Validators.required],
+        fonteEmissora: [null, Validators.required]
+      });
+    }
 
     this.entidadeService.listaEntidades().subscribe((entidades: Entidade) => {
       this.entidades = entidades;
@@ -95,6 +119,7 @@ export class MonitoramentoCadastroComponent implements OnInit {
     this.processoService.list().subscribe((processo: ProcessoAnalise) => {
       this.processos = processo;
     });
+
   }
 
   create() {
@@ -109,6 +134,9 @@ export class MonitoramentoCadastroComponent implements OnInit {
     }
   }
 
+  changeFilterService() {
+    this.data.changeFilter(this.filterForm);
+  }
  /* editarItem(amostra: MonitoramentoRecurso) {
     amostra.dt_amostra = moment(amostra.dt_amostra).format('DD/MM/YYYY');
     const initialState = {
@@ -137,24 +165,20 @@ export class MonitoramentoCadastroComponent implements OnInit {
 
   changeEntidade() {
     this.isAddEdit = false;
+    this.data.changeFilter(null);
     this.propriedadeService.byEntidade(this.filterForm.value.entidade.entidade_id).subscribe((propriedades: Propriedade) => {
       this.propriedades = propriedades;
     });
   }
 
-  changeFonteEmissora() {
-    this.isAddEdit = false;
-    if (this.filterForm.value.fonteEmissora.nm_classificacao === 'M') {
-      this.filterForm.get('tipoCombustivel').clearValidators();
-      this.filterForm.get('tipoCombustivel').updateValueAndValidity();
-      this.showCombustivel = false;
-      this.filterForm.get('tipoCombustivel').setValue(null);
-      // this.findMonitoramento();
-    } else {
-      this.showCombustivel = true;
-      this.filterForm.get('tipoCombustivel').setValidators([Validators.required]);
-      this.filterForm.get('tipoCombustivel').updateValueAndValidity();
-    }
+  changePropriedade() {
+    this.data.changeFilter(null);
+  }
+  changeRecurso() {
+    this.data.changeFilter(null);
+  }
+  changeProcesso() {
+    this.data.changeFilter(null);
   }
 
   closeEdit() {
@@ -189,6 +213,7 @@ export class MonitoramentoCadastroComponent implements OnInit {
   findLaudos() {
     this.monitoramentoRecurso = null;
     if (this.filterForm.valid) {
+      this.data.changeFilter(this.filterForm);
       this.loading = true;
       this.monitoramentoRecursoService.findLaudos(this.filterForm.value).subscribe(data => {
         this.loading = false;
@@ -205,6 +230,12 @@ export class MonitoramentoCadastroComponent implements OnInit {
    /* this.amostraGeeService.findAmostra(id).subscribe(amostras => {
       this.amostrasGee = amostras;
     });*/
+  }
+
+  cleanFilter() {
+    this.loadingC = true;
+    this.filterForm.reset();
+    this.loadingC = false;
   }
 
   activate($event) {
