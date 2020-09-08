@@ -39,8 +39,12 @@ export class MonitoramentoRecursoService {
     return this.http.get<MonitoramentoRecurso>(`${environment.baseUrl}/auth/monitoramento/${id}`);
   }
 
-  //AMOSTRAS
+  // AMOSTRAS
   findAmostras(id: any): Observable<any> {
     return this.http.get<MonitoramentoRecursoAmostra>(`${environment.baseUrl}/auth/resultado/${id}`);
+  }
+
+  remove(id) {
+    return this.http.delete(environment.baseUrl + '/auth/resultado/' + id);
   }
 }

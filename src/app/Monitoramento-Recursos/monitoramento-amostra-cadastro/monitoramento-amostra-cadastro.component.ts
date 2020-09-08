@@ -52,6 +52,10 @@ inserirResultado() {
   this.isAddEdit = true;
 }
 
+delete() {
+  this.monitoramentoService
+}
+
 cancelar() {
   this.isAddEdit = false;
 }
