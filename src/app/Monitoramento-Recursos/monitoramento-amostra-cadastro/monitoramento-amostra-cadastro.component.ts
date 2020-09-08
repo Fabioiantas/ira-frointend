@@ -52,6 +52,12 @@ inserirResultado() {
   this.isAddEdit = true;
 }
 
+editarItem(resultado: MonitoramentoRecursoAmostra) {
+  this.amostraLaudo = new MonitoramentoRecursoAmostra();
+  this.amostraLaudo = resultado;
+  this.isAddEdit = true;
+}
+
 delete() {
   this.monitoramentoService
 }
@@ -79,12 +85,26 @@ populaParametros() {
     }
     this.loading = true;
     this.amostraLaudo.monitoramento_laudo_id = this.params.id;
-    this.monitoramentoService.createAmostra(this.amostraLaudo).subscribe(data => {
+
+    this.monitoramentoService[this.amostraLaudo.id ? 'editResutladoLaudo' : 'createAmostra'](this.amostraLaudo).subscribe(data => {
       this.loading = false;
       this.isAddEdit = false;
       this.amostraLaudo = new MonitoramentoRecursoAmostra();
       this.populaTable(this.params.id);
     }, () => this.loading = false);
+  }
+
+  removerResultado(id: any){
+    this.dialogBox.show('Confirma remoção do Resultado?', 'CONFIRM').then(sim => {
+      if (sim) {
+        this.monitoramentoService.removeResultado(id).subscribe(data => {
+          this.dialogBox.show('Resultado removido com sucesso!', 'OK');
+          this.populaTable(this.params.id);
+        });
+      }
+    });
+
+
   }
 
   monitoramento() {

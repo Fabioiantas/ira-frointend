@@ -3,7 +3,8 @@ import * as moment from 'moment';
 
 export class MomentDateFormatter extends NgbDateParserFormatter {
 
-  readonly DT_FORMAT = 'YYYY-MM-DD';
+  // readonly DT_FORMAT = 'YYYY-MM-DD';
+  readonly DT_FORMAT = 'DD/MM/YYYY';
 
   parse(value: string): NgbDateStruct {
     console.log('MomentDateFormatter: ' + value);

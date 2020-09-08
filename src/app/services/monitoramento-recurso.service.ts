@@ -27,6 +27,10 @@ export class MonitoramentoRecursoService {
     return this.http.post<MonitoramentoRecursoAmostra>(`${environment.baseUrl}/auth/resultado`, amostra);
   }
 
+  editResutladoLaudo(amostra: MonitoramentoRecursoAmostra): Observable<MonitoramentoRecursoAmostra> {
+    return this.http.put<MonitoramentoRecursoAmostra>(`${environment.baseUrl}/auth/resultado`, amostra);
+  }
+
   findLaudos(filter: FilterMonitoramentoRecurso): Observable<MonitoramentoRecurso> {
     return this.http.post<MonitoramentoRecurso>(`${environment.baseUrl}/auth/findlaudos`, filter);
   }
@@ -44,7 +48,7 @@ export class MonitoramentoRecursoService {
     return this.http.get<MonitoramentoRecursoAmostra>(`${environment.baseUrl}/auth/resultado/${id}`);
   }
 
-  remove(id) {
+  removeResultado(id: any) {
     return this.http.delete(environment.baseUrl + '/auth/resultado/' + id);
   }
 }
