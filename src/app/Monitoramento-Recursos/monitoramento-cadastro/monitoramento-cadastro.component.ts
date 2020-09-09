@@ -134,9 +134,15 @@ export class MonitoramentoCadastroComponent implements OnInit {
     }
   }
 
+  editarLaudo() {
+    this.laudo = this.selected;
+    this.isAddEdit = true;
+  }
+
   changeFilterService() {
     this.data.changeFilter(this.filterForm);
   }
+
  /* editarItem(amostra: MonitoramentoRecurso) {
     amostra.dt_amostra = moment(amostra.dt_amostra).format('DD/MM/YYYY');
     const initialState = {
@@ -169,6 +175,12 @@ export class MonitoramentoCadastroComponent implements OnInit {
     this.propriedadeService.byEntidade(this.filterForm.value.entidade.entidade_id).subscribe((propriedades: Propriedade) => {
       this.propriedades = propriedades;
     });
+  }
+
+  changeFilter() {
+    this.rowsLaudo = null;
+    this.monitoramentoRecurso = null;
+    this.data.changeFilter(null);
   }
 
   changePropriedade() {
@@ -235,6 +247,8 @@ export class MonitoramentoCadastroComponent implements OnInit {
   cleanFilter() {
     this.loadingC = true;
     this.filterForm.reset();
+    this.rowsLaudo = null;
+    this.monitoramentoRecurso = null;
     this.loadingC = false;
   }
 

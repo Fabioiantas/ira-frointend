@@ -43,6 +43,9 @@
             <button type="button" (click)="add()" class="btn-shadow btn btn-success" *ngIf="monitoramentoRecurso?.id">
               <fa name="plus-circle"></fa> Novo Laudo
             </button>
+            <button type="button" (click)="editarLaudo()" class="btn-shadow btn btn-warning" *ngIf="monitoramentoRecurso?.id">
+              <fa name="edit"></fa> Editar
+            </button>
             <button type="button" (click)="addAmostra(selected[0].id)" class="btn-shadow btn btn-info"
               *ngIf="laudos?.length">
               <fa name="plus-circle"></fa> Inserir Resultados
@@ -159,19 +162,19 @@
 
             <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
               <label class="mb-0 pl-1">Propriedade:</label>
-              <ng-select [items]="propriedades" (change)="changePropriedade()" bindLabel="nm_propriedade" formControlName="propriedade"
+              <ng-select [items]="propriedades" (change)="changeFilter()" bindLabel="nm_propriedade" formControlName="propriedade"
                 name="propriedade" placeholder="Buscar Propriedade...">
               </ng-select>
             </li>
             <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
               <label class="mb-0 pl-1">Recurso:</label>
-              <ng-select [items]="recursos" (change)="changeRecurso()" bindLabel="nm_recurso" formControlName="recurso" name="recurso"
+              <ng-select [items]="recursos" (change)="changeFilter()" bindLabel="nm_recurso" formControlName="recurso" name="recurso"
                 placeholder="Buscar Recurso...">
               </ng-select>
             </li>
             <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
               <label class="mb-0 pl-1">Processo:</label>
-              <ng-select [items]="processos" [virtualScroll]="true" (change)="changeProcesso()" bindLabel="nm_processo" formControlName="processo"
+              <ng-select [items]="processos" [virtualScroll]="true" (change)="changeFilter()" bindLabel="nm_processo" formControlName="processo"
                 name="nm_processo" placeholder="Buscar Processo...">
               </ng-select>
             </li>
