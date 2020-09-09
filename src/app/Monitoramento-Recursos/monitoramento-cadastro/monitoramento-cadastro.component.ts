@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import * as moment from 'moment';
 import { FonteEmissora } from 'src/app/models/fonte-emissora';
 import { Recurso } from 'src/app/models/recurso';
 import { Propriedade } from 'src/app/models/propriedade';
@@ -18,6 +19,7 @@ import { MonitoramentoLaudo } from 'src/app/models/monitoramentoLaudo';
 import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { FilterMonitoramentoRecurso } from 'src/app/models/filter-monitoramento-recurso';
 import { DataService } from 'src/app/services/data.service';
+import { MomentDateFormatter } from 'src/app/_helpers/MomentDateParse';
 
 @Component({
   selector: 'app-monitoramento-cadastro',
@@ -126,6 +128,7 @@ export class MonitoramentoCadastroComponent implements OnInit {
     this.laudo = new MonitoramentoLaudo();
     if (this.filterForm.valid) {
       this.loading = true;
+
       this.monitoramentoRecursoService.create(this.filterForm.value).subscribe(data => {
         this.loading = false;
         this.monitoramentoRecurso = data;
@@ -134,40 +137,20 @@ export class MonitoramentoCadastroComponent implements OnInit {
     }
   }
 
-  editarLaudo() {
-    this.laudo = this.selected;
+  editarLaudo(laudo: any) {
+    this.laudo = new MonitoramentoLaudo();
+    this.laudo.id = laudo.id;
+    this.laudo.monitoramento_id = laudo.monitoramento_id;
+    this.laudo.nm_empresa_responsavel = laudo.nm_empresa_responsavel;
+    this.laudo.nm_monitoramento = laudo.nm_empresa_responsavel;
+    this.laudo.nr_laudo = laudo.nr_laudo;
+    this.laudo.dt_laudo = new Date(moment(laudo.dt_laudo).format("DD/MM/YYYY"));
     this.isAddEdit = true;
   }
 
   changeFilterService() {
     this.data.changeFilter(this.filterForm);
   }
-
- /* editarItem(amostra: MonitoramentoRecurso) {
-    amostra.dt_amostra = moment(amostra.dt_amostra).format('DD/MM/YYYY');
-    const initialState = {
-      amostraGee: amostra,
-      filteGee: this.filterForm.value,
-      MonitoramentoGee: this.mon,
-    };
-    this.modalService.show(AmostraEditarComponent, { initialState, backdrop: 'static', class: 'modal-md'})
-    .content.onClose.subscribe((amostraReturn: MonitoramentoRecursoAmostra) => {
-      amostra = amostraReturn;
-      this.findMonitoramento();
-    });
-  }*/
-
-  /*removerAmostra(amostra: MonitoramentoRecursoAmostra) {
-    this.dialogBox.show('Tem certeza que deseja remover a amostra?', 'Confirm').then((sim) => {
-      if (sim) {
-        this.loading = true;
-        this.amostraGeeService.remover(amostra.id).subscribe(data => {
-          this.loading = false;
-          this.findMonitoramento();
-        }, () => this.loading = false);
-      }
-    });
-  }*/
 
   changeEntidade() {
     this.isAddEdit = false;
@@ -179,6 +162,7 @@ export class MonitoramentoCadastroComponent implements OnInit {
 
   changeFilter() {
     this.rowsLaudo = null;
+    this.laudos = new MonitoramentoLaudo();
     this.monitoramentoRecurso = null;
     this.data.changeFilter(null);
   }
@@ -210,12 +194,23 @@ export class MonitoramentoCadastroComponent implements OnInit {
     this.loading = true;
     this.laudo.monitoramento_id = this.monitoramentoRecurso.id;
 
-    this.monitoramentoRecursoService.createLaudo(this.laudo).subscribe(data => {
+    this.monitoramentoRecursoService[this.laudo.id ? 'editLaudo' : 'createLaudo'](this.laudo).subscribe(data => {
       this.loading = false;
       this.isAddEdit = false;
       this.laudo = new MonitoramentoLaudo();
       this.findLaudos();
     }, () => this.loading = false);
+  }
+
+  removeLaudo(id: any) {
+    this.dialogBox.show('Confirma remoção do Laudo e todos seus Resultados?', 'CONFIRM').then(sim => {
+      if (sim) {
+        this.monitoramentoRecursoService.removeLaudo(id).subscribe(data => {
+          this.dialogBox.show('Laudo removido com sucesso!', 'OK');
+          this.findLaudos();
+        });
+      }
+    });
   }
 
   addAmostra($id: any) {
@@ -259,3 +254,31 @@ export class MonitoramentoCadastroComponent implements OnInit {
   }
 
 }
+
+
+/* editarItem(amostra: MonitoramentoRecurso) {
+    amostra.dt_amostra = moment(amostra.dt_amostra).format('DD/MM/YYYY');
+    const initialState = {
+      amostraGee: amostra,
+      filteGee: this.filterForm.value,
+      MonitoramentoGee: this.mon,
+    };
+    this.modalService.show(AmostraEditarComponent, { initialState, backdrop: 'static', class: 'modal-md'})
+    .content.onClose.subscribe((amostraReturn: MonitoramentoRecursoAmostra) => {
+      amostra = amostraReturn;
+      this.findMonitoramento();
+    });
+  }*/
+
+  /*removerAmostra(amostra: MonitoramentoRecursoAmostra) {
+    this.dialogBox.show('Tem certeza que deseja remover a amostra?', 'Confirm').then((sim) => {
+      if (sim) {
+        this.loading = true;
+        this.amostraGeeService.remover(amostra.id).subscribe(data => {
+          this.loading = false;
+          this.findMonitoramento();
+        }, () => this.loading = false);
+      }
+    });
+  }*/
+

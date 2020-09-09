@@ -14,15 +14,29 @@ import { MonitoramentoRecursoAmostra } from '../models/monitoramentoRecursoAmost
 export class MonitoramentoRecursoService {
 
   constructor(private http: HttpClient, private router: Router) { }
-
+  // MONITORAMENTO
   create(filter: FilterMonitoramentoRecurso): Observable<MonitoramentoRecurso> {
     return this.http.post<MonitoramentoRecurso>(`${environment.baseUrl}/auth/monitoramento`, filter);
   }
 
+  // LAUDO
   createLaudo(laudo: MonitoramentoLaudo): Observable<MonitoramentoLaudo> {
     return this.http.post<MonitoramentoLaudo>(`${environment.baseUrl}/auth/laudo`, laudo);
   }
 
+  editLaudo(laudo: MonitoramentoLaudo): Observable<MonitoramentoLaudo> {
+    return this.http.put<MonitoramentoLaudo>(`${environment.baseUrl}/auth/laudo`, laudo);
+  }
+
+  removeLaudo(id: any) {
+    return this.http.delete(`${environment.baseUrl}/auth/laudo/${id}`);
+  }
+
+  findLaudos(filter: FilterMonitoramentoRecurso): Observable<MonitoramentoRecurso> {
+    return this.http.post<MonitoramentoRecurso>(`${environment.baseUrl}/auth/findlaudos`, filter);
+  }
+
+  // RESULTADO AMOSTRA
   createAmostra(amostra: MonitoramentoRecursoAmostra): Observable<MonitoramentoRecursoAmostra> {
     return this.http.post<MonitoramentoRecursoAmostra>(`${environment.baseUrl}/auth/resultado`, amostra);
   }
@@ -31,8 +45,12 @@ export class MonitoramentoRecursoService {
     return this.http.put<MonitoramentoRecursoAmostra>(`${environment.baseUrl}/auth/resultado`, amostra);
   }
 
-  findLaudos(filter: FilterMonitoramentoRecurso): Observable<MonitoramentoRecurso> {
-    return this.http.post<MonitoramentoRecurso>(`${environment.baseUrl}/auth/findlaudos`, filter);
+  removeResultado(id: any) {
+    return this.http.delete(environment.baseUrl + '/auth/resultado/' + id);
+  }
+
+  findAmostras(id: any): Observable<any> {
+    return this.http.get<MonitoramentoRecursoAmostra>(`${environment.baseUrl}/auth/resultado/${id}`);
   }
 
   findFonte(id: any): Observable<any> {
@@ -43,12 +61,4 @@ export class MonitoramentoRecursoService {
     return this.http.get<MonitoramentoRecurso>(`${environment.baseUrl}/auth/monitoramento/${id}`);
   }
 
-  // AMOSTRAS
-  findAmostras(id: any): Observable<any> {
-    return this.http.get<MonitoramentoRecursoAmostra>(`${environment.baseUrl}/auth/resultado/${id}`);
-  }
-
-  removeResultado(id: any) {
-    return this.http.delete(environment.baseUrl + '/auth/resultado/' + id);
-  }
 }
