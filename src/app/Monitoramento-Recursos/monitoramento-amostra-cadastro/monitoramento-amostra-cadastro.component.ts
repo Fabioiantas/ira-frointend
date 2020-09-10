@@ -7,6 +7,7 @@ import { ParametroService } from 'src/app/services/parametro.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { FilterMonitoramentoRecurso } from 'src/app/models/filter-monitoramento-recurso';
 import { DataService } from 'src/app/services/data.service';
+import { MonitoramentoLaudo } from 'src/app/models/monitoramentoLaudo';
 
 @Component({
   selector: 'app-monitoramento-amostra-cadastro',
@@ -20,6 +21,7 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
   loading: boolean;
   amostras: MonitoramentoRecursoAmostra;
   amostraLaudo: MonitoramentoRecursoAmostra;
+  laudo: MonitoramentoLaudo;
   parametrosList: any[];
   filterM: FilterMonitoramentoRecurso;
 
@@ -45,6 +47,10 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
 
     this.data.currentFilter.subscribe(filter => {
       console.log(filter);
+    });
+
+    this.data.currentLaudo.subscribe(laudo => {
+      this.laudo = laudo;
     });
   }
 

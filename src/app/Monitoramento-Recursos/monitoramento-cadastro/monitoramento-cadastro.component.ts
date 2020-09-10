@@ -213,8 +213,9 @@ export class MonitoramentoCadastroComponent implements OnInit {
     });
   }
 
-  addAmostra($id: any) {
-    this.router.navigate([`/monitoramento/amostra/${$id}`]);
+  addAmostra($laudo: any) {
+    this.data.changeLaudo($laudo);
+    this.router.navigate([`/monitoramento/amostra/${$laudo.id}`]);
   }
 
   findLaudos() {

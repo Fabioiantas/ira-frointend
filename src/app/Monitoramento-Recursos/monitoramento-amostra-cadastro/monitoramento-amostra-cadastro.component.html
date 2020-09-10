@@ -28,8 +28,8 @@
 <section class="content">
   <div class="card-header-tab card-header">
     <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
-      <i class="header-icon lnr-car mr-3 text-muted opacity-6" *ngIf="fonte?.id">
-        nm_fonte_emissao
+      <i class="header-icon lnr-license mr-3 text-muted opacity-6" *ngIf="laudo?.id">
+        {{laudo.nm_monitoramento}}
       </i>
     </div>
   </div>
@@ -95,8 +95,12 @@
       <button (click)="addAmostra()" class="btn btn-primary mb-2 btn-sm">Salvar Resultados</button>
       <button (click)="cancelar()" class="btn btn-danger mb-2 btn-sm">Cancelar</button>
     </div>
-    <div *ngIf="!isAddEdit">
-      <button (click)="inserirResultado()" class="btn btn-success mb-2 btn-sm">Inserir Resultados</button>
+    <div class="btn-actions-pane-right">
+      <!-- <div class="btn-group-sm btn-group" role="group"> -->
+        <div *ngIf="!isAddEdit">
+          <button (click)="inserirResultado()" class="btn btn-success mb-2 btn-sm">Inserir Resultados</button>
+        </div>
+      <!-- </div> -->
     </div>
   </div>
 </section>
@@ -115,6 +119,7 @@
               <th class="text-center qtd-input">Padrão F.</th>
               <th class="text-center qtd-input">Operador</th>
               <th class="text-center qtd-input">Resultado</th>
+              <th class="text-center qtd-input"></th>
               <th class="text-right"></th>
             </tr>
           </thead>
@@ -147,6 +152,10 @@
               <td class="text-center">{{am.nr_padrao_final | number}}</td>
               <td class="text-center">{{am.ds_operador}}</td>
               <td class="text-center">{{am.nr_resultado | number}}</td>
+              <td class="text-center">
+                <div class="badge badge-pill badge-success" *ngIf="am.ds_resultado == 'DENTRO'">{{am.ds_resultado}}</div>
+                <div class="badge badge-pill badge-danger"  *ngIf="am.ds_resultado == 'FORA'">{{am.ds_resultado}}</div>
+              </td>
               <td class="text-right icons">
                 <i class="pe-7s-tools text-primary" (click)="editarItem(am)"></i>
                 <i class="pe-7s-trash text-danger" (click)="removerResultado(am.id)"></i>

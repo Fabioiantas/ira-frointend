@@ -49,7 +49,7 @@
             <button type="button" (click)="removeLaudo(selected[0].id)" class="btn-shadow btn btn-danger" *ngIf="laudos?.length">
               <fa name="trash"></fa> Remover Laudo
             </button>
-            <button type="button" (click)="addAmostra(selected[0].id)" class="btn-shadow btn btn-info"
+            <button type="button" (click)="addAmostra(selected[0])" class="btn-shadow btn btn-info"
               *ngIf="laudos?.length">
               <fa name="plus-circle"></fa> Inserir Resultados
             </button>

@@ -26,4 +26,6 @@ export class MonitoramentoRecursoAmostra {
   nr_peso: number;
   // tslint:disable-next-line:variable-name
   nr_resultado: number;
+  // tslint:disable-next-line:variable-name
+  ds_resultado: string;
 }
