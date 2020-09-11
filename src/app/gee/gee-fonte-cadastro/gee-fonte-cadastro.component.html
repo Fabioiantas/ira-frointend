@@ -47,6 +47,11 @@
         <input name="cd_unidade_padrao" placeholder="UN." type="text" [(ngModel)]="amostraGee.cd_unidade_padrao" onkeyup="this.value = this.value.toUpperCase();">
       </div>
       <div class="col-sm-2 form-group">
+        <label for="qt_quilometragem_total">Km total: </label>
+        <input name="qt_quilometragem_total" (change)="changeQuilometragem()" placeholder="Consumo total" type="number"
+          [(ngModel)]="amostraGee.qt_quilometragem_total">
+      </div>
+      <div class="col-sm-2 form-group">
         <label for="qt_consumo_total">Consumo: </label>
         <input name="qt_consumo_total" placeholder="Consumo total" type="text"
           [(ngModel)]="amostraGee.qt_consumo_total">

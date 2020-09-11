@@ -4,6 +4,7 @@ import { GeeService } from 'src/app/services/gee.service';
 import { DialogBoxService } from 'src/app/_services/dialog-box.service';
 import { EntidadeService } from 'src/app/services/entidade.service';
 import { Entidade } from 'src/app/models/entidade';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-fonte-entidade',
@@ -33,6 +34,7 @@ export class FonteEntidadeComponent implements OnInit {
   constructor(private router: Router,
               private route: ActivatedRoute,
               private geeService: GeeService,
+              private data: DataService,
               private dialogBox: DialogBoxService,
               private entidadeService: EntidadeService) { }
 
@@ -51,7 +53,7 @@ export class FonteEntidadeComponent implements OnInit {
   populaEntidades() {
     this.entidadeService.listaEntidades().subscribe(entidades => {
       this.entidades = entidades;
-    })
+    });
   }
 
   populaTable(id: any) {
@@ -73,13 +75,14 @@ export class FonteEntidadeComponent implements OnInit {
     }
   }
 
-  changeEntidade (){
-    if (this.entidade)
+  changeEntidade() {
+    if (this.entidade) {
       this.populaTable(this.entidade.entidade_id);
+    }
   }
 
-  inserirEmissao(id: any) {
-      this.router.navigate(['/gee/fontes-cadastro/' + id]);
+  inserirEmissao(monitoramento: any) {
+    this.router.navigate(['/gee/fontes-cadastro/' + monitoramento.monitoramento_gee_id]);
   }
 
 }

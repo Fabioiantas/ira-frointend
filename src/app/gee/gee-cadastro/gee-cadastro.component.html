@@ -68,7 +68,38 @@
               <!--adicionar-->
               <div *ngIf="!loading && monitoramentoGee?.id">
 
-                <div class="row mx-md-n5" *ngIf="isAddEdit">
+                <div class="form-row" *ngIf="isAddEdit">
+                  <div class="col-sm-3">
+                    <label for="qt_quilometragem_total">Km total</label>
+                    <input name="qt_quilometragem_total" placeholder="Km" type="text"
+                      [(ngModel)]="amostras.qt_quilometragem_total" (change)="changeQuilometragem()">
+                  </div>
+
+                  <div class="col-sm-3">
+                    <label for="qt_consumo_total">{{amostras.cd_unidade_padrao == "L" ?  "LITROS" : "M³"}}</label>
+                    <input name="qt_consumo_total" placeholder="Consumo total" type="text"
+                      [(ngModel)]="amostras.qt_consumo_total">
+                  </div>
+                  <div class="col-sm-3">
+                    <label for="">Data</label>
+                    <input placeholder="DD/MM/AAAA" [(ngModel)]="amostras.dt_amostra" name="dt_amostra" ngbDatepicker
+                      #d="ngbDatepicker" readonly>
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary fa fa-calendar" (click)="d.toggle()"
+                        type="button"></button>
+                    </div>
+                  </div>
+                  <div class="col-sm-1 py-4 px-sm-0 icon">
+                    <i class="pe-7s-check btn-icon-wrapper text-success" style="font-size: 33px; margin-right: 0px;"
+                      (click)="addItem()"></i>
+                  </div>
+                  <div class="col-sm-1 py-4 px-sm-0 icon">
+                    <i class="pe-7s-close-circle btn-icon-wrapper text-danger hover"
+                      style="font-size: 33px; margin-right: 0px;" (click)="closeEdit()"></i>
+                  </div>
+                </div>
+
+                <!-- <div class="row mx-md-n5" *ngIf="isAddEdit">
                   <div class="col-sm-2 py-3 px-md-5">
                     Km Total
                     <input name="qt_quilometragem_total" placeholder="Km" type="text"
@@ -94,7 +125,7 @@
                     <i class="pe-7s-close-circle btn-icon-wrapper text-danger hover"
                       style="font-size: 33px; margin-right: 0px;" (click)="closeEdit()"></i>
                   </div>
-                </div>
+                </div> -->
 
                 <div class="row">
                   <div class="col-md-12">

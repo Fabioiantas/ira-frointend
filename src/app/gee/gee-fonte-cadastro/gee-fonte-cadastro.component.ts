@@ -72,4 +72,8 @@ export class GeeFonteCadastroComponent implements OnInit {
     }, () => this.loading = false);
   }
 
+  changeQuilometragem() {
+    // this.amostraGee.qt_consumo_total = this.amostraGee.qt_quilometragem_total / this.filterForm.value.fonteEmissao.qt_consumo;
+ }
+
 }
