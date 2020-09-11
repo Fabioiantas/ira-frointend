@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
-import { FilterMonitoramentoRecurso } from '../models/filter-monitoramento-recurso';
 import { FormGroup } from '@angular/forms';
 import { MonitoramentoLaudo } from '../models/monitoramentoLaudo';
-import { FonteEmissao } from '../models/fonteEmissao';
-import { FonteEmissora } from '../models/fonte-emissora';
+import { FontesEntidade } from '../models/fontesEntidade';
 
 @Injectable({
   providedIn: 'root'
@@ -19,9 +17,9 @@ export class DataService {
   public laudoBehavior = new BehaviorSubject(this.laudo);
   currentLaudo = this.laudoBehavior.asObservable();
 
-  public fonteEmissao: FonteEmissao;
-  public fonteEmissaoBehavior = new BehaviorSubject(this.fonteEmissao);
-  curFonteEmissao = this.fonteEmissaoBehavior.asObservable();
+  public fontesEntidade: FontesEntidade;
+  public fontesEntidadeBehavior = new BehaviorSubject(this.fontesEntidade);
+  curFonteEmissao = this.fontesEntidadeBehavior.asObservable();
 
   constructor() { }
 
@@ -33,7 +31,7 @@ export class DataService {
     this.laudoBehavior.next(laudo);
   }
 
-  changeFonteEmissora(fonte: FonteEmissao) {
-    this.fonteEmissaoBehavior.next(fonte);
+  changeFonteEmissao(fontesEntidade: FontesEntidade) {
+    this.fontesEntidadeBehavior.next(fontesEntidade);
   }
 }

@@ -82,7 +82,12 @@ export class FonteEntidadeComponent implements OnInit {
   }
 
   inserirEmissao(monitoramento: any) {
+    this.data.changeFonteEmissao(monitoramento);
     this.router.navigate(['/gee/fontes-cadastro/' + monitoramento.monitoramento_gee_id]);
+  }
+
+  goEntidadesMonitoradas() {
+    this.router.navigate(['/gee'])
   }
 
 }

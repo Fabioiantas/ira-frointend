@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AmostraGee } from 'src/app/models/amostraGee';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { MonitoramentoGeeService } from 'src/app/services/monitoramento-gee.service';
 import { DialogBoxService } from 'src/app/_services/dialog-box.service';
 import { MonitoramentoGee } from 'src/app/models/monitoramentoGee';
 import { AmostraService } from 'src/app/services/amostra.service';
+import { DataService } from 'src/app/services/data.service';
+import { FontesEntidade } from 'src/app/models/fontesEntidade';
 
 @Component({
   selector: 'app-gee-fonte-cadastro',
@@ -17,6 +19,7 @@ export class GeeFonteCadastroComponent implements OnInit {
   amostras: AmostraGee;
   amostraGee: AmostraGee;
   monitoramentoGee: MonitoramentoGee;
+  fontesEntidade: FontesEntidade;
   fonte: any;
   params: any;
   isAddEdit: boolean;
@@ -24,7 +27,9 @@ export class GeeFonteCadastroComponent implements OnInit {
 
   constructor(private amostraGeeService: AmostraService,
               private monitoramentoGeeService: MonitoramentoGeeService,
+              private data: DataService,
               private route: ActivatedRoute,
+              private router: Router,
               private dialogBox: DialogBoxService) { }
 
   ngOnInit() {
@@ -48,9 +53,12 @@ export class GeeFonteCadastroComponent implements OnInit {
   }
 
   findFonte(id: any) {
-    this.monitoramentoGeeService.findFonte(id).subscribe(fonte => {
-      this.fonte = fonte[0];
+    this.data.curFonteEmissao.subscribe(fonte => {
+      this.fontesEntidade = fonte;
     });
+    /*this.monitoramentoGeeService.findFonte(id).subscribe(fonte => {
+      this.fonte = fonte[0];
+    });*/
   }
 
   add() {
@@ -72,8 +80,25 @@ export class GeeFonteCadastroComponent implements OnInit {
     }, () => this.loading = false);
   }
 
+  removerAmostra(amostra: AmostraGee) {
+    this.dialogBox.show('Tem certeza que deseja remover a amostra?', 'Confirm').then((sim) => {
+      if (sim) {
+        this.loading = true;
+        this.amostraGeeService.remover(amostra.id).subscribe(data => {
+          this.loading = false;
+          this.populaTable(this.params.id);
+        }, () => this.loading = false);
+      }
+    });
+  }
+
   changeQuilometragem() {
-    // this.amostraGee.qt_consumo_total = this.amostraGee.qt_quilometragem_total / this.filterForm.value.fonteEmissao.qt_consumo;
+    this.amostraGee.qt_consumo_total = this.amostraGee.qt_quilometragem_total * this.fontesEntidade.qt_consumo;
+ }
+
+ goFontesMonitoradas() {
+  console.log(this.params.id);
+  this.router.navigate(['/gee/fontes/' + this.monitoramentoGee.entidade_id]);
  }
 
 }
