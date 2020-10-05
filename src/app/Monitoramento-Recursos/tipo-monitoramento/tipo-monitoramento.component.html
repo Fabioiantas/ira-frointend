@@ -1,0 +1,58 @@
+<div class="app-page-title app-page-title-simple" style="padding-bottom: 15px;">
+  <div class="page-title-wrapper">
+    <div class="page-title-heading">
+      <div>
+        <div class="page-title-subheading opacity-10">
+          <nav class="" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a [routerLink]="">
+                  <fa name="home"></fa>
+                </a>
+              </li>
+              <li class="breadcrumb-item">
+                Cadastro
+              </li>
+              <li class="active breadcrumb-item" aria-current="page">
+                Tipo Monitoramento
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main content -->
+<section class="content">
+  <div class="card-header-tab card-header">
+    <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i
+        class="header-icon lnr-store mr-3 text-muted opacity-6"></i> Monitoramento</div>
+    <div class="btn-actions-pane-right">
+      <div class="btn-group-sm btn-group" role="group">
+        <a class="btn btn-success" [routerLink]="['/tipomonitoramento/adicionar']">Adicionar</a>
+        <button class="btn btn-primary" type="button" (click)="editar(selected[0].id)">Editar</button>
+        <button class="btn btn-dark" type="button" (click)="remover()">Remover</button>
+      </div>
+    </div>
+  </div>
+  <div class="p-3 bg-white">
+    <div class="form-group form-inline mb-0">
+      <ngx-datatable-filter [margin]="'-6px'" [float]="'left'" [columns]="columnsTipoMonitoramento" [lista]="tipoMonitoramento"
+        [table]="tableTipoMonitoramento"></ngx-datatable-filter>
+    </div>
+  </div>
+
+  <ngx-datatable ngx-resize-watcher class="bootstrap striped" #tableTipoMonitoramento [rows]="rowsTipoMonitoramento" [footerHeight]="25"
+    [columnMode]="'force'" [columns]="columnsTipoMonitoramento" [selected]="selected" [selectionType]="'single'" [rowHeight]="'auto'"
+    (activate)="activate($event)"
+    [messages]="{'emptyMessage': 'Nenhum resultado encontrado...', 'totalMessage': 'total'}" [limit]="5">
+    <ngx-datatable-column name="Nome" prop="nm_fonte_emissora" [flexGrow]="2"></ngx-datatable-column>
+    <ngx-datatable-column name="Descrição" prop="ds_fonte_emissora" [flexGrow]="2"></ngx-datatable-column>
+    <ngx-datatable-column name="Classificação" prop="nm_classificacao" [flexGrow]="2"></ngx-datatable-column>
+    <ngx-datatable-column name="Observações" prop="ds_observacao" [flexGrow]="2"></ngx-datatable-column>
+  </ngx-datatable>
+</section>
+
+

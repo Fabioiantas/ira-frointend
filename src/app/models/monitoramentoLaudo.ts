@@ -5,6 +5,8 @@ export class MonitoramentoLaudo {
   // tslint:disable-next-line:variable-name
   monitoramento_id: BigInteger;
   // tslint:disable-next-line:variable-name
+  tipo_monitoramento_id: BigInteger;
+  // tslint:disable-next-line:variable-name
   nm_empresa_responsavel: string;
   // tslint:disable-next-line:variable-name
   nm_monitoramento: string;

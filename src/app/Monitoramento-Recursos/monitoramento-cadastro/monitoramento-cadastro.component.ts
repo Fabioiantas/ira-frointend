@@ -20,6 +20,9 @@ import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { FilterMonitoramentoRecurso } from 'src/app/models/filter-monitoramento-recurso';
 import { DataService } from 'src/app/services/data.service';
 import { MomentDateFormatter } from 'src/app/_helpers/MomentDateParse';
+import { TipoMonitoramentoCadastroComponent } from '../tipo-monitoramento/tipo-monitoramento-cadastro/tipo-monitoramento-cadastro.component';
+import { TipoMonitoramentoService } from 'src/app/services/tipo-monitoramento.service';
+import { TipoMonitoramento } from 'src/app/models/tipoMonitoramento';
 
 @Component({
   selector: 'app-monitoramento-cadastro',
@@ -53,6 +56,7 @@ export class MonitoramentoCadastroComponent implements OnInit {
   laudos: MonitoramentoLaudo;
   rowsLaudo: any;
   laudo: MonitoramentoLaudo;
+  listTipoMonitoramento: TipoMonitoramento;
   showCombustivel = false;
   isAddEdit = false;
 
@@ -69,6 +73,7 @@ export class MonitoramentoCadastroComponent implements OnInit {
               private monitoramentoRecursoService: MonitoramentoRecursoService,
               private recursoService: RecursoServiceService,
               private processoService: ProcessoAnaliseService,
+              private tipoMonitoramentoService: TipoMonitoramentoService,
               private data: DataService,
               private dialogBox: DialogBoxService,
               private modalService: BsModalService,
@@ -120,6 +125,10 @@ export class MonitoramentoCadastroComponent implements OnInit {
 
     this.processoService.list().subscribe((processo: ProcessoAnalise) => {
       this.processos = processo;
+    });
+
+    this.tipoMonitoramentoService.getList().subscribe(data => {
+      this.listTipoMonitoramento = data;
     });
 
   }
