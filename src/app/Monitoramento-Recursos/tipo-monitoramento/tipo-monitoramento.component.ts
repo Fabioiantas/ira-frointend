@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { TipoMonitoramentoService } from 'src/app/services/tipo-monitoramento.service';
+import { DialogBoxService } from 'src/app/_services/dialog-box.service';
 
 @Component({
   selector: 'app-tipo-monitoramento',
@@ -7,9 +10,57 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TipoMonitoramentoComponent implements OnInit {
 
-  constructor() { }
+  tipoMonitoramento: any = [];
+  selected: any = [];
+  rowsTipoMonitoramento: any[];
+
+  columnsTipoMonitoramento = [
+    {name : 'Númer', prop : 'nr_monitoramento', width : '35%', selecionado: true},
+    {name : 'Recurso', prop : 'nm_recurso', width : '20%', selecionado: false},
+    {name : 'Monitoramento', prop : 'nm_monitoramento', width : '20%', selecionado: false}
+  ];
+
+  constructor(private router: Router,
+              private tipoMonitoramentoService: TipoMonitoramentoService,
+              private dialogBox: DialogBoxService) { }
 
   ngOnInit() {
+    this.populaTable();
+  }
+
+  populaTable() {
+    this.tipoMonitoramentoService.listar().subscribe((response) => {
+      this.tipoMonitoramento = [...response];
+      this.rowsTipoMonitoramento = [...response];
+    });
+  }
+
+  remover() {
+    if (this.selected) {
+      this.dialogBox.show('Confirma remoção do Recurso?', 'CONFIRM').then(sim => {
+        if (sim) {
+          this.tipoMonitoramentoService.remove(this.selected[0].id).subscribe(data => {
+            this.dialogBox.show('Recurso removido com sucesso!', 'OK');
+            this.populaTable();
+          });
+        }
+      });
+    }
+  }
+
+  editar(id) {
+    console.log('editar: ' + id);
+    this.router.navigate(['/recurso/adicionar/' + id]);
+  }
+
+  editarForm(e) {
+    this.editar(this.selected[0].id);
+  }
+
+  activate($event) {
+    if ($event.type === 'dblclick') {
+      this.router.navigate(['/recurso/adicionar/' + $event.row.id]);
+    }
   }
 
 }

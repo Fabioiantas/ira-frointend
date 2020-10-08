@@ -58,6 +58,9 @@ import { ProcessoAnaliseCadastroComponent } from './Monitoramento-Recursos/proce
 import { FonteEmissoraCadastroComponent } from './Monitoramento-Recursos/fonte-emissora/fonte-emissora-cadastro/fonte-emissora-cadastro.component';
 import { MonitoramentoCadastroComponent } from './Monitoramento-Recursos/monitoramento-cadastro/monitoramento-cadastro.component';
 import { MonitoramentoAmostraCadastroComponent } from './Monitoramento-Recursos/monitoramento-amostra-cadastro/monitoramento-amostra-cadastro.component';
+import { TipoMonitoramento } from './models/tipoMonitoramento';
+import { TipoMonitoramentoCadastroComponent } from './Monitoramento-Recursos/tipo-monitoramento/tipo-monitoramento-cadastro/tipo-monitoramento-cadastro.component';
+import { TipoMonitoramentoComponent } from './Monitoramento-Recursos/tipo-monitoramento/tipo-monitoramento.component';
 
 const routes: Routes = [
   {
@@ -519,6 +522,30 @@ const routes: Routes = [
         canActivate: [AuthGuard],
         data: { roles: [Role.Admin], extraParameter: 'mRecursoMenu' }
       }
+    ]
+  },
+  {
+    path: 'tipomonitoramento',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: TipoMonitoramentoComponent,
+        data: { extraParameter: 'mRecursoMenu' },
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'tipomonitoramento/:id',
+        component: TipoMonitoramentoCadastroComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'mRecursoMenu' }
+      }/*,
+      {
+        path: 'amostra/:id',
+        component: MonitoramentoAmostraCadastroComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'mRecursoMenu' }
+      }*/
     ]
   },
 

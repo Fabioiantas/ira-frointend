@@ -28,7 +28,7 @@
 <section class="content">
   <div class="card-header-tab card-header">
     <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i
-        class="header-icon lnr-store mr-3 text-muted opacity-6"></i> Monitoramento</div>
+        class="header-icon lnr-store mr-3 text-muted opacity-6"></i>Tipo Monitoramento</div>
     <div class="btn-actions-pane-right">
       <div class="btn-group-sm btn-group" role="group">
         <a class="btn btn-success" [routerLink]="['/tipomonitoramento/adicionar']">Adicionar</a>
@@ -45,13 +45,16 @@
   </div>
 
   <ngx-datatable ngx-resize-watcher class="bootstrap striped" #tableTipoMonitoramento [rows]="rowsTipoMonitoramento" [footerHeight]="25"
-    [columnMode]="'force'" [columns]="columnsTipoMonitoramento" [selected]="selected" [selectionType]="'single'" [rowHeight]="'auto'"
+    [columnMode]="'force'"
+    [columns]="columnsTipoMonitoramento"
+    [selected]="selected"
+    [selectionType]="'single'"
+    [rowHeight]="'auto'"
     (activate)="activate($event)"
     [messages]="{'emptyMessage': 'Nenhum resultado encontrado...', 'totalMessage': 'total'}" [limit]="5">
-    <ngx-datatable-column name="Nome" prop="nm_fonte_emissora" [flexGrow]="2"></ngx-datatable-column>
-    <ngx-datatable-column name="Descrição" prop="ds_fonte_emissora" [flexGrow]="2"></ngx-datatable-column>
-    <ngx-datatable-column name="Classificação" prop="nm_classificacao" [flexGrow]="2"></ngx-datatable-column>
-    <ngx-datatable-column name="Observações" prop="ds_observacao" [flexGrow]="2"></ngx-datatable-column>
+    <ngx-datatable-column name="Número" prop="nr_monitoramento" [flexGrow]="2"></ngx-datatable-column>
+    <ngx-datatable-column name="Recurso" prop="recurso.nm_recurso" [flexGrow]="2"></ngx-datatable-column>
+    <ngx-datatable-column name="Monitoramento" prop="nm_monitoramento" [flexGrow]="2"></ngx-datatable-column>
   </ngx-datatable>
 </section>
 

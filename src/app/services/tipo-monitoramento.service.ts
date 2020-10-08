@@ -16,4 +16,21 @@ export class TipoMonitoramentoService {
   getList(): Observable<any> {
     return this.http.get<TipoMonitoramento>(`${environment.baseUrl}/auth/tipomonilist`);
   }
+
+  listar(): any {
+    return this.http.get(`${environment.baseUrl}/auth/tipomonilista`);
+  }
+
+  add(tipoMonitoramento: TipoMonitoramento) {
+
+    return this.http.post<any>(environment.baseUrl + '/auth/tipomonitoramento', tipoMonitoramento);
+  }
+
+  remove(id) {
+    return this.http.delete(environment.baseUrl + '/auth/tipomonitoramento/' + id);
+  }
+
+  edit(recurso: TipoMonitoramento) {
+    return this.http.put(`${environment.baseUrl}/auth/tipomonitoramento`, recurso);
+  }
 }
