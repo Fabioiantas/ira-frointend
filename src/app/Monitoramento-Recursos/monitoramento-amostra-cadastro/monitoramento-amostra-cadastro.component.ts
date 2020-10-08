@@ -85,14 +85,13 @@ populaParametros() {
   }
 
   addAmostra() {
-    if (!this.amostraLaudo.cd_unidade_padrao || !this.amostraLaudo.parametro_id ||
-      !this.amostraLaudo.ds_operador || !this.amostraLaudo.nr_padrao_inicial) {
-      return this.dialogBox.show('É nescessário preencher todos os campos', 'Warning');
+    if (!this.amostraLaudo.nr_amostra || !this.amostraLaudo.dt_amostra) {
+      return this.dialogBox.show('É nescessário preencher o número e data da amostra', 'Warning');
     }
     this.loading = true;
     this.amostraLaudo.monitoramento_laudo_id = this.params.id;
 
-    this.monitoramentoService[this.amostraLaudo.id ? 'editResutladoLaudo' : 'createAmostra'](this.amostraLaudo).subscribe(data => {
+    this.monitoramentoService[this.amostraLaudo.id ? 'editAmostraLaudo' : 'createAmostra'](this.amostraLaudo).subscribe(data => {
       this.loading = false;
       this.isAddEdit = false;
       this.amostraLaudo = new MonitoramentoRecursoAmostra();
@@ -101,10 +100,10 @@ populaParametros() {
   }
 
   removerResultado(id: any){
-    this.dialogBox.show('Confirma remoção do Resultado?', 'CONFIRM').then(sim => {
+    this.dialogBox.show('Confirma remoção da Amostra e todos seus resultados?', 'CONFIRM').then(sim => {
       if (sim) {
         this.monitoramentoService.removeResultado(id).subscribe(data => {
-          this.dialogBox.show('Resultado removido com sucesso!', 'OK');
+          this.dialogBox.show('Amostra removida com sucesso!', 'OK');
           this.populaTable(this.params.id);
         });
       }

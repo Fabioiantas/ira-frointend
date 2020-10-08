@@ -38,11 +38,11 @@ export class MonitoramentoRecursoService {
 
   // RESULTADO AMOSTRA
   createAmostra(amostra: MonitoramentoRecursoAmostra): Observable<MonitoramentoRecursoAmostra> {
-    return this.http.post<MonitoramentoRecursoAmostra>(`${environment.baseUrl}/auth/resultado`, amostra);
+    return this.http.post<MonitoramentoRecursoAmostra>(`${environment.baseUrl}/auth/amostralaudo`, amostra);
   }
 
-  editResutladoLaudo(amostra: MonitoramentoRecursoAmostra): Observable<MonitoramentoRecursoAmostra> {
-    return this.http.put<MonitoramentoRecursoAmostra>(`${environment.baseUrl}/auth/resultado`, amostra);
+  editAmostraLaudo(amostra: MonitoramentoRecursoAmostra): Observable<MonitoramentoRecursoAmostra> {
+    return this.http.put<MonitoramentoRecursoAmostra>(`${environment.baseUrl}/auth/amostralaudo`, amostra);
   }
 
   removeResultado(id: any) {
@@ -50,7 +50,7 @@ export class MonitoramentoRecursoService {
   }
 
   findAmostras(id: any): Observable<any> {
-    return this.http.get<MonitoramentoRecursoAmostra>(`${environment.baseUrl}/auth/resultado/${id}`);
+    return this.http.get<MonitoramentoRecursoAmostra>(`${environment.baseUrl}/auth/amostraslaudo/${id}`);
   }
 
   findFonte(id: any): Observable<any> {

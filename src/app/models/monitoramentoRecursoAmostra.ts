@@ -1,31 +1,8 @@
 export class MonitoramentoRecursoAmostra {
   id: BigInteger;
-  // tslint:disable-next-line:variable-name
   monitoramento_laudo_id: BigInteger;
-  // tslint:disable-next-line:variable-name
   nr_sequencia_amostra: BigInteger;
-  // tslint:disable-next-line:variable-name
+  nr_amostra: BigInteger;
+  ds_amostra: String;
   dt_amostra: Date;
-  // tslint:disable-next-line:variable-name
-  tipo_recurso_id: BigInteger;
-  // tslint:disable-next-line:variable-name
-  fonte_emissora_id: BigInteger;
-  // tslint:disable-next-line:variable-name
-  parametro_id: BigInteger;
-  // tslint:disable-next-line:variable-name
-  sg_parametro: string;
-  // tslint:disable-next-line:variable-name
-  cd_unidade_padrao: string;
-  // tslint:disable-next-line:variable-name
-  nr_padrao_inicial: number;
-  // tslint:disable-next-line:variable-name
-  nr_padrao_final: number;
-  // tslint:disable-next-line:variable-name
-  ds_operador: string;
-  // tslint:disable-next-line:variable-name
-  nr_peso: number;
-  // tslint:disable-next-line:variable-name
-  nr_resultado: number;
-  // tslint:disable-next-line:variable-name
-  ds_resultado: string;
 }
