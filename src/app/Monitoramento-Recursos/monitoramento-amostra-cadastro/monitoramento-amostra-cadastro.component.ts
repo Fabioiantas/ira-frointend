@@ -8,6 +8,7 @@ import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { FilterMonitoramentoRecurso } from 'src/app/models/filter-monitoramento-recurso';
 import { DataService } from 'src/app/services/data.service';
 import { MonitoramentoLaudo } from 'src/app/models/monitoramentoLaudo';
+import { ResultadoAmostra } from 'src/app/models/resultadoAmostra';
 
 @Component({
   selector: 'app-monitoramento-amostra-cadastro',
@@ -21,6 +22,7 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
   loading: boolean;
   amostras: MonitoramentoRecursoAmostra;
   amostraLaudo: MonitoramentoRecursoAmostra;
+  resultadoAmostra: ResultadoAmostra;
   laudo: MonitoramentoLaudo;
   parametrosList: any[];
   filterM: FilterMonitoramentoRecurso;
@@ -99,7 +101,7 @@ populaParametros() {
     }, () => this.loading = false);
   }
 
-  removerResultado(id: any){
+  removerAmostra(id: any){
     this.dialogBox.show('Confirma remoção da Amostra e todos seus resultados?', 'CONFIRM').then(sim => {
       if (sim) {
         this.monitoramentoService.removeResultado(id).subscribe(data => {
@@ -110,6 +112,21 @@ populaParametros() {
     });
 
 
+  }
+
+  getResultadoAmostra(id: any) {
+    this.monitoramentoService.getResultadoAmostra(id).subscribe(resultadoAmostra => {
+      this.resultadoAmostra = resultadoAmostra;
+      this.add();
+    });
+  }
+
+  add() {
+    this.isAddEdit = true;
+  }
+
+  closeEdit() {
+    this.isAddEdit = false;
   }
 
   monitoramento() {

@@ -47,8 +47,7 @@
           <input class="form-control form-control-sm" placeholder="DD/MM/AAAA" [(ngModel)]="amostraLaudo.dt_amostra"
             name="dt_amostra" ngbDatepicker #d="ngbDatepicker">
           <div class="input-group-append">
-            <button class="btn btn-outline-secondary fa fa-calendar btn-sm" (click)="d.toggle()"
-              type="button"></button>
+            <button class="btn btn-outline-secondary fa fa-calendar btn-sm" (click)="d.toggle()" type="button"></button>
           </div>
         </div>
       </div>
@@ -65,23 +64,23 @@
     </div>
     <div class="btn-actions-pane-right">
       <!-- <div class="btn-group-sm btn-group" role="group"> -->
-        <div *ngIf="!isAddEdit">
-          <button (click)="inserirResultado()" class="btn btn-success mb-2 btn-sm">Inserir Amostra</button>
-        </div>
+      <div *ngIf="!isAddEdit">
+        <button (click)="inserirResultado()" class="btn btn-success mb-2 btn-sm">Inserir Amostra</button>
+      </div>
       <!-- </div> -->
     </div>
   </div>
 </section>
 <section class="content">
-  <div class="row">
+  <div *ngIf="!isAddEdit" class="row">
     <div class="col-md-12">
       <div class="table-responsive" style="min-height: 500px;">
         <table class="align-middle mb-0 table table-borderless table-striped table-hover">
           <thead>
             <tr [ngClass]="{'table-active': !isAddEdit}">
               <th class="text-center" width="3%"></th>
-              <th class="text-left"   width="7%">N° Amostra</th>
-              <th class="text-left"   width="10%">Data</th>
+              <th class="text-left" width="7%">N° Amostra</th>
+              <th class="text-left" width="10%">Data</th>
               <th class="text-left">Informações</th>
               <th class="text-center" width="10%">Editar Amostra</th>
               <th class="text-center" width="10%">Removar Amostra</th>
@@ -93,9 +92,6 @@
             <tr *ngIf="!amostras?.length">
               <td colspan="12" class="text-center">
                 <h6 class="mt-3">Nenhuma amostra adicionada</h6>
-                <!-- <button *ngIf="!isAddEdit" class="mb-2 mr-2 mt-3 btn-icon btn-pill btn btn-outline-success"
-                  style="margin-right: 7px;" (click)="add()"><i
-                    class="pe-7s-check btn-icon-wrapper"></i>Inserir</button> -->
               </td>
             </tr>
 
@@ -109,10 +105,10 @@
                 <i class="pe-7s-tools text-primary" (click)="editarItem(am)"></i>
               </td>
               <td class="text-center icons">
-                <i class="pe-7s-trash text-danger" (click)="removerResultado(am.id)"></i>
+                <i class="pe-7s-trash text-danger" (click)="removerAmostra(am.id)"></i>
               </td>
               <td class="text-center icons">
-                <i class="pe-7s-plus text-success" (click)="removerResultado(am.id)"></i>
+                <i class="pe-7s-plus text-success" (click)="getResultadoAmostra(am.id)"></i>
               </td>
               <td class="text-center icons">
                 <i class="pe-7s-plus text-success" (click)="removerResultado(am.id)"></i>
@@ -125,65 +121,84 @@
       </div>
     </div>
   </div>
+
+
+  <!--Resultado-->
+  <div *ngIf="isAddEdit">
+    <div class="row mt-4 mb-2">
+      <div class="col-sm-12">
+        <h5 class="card-title ml-1">Resultado Parâmetros</h5>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table-responsive" style="min-height: 500px;">
+          <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+            <thead>
+              <tr [ngClass]="{'table-active': !isAddEdit}">
+                <th class="text-center"></th>
+                <th>Parâmetro</th>
+                <th class="text-center qtd-input">UN.</th>
+                <th class="text-center">Padrão Inicial</th>
+                <th class="text-center">Padrão Final</th>
+                <th class="text-center">Operador</th>
+                <th class="text-center">Resultado</th>
+                <th class="text-right"></th>
+              </tr>
+            </thead>
+            <tbody>
+
+              <tr class="table-active" *ngIf="isAddEdit">
+                <td class="text-center text-muted icons">
+                  <i class="pe-7s-close btn-icon-wrapper text-danger" style="font-size: 43px; margin-right: 0px;"
+                    (click)="closeEdit()"></i>
+                </td>
+
+                <td class="text-center align-middle">
+                  <input class="form-control" name="text" placeholder="Resultado" type="text"
+                    [(ngModel)]="resultadoAmostra.nr_resultado">
+                </td>
+                <td class="text-center">
+                  106
+                </td>
+                <td class="text-center icons">
+                  <i class="pe-7s-check btn-icon-wrapper text-success" style="font-size: 33px; margin-right: 0px;"
+                    (click)="addItem()"></i>
+                </td>
+                <td class="text-right icons"></td>
+              </tr>
+
+              <tr *ngFor="let item of resultadoAmostra; let i = index">
+                <td class="text-center text-muted">{{i+1}}</td>
+                <td>
+                  <div class="widget-content p-0">
+                    <div class="widget-content-wrapper">
+                      <div class="widget-content-left flex2">
+                        <div class="widget-heading">{{item.parametro_id}}</div>
+                        <div class="widget-subheading opacity-7">Parametro</div>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td class="text-center">{{item.cd_unidade_padrao}}</td>
+                <td class="text-center">{{item.nr_padrao_inicial}}</td>
+                <td class="text-center">{{item.nr_padrao_final}}</td>
+                <td class="text-center">{{item.ds_operador}}</td>
+                <td class="text-center">{{item.nr_resultado}}</td>
+
+                <td class="text-right icons">
+                  <i (click)="add()" *ngIf="!isAddEdit && i==0" class="pe-7s-plus text-success touch"></i>
+                  <i class="pe-7s-tools text-primary" (click)="editarItem(item)"></i>
+                  <i class="pe-7s-trash text-danger" (click)="removerItem(item)"></i>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+          <div class="divider"></div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
-
-
-
-<!--
-<div class="form-group form-inline mb-0">
-  <div class="col-sm-3">
-    <label for="dt_amostra">Data</label>
-    <input class="form-control form-control-sm" (click)="dt_amostra.toggle()" placeholder="dia/mês/ano"
-      name="dt_amostra" ngbDatepicker [(ngModel)]="amostraLaudo.dt_amostra" #dt_amostra="ngbDatepicker"
-      autocomplete="off" readonly>
-    <button class="btn btn-primary btn-sm" (click)="dt_amostra.toggle()" type="button">
-      <i class="fa fa-calendar"></i>
-    </button>
-  </div>
-
-  <div class="col-sm-3">
-    <label for="parametro_id">Parâmetro</label>
-    <ng-select [items]="parametrosList" bindValue="parametro_id" bindLabel="sg_parametro"
-      [(ngModel)]="amostraLaudo.parametro_id" name="parametro_id" placeholder="Buscar Parâmetro...">
-    </ng-select>
-  </div>
-
-  <div class="col-sm-2">
-    <label for="cd_unidade_padrao">Unidade Consumo</label>
-    <input class="form-control form-control-sm" name="cd_unidade_padrao" placeholder="UN." type="text"
-      [(ngModel)]="amostraLaudo.cd_unidade_padrao" onkeyup="this.value = this.value.toUpperCase();">
-  </div>
-</div>
-
-<div class="form-group form-inline mb-0">
-  <div class="col-sm-2">
-    <label for="nr_padrao_inicial">Padrão Inicial</label>
-    <input class="form-control form-control-sm" name="nr_padrao_inicial" type="number"
-      [(ngModel)]="amostraLaudo.nr_padrao_inicial">
-  </div>
-  <div class="col-sm-2">
-    <label for="nr_padrao_final">Padrão Final</label>
-    <input class="form-control form-control-sm" name="nr_padrao_final" type="number"
-      [(ngModel)]="amostraLaudo.nr_padrao_final">
-  </div>
-  <div class="col-sm-2">
-    <label for="ds_operador">Operador</label>
-
-    <select class="form-control" id="ds_operador" type="select"
-    [(ngModel)]="amostraLaudo.ds_operador" required>
-      <option value="IG">Igual</option>
-      <option value="EN">Entre</option>
-      <option value="MA">Maior que</option>
-      <option value="ME">Menor que</option>
-    </select>
-  </div>
-  <div class="col-sm-2">
-    <label for="nr_resultado">Resultado</label>
-    <input class="form-control form-control-sm" name="nr_resultado" type="number"
-      [(ngModel)]="amostraLaudo.nr_resultado">
-  </div>
-  <div class="col-sm-2 mb--2 icons">
-    <i class="pe-7s-check btn-icon-wrapper text-success" style="font-size: 33px; margin-right: 0px;"
-      (click)="addItem()"></i>
-  </div>
-</div> -->

@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { MonitoramentoRecurso } from '../models/monitoramentoRecurso';
 import { MonitoramentoLaudo } from '../models/monitoramentoLaudo';
 import { MonitoramentoRecursoAmostra } from '../models/monitoramentoRecursoAmostra';
+import { ResultadoAmostra } from '../models/resultadoAmostra';
 
 @Injectable({
   providedIn: 'root'
@@ -46,7 +47,7 @@ export class MonitoramentoRecursoService {
   }
 
   removeResultado(id: any) {
-    return this.http.delete(environment.baseUrl + '/auth/resultado/' + id);
+    return this.http.delete(`${environment.baseUrl}/auth/amostraresultado/${id}`);
   }
 
   findAmostras(id: any): Observable<any> {
@@ -59,6 +60,10 @@ export class MonitoramentoRecursoService {
 
   findById(id: any): Observable<any> {
     return this.http.get<MonitoramentoRecurso>(`${environment.baseUrl}/auth/monitoramento/${id}`);
+  }
+
+  getResultadoAmostra(id: any): Observable<ResultadoAmostra> {
+    return this.http.get<ResultadoAmostra>(`${environment.baseUrl}/auth/getresultadoamostra/${id}`);
   }
 
 }
