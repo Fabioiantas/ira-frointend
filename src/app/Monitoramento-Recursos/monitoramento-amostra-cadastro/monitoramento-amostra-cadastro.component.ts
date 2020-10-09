@@ -19,9 +19,12 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
   fonte: any;
   params: any;
   isAddEdit = false;
+  isAddEditParam = false;
+  isAddEditResult = false;
   loading: boolean;
   amostras: MonitoramentoRecursoAmostra;
   amostraLaudo: MonitoramentoRecursoAmostra;
+  laudoAmostra: any;
   resultadoAmostra: ResultadoAmostra;
   laudo: MonitoramentoLaudo;
   parametrosList: any[];
@@ -53,10 +56,11 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
 
     this.data.currentLaudo.subscribe(laudo => {
       this.laudo = laudo;
+      console.log('laudo: ' + laudo)
     });
   }
 
-inserirResultado() {
+  inserirAmostra() {
   this.isAddEdit = true;
 }
 
@@ -81,8 +85,10 @@ populaParametros() {
   }
 
   populaTable(id: any) {
-    this.monitoramentoService.findAmostras(this.params.id).subscribe(monitoramento => {
-      this.amostras = monitoramento;
+    this.monitoramentoService.findAmostras(this.params.id).subscribe(amostras => {
+      console.log('amostras: ' + amostras);
+      this.laudoAmostra = amostras;
+      this.amostras = amostras.amostras;
     });
   }
 
@@ -117,12 +123,12 @@ populaParametros() {
   getResultadoAmostra(id: any) {
     this.monitoramentoService.getResultadoAmostra(id).subscribe(resultadoAmostra => {
       this.resultadoAmostra = resultadoAmostra;
-      this.add();
+      this.showParametros();
     });
   }
 
-  add() {
-    this.isAddEdit = true;
+  showParametros() {
+    this.isAddEditParam = true;
   }
 
   closeEdit() {
@@ -131,5 +137,9 @@ populaParametros() {
 
   monitoramento() {
     this.router.navigate(['/monitoramento']);
+  }
+
+  showAmostras() {
+    this.isAddEditParam = false;
   }
 }

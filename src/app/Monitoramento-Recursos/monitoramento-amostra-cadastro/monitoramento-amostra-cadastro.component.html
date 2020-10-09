@@ -35,7 +35,7 @@
   </div>
   <div class="p-3 bg-white">
 
-    <div *ngIf="isAddEdit">
+    <div *ngIf="isAddEdit && !isAddEditParam">
       <div class="form-row">
         <div class="form-group col-sm-3">
           <label for="nr_amostra">N° Amostra</label>
@@ -64,22 +64,22 @@
     </div>
     <div class="btn-actions-pane-right">
       <!-- <div class="btn-group-sm btn-group" role="group"> -->
-      <div *ngIf="!isAddEdit">
-        <button (click)="inserirResultado()" class="btn btn-success mb-2 btn-sm">Inserir Amostra</button>
+      <div *ngIf="!isAddEdit && !isAddEditParam">
+        <button (click)="inserirAmostra()" class="btn btn-success mb-2 btn-sm">Inserir Amostra</button>
       </div>
       <!-- </div> -->
     </div>
   </div>
 </section>
 <section class="content">
-  <div *ngIf="!isAddEdit" class="row">
+  <div *ngIf="!isAddEditParam" class="row">
     <div class="col-md-12">
       <div class="table-responsive" style="min-height: 500px;">
         <table class="align-middle mb-0 table table-borderless table-striped table-hover">
           <thead>
             <tr [ngClass]="{'table-active': !isAddEdit}">
               <th class="text-center" width="3%"></th>
-              <th class="text-left" width="7%">N° Amostra</th>
+              <th class="text-left" width="8%">N° Amostra</th>
               <th class="text-left" width="10%">Data</th>
               <th class="text-left">Informações</th>
               <th class="text-center" width="10%">Editar Amostra</th>
@@ -89,11 +89,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngIf="!amostras?.length">
+            <!-- <tr *ngIf="!amostras?.length">
               <td colspan="12" class="text-center">
                 <h6 class="mt-3">Nenhuma amostra adicionada</h6>
               </td>
-            </tr>
+            </tr> -->
 
             <!-- DADOS DA TABLE -->
             <tr *ngFor="let am of amostras; let i = index">
@@ -124,10 +124,13 @@
 
 
   <!--Resultado-->
-  <div *ngIf="isAddEdit">
+  <div *ngIf="isAddEditParam">
     <div class="row mt-4 mb-2">
-      <div class="col-sm-12">
+      <div class="col-sm-2">
         <h5 class="card-title ml-1">Resultado Parâmetros</h5>
+      </div>
+      <div class="col-sm-2">
+          <button (click)="showAmostras()" class="btn btn-outline-secondary mb-2 btn-sm">Ver Amostras</button>
       </div>
     </div>
 
@@ -139,11 +142,11 @@
               <tr [ngClass]="{'table-active': !isAddEdit}">
                 <th class="text-center"></th>
                 <th>Parâmetro</th>
-                <th class="text-center qtd-input">UN.</th>
+                <th class="text-center">UN.</th>
                 <th class="text-center">Padrão Inicial</th>
                 <th class="text-center">Padrão Final</th>
                 <th class="text-center">Operador</th>
-                <th class="text-center">Resultado</th>
+                <th class="text-center qtd-input">Resultado</th>
                 <th class="text-right"></th>
               </tr>
             </thead>
@@ -188,7 +191,7 @@
                 <td class="text-center">{{item.nr_resultado}}</td>
 
                 <td class="text-right icons">
-                  <i (click)="add()" *ngIf="!isAddEdit && i==0" class="pe-7s-plus text-success touch"></i>
+                  <i (click)="showParametros()" *ngIf="!isAddEditResult && i==0" class="pe-7s-plus text-success touch"></i>
                   <i class="pe-7s-tools text-primary" (click)="editarItem(item)"></i>
                   <i class="pe-7s-trash text-danger" (click)="removerItem(item)"></i>
                 </td>

@@ -9,15 +9,15 @@ import { FontesEntidade } from '../models/fontesEntidade';
 })
 export class DataService {
 
-  public filterMonitorameto: FormGroup;
+  public filterMonitorameto: FormGroup = null;
   public filterSourceBehavior = new BehaviorSubject(this.filterMonitorameto);
   currentFilter = this.filterSourceBehavior.asObservable();
 
-  public laudo: MonitoramentoLaudo;
+  public laudo: MonitoramentoLaudo = null;
   public laudoBehavior = new BehaviorSubject(this.laudo);
   currentLaudo = this.laudoBehavior.asObservable();
 
-  public fontesEntidade: FontesEntidade;
+  public fontesEntidade: FontesEntidade = null;
   public fontesEntidadeBehavior = new BehaviorSubject(this.fontesEntidade);
   curFonteEmissao = this.fontesEntidadeBehavior.asObservable();
 
