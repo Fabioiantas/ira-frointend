@@ -37,7 +37,7 @@ export class MonitoramentoRecursoService {
     return this.http.post<MonitoramentoRecurso>(`${environment.baseUrl}/auth/findlaudos`, filter);
   }
 
-  // RESULTADO AMOSTRA
+  // AMOSTRA
   createAmostra(amostra: MonitoramentoRecursoAmostra): Observable<MonitoramentoRecursoAmostra> {
     return this.http.post<MonitoramentoRecursoAmostra>(`${environment.baseUrl}/auth/amostralaudo`, amostra);
   }
@@ -62,8 +62,13 @@ export class MonitoramentoRecursoService {
     return this.http.get<MonitoramentoRecurso>(`${environment.baseUrl}/auth/monitoramento/${id}`);
   }
 
+  // RESULTADO AMOSTRA
   getResultadoAmostra(id: any): Observable<ResultadoAmostra> {
     return this.http.get<ResultadoAmostra>(`${environment.baseUrl}/auth/getresultadoamostra/${id}`);
+  }
+
+  putResultado(resultado: ResultadoAmostra): Observable<ResultadoAmostra> {
+    return this.http.put<ResultadoAmostra>(`${environment.baseUrl}/auth/resultado`, resultado);
   }
 
 }

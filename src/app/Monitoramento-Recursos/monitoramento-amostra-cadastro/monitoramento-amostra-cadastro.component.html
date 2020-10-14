@@ -108,7 +108,7 @@
                 <i class="pe-7s-trash text-danger" (click)="removerAmostra(am.id)"></i>
               </td>
               <td class="text-center icons">
-                <i class="pe-7s-plus text-success" (click)="getResultadoAmostra(am.id)"></i>
+                <i class="pe-7s-plus text-success" (click)="getResultadoAmostra(am)"></i>
               </td>
               <td class="text-center icons">
                 <i class="pe-7s-plus text-success" (click)="removerResultado(am.id)"></i>
@@ -130,14 +130,84 @@
         <h5 class="card-title ml-1">Resultado Parâmetros</h5>
       </div>
       <div class="col-sm-2">
-          <button (click)="showAmostras()" class="btn btn-outline-secondary mb-2 btn-sm">Ver Amostras</button>
+        <button (click)="showAmostras()" class="btn btn-outline-secondary mb-2 btn-sm">Ver Amostras</button>
       </div>
     </div>
 
     <div class="row">
       <div class="col-md-12">
         <div class="table-responsive" style="min-height: 500px;">
-          <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+
+          <!-- Editable table -->
+          <div class="card">
+            <h3 class="text-center font-weight-bold text-uppercase py-4">Amostra N:</h3>
+            <div class="card-body">
+              <div id="table" class="table-editable">
+                <span class="table-add float-right mb-3 mr-2">
+                  <a class="text-success" (click)="add()">
+                    <mdb-icon fas icon="plus" size="2x"></mdb-icon>
+                  </a>
+                </span>
+                <table class="table table-bordered table-responsive-md table-striped text-center">
+                  <tr>
+                    <th class="text-center"></th>
+                    <th>Parâmetro</th>
+                    <th class="text-center">UN.</th>
+                    <th class="text-center">Padrão Inicial</th>
+                    <th class="text-center">Padrão Final</th>
+                    <th class="text-center">Operador</th>
+                    <th class="text-center qtd-input">Resultado</th>
+                    <th class="text-right"></th>
+                  </tr>
+                  <tr *ngFor="let item of resultadoAmostra; let id = index">
+                    <td>{{id}}</td>
+                    <td>
+                      <span>{{item.parametro_id}}</span>
+                    </td>
+                    <td>
+                      <span>{{item.cd_unidade_padrao}}</span>
+                    </td>
+                    <td>
+                      <span>{{item.nr_padrao_inicial}}</span>
+                    </td>
+                    <td>
+                      <span>{{item.nr_padrao_final}}</span>
+                    </td>
+                    <td>
+                      <span>{{item.ds_operador}}</span>
+                    </td>
+                    <td>
+                      <span contenteditable="true" (keyup)="changeValue($event)"
+                        (blur)="updateResultado(item, $event)">{{item.nr_resultado}}</span>
+                    </td>
+
+                    <td>
+                      <span class="table-remove">
+                        <button type="button" mdbBtn color="danger" rounded="true" size="sm" class="my-0"
+                          (click)="remove(id)">Remove</button>
+                      </span>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <!-- Editable table -->
+
+
+          <div class="divider"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+<!-- <table class="align-middle mb-0 table table-borderless table-striped table-hover">
             <thead>
               <tr [ngClass]="{'table-active': !isAddEdit}">
                 <th class="text-center"></th>
@@ -152,7 +222,7 @@
             </thead>
             <tbody>
 
-              <tr class="table-active" *ngIf="isAddEdit">
+              <tr class="table-active" *ngIf="isAddEditResult">
                 <td class="text-center text-muted icons">
                   <i class="pe-7s-close btn-icon-wrapper text-danger" style="font-size: 43px; margin-right: 0px;"
                     (click)="closeEdit()"></i>
@@ -161,9 +231,6 @@
                 <td class="text-center align-middle">
                   <input class="form-control" name="text" placeholder="Resultado" type="text"
                     [(ngModel)]="resultadoAmostra.nr_resultado">
-                </td>
-                <td class="text-center">
-                  106
                 </td>
                 <td class="text-center icons">
                   <i class="pe-7s-check btn-icon-wrapper text-success" style="font-size: 33px; margin-right: 0px;"
@@ -188,20 +255,18 @@
                 <td class="text-center">{{item.nr_padrao_inicial}}</td>
                 <td class="text-center">{{item.nr_padrao_final}}</td>
                 <td class="text-center">{{item.ds_operador}}</td>
-                <td class="text-center">{{item.nr_resultado}}</td>
+                <td *ngIf="!isAddEditResult" class="text-center">{{item.nr_resultado}}</td>
+                <td *ngIf="isAddEditResult" class="text-center align-middle">
+                  <input class="form-control" name="text" placeholder="Resultado" type="text"
+                    [(ngModel)]="resultadoAmostra.nr_resultado">
+                </td>
 
-                <td class="text-right icons">
-                  <i (click)="showParametros()" *ngIf="!isAddEditResult && i==0" class="pe-7s-plus text-success touch"></i>
+                <td *ngIf="!isAddEditResult" class="text-right icons">
+                  <i (click)="editResultado()" *ngIf="!isAddEditResult" class="pe-7s-plus text-success touch"></i>
                   <i class="pe-7s-tools text-primary" (click)="editarItem(item)"></i>
                   <i class="pe-7s-trash text-danger" (click)="removerItem(item)"></i>
                 </td>
               </tr>
 
             </tbody>
-          </table>
-          <div class="divider"></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+          </table> -->
