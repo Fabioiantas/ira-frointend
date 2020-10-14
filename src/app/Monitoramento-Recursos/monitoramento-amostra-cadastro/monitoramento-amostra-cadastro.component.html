@@ -28,8 +28,8 @@
 <section class="content">
   <div class="card-header-tab card-header">
     <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
-      <i class="header-icon lnr-license mr-3 text-muted opacity-6" *ngIf="laudo?.id">
-        {{laudo.nm_monitoramento}}
+      <i class="header-icon lnr-license mr-5 text-muted opacity-6" *ngIf="tipoMonitoramento?.id">
+        {{tipoMonitoramento.nm_monitoramento}}
       </i>
     </div>
   </div>
@@ -140,7 +140,6 @@
 
           <!-- Editable table -->
           <div class="card">
-            <h3 class="text-center font-weight-bold text-uppercase py-4">Amostra N:</h3>
             <div class="card-body">
               <div id="table" class="table-editable">
                 <span class="table-add float-right mb-3 mr-2">
@@ -176,15 +175,31 @@
                     <td>
                       <span>{{item.ds_operador}}</span>
                     </td>
-                    <td>
+                    <td *ngIf="!isAddEditResult">
                       <span contenteditable="true" (keyup)="changeValue($event)"
                         (blur)="updateResultado(item, $event)">{{item.nr_resultado}}</span>
                     </td>
+                    <td *ngIf="isAddEditResult" class="text-center">
+                      <div class="form-group">
+                        <input class="form-control form-control-sm" name="ds_amostra" placeholder="Resultado" type="number"
+                        [(ngModel)]="resultadoAmostra[id].nr_resultado" (change)="changeResultado(item)">
+                      </div>
+                    </td>
 
-                    <td>
+                    <td *ngIf="!isAddEditResult">
                       <span class="table-remove">
                         <button type="button" mdbBtn color="danger" rounded="true" size="sm" class="my-0"
-                          (click)="remove(id)">Remove</button>
+                          (click)="editResultado()">Editar</button>
+                      </span>
+                    </td>
+                    <td *ngIf="isAddEditResult">
+                      <span class="table-success">
+                        <button type="button" mdbBtn color="danger" rounded="true" size="sm" class="my-0"
+                          (click)="editResultado()">salvar</button>
+                      </span>
+                      <span class="table-danger">
+                        <button type="button" mdbBtn color="danger" rounded="true" size="sm" class="my-0"
+                          (click)="editResultado()">Cancelar</button>
                       </span>
                     </td>
                   </tr>

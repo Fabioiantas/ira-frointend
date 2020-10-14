@@ -90,7 +90,6 @@ export class MonitoramentoCadastroComponent implements OnInit {
       if (filter) {
         this.filterMonitoramento = filter.value;
       }
-      console.log(this.filterMonitoramento.entidade);
     });
     if (this.filterMonitoramento) {
       this.filterForm = this.formBuilder.group({

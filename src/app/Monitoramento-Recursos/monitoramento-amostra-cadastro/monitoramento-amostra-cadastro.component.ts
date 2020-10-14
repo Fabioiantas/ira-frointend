@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DialogBoxService } from 'src/app/_services/dialog-box.service';
-import { FormBuilder } from '@angular/forms';
+import * as moment from 'moment';
 import { FilterMonitoramentoRecurso } from 'src/app/models/filter-monitoramento-recurso';
 import { DataService } from 'src/app/services/data.service';
 import { MonitoramentoRecursoService } from 'src/app/services/monitoramento-recurso.service';
@@ -24,7 +24,6 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
   isAddEditParam = false;
   isAddEditResult = false;
   loading: boolean;
-  // amostras: MonitoramentoRecursoAmostra;
   tipoMonitoramento: TipoMonitoramento;
   amostras: MonitoramentoRecursoAmostra;
   amostraLaudo: MonitoramentoRecursoAmostra;
@@ -38,6 +37,8 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
   nrAmostra: string;
   dsAmostra: string;
   nrResultadoOld: string;
+  tipoMonitoramentoId: any;
+  changes = false;
 
   constructor(private tipoMonitoramentoService: TipoMonitoramentoService,
               private monitoramentoService: MonitoramentoRecursoService,
@@ -45,64 +46,58 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
               private data: DataService,
               private route: ActivatedRoute,
               private router: Router,
-              private dialogBox: DialogBoxService,
-              private formBuilder: FormBuilder) {
+              private dialogBox: DialogBoxService) {
   }
 
   ngOnInit() {
-    this.populaParametros();
-    this.amostraLaudo = new MonitoramentoRecursoAmostra();
+   // this.populaParametros();
     this.route.params.subscribe(param => {
       this.params = param;
     });
-
     if (this.params.id) {
       this.populaTable(this.params.id);
     }
-
-    // this.data.currentFilter.subscribe(filter => {
-    //   console.log(filter);
-    // });
-
     this.data.currentLaudo.subscribe(laudo => {
       this.laudo = laudo;
-      // console.log('laudo: ' + laudo);
     });
   }
 
   inserirAmostra() {
-  this.isAddEdit = true;
-}
+    this.amostraLaudo = new MonitoramentoRecursoAmostra();
+    this.isAddEdit = true;
+  }
 
-editarItem(resultado: MonitoramentoRecursoAmostra) {
-  this.amostraLaudo = new MonitoramentoRecursoAmostra();
-  this.amostraLaudo = resultado;
-  this.isAddEdit = true;
-}
+  editarItem(resultado: MonitoramentoRecursoAmostra) {
+    this.amostraLaudo = new MonitoramentoRecursoAmostra();
+    this.amostraLaudo.nr_amostra = resultado.nr_amostra;
+    this.amostraLaudo.dt_amostra =  new Date(moment(resultado.dt_amostra).format('DD/MM/YYYY'));
+    this.amostraLaudo.ds_amostra = resultado.ds_amostra;
+    this.isAddEdit = true;
+  }
 
-delete() {
-  // this.monitoramentoService
-}
+  delete() {
+    // this.monitoramentoService
+  }
 
-cancelar() {
-  this.isAddEdit = false;
-}
+  cancelar() {
+    this.isAddEdit = false;
+  }
 
-populaParametros() {
-  this.parametroService.list().subscribe(param => {
-    this.parametrosList = param;
-  });
+  populaParametros() {
+    this.parametroService.list().subscribe(param => {
+      this.parametrosList = param;
+    });
   }
 
   populaTable(id: any) {
-    this.monitoramentoService.findAmostras(this.params.id).subscribe(amostras => {
-      // console.log('amostras: ' + amostras.amostras);
-      this.laudoAmostra = amostras;
-      this.amostras = amostras.amostras;
+    this.monitoramentoService.findAmostras(this.params.id).subscribe(data => {
+      this.amostras = data.amostras;
+      this.laudoAmostra = data;
+      this.tipoMonitoramentoService.getById(this.laudoAmostra.tipo_monitoramento_id).subscribe(data => {
+        this.tipoMonitoramento = data;
+      });
     });
-    this.tipoMonitoramentoService.getById(this.laudoAmostra.tipo_monitoramento_id).subscribe(data => {
-      this.tipoMonitoramento = data;
-    });
+
   }
 
   addAmostra() {
@@ -129,8 +124,6 @@ populaParametros() {
         });
       }
     });
-
-
   }
 
   getResultadoAmostra(amostra: any) {
@@ -161,37 +154,26 @@ populaParametros() {
   editResultado() {
     this.isAddEditResult = true;
   }
-// #####################
+
+
+  // #####################
   changeValue(event: any) {
     this.editField = event.target.textContent;
   }
 
   updateResultado( item, event ) {
-    console.log('item: ' + JSON.stringify(item));
     const index = this.resultadoPost.findIndex((e) => e.id === item.id);
     if (index === -1) {
       item.nr_resultado = event.target.textContent;
-      console.log('item resultado: ' + item);
       this.resultadoPost.push(item);
     } else {
       this.resultadoPost[index].nr_resultado = event.target.textContent;
     }
-    console.log(JSON.stringify(this.resultadoPost));
-}
+  }
 
-  // updateResultado(item: any, event: any) {
-  //   // tslint:disable-next-line:whitespace
-  //   if (this.resultadoPost.length === 0) {
-  //     console.log('len: ' + this.resultadoPost.length);
-  //     this.resultadoPost.push(item);
-  //   } else {
-  //     this.resultadoPost.forEach((value: any, i: any) => {
-  //       this.resultadoPost.includes(item, i) ? this.resultadoPost[i] = item : this.resultadoPost.push(item);
-  //       continue;
-  //     });
-  //   }
-  //   console.log('json' + JSON.stringify(this.resultadoPost));
-  // }
+  changeResultado(item: any) {
+    console.log('changeResultado: ' + JSON.stringify(this.resultadoAmostra));
+  }
 
   oldResultado(event: any) {
     this.nrResultadoOld = event.target.textContent;

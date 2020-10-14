@@ -9,7 +9,7 @@ export class MonitoramentoRecursoAmostra {
   // tslint:disable-next-line:variable-name
   nr_amostra: BigInteger;
   // tslint:disable-next-line:variable-name
-  ds_amostra: string;
+  ds_amostra: Date;
   // tslint:disable-next-line:variable-name
   dt_amostra: Date;
   resultados: ResultadoAmostra;
