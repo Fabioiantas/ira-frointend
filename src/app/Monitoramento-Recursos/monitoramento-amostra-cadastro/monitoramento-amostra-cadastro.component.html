@@ -129,8 +129,17 @@
       <div class="col-sm-2">
         <h5 class="card-title ml-1">Resultado Parâmetros</h5>
       </div>
-      <div class="col-sm-2">
-        <button (click)="showAmostras()" class="btn btn-outline-secondary mb-2 btn-sm">Ver Amostras</button>
+      <div class="btn-actions-pane-right">
+        <div class="btn-group-sm btn-group" role="group">
+          <button (click)="showAmostras()" class="btn btn-outline-secondary mr-2 btn-xs">Ver Amostras</button>
+          <div *ngIf="!isAddEditResultB">
+            <button (click)="editResultado()" class="btn btn-info mr-2 btn-xs">Editar Resultados</button>
+          </div>
+          <div *ngIf="isAddEditResultB">
+            <button (click)="salvarResultado()" class="btn btn-success mr-2 btn-xs">Salvar</button>
+            <button (click)="cancelarResultado()" class="btn btn-danger mr-2 btn-xs">Cancelar</button>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -155,8 +164,8 @@
                     <th class="text-center">Padrão Inicial</th>
                     <th class="text-center">Padrão Final</th>
                     <th class="text-center">Operador</th>
-                    <th class="text-center qtd-input">Resultado</th>
-                    <th class="text-right"></th>
+                    <th class="text-center qtd-input" width="10%">Resultado</th>
+                    <!-- <th class="text-right"></th> -->
                   </tr>
                   <tr *ngFor="let item of resultadoAmostra; let id = index">
                     <td>{{id}}</td>
@@ -176,17 +185,20 @@
                       <span>{{item.ds_operador}}</span>
                     </td>
                     <td *ngIf="!isAddEditResult">
+                      <span>{{item.nr_resultado}}</span>
+                    </td>
+                    <!-- <td *ngIf="!isAddEditResult">
                       <span contenteditable="true" (keyup)="changeValue($event)"
                         (blur)="updateResultado(item, $event)">{{item.nr_resultado}}</span>
-                    </td>
+                    </td> -->
                     <td *ngIf="isAddEditResult" class="text-center">
                       <div class="form-group">
-                        <input class="form-control form-control-sm" name="ds_amostra" placeholder="Resultado" type="number"
-                        [(ngModel)]="resultadoAmostra[id].nr_resultado" (change)="changeResultado(item)">
+                        <input class="form-control form-control-xs text-right" name="nr_resultado" placeholder="Resultado" type="number"
+                        [(ngModel)]="resultadoAmostra[id].nr_resultado">
                       </div>
                     </td>
 
-                    <td *ngIf="!isAddEditResult">
+                    <!-- <td *ngIf="!isAddEditResult">
                       <span class="table-remove">
                         <button type="button" mdbBtn color="danger" rounded="true" size="sm" class="my-0"
                           (click)="editResultado()">Editar</button>
@@ -201,7 +213,7 @@
                         <button type="button" mdbBtn color="danger" rounded="true" size="sm" class="my-0"
                           (click)="editResultado()">Cancelar</button>
                       </span>
-                    </td>
+                    </td> -->
                   </tr>
                 </table>
               </div>

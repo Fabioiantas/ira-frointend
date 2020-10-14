@@ -67,7 +67,7 @@ export class MonitoramentoRecursoService {
     return this.http.get<ResultadoAmostra>(`${environment.baseUrl}/auth/getresultadoamostra/${id}`);
   }
 
-  putResultado(resultado: ResultadoAmostra): Observable<ResultadoAmostra> {
+  putResultado(resultado: any): Observable<ResultadoAmostra> {
     return this.http.put<ResultadoAmostra>(`${environment.baseUrl}/auth/resultado`, resultado);
   }
 

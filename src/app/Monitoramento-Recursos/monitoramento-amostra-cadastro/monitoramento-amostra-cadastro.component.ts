@@ -23,6 +23,7 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
   isAddEdit = false;
   isAddEditParam = false;
   isAddEditResult = false;
+  isAddEditResultB = false;
   loading: boolean;
   tipoMonitoramento: TipoMonitoramento;
   amostras: MonitoramentoRecursoAmostra;
@@ -149,31 +150,52 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
 
   showAmostras() {
     this.isAddEditParam = false;
+    this.isAddEditResultB = false;
   }
 
   editResultado() {
     this.isAddEditResult = true;
+    this.isAddEditResultB = true;
   }
 
+  salvarResultado(){
+    this.monitoramentoService.putResultado(this.resultadoAmostra).subscribe(data => {
+      this.dialogBox.show('Resultado(s) salvo(s) com sucesso!', 'OK');
+    });
+    this.populaTable(this.params.id);
+    this.isAddEditResult = false;
+    this.isAddEditResultB = false;
+  }
+
+  cancelarResultado(){
+    this.isAddEditResult = false;
+    this.isAddEditResultB = false;
+  }
 
   // #####################
-  changeValue(event: any) {
+  /*changeValue(event: any) {
     this.editField = event.target.textContent;
-  }
+  }*/
 
-  updateResultado( item, event ) {
+  /*updateResultado( item: any, $event: any ) {
+    console.log('item: ' + JSON.stringify(item));
+    console.log('resultadoAmostra: ' + JSON.stringify(this.resultadoAmostra));
     const index = this.resultadoPost.findIndex((e) => e.id === item.id);
     if (index === -1) {
-      item.nr_resultado = event.target.textContent;
+      item.nr_resultado = $event.target.textContent;
       this.resultadoPost.push(item);
     } else {
-      this.resultadoPost[index].nr_resultado = event.target.textContent;
+      this.resultadoPost[index].nr_resultado = $event.target.textContent;
     }
   }
 
-  changeResultado(item: any) {
-    console.log('changeResultado: ' + JSON.stringify(this.resultadoAmostra));
-  }
+  changeResultado(id: any, item: any, $event: any) {
+    this.resultadoAmostra[id].nr_resultado = event.target.textContent;
+    console.log('event: ' + $event.target.textContent);
+    console.log('item: ' + JSON.stringify(item));
+    console.log('id: ' + id);
+
+  }*/
 
   oldResultado(event: any) {
     this.nrResultadoOld = event.target.textContent;
