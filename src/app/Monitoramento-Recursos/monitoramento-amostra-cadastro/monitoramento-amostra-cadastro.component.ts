@@ -22,6 +22,11 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
   params: any;
   isAddEdit = false;
   isAddEditParam = false;
+
+  isShowAmostras = false;
+  isShowResultados = false;
+  isEditResultaos = false
+
   isAddEditResult = false;
   isAddEditResultB = false;
   loading: boolean;
@@ -70,6 +75,7 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
 
   editarItem(resultado: MonitoramentoRecursoAmostra) {
     this.amostraLaudo = new MonitoramentoRecursoAmostra();
+    this.amostraLaudo.id = resultado.id;
     this.amostraLaudo.nr_amostra = resultado.nr_amostra;
     this.amostraLaudo.dt_amostra =  new Date(moment(resultado.dt_amostra).format('DD/MM/YYYY'));
     this.amostraLaudo.ds_amostra = resultado.ds_amostra;
@@ -133,6 +139,8 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
     this.monitoramentoService.getResultadoAmostra(amostra.id).subscribe(resultadoAmostra => {
       this.resultadoAmostra = resultadoAmostra;
       this.showParametros();
+      this.isShowResultados = true;
+      this.isShowAmostras = true;
     });
   }
 
@@ -149,13 +157,15 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
   }
 
   showAmostras() {
+    this.isShowResultados = false;
+    this.isShowAmostras = true;
     this.isAddEditParam = false;
     this.isAddEditResultB = false;
   }
 
   editResultado() {
     this.isAddEditResult = true;
-    this.isAddEditResultB = true;
+    //this.isAddEditResultB = true;
   }
 
   salvarResultado() {
