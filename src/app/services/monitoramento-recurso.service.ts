@@ -8,6 +8,7 @@ import { MonitoramentoRecurso } from '../models/monitoramentoRecurso';
 import { MonitoramentoLaudo } from '../models/monitoramentoLaudo';
 import { MonitoramentoRecursoAmostra } from '../models/monitoramentoRecursoAmostra';
 import { ResultadoAmostra } from '../models/resultadoAmostra';
+import { AmostraResultadoParametro } from '../models/amostraResultadoParametro';
 
 @Injectable({
   providedIn: 'root'
@@ -63,8 +64,11 @@ export class MonitoramentoRecursoService {
   }
 
   // RESULTADO AMOSTRA
-  getResultadoAmostra(id: any): Observable<ResultadoAmostra> {
+  /*getResultadoAmostra(id: any): Observable<ResultadoAmostra> {
     return this.http.get<ResultadoAmostra>(`${environment.baseUrl}/auth/getresultadoamostra/${id}`);
+  }*/
+  getResultadoAmostra(id: any): Observable<any> {
+    return this.http.get<any>(`${environment.baseUrl}/auth/getresultadoamostra/${id}`);
   }
 
   putResultado(resultado: any): Observable<ResultadoAmostra> {

@@ -11,6 +11,7 @@ import { MonitoramentoLaudo } from 'src/app/models/monitoramentoLaudo';
 import { ResultadoAmostra } from 'src/app/models/resultadoAmostra';
 import { TipoMonitoramento } from 'src/app/models/tipoMonitoramento';
 import { TipoMonitoramentoService } from 'src/app/services/tipo-monitoramento.service';
+import { AmostraResultadoParametro } from 'src/app/models/amostraResultadoParametro';
 
 @Component({
   selector: 'app-monitoramento-amostra-cadastro',
@@ -34,7 +35,9 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
   amostras: MonitoramentoRecursoAmostra;
   amostraLaudo: MonitoramentoRecursoAmostra;
   laudoAmostra: any;
-  resultadoAmostra: ResultadoAmostra;
+  // resultadoAmostra: ResultadoAmostra;
+  // resultadoAmostra: AmostraResultadoParametro;
+  resultadoAmostra: any[] = [];
   resultadoPost: any[] = [];
   laudo: MonitoramentoLaudo;
   parametrosList: any[];
@@ -169,7 +172,7 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
   }
 
   salvarResultado() {
-    this.monitoramentoService.putResultado(this.resultadoAmostra).subscribe(data => {
+    this.monitoramentoService.putResultado(this.resultadoAmostra['resultados']).subscribe(data => {
       this.dialogBox.show('Resultado(s) salvo(s) com sucesso!', 'OK');
     });
     this.populaTable(this.params.id);
