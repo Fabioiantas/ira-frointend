@@ -33,7 +33,7 @@
       </i>
     </div>
   </div>
-  <div class="p-3 bg-white">
+  <div class="bg-white">
 
     <div *ngIf="isAddEdit && !isAddEditParam">
       <div class="form-row">
@@ -57,18 +57,41 @@
           <input class="form-control form-control-sm" name="ds_amostra" placeholder="Informações da Amostra" type="text"
             [(ngModel)]="amostraLaudo.ds_amostra" onkeyup="this.value = this.value.toUpperCase();">
         </div>
-
       </div>
       <button (click)="addAmostra()" class="btn btn-primary mb-2 btn-sm">Salvar Amostra</button>
       <button (click)="cancelar()" class="btn btn-danger mb-2 btn-sm">Cancelar</button>
     </div>
+
     <div class="btn-actions-pane-right">
       <!-- <div class="btn-group-sm btn-group" role="group"> -->
       <div *ngIf="!isAddEdit && !isAddEditParam">
         <button (click)="inserirAmostra()" class="btn btn-success mb-2 btn-sm">Inserir Amostra</button>
       </div>
+      <button (click)="showAmostras()" class="btn btn-outline-secondary mr-2 btn-xs">Ver Amostras</button>
+          <div *ngIf="!isAddEditResultB">
+            <button (click)="editResultado()" class="btn btn-info mr-2 btn-xs">Editar Resultados</button>
+          </div>
+          <div *ngIf="isAddEditResultB">
+            <button (click)="salvarResultado()" class="btn btn-success mr-2 btn-xs">Salvar</button>
+            <button (click)="cancelarResultado()" class="btn btn-danger mr-2 btn-xs">Cancelar</button>
+          </div>
       <!-- </div> -->
     </div>
+    <div class="row mt-4 mb-2">
+      <div *ngIf="isAddEditParam" class="btn-actions-pane-right">
+        <div class="btn-group-sm btn-group" role="group">
+          <!-- <button (click)="showAmostras()" class="btn btn-outline-secondary mr-2 btn-xs">Ver Amostras</button>
+          <div *ngIf="!isAddEditResultB">
+            <button (click)="editResultado()" class="btn btn-info mr-2 btn-xs">Editar Resultados</button>
+          </div>
+          <div *ngIf="isAddEditResultB">
+            <button (click)="salvarResultado()" class="btn btn-success mr-2 btn-xs">Salvar</button>
+            <button (click)="cancelarResultado()" class="btn btn-danger mr-2 btn-xs">Cancelar</button>
+          </div> -->
+        </div>
+      </div>
+    </div>
+
   </div>
 </section>
 <section class="content">
@@ -125,23 +148,6 @@
 
   <!--Resultado-->
   <div *ngIf="isAddEditParam">
-    <div class="row mt-4 mb-2">
-      <div class="col-sm-2">
-        <h5 class="card-title ml-1">Resultado Parâmetros</h5>
-      </div>
-      <div class="btn-actions-pane-right">
-        <div class="btn-group-sm btn-group" role="group">
-          <button (click)="showAmostras()" class="btn btn-outline-secondary mr-2 btn-xs">Ver Amostras</button>
-          <div *ngIf="!isAddEditResultB">
-            <button (click)="editResultado()" class="btn btn-info mr-2 btn-xs">Editar Resultados</button>
-          </div>
-          <div *ngIf="isAddEditResultB">
-            <button (click)="salvarResultado()" class="btn btn-success mr-2 btn-xs">Salvar</button>
-            <button (click)="cancelarResultado()" class="btn btn-danger mr-2 btn-xs">Cancelar</button>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <div class="row">
       <div class="col-md-12">
@@ -165,7 +171,6 @@
                     <th class="text-center">Padrão Final</th>
                     <th class="text-center">Operador</th>
                     <th class="text-center qtd-input" width="10%">Resultado</th>
-                    <!-- <th class="text-right"></th> -->
                   </tr>
                   <tr *ngFor="let item of resultadoAmostra; let id = index">
                     <td>{{id}}</td>
@@ -193,8 +198,8 @@
                     </td> -->
                     <td *ngIf="isAddEditResult" class="text-center">
                       <div class="form-group">
-                        <input class="form-control form-control-xs text-right" name="nr_resultado" placeholder="Resultado" type="number"
-                        [(ngModel)]="resultadoAmostra[id].nr_resultado">
+                        <input class="form-control form-control-xs text-right" name="nr_resultado"
+                          placeholder="Resultado" type="number" [(ngModel)]="resultadoAmostra[id].nr_resultado">
                       </div>
                     </td>
 

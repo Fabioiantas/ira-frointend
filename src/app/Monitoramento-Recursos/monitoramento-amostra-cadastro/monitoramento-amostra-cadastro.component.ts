@@ -94,8 +94,8 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
     this.monitoramentoService.findAmostras(this.params.id).subscribe(data => {
       this.amostras = data.amostras;
       this.laudoAmostra = data;
-      this.tipoMonitoramentoService.getById(this.laudoAmostra.tipo_monitoramento_id).subscribe(data => {
-        this.tipoMonitoramento = data;
+      this.tipoMonitoramentoService.getById(this.laudoAmostra.tipo_monitoramento_id).subscribe(tipo => {
+        this.tipoMonitoramento = tipo;
       });
     });
 
@@ -158,7 +158,7 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
     this.isAddEditResultB = true;
   }
 
-  salvarResultado(){
+  salvarResultado() {
     this.monitoramentoService.putResultado(this.resultadoAmostra).subscribe(data => {
       this.dialogBox.show('Resultado(s) salvo(s) com sucesso!', 'OK');
     });
@@ -167,7 +167,7 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
     this.isAddEditResultB = false;
   }
 
-  cancelarResultado(){
+  cancelarResultado() {
     this.isAddEditResult = false;
     this.isAddEditResultB = false;
   }
