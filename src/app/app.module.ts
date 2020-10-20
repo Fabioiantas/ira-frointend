@@ -132,6 +132,8 @@ import { MonitoramentoAmostraCadastroComponent } from './Monitoramento-Recursos/
 import { TipoMonitoramentoComponent } from './Monitoramento-Recursos/tipo-monitoramento/tipo-monitoramento.component';
 import { TipoMonitoramentoCadastroComponent } from './Monitoramento-Recursos/tipo-monitoramento/tipo-monitoramento-cadastro/tipo-monitoramento-cadastro.component';
 import { ParametroUnidadeComponent } from './Monitoramento-Recursos/parametro/parametro-unidade/parametro-unidade.component';
+import { MonitoramentoTalhaoComponent } from './Monitoramento-Recursos/monitoramento-talhao/monitoramento-talhao.component';
+import { TalhaoComponent } from './Monitoramento-Recursos/talhao/talhao.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -227,6 +229,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     TipoMonitoramentoComponent,
     TipoMonitoramentoCadastroComponent,
     ParametroUnidadeComponent,
+    MonitoramentoTalhaoComponent,
+    TalhaoComponent,
 
   ],
   imports: [

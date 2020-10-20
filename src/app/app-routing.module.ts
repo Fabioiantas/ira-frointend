@@ -61,6 +61,7 @@ import { MonitoramentoAmostraCadastroComponent } from './Monitoramento-Recursos/
 import { TipoMonitoramento } from './models/tipoMonitoramento';
 import { TipoMonitoramentoCadastroComponent } from './Monitoramento-Recursos/tipo-monitoramento/tipo-monitoramento-cadastro/tipo-monitoramento-cadastro.component';
 import { TipoMonitoramentoComponent } from './Monitoramento-Recursos/tipo-monitoramento/tipo-monitoramento.component';
+import { MonitoramentoTalhaoComponent } from './Monitoramento-Recursos/monitoramento-talhao/monitoramento-talhao.component';
 
 const routes: Routes = [
   {
@@ -524,6 +525,32 @@ const routes: Routes = [
       }
     ]
   },
+  // TALHAOO
+  {
+    path: 'talhao',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: MonitoramentoTalhaoComponent,
+        data: { extraParameter: 'mRecursoMenu' },
+        canActivate: [AuthGuard]
+      }
+      // ,
+      // {
+      //   path: 'monitoramento/:id',
+      //   component: MonitoramentoCadastroComponent,
+      //   canActivate: [AuthGuard],
+      //   data: { roles: [Role.Admin], extraParameter: 'mRecursoMenu' }
+      // },
+      // {
+      //   path: 'amostra/:id',
+      //   component: MonitoramentoAmostraCadastroComponent,
+      //   canActivate: [AuthGuard],
+      //   data: { roles: [Role.Admin], extraParameter: 'mRecursoMenu' }
+      // }
+    ]
+  },
   {
     path: 'tipomonitoramento',
     component: BaseLayoutComponent,
@@ -539,149 +566,9 @@ const routes: Routes = [
         component: TipoMonitoramentoCadastroComponent,
         canActivate: [AuthGuard],
         data: { roles: [Role.Admin], extraParameter: 'mRecursoMenu' }
-      }/*,
-      {
-        path: 'amostra/:id',
-        component: MonitoramentoAmostraCadastroComponent,
-        canActivate: [AuthGuard],
-        data: { roles: [Role.Admin], extraParameter: 'mRecursoMenu' }
-      }*/
-    ]
-  },
-
-// #####################
-  {
-    path: 'campanha',
-    component: BaseLayoutComponent,
-    children: [
-      {
-        path: '',
-        component: CampanhasComponent,
-        data: { extraParameter: 'cadastroMenu' },
-        canActivate: [AuthGuard]
-      },
-      {
-        path: 'adicionar',
-        component: AdicionarCampanhaComponent,
-        canActivate: [AuthGuard],
-        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
-      },
-      {
-        path: 'editar/:id',
-        component: AdicionarCampanhaComponent,
-        canActivate: [AuthGuard],
-        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
-      }
-
-    ]
-  },
-
-  {
-    path: 'produto',
-    component: BaseLayoutComponent,
-    children: [
-      {
-        path: '',
-        component: ProdutoComponent,
-        data: { extraParameter: 'cadastroMenu' },
-        canActivate: [AuthGuard]
-      },
-      {
-        path: 'adicionar',
-        component: AdicionarProdutoComponent,
-        canActivate: [AuthGuard],
-        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
-      },
-      {
-        path: 'editar/:id',
-        component: AdicionarProdutoComponent,
-        canActivate: [AuthGuard],
-        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
-      }
-
-    ]
-  },
-
-  {
-    path: 'produtos-liberados',
-    component: BaseLayoutComponent,
-    children: [
-      {
-        path: '',
-        component: ProdutosLiberadosComponent,
-        data: { extraParameter: 'cadastroMenu' },
-        canActivate: [AuthGuard]
       }
     ]
   },
-
-  {
-    path: 'programacao',
-    component: BaseLayoutComponent,
-    children: [
-      {
-        path: '',
-        component: ProgramacaoComponent,
-        data: { extraParameter: 'programacaoMenu' },
-        canActivate: [AuthGuard]
-      }
-
-    ]
-  },
-
-  {
-    path: 'programacao-pendente',
-    component: BaseLayoutComponent,
-    children: [
-      {
-        path: '',
-        component: ProgramacaoPendenteAnaliseComponent,
-        data: { extraParameter: 'programacaoMenu' },
-        canActivate: [AuthGuard]
-      }
-
-    ]
-  },
-
-  {
-    path: 'usuario',
-    component: BaseLayoutComponent,
-    children: [
-      {
-        path: '',
-        component: UsuarioComponent,
-        data: {roles: [Role.Admin], extraParameter: 'cadastroMenu' },
-        canActivate: [AuthGuard]
-      },
-      {
-        path: 'adicionar',
-        component: AdicionarUsuarioComponent,
-        canActivate: [AuthGuard],
-        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
-      },
-      {
-        path: 'editar/:id',
-        component: AdicionarUsuarioComponent,
-        canActivate: [AuthGuard],
-        data: { roles: [Role.Admin], extraParameter: 'cadastroMenu' }
-      }
-
-    ]
-  },
-
-  {
-    path: 'tecnico',
-    component: BaseLayoutComponent,
-    children: [
-      {
-        path: '',
-        component: TecnicoComponent,
-        data: { extraParameter: 'cadastroMenu' },
-        canActivate: [AuthGuard]
-      }
-    ]
-  },
-
   {
     path: '',
     component: PagesLayoutComponent,
@@ -704,7 +591,7 @@ const routes: Routes = [
 
     ]
   },
-  { path: '**', redirectTo: '' }
+  { path: '**', redirectTo: 'login' }
 ];
 
 @NgModule({
