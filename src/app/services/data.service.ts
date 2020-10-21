@@ -13,6 +13,10 @@ export class DataService {
   public filterSourceBehavior = new BehaviorSubject(this.filterMonitorameto);
   currentFilter = this.filterSourceBehavior.asObservable();
 
+  public filterTalhao: FormGroup = null;
+  public filterTalhaoSourceBehavior = new BehaviorSubject(this.filterTalhao);
+  currentFilterTalhao = this.filterTalhaoSourceBehavior.asObservable();
+
   public laudo: MonitoramentoLaudo = null;
   public laudoBehavior = new BehaviorSubject(this.laudo);
   currentLaudo = this.laudoBehavior.asObservable();
@@ -25,6 +29,10 @@ export class DataService {
 
   changeFilter(filter: FormGroup) {
     this.filterSourceBehavior.next(filter);
+  }
+
+  changeTalhaoFilter(filter: FormGroup) {
+    this.filterTalhaoSourceBehavior.next(filter);
   }
 
   changeLaudo(laudo: MonitoramentoLaudo) {

@@ -34,7 +34,7 @@ export class TalhaoService {
     return this.http.post<any>(environment.baseUrl + '/auth/talhao', talhao);
   }
 
-  remove(id) {
+  remove(id: string) {
     return this.http.delete(environment.baseUrl + '/auth/talhao/' + id);
   }
 

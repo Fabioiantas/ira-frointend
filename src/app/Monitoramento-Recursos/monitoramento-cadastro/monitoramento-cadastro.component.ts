@@ -87,6 +87,7 @@ export class MonitoramentoCadastroComponent implements OnInit {
         this.filterMonitoramento = filter.value;
       }
     });
+
     if (this.filterMonitoramento) {
       this.filterForm = this.formBuilder.group({
         entidade: [this.filterMonitoramento.entidade, Validators.required],

@@ -13,4 +13,8 @@ export class PropriedadeService {
   byEntidade(id: any): any {
     return this.http.get(environment.baseUrl + '/auth/propriedade/' + id);
   }
+
+  getById(id: any): any {
+    return this.http.get(`${environment.baseUrl}/auth/getpropriedade/${id}`);
+  }
 }

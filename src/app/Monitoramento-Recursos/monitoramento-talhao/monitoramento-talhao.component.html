@@ -19,9 +19,8 @@
               [table]="tableTalhao"></ngx-datatable-filter>
               <div class="btn-actions-pane-right">
                 <div class="btn-group-sm btn-group" role="group">
-                  <a class="btn btn-success" [routerLink]="['/talhao/adicionar']">Adicionar</a>
-                  <button class="btn btn-primary" type="button" (click)="editar(selected[0].id)">Editar</button>
-                  <button class="btn btn-primary" type="button" (click)="editar(selected[0].id)">Editar</button>
+                  <button class="btn btn-success" type="button" (click)="addTalhao()">Adicionar</button>
+                  <button class="btn btn-primary" type="button" (click)="editar(selected[0])">Editar</button>
                   <button class="btn btn-dark" type="button" (click)="remover()">Remover</button>
                 </div>
               </div>
@@ -74,7 +73,7 @@
         </form>
       </div>
       <div class="app-inner-layout__sidebar-footer pt-3 pb-3 pl-3 pr-3">
-        <button class="btn-wide btn-pill btn btn-success btn-sm btn-block" (click)="findLaudos()"
+        <button class="btn-wide btn-pill btn btn-success btn-sm btn-block" (click)="findTalhoes()"
           [ladda]="loading">Filtrar</button>
         <button class="btn-wide btn-pill btn btn-danger btn-sm btn-block" (click)="cleanFilter()"
           [ladda]="loadingC">Limpar</button>
