@@ -24,6 +24,7 @@ export class MonitoramentoTalhaoComponent implements OnInit {
   toggleMobileSidebar: any;
 
   talhao: Talhao;
+  rowsTalhao: any;
   model: any;
   searching = false;
   searchFailed = false;
@@ -41,11 +42,10 @@ export class MonitoramentoTalhaoComponent implements OnInit {
   showCombustivel = false;
   isAddEdit = false;
 
-  columnsLaudo = [
-    {name : 'Data', prop : 'dt_laudo', width : '35%', selecionado: true},
-    {name : 'N° Laudo', prop : 'nr_laudo', width : '20%', selecionado: false},
-    {name : 'Empresa', prop : 'nm_empresa_responsavel', width : '20%', selecionado: false},
-    {name : 'Descrição', prop : 'nm_monitoramento', width : '20%', selecionado: false}
+  columnsTalhao = [
+    {name : 'Nome', prop : 'nm_talhao', width : '35%', selecionado: true},
+    {name : 'Area Agricultavel', prop : 'qt_area_agricultavel', width : '20%', selecionado: false},
+    {name : 'Situacao', prop : 'ie_situacao', width : '20%', selecionado: false}
   ];
 
   constructor(private entidadeService: EntidadeService,
@@ -61,24 +61,10 @@ export class MonitoramentoTalhaoComponent implements OnInit {
     this.route.queryParams.subscribe(param => {
       this.params = param;
     });
-
-    // this.data.currentFilter.subscribe(filter => {
-    //   if (filter) {
-    //     this.filterTalhao = filter.value;
-    //   }
-    // });
-    if (this.filterTalhao) {
-      this.filterForm = this.formBuilder.group({
+    this.filterForm = this.formBuilder.group({
         entidade: [this.filterTalhao.entidade, Validators.required],
         propriedade: [this.filterTalhao.propriedade, Validators.required]
-      });
-      this.findLaudos();
-    } else {
-      this.filterForm = this.formBuilder.group({
-        entidade: [null, Validators.required]
-      });
-    }
-
+    });
     this.entidadeService.listaEntidades().subscribe((entidades: Entidade) => {
       this.entidades = entidades;
     });
@@ -136,9 +122,11 @@ export class MonitoramentoTalhaoComponent implements OnInit {
     this.talhao = null;
     if (this.filterForm.valid) {
       this.loading = true;
-      this.talhaoService.findTalhoesPropriedade(this.filterForm.value).subscribe(data => {
+      console.log(JSON.stringify(this.findTalhoes));
+      this.talhaoService.findTalhoesPropriedade(1).subscribe(data => {
         this.loading = false;
         this.talhao = data;
+        this.rowsTalhao = data;
         console.log('tal: ' + this.talhao);
       });
     }

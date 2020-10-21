@@ -18,8 +18,8 @@ export class TalhaoService {
     return this.http.get<Talhao>(`${environment.baseUrl}/auth/tipomonilist`);
   }
 
-  findTalhoesPropriedade(filterTalhao: FilterTalhao) {
-    return this.http.post<any>(environment.baseUrl + '/auth/talhao', filterTalhao);
+  findTalhoesPropriedade(id: number) {
+    return this.http.get<any>(`${environment.baseUrl}/auth/propriedadetalhao/${id}`);
   }
 
   listar(): any {

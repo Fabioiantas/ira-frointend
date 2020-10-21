@@ -9,18 +9,15 @@ import { EntidadeService } from 'src/app/services/entidade.service';
 import { PropriedadeService } from 'src/app/services/propriedade.service';
 import { FonteEmissoraService } from 'src/app/services/fonte-emissora.service';
 import { DialogBoxService } from 'src/app/_services/dialog-box.service';
-import { BsModalService } from 'ngx-bootstrap/modal';
 import { MonitoramentoRecursoService } from 'src/app/services/monitoramento-recurso.service';
 import { MonitoramentoRecurso } from 'src/app/models/monitoramentoRecurso';
 import { ProcessoAnalise } from 'src/app/models/processoAnalise';
 import { RecursoServiceService } from 'src/app/services/recurso-service.service';
 import { ProcessoAnaliseService } from 'src/app/services/processo-analise.service';
 import { MonitoramentoLaudo } from 'src/app/models/monitoramentoLaudo';
-import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FilterMonitoramentoRecurso } from 'src/app/models/filter-monitoramento-recurso';
 import { DataService } from 'src/app/services/data.service';
-import { MomentDateFormatter } from 'src/app/_helpers/MomentDateParse';
-import { TipoMonitoramentoCadastroComponent } from '../tipo-monitoramento/tipo-monitoramento-cadastro/tipo-monitoramento-cadastro.component';
 import { TipoMonitoramentoService } from 'src/app/services/tipo-monitoramento.service';
 import { TipoMonitoramento } from 'src/app/models/tipoMonitoramento';
 
@@ -76,7 +73,6 @@ export class MonitoramentoCadastroComponent implements OnInit {
               private tipoMonitoramentoService: TipoMonitoramentoService,
               private data: DataService,
               private dialogBox: DialogBoxService,
-              private modalService: BsModalService,
               private formBuilder: FormBuilder,
               private router: Router,
               private route: ActivatedRoute) { }
@@ -152,7 +148,7 @@ export class MonitoramentoCadastroComponent implements OnInit {
     this.laudo.nm_empresa_responsavel = laudo.nm_empresa_responsavel;
     this.laudo.nm_monitoramento = laudo.nm_empresa_responsavel;
     this.laudo.nr_laudo = laudo.nr_laudo;
-    this.laudo.dt_laudo = new Date(moment(laudo.dt_laudo).format("DD/MM/YYYY"));
+    this.laudo.dt_laudo = new Date(moment(laudo.dt_laudo).format('DD/MM/YYYY'));
     this.isAddEdit = true;
   }
 
@@ -202,7 +198,7 @@ export class MonitoramentoCadastroComponent implements OnInit {
     this.loading = true;
     this.laudo.monitoramento_id = this.monitoramentoRecurso.id;
 
-    this.monitoramentoRecursoService[this.laudo.id ? 'editLaudo' : 'createLaudo'](this.laudo).subscribe(data => {
+    this.monitoramentoRecursoService[this.laudo.id ? 'editLaudo' : 'createLaudo'](this.laudo).subscribe(() => {
       this.loading = false;
       this.isAddEdit = false;
       this.laudo = new MonitoramentoLaudo();
@@ -213,7 +209,7 @@ export class MonitoramentoCadastroComponent implements OnInit {
   removeLaudo(id: any) {
     this.dialogBox.show('Confirma remoção do Laudo e todos seus Resultados?', 'CONFIRM').then(sim => {
       if (sim) {
-        this.monitoramentoRecursoService.removeLaudo(id).subscribe(data => {
+        this.monitoramentoRecursoService.removeLaudo(id).subscribe(() => {
           this.dialogBox.show('Laudo removido com sucesso!', 'OK');
           this.findLaudos();
         });
@@ -242,7 +238,7 @@ export class MonitoramentoCadastroComponent implements OnInit {
     }
   }
 
-  findAmostras(id: any) {
+  findAmostras() {
    /* this.amostraGeeService.findAmostra(id).subscribe(amostras => {
       this.amostrasGee = amostras;
     });*/

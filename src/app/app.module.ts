@@ -134,6 +134,7 @@ import { TipoMonitoramentoCadastroComponent } from './Monitoramento-Recursos/tip
 import { ParametroUnidadeComponent } from './Monitoramento-Recursos/parametro/parametro-unidade/parametro-unidade.component';
 import { MonitoramentoTalhaoComponent } from './Monitoramento-Recursos/monitoramento-talhao/monitoramento-talhao.component';
 import { TalhaoComponent } from './Monitoramento-Recursos/talhao/talhao.component';
+import { TalhaoCadastroComponent } from './Monitoramento-Recursos/monitoramento-talhao/talhao-cadastro/talhao-cadastro.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -231,6 +232,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ParametroUnidadeComponent,
     MonitoramentoTalhaoComponent,
     TalhaoComponent,
+    TalhaoCadastroComponent,
 
   ],
   imports: [
