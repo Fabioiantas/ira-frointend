@@ -81,7 +81,7 @@
 </section>
 
 <section class="content">
-  <div *ngIf="!isAddEditParam" class="row">
+  <div *ngIf="!isAddEditParam && !isShowTalhao" class="row">
     <div class="col-md-12">
       <div class="table-responsive" style="min-height: 500px;">
         <table class="align-middle mb-0 table table-borderless table-sm table-striped table-hover">
@@ -114,7 +114,7 @@
                 <i class="pe-7s-plus text-success" (click)="getResultadoAmostra(am)"></i>
               </td>
               <td class="text-center icons">
-                <i class="pe-7s-plus text-success" (click)="removerResultado(am.id)"></i>
+                <i class="pe-7s-plus text-success" (click)="getAmostraTalhao(am)"></i>
               </td>
             </tr>
 
@@ -142,7 +142,7 @@
                     <mdb-icon fas icon="plus" size="2x"></mdb-icon>
                   </a>
                 </span>
-                <table class="table table-sm table-bordered table-responsive-md table-striped table-hover text-center">
+                <table  class="table table-sm table-bordered table-responsive-md table-striped table-hover text-center">
                   <tr>
                     <th>Parâmetro</th>
                     <th class="text-center">UN.</th>
@@ -175,6 +175,49 @@
                         <input class="form-control form-control-xs text-right" name="nr_resultado"
                           placeholder="Resultado" type="number" [(ngModel)]="resultadoAmostra.resultados[id].nr_resultado">
                       </div>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+          <!-- Editable table -->
+          <div class="divider"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Talhão-->
+  <div *ngIf="isShowTalhao">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="table-responsive" style="min-height: 500px;">
+
+          <!-- Editable table -->
+          <div class="card">
+            <div class="card-body">
+              <h5 *ngIf="isShowTalhao" class="text-muted pl-1">
+                Amostra n°: {{nrAmostra}} - {{dsAmostra}}
+              </h5>
+              <div id="table" class="table-editable">
+                <span class="table-add float-right mb-3 mr-2">
+                  <a class="text-success" (click)="add()">
+                    <mdb-icon fas icon="plus" size="2x"></mdb-icon>
+                  </a>
+                </span>
+                <table class="table table-sm table-bordered table-responsive-md table-striped table-hover text-center">
+                  <tr>
+                    <th>Nome</th>
+                    <th>Área Agricultavel</th>
+                  </tr>
+
+                  <tr *ngFor="let item of talhoesAmostra; let id = index">
+                    <td>
+                      <span>{{item.talhao.nm_talhao}}</span>
+                    </td>
+                    <td>
+                      <span>{{item.nr_safra}}</span>
                     </td>
                   </tr>
                 </table>

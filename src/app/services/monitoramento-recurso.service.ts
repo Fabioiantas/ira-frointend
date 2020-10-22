@@ -64,15 +64,17 @@ export class MonitoramentoRecursoService {
   }
 
   // RESULTADO AMOSTRA
-  /*getResultadoAmostra(id: any): Observable<ResultadoAmostra> {
-    return this.http.get<ResultadoAmostra>(`${environment.baseUrl}/auth/getresultadoamostra/${id}`);
-  }*/
   getResultadoAmostra(id: any): Observable<any> {
     return this.http.get<any>(`${environment.baseUrl}/auth/getresultadoamostra/${id}`);
   }
 
   putResultado(resultado: any): Observable<ResultadoAmostra> {
     return this.http.put<ResultadoAmostra>(`${environment.baseUrl}/auth/resultado`, resultado);
+  }
+
+  // AMOSTRA TALHÃO
+  getTalhaoByAmostra(id: any): Observable<any> {
+    return this.http.get<any>(`${environment.baseUrl}/auth/amostratalhao/${id}`);
   }
 
 }

@@ -28,6 +28,11 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
   isShowResultados = false;
   isEditResultaos = false
 
+  isShowTalhao = false;
+  isAddEditTalhao = false;
+
+  talhoesAmostra: any[] = [];
+
   isAddEditResult = false;
   isAddEditResultB = false;
   loading: boolean;
@@ -35,8 +40,6 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
   amostras: MonitoramentoRecursoAmostra;
   amostraLaudo: MonitoramentoRecursoAmostra;
   laudoAmostra: any;
-  // resultadoAmostra: ResultadoAmostra;
-  // resultadoAmostra: AmostraResultadoParametro;
   resultadoAmostra: any[] = [];
   resultadoPost: any[] = [];
   laudo: MonitoramentoLaudo;
@@ -147,6 +150,16 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
     });
   }
 
+  getAmostraTalhao(amostra: any) {
+    this.nrAmostra = amostra.nr_amostra;
+    this.dsAmostra =  amostra.ds_amostra;
+    this.isShowTalhao = true;
+    this.isAddEditParam = false;
+    this.monitoramentoService.getTalhaoByAmostra(amostra.id).subscribe(data => {
+      this.talhoesAmostra = data.talhoes;
+    });
+  }
+
   showParametros() {
     this.isAddEditParam = true;
   }
@@ -184,31 +197,6 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
     this.isAddEditResult = false;
     this.isAddEditResultB = false;
   }
-
-  // #####################
-  /*changeValue(event: any) {
-    this.editField = event.target.textContent;
-  }*/
-
-  /*updateResultado( item: any, $event: any ) {
-    console.log('item: ' + JSON.stringify(item));
-    console.log('resultadoAmostra: ' + JSON.stringify(this.resultadoAmostra));
-    const index = this.resultadoPost.findIndex((e) => e.id === item.id);
-    if (index === -1) {
-      item.nr_resultado = $event.target.textContent;
-      this.resultadoPost.push(item);
-    } else {
-      this.resultadoPost[index].nr_resultado = $event.target.textContent;
-    }
-  }
-
-  changeResultado(id: any, item: any, $event: any) {
-    this.resultadoAmostra[id].nr_resultado = event.target.textContent;
-    console.log('event: ' + $event.target.textContent);
-    console.log('item: ' + JSON.stringify(item));
-    console.log('id: ' + id);
-
-  }*/
 
   oldResultado(event: any) {
     this.nrResultadoOld = event.target.textContent;
