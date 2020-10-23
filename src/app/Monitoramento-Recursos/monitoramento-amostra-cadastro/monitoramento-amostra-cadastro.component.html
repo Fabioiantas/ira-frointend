@@ -36,11 +36,14 @@
     <!-- BUUTONS -->
     <div class="btn-actions-pane-right pt-2">
       <div class="btn-group-xs btn-group" role="group">
-        <div *ngIf="!isShowResultados && !isAddEdit">
+        <div *ngIf="!isShowResultados && !isAddEdit && !isShowTalhao">
           <button (click)="inserirAmostra()" class="btn btn-success mb-2 btn-sm">Inserir Amostra</button>
         </div>
-        <div *ngIf="isShowResultados && !isAddEditResult">
+        <div *ngIf="(isShowResultados && !isAddEditResult) || isShowTalhao ">
           <button (click)="showAmostras()" class="btn btn-outline-secondary mr-2 btn-xs">Ver Amostras</button>
+          <button (click)="addAmostraTalhao()" class="btn btn-success mr-2 btn-xs">Inserir Talhão</button>
+        </div>
+        <div *ngIf="(isShowResultados && !isAddEditResult)">
           <button (click)="editResultado()" class="btn btn-info mr-2 btn-xs">Editar Resultados</button>
         </div>
         <div *ngIf="isAddEditResult">

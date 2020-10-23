@@ -30,6 +30,7 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
 
   isShowTalhao = false;
   isAddEditTalhao = false;
+  isAddTalhao = false;
 
   talhoesAmostra: any[] = [];
 
@@ -160,6 +161,10 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
     });
   }
 
+  addAmostraTalhao(){
+    this.isAddTalhao = true;
+  }
+
   showParametros() {
     this.isAddEditParam = true;
   }
@@ -177,6 +182,7 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
     this.isShowAmostras = true;
     this.isAddEditParam = false;
     this.isAddEditResultB = false;
+    this.isShowTalhao = false;
   }
 
   editResultado() {
