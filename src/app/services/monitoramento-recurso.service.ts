@@ -77,4 +77,8 @@ export class MonitoramentoRecursoService {
     return this.http.get<any>(`${environment.baseUrl}/auth/amostratalhao/${id}`);
   }
 
+  getTalhaoByPropriedade(id: any): Observable<any> {
+    return this.http.get<any>(`${environment.baseUrl}/auth/gettalhaobypropriedade/${id}`);
+  }
+
 }

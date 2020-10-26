@@ -80,6 +80,14 @@
       <button (click)="addAmostra()" class="btn btn-primary mb-2 btn-sm">Salvar Amostra</button>
       <button (click)="cancelar()" class="btn btn-danger mb-2 btn-sm">Cancelar</button>
     </div>
+    <div class="form-row" *ngIf="isAddTalhao">
+      <div class="col-md-12 mb-12 form-group">
+        <label for="talhao_id">Talhão</label>
+        <ng-select [items]="listAmostraTalhao" bindValue="talhao_id" bindLabel="nm_talhao"
+          [(ngModel)]="laudo.talhao_id" name="talhao_id" placeholder="Buscar Monitoramento...">
+        </ng-select>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -145,7 +153,7 @@
                     <mdb-icon fas icon="plus" size="2x"></mdb-icon>
                   </a>
                 </span>
-                <table  class="table table-sm table-bordered table-responsive-md table-striped table-hover text-center">
+                <table class="table table-sm table-bordered table-responsive-md table-striped table-hover text-center">
                   <tr>
                     <th>Parâmetro</th>
                     <th class="text-center">UN.</th>
@@ -176,7 +184,8 @@
                     <td *ngIf="isAddEditResult" class="text-center">
                       <div class="form-group">
                         <input class="form-control form-control-xs text-right" name="nr_resultado"
-                          placeholder="Resultado" type="number" [(ngModel)]="resultadoAmostra.resultados[id].nr_resultado">
+                          placeholder="Resultado" type="number"
+                          [(ngModel)]="resultadoAmostra.resultados[id].nr_resultado">
                       </div>
                     </td>
                   </tr>

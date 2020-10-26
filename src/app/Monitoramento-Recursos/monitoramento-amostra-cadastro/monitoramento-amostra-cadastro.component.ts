@@ -8,10 +8,9 @@ import { MonitoramentoRecursoService } from 'src/app/services/monitoramento-recu
 import { MonitoramentoRecursoAmostra } from 'src/app/models/monitoramentoRecursoAmostra';
 import { ParametroService } from 'src/app/services/parametro.service';
 import { MonitoramentoLaudo } from 'src/app/models/monitoramentoLaudo';
-import { ResultadoAmostra } from 'src/app/models/resultadoAmostra';
 import { TipoMonitoramento } from 'src/app/models/tipoMonitoramento';
 import { TipoMonitoramentoService } from 'src/app/services/tipo-monitoramento.service';
-import { AmostraResultadoParametro } from 'src/app/models/amostraResultadoParametro';
+import { AmostraTalhao } from 'src/app/models/amostraTalhao';
 
 @Component({
   selector: 'app-monitoramento-amostra-cadastro',
@@ -26,13 +25,15 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
 
   isShowAmostras = false;
   isShowResultados = false;
-  isEditResultaos = false
+  isEditResultaos = false;
 
   isShowTalhao = false;
   isAddEditTalhao = false;
   isAddTalhao = false;
 
   talhoesAmostra: any[] = [];
+  listAmostraTalhao: any[] = [];
+  amostraTalhao: AmostraTalhao;
 
   isAddEditResult = false;
   isAddEditResultB = false;
@@ -161,9 +162,15 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
     });
   }
 
-  addAmostraTalhao(){
+  addAmostraTalhao() {
     this.isAddTalhao = true;
+    this.amostraTalhao = new AmostraTalhao();
+    // this.monitoramentoService.getTalhaoByPropriedade(this.)
   }
+
+  // getTalhaoByPropriedade() {
+  //   this.monitoramentoService.getTalhaoByPropriedade()
+  // }
 
   showParametros() {
     this.isAddEditParam = true;
@@ -187,10 +194,10 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
 
   editResultado() {
     this.isAddEditResult = true;
-    //this.isAddEditResultB = true;
   }
 
   salvarResultado() {
+    // tslint:disable-next-line:no-string-literal
     this.monitoramentoService.putResultado(this.resultadoAmostra['resultados']).subscribe(data => {
       this.dialogBox.show('Resultado(s) salvo(s) com sucesso!', 'OK');
     });
