@@ -27,7 +27,7 @@
 </div>
 
 <section class="content">
-  <div class="card-header-tab card-header">
+  <div class="card-header">
     <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
       <i class="header-icon lnr-license mr-5 text-muted opacity-6" *ngIf="tipoMonitoramento?.id">
         {{tipoMonitoramento.nm_monitoramento}}
@@ -53,6 +53,13 @@
       </div>
     </div>
   </div>
+  <div *ngIf="monitoramentoRecuso?.entidade && monitoramentoRecuso?.entidade" class="bg-info text-right">
+    <h6 class="mb-0 text-dark title">{{monitoramentoRecuso.entidade.nm_entidade}}</h6>
+      <div class="opacity-7 mt-2">
+        <span class="text-dark">{{monitoramentoRecuso.propriedade.nm_propriedade}}</span>
+      </div>
+  </div>
+  <!-- CARD-HEADER -->
   <div class="bg-white">
     <div *ngIf="isAddEdit && !isAddEditParam">
       <div class="form-row">
@@ -84,7 +91,7 @@
       <div class="col-md-12 mb-12 form-group">
         <label for="talhao_id">Talhão</label>
         <ng-select [items]="listAmostraTalhao" bindValue="talhao_id" bindLabel="nm_talhao"
-          [(ngModel)]="laudo.talhao_id" name="talhao_id" placeholder="Buscar Monitoramento...">
+          [(ngModel)]="amostraTalhao.talhao_id" name="talhao_id" placeholder="Buscar Talhão...">
         </ng-select>
       </div>
     </div>
@@ -223,7 +230,6 @@
                     <th>Nome</th>
                     <th>Área Agricultavel</th>
                   </tr>
-
                   <tr *ngFor="let item of talhoesAmostra; let id = index">
                     <td>
                       <span>{{item.talhao.nm_talhao}}</span>

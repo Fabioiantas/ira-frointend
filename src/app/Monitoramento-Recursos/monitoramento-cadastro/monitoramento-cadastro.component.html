@@ -43,10 +43,12 @@
             <button type="button" (click)="add()" class="btn-shadow btn btn-success" *ngIf="monitoramentoRecurso?.id">
               <fa name="plus-circle"></fa> Novo Laudo
             </button>
-            <button type="button" (click)="editarLaudo(selected[0])" class="btn-shadow btn btn-warning" *ngIf="laudos?.length">
+            <button type="button" (click)="editarLaudo(selected[0])" class="btn-shadow btn btn-warning"
+              *ngIf="laudos?.length">
               <fa name="edit"></fa> Editar Laudo
             </button>
-            <button type="button" (click)="removeLaudo(selected[0].id)" class="btn-shadow btn btn-danger" *ngIf="laudos?.length">
+            <button type="button" (click)="removeLaudo(selected[0].id)" class="btn-shadow btn btn-danger"
+              *ngIf="laudos?.length">
               <fa name="trash"></fa> Remover Laudo
             </button>
             <button type="button" (click)="addAmostra(selected[0])" class="btn-shadow btn btn-info"
@@ -79,11 +81,12 @@
                 <div class="form-row" *ngIf="isAddEdit">
                   <div class="col-md-12 mb-12 form-group">
                     <label for="tipo_monitoramento_id">Tipo Monitoramento</label>
-                    <ng-select [items]="listTipoMonitoramento" bindValue="tipo_monitoramento_id" bindLabel="nm_monitoramento"
-                    [(ngModel)]="laudo.tipo_monitoramento_id" name="tipo_monitoramento_id" placeholder="Buscar Monitoramento...">
-                  </ng-select>
+                    <ng-select [items]="listTipoMonitoramento" bindValue="tipo_monitoramento_id"
+                      bindLabel="nm_monitoramento" [(ngModel)]="laudo.tipo_monitoramento_id"
+                      name="tipo_monitoramento_id" placeholder="Buscar Monitoramento...">
+                    </ng-select>
+                  </div>
                 </div>
-              </div>
 
                 <div class="form-row" *ngIf="isAddEdit">
                   <div class="form-group col-sm-6">
@@ -136,7 +139,8 @@
                       [messages]="{'emptyMessage': 'Nenhum resultado encontrado...', 'totalMessage': 'total'}"
                       [limit]="15">
                       <ngx-datatable-column name="Data" prop="dt_laudo" [width]="50" [flexGrow]="2">
-                        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                        <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value"
+                          let-row="row">
                           {{row.dt_laudo | date:'dd/MM/yyyy' }}
                         </ng-template>
                       </ngx-datatable-column>
@@ -174,20 +178,20 @@
 
             <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
               <label class="mb-0 pl-1">Propriedade:</label>
-              <ng-select [items]="propriedades" (change)="changeFilter()" bindLabel="nm_propriedade" formControlName="propriedade"
-                name="propriedade" placeholder="Buscar Propriedade...">
+              <ng-select [items]="propriedades" (change)="changeFilter()" bindLabel="nm_propriedade"
+                formControlName="propriedade" name="propriedade" placeholder="Buscar Propriedade...">
               </ng-select>
             </li>
             <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
               <label class="mb-0 pl-1">Recurso:</label>
-              <ng-select [items]="recursos" (change)="changeFilter()" bindLabel="nm_recurso" formControlName="recurso" name="recurso"
-                placeholder="Buscar Recurso...">
+              <ng-select [items]="recursos" (change)="changeFilter()" bindLabel="nm_recurso" formControlName="recurso"
+                name="recurso" placeholder="Buscar Recurso...">
               </ng-select>
             </li>
             <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
               <label class="mb-0 pl-1">Processo:</label>
-              <ng-select [items]="processos" [virtualScroll]="true" (change)="changeFilter()" bindLabel="nm_processo" formControlName="processo"
-                name="nm_processo" placeholder="Buscar Processo...">
+              <ng-select [items]="processos" [virtualScroll]="true" (change)="changeFilter()" bindLabel="nm_processo"
+                formControlName="processo" name="nm_processo" placeholder="Buscar Processo...">
               </ng-select>
             </li>
             <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
@@ -210,4 +214,3 @@
     <!--//Sidebar Filter-->
   </div>
 </div>
-

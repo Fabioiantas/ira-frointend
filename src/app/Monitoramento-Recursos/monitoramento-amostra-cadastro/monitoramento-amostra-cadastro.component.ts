@@ -37,22 +37,21 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
 
   isAddEditResult = false;
   isAddEditResultB = false;
+
   loading: boolean;
+
+  monitoramentoRecuso: any;
+
   tipoMonitoramento: TipoMonitoramento;
   amostras: MonitoramentoRecursoAmostra;
   amostraLaudo: MonitoramentoRecursoAmostra;
   laudoAmostra: any;
   resultadoAmostra: any[] = [];
-  resultadoPost: any[] = [];
   laudo: MonitoramentoLaudo;
   parametrosList: any[];
-  filterM: FilterMonitoramentoRecurso;
-  editField: string;
   nrAmostra: string;
   dsAmostra: string;
   nrResultadoOld: string;
-  tipoMonitoramentoId: any;
-  changes = false;
 
   constructor(private tipoMonitoramentoService: TipoMonitoramentoService,
               private monitoramentoService: MonitoramentoRecursoService,
@@ -108,11 +107,14 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
     this.monitoramentoService.findAmostras(this.params.id).subscribe(data => {
       this.amostras = data.amostras;
       this.laudoAmostra = data;
-      this.tipoMonitoramentoService.getById(this.laudoAmostra.tipo_monitoramento_id).subscribe(tipo => {
+      this.tipoMonitoramentoService.getTipoMonitoramentoById(this.laudoAmostra.tipo_monitoramento_id).subscribe(tipo => {
         this.tipoMonitoramento = tipo;
       });
+      this.monitoramentoService.getMonitoramentoById(this.laudoAmostra.monitoramento_id).subscribe(data => {
+        this.monitoramentoRecuso = data;
+        console.log('data ' + JSON.stringify(this.monitoramentoRecuso.entidade));
+      });
     });
-
   }
 
   addAmostra() {
@@ -165,7 +167,10 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
   addAmostraTalhao() {
     this.isAddTalhao = true;
     this.amostraTalhao = new AmostraTalhao();
-    // this.monitoramentoService.getTalhaoByPropriedade(this.)
+    this.monitoramentoService.getTalhaoByPropriedade(1).subscribe(data => {
+      this.listAmostraTalhao = data.talhoes;
+      console.log(JSON.stringify(this.amostraTalhao));
+    });
   }
 
   // getTalhaoByPropriedade() {

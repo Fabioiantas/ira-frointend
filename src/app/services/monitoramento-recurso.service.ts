@@ -16,9 +16,14 @@ import { AmostraResultadoParametro } from '../models/amostraResultadoParametro';
 export class MonitoramentoRecursoService {
 
   constructor(private http: HttpClient, private router: Router) { }
+
   // MONITORAMENTO
   create(filter: FilterMonitoramentoRecurso): Observable<MonitoramentoRecurso> {
     return this.http.post<MonitoramentoRecurso>(`${environment.baseUrl}/auth/monitoramento`, filter);
+  }
+
+  getMonitoramentoById(monitoramentoId: any) {
+    return this.http.get<any>(`${environment.baseUrl}/auth/monitoramentobyid/${monitoramentoId}`);
   }
 
   // LAUDO

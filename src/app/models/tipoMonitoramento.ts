@@ -6,4 +6,5 @@ export class TipoMonitoramento {
   nm_monitoramento: string;
   // tslint:disable-next-line:variable-name
   ds_monitoramento: string;
+  laudos: any;
 }
