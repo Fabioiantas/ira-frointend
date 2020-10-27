@@ -53,16 +53,16 @@
       </div>
     </div>
   </div>
-  <div *ngIf="monitoramentoRecuso?.entidade && monitoramentoRecuso?.entidade" class="bg-white border-info text-left">
+  <div *ngIf="monitoramentoRecuso?.entidade && monitoramentoRecuso?.entidade" class="bg-light border-bottom text-left">
     <div class="row">
       <div class="col-sm-3">
         <i class="lrn lnr-user mr-1 text-dark title">
-          <b>{{monitoramentoRecuso.entidade.nm_reduzido}}</b>
+          <b> {{monitoramentoRecuso.entidade.nm_reduzido}}</b>
         </i>
       </div>
       <div class="col-sm-3">
         <i class="lrn lnr-map mr-1">
-          <b>{{monitoramentoRecuso.propriedade.nm_propriedade}}</b>
+          <b> {{monitoramentoRecuso.propriedade.nm_propriedade}}</b>
           </i>
       </div>
     </div>
@@ -99,7 +99,7 @@
       <div class="form-row">
         <div class="col-md-6 mb-12 form-group">
           <label for="talhao_id">Talhão</label>
-          <ng-select [items]="listAmostraTalhao" bindValue="talhao_id" bindLabel="nm_talhao"
+          <ng-select [items]="listAmostraTalhao" bindValue="id" bindLabel="nm_talhao"
             [(ngModel)]="amostraTalhao.talhao_id" name="talhao_id" placeholder="Buscar Talhão...">
           </ng-select>
         </div>
@@ -154,7 +154,7 @@
                 <i class="pe-7s-plus text-success" (click)="getResultadoAmostra(am)"></i>
               </td>
               <td class="text-center icons">
-                <i class="pe-7s-plus text-success" (click)="getAmostraTalhao(am)"></i>
+                <i class="pe-7s-plus text-success" (click)="ShowAmostraTalhao(am)"></i>
               </td>
             </tr>
 
@@ -173,7 +173,7 @@
           <!-- Editable table -->
           <div class="card">
             <div class="card-body">
-              <h5 *ngIf="isShowAmostras" class="text-muted pl-1">
+              <h5 *ngIf="isShowAmostras || isShowTalhao" class="text-muted pl-1">
                 Amostra n°: {{nrAmostra}} - {{dsAmostra}}
               </h5>
               <div id="table" class="table-editable">
@@ -250,14 +250,18 @@
                 <table class="table table-sm table-bordered table-responsive-md table-striped table-hover text-center">
                   <tr>
                     <th>Nome</th>
-                    <th>Área Agricultavel</th>
+                    <th>Editar</th>
+                    <th>Remover</th>
                   </tr>
                   <tr *ngFor="let item of talhoesAmostra; let id = index">
                     <td>
                       <span>{{item.talhao.nm_talhao}}</span>
                     </td>
-                    <td>
-                      <span>{{item.nr_safra}}</span>
+                    <td class="text-center icons">
+                      <i class="pe-7s-tools text-primary" (click)="editarAmostraTalhao(item)"></i>
+                    </td>
+                    <td class="text-center icons">
+                      <i class="pe-7s-trash text-danger" (click)="removerAmostraTalhao(item.id)"></i>
                     </td>
                   </tr>
                 </table>

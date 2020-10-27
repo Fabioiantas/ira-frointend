@@ -166,19 +166,24 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
     });
   }
 
-  getAmostraTalhao(amostra: any) {
+  ShowAmostraTalhao(amostra: any) {
     this.nrAmostra = amostra.nr_amostra;
     this.dsAmostra =  amostra.ds_amostra;
+    this.amostraTalhao = new AmostraTalhao();
+    this.amostraTalhao.amostra_id = amostra.id;
     this.isShowTalhao = true;
     this.isAddEditParam = false;
-    this.monitoramentoService.getTalhaoByAmostra(amostra.id).subscribe(data => {
+    this.getAmostraTalhao(amostra.id);
+  }
+
+  getAmostraTalhao(id: any) {
+    this.monitoramentoService.getTalhaoByAmostra(id).subscribe(data => {
       this.talhoesAmostra = data.talhoes;
     });
   }
 
   addAmostraTalhao() {
     this.isAddTalhao = true;
-    this.amostraTalhao = new AmostraTalhao();
     this.monitoramentoService.getTalhaoByPropriedade(1).subscribe(data => {
       this.listAmostraTalhao = data.talhoes;
       console.log(JSON.stringify(this.amostraTalhao));
@@ -186,15 +191,16 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
   }
 
   salvarAmostraTalhao() {
-    // this.amostraTalhao.amostra_id = this.amostra;
     this.monitoramentoService.createAmostraTalhao(this.amostraTalhao).subscribe(data => {
-      console.log(JSON.stringify(data));
+      this.dialogBox.show('Talhão adicionado com sucesso!','OK');
+      this.isAddTalhao = false;
+      this.getAmostraTalhao(this.amostraTalhao.amostra_id);
     });
   }
 
-  // getTalhaoByPropriedade() {
-  //   this.monitoramentoService.getTalhaoByPropriedade()
-  // }
+  removerAmostraTalhao() {
+
+  }
 
   showParametros() {
     this.isAddEditParam = true;

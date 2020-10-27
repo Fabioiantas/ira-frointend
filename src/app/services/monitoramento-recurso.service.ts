@@ -88,7 +88,11 @@ export class MonitoramentoRecursoService {
     return this.http.get<any>(`${environment.baseUrl}/auth/gettalhaobypropriedade/${id}`);
   }
 
-  createAmostraTalhao(amostraTalhao: AmostraTalhao) {
+  createAmostraTalhao(amostraTalhao: AmostraTalhao): Observable<any> {
     return this.http.post<any>(`${environment.baseUrl}/auth/amostratalhao`, amostraTalhao);
+  }
+
+  removeAmostraTalhao(id: any): Observable<any> {
+    return this.http.delete(`${environment.baseUrl}/auth/amostraTalhao/${id}`);
   }
 }
