@@ -53,6 +53,18 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
   dsAmostra: string;
   nrResultadoOld: string;
 
+  listSafra = [
+    { nr_safra: 20202020},
+    { nr_safra: 20202021},
+    { nr_safra: 20212021},
+    { nr_safra: 20212022},
+    { nr_safra: 20222022},
+    { nr_safra: 20222023},
+    { nr_safra: 20232023},
+    { nr_safra: 20223024},
+    { nr_safra: 20224024}
+  ];
+
   constructor(private tipoMonitoramentoService: TipoMonitoramentoService,
               private monitoramentoService: MonitoramentoRecursoService,
               private parametroService: ParametroService,
@@ -110,8 +122,8 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
       this.tipoMonitoramentoService.getTipoMonitoramentoById(this.laudoAmostra.tipo_monitoramento_id).subscribe(tipo => {
         this.tipoMonitoramento = tipo;
       });
-      this.monitoramentoService.getMonitoramentoById(this.laudoAmostra.monitoramento_id).subscribe(data => {
-        this.monitoramentoRecuso = data;
+      this.monitoramentoService.getMonitoramentoById(this.laudoAmostra.monitoramento_id).subscribe(monitoramentoRecuso => {
+        this.monitoramentoRecuso = monitoramentoRecuso;
         console.log('data ' + JSON.stringify(this.monitoramentoRecuso.entidade));
       });
     });
@@ -170,6 +182,13 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
     this.monitoramentoService.getTalhaoByPropriedade(1).subscribe(data => {
       this.listAmostraTalhao = data.talhoes;
       console.log(JSON.stringify(this.amostraTalhao));
+    });
+  }
+
+  salvarAmostraTalhao() {
+    // this.amostraTalhao.amostra_id = this.amostra;
+    this.monitoramentoService.createAmostraTalhao(this.amostraTalhao).subscribe(data => {
+      console.log(JSON.stringify(data));
     });
   }
 

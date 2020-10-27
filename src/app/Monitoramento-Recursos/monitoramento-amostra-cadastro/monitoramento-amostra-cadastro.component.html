@@ -53,11 +53,19 @@
       </div>
     </div>
   </div>
-  <div *ngIf="monitoramentoRecuso?.entidade && monitoramentoRecuso?.entidade" class="bg-info text-right">
-    <h6 class="mb-0 text-dark title">{{monitoramentoRecuso.entidade.nm_entidade}}</h6>
-      <div class="opacity-7 mt-2">
-        <span class="text-dark">{{monitoramentoRecuso.propriedade.nm_propriedade}}</span>
+  <div *ngIf="monitoramentoRecuso?.entidade && monitoramentoRecuso?.entidade" class="bg-white border-info text-left">
+    <div class="row">
+      <div class="col-sm-3">
+        <i class="lrn lnr-user mr-1 text-dark title">
+          <b>{{monitoramentoRecuso.entidade.nm_reduzido}}</b>
+        </i>
       </div>
+      <div class="col-sm-3">
+        <i class="lrn lnr-map mr-1">
+          <b>{{monitoramentoRecuso.propriedade.nm_propriedade}}</b>
+          </i>
+      </div>
+    </div>
   </div>
   <!-- CARD-HEADER -->
   <div class="bg-white">
@@ -87,12 +95,26 @@
       <button (click)="addAmostra()" class="btn btn-primary mb-2 btn-sm">Salvar Amostra</button>
       <button (click)="cancelar()" class="btn btn-danger mb-2 btn-sm">Cancelar</button>
     </div>
-    <div class="form-row" *ngIf="isAddTalhao">
-      <div class="col-md-12 mb-12 form-group">
-        <label for="talhao_id">Talhão</label>
-        <ng-select [items]="listAmostraTalhao" bindValue="talhao_id" bindLabel="nm_talhao"
-          [(ngModel)]="amostraTalhao.talhao_id" name="talhao_id" placeholder="Buscar Talhão...">
-        </ng-select>
+    <div  *ngIf="isAddTalhao">
+      <div class="form-row">
+        <div class="col-md-6 mb-12 form-group">
+          <label for="talhao_id">Talhão</label>
+          <ng-select [items]="listAmostraTalhao" bindValue="talhao_id" bindLabel="nm_talhao"
+            [(ngModel)]="amostraTalhao.talhao_id" name="talhao_id" placeholder="Buscar Talhão...">
+          </ng-select>
+        </div>
+        <div class="col-md-6 mb-12 form-group">
+          <label for="nr_safra">Safra</label>
+          <ng-select [items]="listSafra" bindValue="nr_safra" bindLabel="nr_safra"
+            [(ngModel)]="amostraTalhao.nr_safra" name="nr_safra" placeholder="Buscar Safra...">
+          </ng-select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <button (click)="salvarAmostraTalhao()" class="btn btn-primary mb-2 btn-sm">Salvar</button>
+          <button (click)="cancelarAmostraTalhao()" class="btn btn-danger mb-2 btn-sm">Cancelar</button>
+        </div>
       </div>
     </div>
   </div>

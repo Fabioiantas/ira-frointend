@@ -9,10 +9,12 @@ import { MonitoramentoLaudo } from '../models/monitoramentoLaudo';
 import { MonitoramentoRecursoAmostra } from '../models/monitoramentoRecursoAmostra';
 import { ResultadoAmostra } from '../models/resultadoAmostra';
 import { AmostraResultadoParametro } from '../models/amostraResultadoParametro';
+import { AmostraTalhao } from '../models/amostraTalhao';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class MonitoramentoRecursoService {
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -86,4 +88,7 @@ export class MonitoramentoRecursoService {
     return this.http.get<any>(`${environment.baseUrl}/auth/gettalhaobypropriedade/${id}`);
   }
 
+  createAmostraTalhao(amostraTalhao: AmostraTalhao) {
+    return this.http.post<any>(`${environment.baseUrl}/auth/amostratalhao`, amostraTalhao);
+  }
 }
