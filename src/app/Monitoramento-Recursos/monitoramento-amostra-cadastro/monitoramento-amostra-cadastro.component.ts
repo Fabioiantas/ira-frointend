@@ -18,6 +18,8 @@ import { AmostraTalhao } from 'src/app/models/amostraTalhao';
   styleUrls: ['./monitoramento-amostra-cadastro.component.sass']
 })
 export class MonitoramentoAmostraCadastroComponent implements OnInit {
+  isLoading = false;
+
   fonte: any;
   params: any;
   isAddEdit = false;
@@ -51,6 +53,7 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
   parametrosList: any[];
   nrAmostra: string;
   dsAmostra: string;
+  amostraId: any;
   nrResultadoOld: string;
 
   listSafra = [
@@ -156,8 +159,10 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
   }
 
   getResultadoAmostra(amostra: any) {
+    this.isShowTalhao = false;
     this.nrAmostra = amostra.nr_amostra;
     this.dsAmostra =  amostra.ds_amostra;
+    this.amostraId =  amostra.id;
     this.monitoramentoService.getResultadoAmostra(amostra.id).subscribe(resultadoAmostra => {
       this.resultadoAmostra = resultadoAmostra;
       this.showParametros();
@@ -167,8 +172,10 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
   }
 
   ShowAmostraTalhao(amostra: any) {
+    this.data.changeAmostra(amostra);
     this.nrAmostra = amostra.nr_amostra;
     this.dsAmostra =  amostra.ds_amostra;
+    this.amostraId = amostra.id;
     this.amostraTalhao = new AmostraTalhao();
     this.amostraTalhao.amostra_id = amostra.id;
     this.isShowTalhao = true;
@@ -177,29 +184,55 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
   }
 
   getAmostraTalhao(id: any) {
+    this.isLoading = true;
     this.monitoramentoService.getTalhaoByAmostra(id).subscribe(data => {
       this.talhoesAmostra = data.talhoes;
     });
+    this.isLoading = false;
   }
 
   addAmostraTalhao() {
     this.isAddTalhao = true;
-    this.monitoramentoService.getTalhaoByPropriedade(1).subscribe(data => {
+    this.amostraTalhao = new AmostraTalhao();
+    this.monitoramentoService.getTalhaoByPropriedade(this.monitoramentoRecuso.propriedade.id).subscribe(data => {
       this.listAmostraTalhao = data.talhoes;
-      console.log(JSON.stringify(this.amostraTalhao));
     });
   }
 
   salvarAmostraTalhao() {
-    this.monitoramentoService.createAmostraTalhao(this.amostraTalhao).subscribe(data => {
+    this.isLoading = true;
+    this.data.currentAmostra.subscribe(amostra => {
+      this.amostraTalhao.amostra_id = amostra.id;
+    });
+    this.monitoramentoService[this.amostraTalhao.id ? 'editAmostraTalhao' : 'createAmostraTalhao'](this.amostraTalhao).subscribe(data => {
       this.dialogBox.show('Talhão adicionado com sucesso!','OK');
       this.isAddTalhao = false;
       this.getAmostraTalhao(this.amostraTalhao.amostra_id);
+      this.isLoading = false;
     });
   }
 
-  removerAmostraTalhao() {
+  cancelarAmostraTalhao() {
+    this.isAddTalhao = false;
+  }
 
+  editarAmostraTalhao(amostraTalhao: any) {
+    this.addAmostraTalhao();
+    this.amostraTalhao.id = amostraTalhao.id;
+    this.amostraTalhao.nr_safra = amostraTalhao.nr_safra;
+    this.amostraTalhao.talhao_id = amostraTalhao.talhao.id;
+    this.isAddTalhao = true;
+  }
+
+  removerAmostraTalhao(amostraTalhao: any) {
+    this.dialogBox.show('Confirma remoção do registro', 'CONFIRM').then((sim: any) => {
+      if (sim){
+        this.monitoramentoService.removeAmostraTalhao(amostraTalhao.id).subscribe( data => {
+          this.dialogBox.show(data.message, 'OK');
+        });
+        this.getAmostraTalhao(amostraTalhao.amostra_id);
+      }
+    });
   }
 
   showParametros() {
@@ -215,11 +248,13 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
   }
 
   showAmostras() {
+    this.populaTable(this.params.id);
     this.isShowResultados = false;
     this.isShowAmostras = true;
     this.isAddEditParam = false;
     this.isAddEditResultB = false;
     this.isShowTalhao = false;
+    this.isAddTalhao = false;
   }
 
   editResultado() {
@@ -228,10 +263,12 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
 
   salvarResultado() {
     // tslint:disable-next-line:no-string-literal
+    this.isLoading = true;
     this.monitoramentoService.putResultado(this.resultadoAmostra['resultados']).subscribe(data => {
       this.dialogBox.show('Resultado(s) salvo(s) com sucesso!', 'OK');
     });
     this.populaTable(this.params.id);
+    this.isLoading = false;
     this.isAddEditResult = false;
     this.isAddEditResultB = false;
   }

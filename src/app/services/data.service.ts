@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { FormGroup } from '@angular/forms';
 import { MonitoramentoLaudo } from '../models/monitoramentoLaudo';
 import { FontesEntidade } from '../models/fontesEntidade';
+import { MonitoramentoRecursoAmostra } from '../models/monitoramentoRecursoAmostra';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,10 @@ export class DataService {
   public laudoBehavior = new BehaviorSubject(this.laudo);
   currentLaudo = this.laudoBehavior.asObservable();
 
+  public amostra: MonitoramentoRecursoAmostra = null;
+  public amostraBehavior = new BehaviorSubject(this.amostra);
+  currentAmostra = this.amostraBehavior.asObservable();
+
   public fontesEntidade: FontesEntidade = null;
   public fontesEntidadeBehavior = new BehaviorSubject(this.fontesEntidade);
   curFonteEmissao = this.fontesEntidadeBehavior.asObservable();
@@ -37,6 +42,10 @@ export class DataService {
 
   changeLaudo(laudo: MonitoramentoLaudo) {
     this.laudoBehavior.next(laudo);
+  }
+
+  changeAmostra(amostra: MonitoramentoRecursoAmostra) {
+    this.amostraBehavior.next(amostra);
   }
 
   changeFonteEmissao(fontesEntidade: FontesEntidade) {

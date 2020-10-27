@@ -92,7 +92,11 @@ export class MonitoramentoRecursoService {
     return this.http.post<any>(`${environment.baseUrl}/auth/amostratalhao`, amostraTalhao);
   }
 
+  editAmostraTalhao(amostraTalhao: AmostraTalhao): Observable<AmostraTalhao> {
+    return this.http.put<AmostraTalhao>(`${environment.baseUrl}/auth/amostratalhao`, amostraTalhao);
+  }
+
   removeAmostraTalhao(id: any): Observable<any> {
-    return this.http.delete(`${environment.baseUrl}/auth/amostraTalhao/${id}`);
+    return this.http.delete(`${environment.baseUrl}/auth/amostratalhao/${id}`);
   }
 }

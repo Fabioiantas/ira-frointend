@@ -39,15 +39,17 @@
         <div *ngIf="!isShowResultados && !isAddEdit && !isShowTalhao">
           <button (click)="inserirAmostra()" class="btn btn-success mb-2 btn-sm">Inserir Amostra</button>
         </div>
-        <div *ngIf="(isShowResultados && !isAddEditResult) || isShowTalhao ">
+        <div *ngIf="(isShowResultados && !isAddEditResult) || isShowTalhao">
           <button (click)="showAmostras()" class="btn btn-outline-secondary mr-2 btn-xs">Ver Amostras</button>
+        </div>
+        <div *ngIf="isShowTalhao">
           <button (click)="addAmostraTalhao()" class="btn btn-success mr-2 btn-xs">Inserir Talhão</button>
         </div>
         <div *ngIf="(isShowResultados && !isAddEditResult)">
           <button (click)="editResultado()" class="btn btn-info mr-2 btn-xs">Editar Resultados</button>
         </div>
         <div *ngIf="isAddEditResult">
-          <button (click)="salvarResultado()" class="btn btn-success mr-2 btn-xs">Salvar</button>
+          <button (click)="salvarResultado()" [ladda]="isLoading" class="btn btn-success mr-2 btn-xs">Salvar</button>
           <button (click)="cancelarResultado()" class="btn btn-danger mr-2 btn-xs">Cancelar</button>
         </div>
       </div>
@@ -55,6 +57,11 @@
   </div>
   <div *ngIf="monitoramentoRecuso?.entidade && monitoramentoRecuso?.entidade" class="bg-light border-bottom text-left">
     <div class="row">
+      <div *ngIf="isShowAmostras || isShowTalhao" class="col-sm-3">
+        <i class="lrn lnr-user mr-1 text-dark title">
+            Amostra n°: {{nrAmostra}} - {{dsAmostra}}
+        </i>
+      </div>
       <div class="col-sm-3">
         <i class="lrn lnr-user mr-1 text-dark title">
           <b> {{monitoramentoRecuso.entidade.nm_reduzido}}</b>
@@ -92,7 +99,7 @@
             [(ngModel)]="amostraLaudo.ds_amostra" onkeyup="this.value = this.value.toUpperCase();">
         </div>
       </div>
-      <button (click)="addAmostra()" class="btn btn-primary mb-2 btn-sm">Salvar Amostra</button>
+      <button (click)="addAmostra()" [ladda]="isLoading" class="btn btn-primary mb-2 btn-sm">Salvar Amostra</button>
       <button (click)="cancelar()" class="btn btn-danger mb-2 btn-sm">Cancelar</button>
     </div>
     <div  *ngIf="isAddTalhao">
@@ -112,7 +119,7 @@
       </div>
       <div class="row">
         <div class="col-sm-12">
-          <button (click)="salvarAmostraTalhao()" class="btn btn-primary mb-2 btn-sm">Salvar</button>
+          <button (click)="salvarAmostraTalhao()" [ladda]="isLoading" class="btn btn-primary mb-2 btn-sm">Salvar</button>
           <button (click)="cancelarAmostraTalhao()" class="btn btn-danger mb-2 btn-sm">Cancelar</button>
         </div>
       </div>
@@ -154,7 +161,7 @@
                 <i class="pe-7s-plus text-success" (click)="getResultadoAmostra(am)"></i>
               </td>
               <td class="text-center icons">
-                <i class="pe-7s-plus text-success" (click)="ShowAmostraTalhao(am)"></i>
+                <i class="pe-7s-plus text-success" [ladda]="isLoading" (click)="ShowAmostraTalhao(am)"></i>
               </td>
             </tr>
 
@@ -173,9 +180,6 @@
           <!-- Editable table -->
           <div class="card">
             <div class="card-body">
-              <h5 *ngIf="isShowAmostras || isShowTalhao" class="text-muted pl-1">
-                Amostra n°: {{nrAmostra}} - {{dsAmostra}}
-              </h5>
               <div id="table" class="table-editable">
                 <span class="table-add float-right mb-3 mr-2">
                   <a class="text-success" (click)="add()">
@@ -261,7 +265,7 @@
                       <i class="pe-7s-tools text-primary" (click)="editarAmostraTalhao(item)"></i>
                     </td>
                     <td class="text-center icons">
-                      <i class="pe-7s-trash text-danger" (click)="removerAmostraTalhao(item.id)"></i>
+                      <i class="pe-7s-trash text-danger" (click)="removerAmostraTalhao(item)"></i>
                     </td>
                   </tr>
                 </table>
