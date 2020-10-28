@@ -569,13 +569,13 @@ const routes: Routes = [
     component: BaseLayoutComponent,
     children: [
       {
-        path: '',
+        path: 'adicionar',
         component: TipoMonitoramentoComponent,
         data: { extraParameter: 'mRecursoMenu' },
         canActivate: [AuthGuard]
       },
       {
-        path: 'tipomonitoramento/:id',
+        path: 'adicionar/:id',
         component: TipoMonitoramentoCadastroComponent,
         canActivate: [AuthGuard],
         data: { roles: [Role.Admin], extraParameter: 'mRecursoMenu' }

@@ -25,7 +25,7 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
   isAddEdit = false;
   isAddEditParam = false;
 
-  isShowAmostras = false;
+  isShowAmostras = true;
   isShowResultados = false;
   isEditResultaos = false;
 
@@ -167,7 +167,7 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
       this.resultadoAmostra = resultadoAmostra;
       this.showParametros();
       this.isShowResultados = true;
-      this.isShowAmostras = true;
+      this.isShowAmostras = false;
     });
   }
 
@@ -185,6 +185,7 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
 
   getAmostraTalhao(id: any) {
     this.isLoading = true;
+    this.isShowAmostras = false;
     this.monitoramentoService.getTalhaoByAmostra(id).subscribe(data => {
       this.talhoesAmostra = data.talhoes;
     });
@@ -205,7 +206,7 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
       this.amostraTalhao.amostra_id = amostra.id;
     });
     this.monitoramentoService[this.amostraTalhao.id ? 'editAmostraTalhao' : 'createAmostraTalhao'](this.amostraTalhao).subscribe(data => {
-      this.dialogBox.show('Talhão adicionado com sucesso!','OK');
+      this.dialogBox.show('Talhão adicionado com sucesso!', 'OK');
       this.isAddTalhao = false;
       this.getAmostraTalhao(this.amostraTalhao.amostra_id);
       this.isLoading = false;
@@ -226,7 +227,7 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
 
   removerAmostraTalhao(amostraTalhao: any) {
     this.dialogBox.show('Confirma remoção do registro', 'CONFIRM').then((sim: any) => {
-      if (sim){
+      if (sim) {
         this.monitoramentoService.removeAmostraTalhao(amostraTalhao.id).subscribe( data => {
           this.dialogBox.show(data.message, 'OK');
         });
@@ -262,8 +263,8 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
   }
 
   salvarResultado() {
-    // tslint:disable-next-line:no-string-literal
     this.isLoading = true;
+    // tslint:disable-next-line:no-string-literal
     this.monitoramentoService.putResultado(this.resultadoAmostra['resultados']).subscribe(data => {
       this.dialogBox.show('Resultado(s) salvo(s) com sucesso!', 'OK');
     });

@@ -57,19 +57,19 @@
   </div>
   <div *ngIf="monitoramentoRecuso?.entidade && monitoramentoRecuso?.entidade" class="bg-light border-bottom text-left">
     <div class="row">
-      <div *ngIf="isShowAmostras || isShowTalhao" class="col-sm-3">
-        <i class="lrn lnr-user mr-1 text-dark title">
-            Amostra n°: {{nrAmostra}} - {{dsAmostra}}
+      <div *ngIf="!isShowAmostras" class="col-sm-4">
+        <i class="lnr-drop mr-1 text-muted">
+            AMOSTRA N°: {{nrAmostra}}
         </i>
       </div>
-      <div class="col-sm-3">
-        <i class="lrn lnr-user mr-1 text-dark title">
-          <b> {{monitoramentoRecuso.entidade.nm_reduzido}}</b>
+      <div class="col-sm-4">
+        <i class="lnr-user mx-1 text-muted">
+          {{monitoramentoRecuso.entidade.nm_reduzido}}
         </i>
       </div>
-      <div class="col-sm-3">
-        <i class="lrn lnr-map mr-1">
-          <b> {{monitoramentoRecuso.propriedade.nm_propriedade}}</b>
+      <div class="col-sm-4">
+        <i class="lnr-map text-muted mx-1">
+          {{monitoramentoRecuso.propriedade.nm_propriedade}}
           </i>
       </div>
     </div>
@@ -242,9 +242,6 @@
           <!-- Editable table -->
           <div class="card">
             <div class="card-body">
-              <h5 *ngIf="isShowTalhao" class="text-muted pl-1">
-                Amostra n°: {{nrAmostra}} - {{dsAmostra}}
-              </h5>
               <div id="table" class="table-editable">
                 <span class="table-add float-right mb-3 mr-2">
                   <a class="text-success" (click)="add()">
@@ -254,12 +251,16 @@
                 <table class="table table-sm table-bordered table-responsive-md table-striped table-hover text-center">
                   <tr>
                     <th>Nome</th>
+                    <th>Área Agricultável</th>
                     <th>Editar</th>
                     <th>Remover</th>
                   </tr>
                   <tr *ngFor="let item of talhoesAmostra; let id = index">
                     <td>
                       <span>{{item.talhao.nm_talhao}}</span>
+                    </td>
+                    <td>
+                      <span>{{item.talhao.qt_area_agricultavel}}</span>
                     </td>
                     <td class="text-center icons">
                       <i class="pe-7s-tools text-primary" (click)="editarAmostraTalhao(item)"></i>
