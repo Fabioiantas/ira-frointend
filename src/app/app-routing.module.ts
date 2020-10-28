@@ -63,6 +63,7 @@ import { TipoMonitoramentoCadastroComponent } from './Monitoramento-Recursos/tip
 import { TipoMonitoramentoComponent } from './Monitoramento-Recursos/tipo-monitoramento/tipo-monitoramento.component';
 import { MonitoramentoTalhaoComponent } from './Monitoramento-Recursos/monitoramento-talhao/monitoramento-talhao.component';
 import { TalhaoCadastroComponent } from './Monitoramento-Recursos/monitoramento-talhao/talhao-cadastro/talhao-cadastro.component';
+import { UnidadeParametroComponent } from './Monitoramento-Recursos/unidade-parametro/unidade-parametro.component';
 
 const routes: Routes = [
   {
@@ -479,6 +480,18 @@ const routes: Routes = [
     ]
   },
   {
+    path: 'unidade',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: UnidadeParametroComponent,
+        data: { extraParameter: 'mRecursoMenu' },
+        canActivate: [AuthGuard]
+      }
+    ]
+  },
+  {
     path: 'processo',
     component: BaseLayoutComponent,
     children: [
@@ -549,19 +562,6 @@ const routes: Routes = [
         data: { extraParameter: 'mRecursoMenu' },
         canActivate: [AuthGuard]
       }
-      // ,
-      // {
-      //   path: 'monitoramento/:id',
-      //   component: MonitoramentoCadastroComponent,
-      //   canActivate: [AuthGuard],
-      //   data: { roles: [Role.Admin], extraParameter: 'mRecursoMenu' }
-      // },
-      // {
-      //   path: 'amostra/:id',
-      //   component: MonitoramentoAmostraCadastroComponent,
-      //   canActivate: [AuthGuard],
-      //   data: { roles: [Role.Admin], extraParameter: 'mRecursoMenu' }
-      // }
     ]
   },
   {
@@ -569,16 +569,22 @@ const routes: Routes = [
     component: BaseLayoutComponent,
     children: [
       {
-        path: 'adicionar',
+        path: '',
         component: TipoMonitoramentoComponent,
+        data: { extraParameter: 'mRecursoMenu' },
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'adicionar',
+        component: TipoMonitoramentoCadastroComponent,
         data: { extraParameter: 'mRecursoMenu' },
         canActivate: [AuthGuard]
       },
       {
         path: 'adicionar/:id',
         component: TipoMonitoramentoCadastroComponent,
-        canActivate: [AuthGuard],
-        data: { roles: [Role.Admin], extraParameter: 'mRecursoMenu' }
+        data: { extraParameter: 'mRecursoMenu' },
+        canActivate: [AuthGuard]
       }
     ]
   },

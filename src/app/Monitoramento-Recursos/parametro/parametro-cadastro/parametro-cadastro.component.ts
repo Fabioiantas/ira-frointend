@@ -60,7 +60,7 @@ export class ParametroCadastroComponent implements OnInit {
 
   handleReset() {
     this.formGroup.reset();
-    this.router.navigate(['/recurso']);
+    this.router.navigate(['/parametro']);
   }
 
   handleValidSubmit() {
