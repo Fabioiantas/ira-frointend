@@ -2,21 +2,23 @@
   <div class="app-inner-layout__wrapper" [ngClass]="{'open-mobile-menu' :
     toggleMobileSidebar}">
     <div class="app-inner-layout__content card">
-      <div class="table-responsive">
-        <div class="app-inner-layout__top-pane">
-          <div class="pane-left">
-            <div class="mobile-app-menu-btn">
-              <button type="button" class="hamburger hamburger--elastic" [ngClass]="{'is-active' : toggleMobileSidebar}"
-                (click)="toggleMobileSidebar= !toggleMobileSidebar">
-                <span class="hamburger-box"><span class="hamburger-inner"></span></span>
-              </button>
+      <div class="col-md-12">
+        <div class="table-responsive">
+          <div class="app-inner-layout__top-pane">
+            <div class="pane-left">
+              <div class="mobile-app-menu-btn">
+                <button type="button" class="hamburger hamburger--elastic" [ngClass]="{'is-active' : toggleMobileSidebar}"
+                  (click)="toggleMobileSidebar= !toggleMobileSidebar">
+                  <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="p-3 bg-white">
-          <div class="form-group form-inline mb-0">
-            <ngx-datatable-filter [margin]="'-6px'" [float]="'left'" [columns]="columnsUnidadeParametro" [lista]="rowsTalhao"
-              [table]="tableUnidadeParametro"></ngx-datatable-filter>
+          <div class="p-3 bg-white">
+            <div class="form-group form-inline mb-0">
+              <ngx-datatable-filter [margin]="'-6px'" [float]="'left'" [columns]="columnsUnidadeParametro"
+                [lista]="rowsUnidadeParametro" [table]="tableUnidadeParametro">
+              </ngx-datatable-filter>
               <div class="btn-actions-pane-right">
                 <div class="btn-group-sm btn-group" role="group">
                   <button class="btn btn-success" type="button" (click)="addUnidadeParametro()">Adicionar</button>
@@ -25,21 +27,15 @@
                 </div>
               </div>
             </div>
+          </div>
+          <ngx-datatable ngx-resize-watcher class="bootstrap striped" #tableUnidadeParametro [rows]="rowsUnidadeParametro"
+            [footerHeight]="25" [columnMode]="'force'" [columns]="columnsUnidadeParametro" [selected]="selected"
+            [selectionType]="'single'" [rowHeight]="'auto'" (activate)="activate($event)"
+            [messages]="{'emptyMessage': 'Nenhum resultado encontrado...', 'totalMessage': 'total'}" [limit]="10">
+            <ngx-datatable-column name="Unidade" prop="cd_unidade_padrao" [flexGrow]="2"></ngx-datatable-column>
+            <ngx-datatable-column name="Descricão" prop="ds_unidade_padrao" [flexGrow]="2"></ngx-datatable-column>
+          </ngx-datatable>
         </div>
-        <ngx-datatable ngx-resize-watcher class="bootstrap striped" #tableUnidadeParametro
-          [rows]="rowsTalhao"
-          [footerHeight]="25"
-          [columnMode]="'force'"
-          [columns]="columnsUnidadeParametro"
-          [selected]="selected"
-          [selectionType]="'single'"
-          [rowHeight]="'auto'"
-          (activate)="activate($event)"
-          [messages]="{'emptyMessage': 'Nenhum resultado encontrado...', 'totalMessage': 'total'}"
-          [limit]="10">
-          <ngx-datatable-column name="Unidade" prop="nm_talhao" [flexGrow]="2"></ngx-datatable-column>
-          <ngx-datatable-column name="Descricão" prop="qt_area_agricultavel" [flexGrow]="2"></ngx-datatable-column>
-        </ngx-datatable>
       </div>
     </div>
 
@@ -53,7 +49,7 @@
             </li>
             <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
               <label class="mb-0 pl-1">Parametro:</label>
-              <ng-select [items]="parametros" (change)="changeParametro()" bindLabel="sg_parametro"
+              <ng-select [items]="parametros" (change)="changeParametro()" bindLabel="nm_parametro"
                 formControlName="parametro" name="parametro" placeholder="Buscar
                 Parametro...">
               </ng-select>

@@ -5,6 +5,7 @@ import { FilterUnidadeParametro } from 'src/app/models/filterUnidadeParametro';
 import { Parametro } from 'src/app/models/parametro';
 import { UnidadeParametro } from 'src/app/models/unidadeParametro';
 import { ParametroService } from 'src/app/services/parametro.service';
+import { UnidadeParametroService } from 'src/app/services/unidade-parametro.service';
 import { DialogBoxService } from 'src/app/_services/dialog-box.service';
 
 @Component({
@@ -21,7 +22,7 @@ export class UnidadeParametroComponent implements OnInit {
 
   unidadeparametro: UnidadeParametro;
   parametros: Parametro;
-  rowsTalhao: any;
+  rowsUnidadeParametro: any;
   model: any;
   searching = false;
   searchFailed = false;
@@ -43,6 +44,7 @@ export class UnidadeParametroComponent implements OnInit {
               private formBuilder: FormBuilder,
               private router: Router,
               private route: ActivatedRoute,
+              private unidadeParametroService: UnidadeParametroService,
               private parametroService: ParametroService) { }
 
   ngOnInit() {
@@ -62,6 +64,18 @@ export class UnidadeParametroComponent implements OnInit {
       this.filterForm = this.formBuilder.group({
         parametro: [this.filterUnidadeParametro.parametro, Validators.required]
       });
+    }
+  }
+
+  changeParametro() {
+    this.unidadeParametroService.getListUnidadeByParametroId(this.filterForm.value.parametro.parametro_id).subscribe(data => {
+      this.rowsUnidadeParametro = data.unidades;
+    });
+  }
+
+  activate($event) {
+    if ($event.type === 'dblclick') {
+      this.router.navigate(['/unidadeparametro/adicionar/' + $event.row.id]);
     }
   }
 
