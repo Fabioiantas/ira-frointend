@@ -11,15 +11,15 @@ export class EscopoGeeService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  getList(): any{
+  getList(): any {
     return this.http.get(environment.baseUrl + '/auth/escopos');
   }
 
-  list(): any{
+  list(): any {
     return this.http.get(environment.baseUrl + '/auth/escoposl');
   }
 
-  remove(id) {
+  remove(id: string) {
     return this.http.delete(environment.baseUrl + '/auth/escopo/' + id);
   }
 
