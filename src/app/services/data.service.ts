@@ -31,7 +31,7 @@ export class DataService {
   public fontesEntidadeBehavior = new BehaviorSubject(this.fontesEntidade);
   curFonteEmissao = this.fontesEntidadeBehavior.asObservable();
 
-  public parametro: Parametro = null;
+  public parametro: any = null;
   public parametroBehavior = new BehaviorSubject(this.parametro);
   curParametro = this.parametroBehavior.asObservable();
 

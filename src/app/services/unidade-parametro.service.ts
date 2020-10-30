@@ -28,6 +28,10 @@ export class UnidadeParametroService {
       return this.http.put(`${environment.baseUrl}/auth/unidadeparametro`, unidadeParametro);
   }
 
+  remove(id: string): Observable<any> {
+    return this.http.delete(`${environment.baseUrl}/auth/unidadeparametro/${id}`);
+  }
+
   // list(): any {
   //   return this.http.get(environment.baseUrl + '/auth/escoposl');
   // }

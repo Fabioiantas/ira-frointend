@@ -31,10 +31,9 @@
       <h5 class="card-title">Cadastro de Unidade Parametro</h5>
       <div class="form-row">
         <div class="col-md-12 mb-12 form-group">
-          <label class="mb-0 pl-1">Parametro:</label>
-          <ng-select [items]="parametros"  bindLabel="nm_parametro"
-            formControlName="parametro_id" name="parametro_id" placeholder="Buscar
-            Parametro...">
+          <label for="parametro_id">Parâmetro</label>
+          <ng-select [items]="ListParametros" bindValue="parametro_id" bindLabel="nm_parametro"
+            formControlName="parametro_id" name="parametro_id" placeholder="Buscar Parametro...">
           </ng-select>
         </div>
         <div class="col-md-12 mb-12 form-group">

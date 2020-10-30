@@ -65,6 +65,7 @@ import { MonitoramentoTalhaoComponent } from './Monitoramento-Recursos/monitoram
 import { TalhaoCadastroComponent } from './Monitoramento-Recursos/monitoramento-talhao/talhao-cadastro/talhao-cadastro.component';
 import { UnidadeParametroComponent } from './Monitoramento-Recursos/unidade-parametro/unidade-parametro.component';
 import { UnidadeParametroCadastroComponent } from './Monitoramento-Recursos/unidade-parametro/unidade-parametro-cadastro/unidade-parametro-cadastro.component';
+import { MonitoramentoParametrosComponent } from './Monitoramento-Recursos/monitoramento-parametros/monitoramento-parametros.component';
 
 const routes: Routes = [
   {
@@ -549,6 +550,18 @@ const routes: Routes = [
         component: MonitoramentoAmostraCadastroComponent,
         canActivate: [AuthGuard],
         data: { roles: [Role.Admin], extraParameter: 'mRecursoMenu' }
+      }
+    ]
+  },
+  {
+    path: 'monitoramentoparam',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: MonitoramentoParametrosComponent,
+        data: { extraParameter: 'mRecursoMenu' },
+        canActivate: [AuthGuard]
       }
     ]
   },

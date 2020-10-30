@@ -22,7 +22,7 @@ export class UnidadeParametroCadastroComponent implements OnInit {
     ds_unidade_padrao: new FormControl('', Validators.required)
   });
 
-  parametros: Parametro;
+  ListParametros: Parametro;
   unidadeParametro: UnidadeParametro = new UnidadeParametro();
   params: any;
   isLoading: any = false;
@@ -42,15 +42,8 @@ export class UnidadeParametroCadastroComponent implements OnInit {
 
   ngOnInit() {
 
-    this.dataService.curParametro.subscribe(parametro => {
-      if (!parametro) {
-        this.dialogBox.show('Parametro nao selecionado!', 'ERROR');
-        this.router.navigate(['/unidade']);
-      }
-    });
-
     this.parametroService.list().subscribe(parametros => {
-      this.parametros = parametros;
+      this.ListParametros = parametros;
     });
 
     this.route.params.subscribe(data => {
@@ -67,8 +60,15 @@ export class UnidadeParametroCadastroComponent implements OnInit {
           ds_unidade_padrao: unidadeParametro.ds_unidade_padrao
         });
       });
+    } else {
+      this.dataService.curParametro.subscribe(parametro => {
+        if (parametro) {
+          this.formGroup.patchValue({
+            parametro_id: parametro.parametro_id
+          });
+        }
+      });
     }
-
   }
 
   handleValidSubmit() {

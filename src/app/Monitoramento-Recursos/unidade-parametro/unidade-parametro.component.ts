@@ -27,7 +27,7 @@ export class UnidadeParametroComponent implements OnInit {
   model: any;
   searching = false;
   searchFailed = false;
-  filterUnidadeParametro: FilterUnidadeParametro = new FilterUnidadeParametro();
+  // filterUnidadeParametro: FilterUnidadeParametro = new FilterUnidadeParametro();
   filterForm: FormGroup;
   selected: any = [];
   produtoSelecionado = null;
@@ -50,29 +50,29 @@ export class UnidadeParametroComponent implements OnInit {
               private dataService: DataService) { }
 
   ngOnInit() {
-    this.route.queryParams.subscribe(param => {
-      this.params = param;
-    });
-
-    this.filterForm = this.formBuilder.group({
-        parametro: [this.filterUnidadeParametro.parametro, Validators.required]
-    });
 
     this.parametroService.list().subscribe(parametros => {
       this.parametros = parametros;
     });
 
-    if (this.filterUnidadeParametro) {
-      this.filterForm = this.formBuilder.group({
-        parametro: [this.filterUnidadeParametro.parametro, Validators.required]
-      });
-    }
+    this.filterForm = this.formBuilder.group({
+      parametro: [null, Validators.required]
+    });
   }
 
   changeParametro() {
-    this.unidadeParametroService.getListUnidadeByParametroId(this.filterForm.value.parametro.parametro_id).subscribe(data => {
-      this.rowsUnidadeParametro = data.unidades;
-    });
+    if (this.filterForm.valid) {
+      this.dataService.changeParametro(this.filterForm.value);
+      this.findUnidadeParametro();
+    }
+  }
+
+  findUnidadeParametro() {
+    if (this.filterForm.valid) {
+      this.unidadeParametroService.getListUnidadeByParametroId(this.filterForm.value.parametro.parametro_id).subscribe(data => {
+        this.rowsUnidadeParametro = data.unidades;
+      });
+    }
   }
 
   activate($event) {
@@ -84,14 +84,33 @@ export class UnidadeParametroComponent implements OnInit {
   cleanFilter() {
     this.filterForm.reset();
     this.rowsUnidadeParametro = null;
+    this.dataService.changeParametro(null);
   }
 
   inserir() {
-    if (this.filterForm.valid) {
-      this.dataService.changeParametro(this.filterForm.value.parametro);
-      this.router.navigate(['unidade/adicionar']);
+    this.router.navigate(['unidade/adicionar']);
+  }
+
+  editar(row: any) {
+    if(!row) {
+      this.dialogBox.show('Nehuma unidade selecionada!', 'ERROR');
+      return;
+    }
+    this.router.navigate(['/unidade/adicionar/' + row.id]);
+  }
+
+  remover() {
+    if (this.selected[0]) {
+      this.dialogBox.show("Confirma remoção da Unidade?","CONFIRM").then(sim => {
+        if(sim){
+          this.unidadeParametroService.remove(this.selected[0].id).subscribe(data => {
+            this.dialogBox.show('Unidade removida com sucesso!', 'OK');
+            this.findUnidadeParametro();
+          });
+        }
+      });
     } else {
-      this.dialogBox.show('Selecione um parametro!', 'ERROR');
+      this.dialogBox.show('Nenhuma Unidade selecionada!','ERROR');
     }
   }
 

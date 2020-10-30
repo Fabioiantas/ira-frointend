@@ -23,7 +23,6 @@ export class CampanhaService {
     return this.http.post(environment.baseUrl + '/campanha/remove', campanha);
   }
 
-
   edit(campanha: Campanha) {
     return this.http.put(environment.baseUrl + '/campanha/edit', campanha);
   }
