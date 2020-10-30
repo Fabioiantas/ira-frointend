@@ -36,8 +36,8 @@ export class ProcessoAnaliseComponent implements OnInit {
 
   remover() {
     if (this.selected) {
-      this.dialogBox.show("Confirma remoção do Processo?","CONFIRM").then(sim=>{
-        if(sim){
+      this.dialogBox.show('Confirma remoção do Processo?', 'CONFIRM').then(sim => {
+        if (sim) {
           this.processoService.remove(this.selected[0].id).subscribe(data => {
             this.dialogBox.show('Processo removido com sucesso!', 'OK');
             this.populaTable();
@@ -49,10 +49,10 @@ export class ProcessoAnaliseComponent implements OnInit {
 
   editar(id) {
     console.log('editar processo: ' + id);
-    this.router.navigate(['/processo/adicionar/' + id])
+    this.router.navigate(['/processo/adicionar/' + id]);
   }
 
-  editarForm(e){
+  editarForm() {
     this.editar(this.selected[0].id);
   }
 

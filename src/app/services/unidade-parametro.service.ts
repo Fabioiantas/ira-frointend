@@ -16,6 +16,18 @@ export class UnidadeParametroService {
     return this.http.get<any>(`${environment.baseUrl}/auth/unidadeparametros/${id}`);
   }
 
+  getById(id: any) {
+    return this.http.get<UnidadeParametro>(environment.baseUrl + '/auth/unidadeparametro/' + id);
+  }
+
+  add(unidadeParametro: UnidadeParametro): Observable<any> {
+      return this.http.post<any>(`${environment.baseUrl}/auth/unidadeparametro`, unidadeParametro);
+  }
+
+  edit(unidadeParametro: UnidadeParametro): Observable<any> {
+      return this.http.put(`${environment.baseUrl}/auth/unidadeparametro`, unidadeParametro);
+  }
+
   // list(): any {
   //   return this.http.get(environment.baseUrl + '/auth/escoposl');
   // }

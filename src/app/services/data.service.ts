@@ -4,6 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { MonitoramentoLaudo } from '../models/monitoramentoLaudo';
 import { FontesEntidade } from '../models/fontesEntidade';
 import { MonitoramentoRecursoAmostra } from '../models/monitoramentoRecursoAmostra';
+import { Parametro } from '../models/Parametro';
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +31,10 @@ export class DataService {
   public fontesEntidadeBehavior = new BehaviorSubject(this.fontesEntidade);
   curFonteEmissao = this.fontesEntidadeBehavior.asObservable();
 
+  public parametro: Parametro = null;
+  public parametroBehavior = new BehaviorSubject(this.parametro);
+  curParametro = this.parametroBehavior.asObservable();
+
   constructor() { }
 
   changeFilter(filter: FormGroup) {
@@ -50,5 +55,9 @@ export class DataService {
 
   changeFonteEmissao(fontesEntidade: FontesEntidade) {
     this.fontesEntidadeBehavior.next(fontesEntidade);
+  }
+
+  changeParametro(parametro: Parametro) {
+    this.parametroBehavior.next(parametro);
   }
 }

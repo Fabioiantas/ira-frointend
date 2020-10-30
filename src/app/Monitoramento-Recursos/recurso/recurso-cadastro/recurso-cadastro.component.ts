@@ -12,6 +12,7 @@ import { Recurso } from 'src/app/models/recurso';
   styleUrls: ['./recurso-cadastro.component.sass']
 })
 export class RecursoCadastroComponent implements OnInit {
+
   formGroup = new FormGroup({
     id: new FormControl(''),
     nm_recurso: new FormControl('', Validators.required),

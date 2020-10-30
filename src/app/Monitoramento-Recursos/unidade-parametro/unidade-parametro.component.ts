@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FilterUnidadeParametro } from 'src/app/models/filterUnidadeParametro';
 import { Parametro } from 'src/app/models/parametro';
 import { UnidadeParametro } from 'src/app/models/unidadeParametro';
+import { DataService } from 'src/app/services/data.service';
 import { ParametroService } from 'src/app/services/parametro.service';
 import { UnidadeParametroService } from 'src/app/services/unidade-parametro.service';
 import { DialogBoxService } from 'src/app/_services/dialog-box.service';
@@ -45,7 +46,8 @@ export class UnidadeParametroComponent implements OnInit {
               private router: Router,
               private route: ActivatedRoute,
               private unidadeParametroService: UnidadeParametroService,
-              private parametroService: ParametroService) { }
+              private parametroService: ParametroService,
+              private dataService: DataService) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe(param => {
@@ -75,7 +77,21 @@ export class UnidadeParametroComponent implements OnInit {
 
   activate($event) {
     if ($event.type === 'dblclick') {
-      this.router.navigate(['/unidadeparametro/adicionar/' + $event.row.id]);
+      this.router.navigate(['/unidade/adicionar/' + $event.row.id]);
+    }
+  }
+
+  cleanFilter() {
+    this.filterForm.reset();
+    this.rowsUnidadeParametro = null;
+  }
+
+  inserir() {
+    if (this.filterForm.valid) {
+      this.dataService.changeParametro(this.filterForm.value.parametro);
+      this.router.navigate(['unidade/adicionar']);
+    } else {
+      this.dialogBox.show('Selecione um parametro!', 'ERROR');
     }
   }
 

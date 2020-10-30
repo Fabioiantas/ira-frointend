@@ -30,9 +30,9 @@ export class OrgaoResponsavelCadastroComponent implements OnInit {
   nmEsfera: any;
   sgEstado: any;
 
-  constructor(private orgaoService: OrgaoService, 
+  constructor(private orgaoService: OrgaoService,
               private dialogBox: DialogBoxService,
-              private route: ActivatedRoute, 
+              private route: ActivatedRoute,
               private router: Router) { }
 
   ngOnInit() {
@@ -55,8 +55,6 @@ export class OrgaoResponsavelCadastroComponent implements OnInit {
 
   salvar() {
     if (!this.formGroup.valid) { return; }
-    console.log(this.formGroup.value.id);
-    
     this.orgaoService[this.formGroup.value.id ? 'edit' : 'add'](this.formGroup.value).subscribe(() => {
       this.dialogBox.show('Orgão salvo com sucesso!', 'OK');
       this.router.navigate(['/orgao']);
