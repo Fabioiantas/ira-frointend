@@ -42,8 +42,14 @@
         [table]="tableUsuarios"></ngx-datatable-filter>
     </div>
   </div>
-  <ngx-datatable ngx-resize-watcher class="bootstrap striped" #tableUsuarios [rows]="rows" [footerHeight]="25"
-    [columnMode]="'force'" [columns]="columns" [selected]="selected" [selectionType]="'single'" [rowHeight]="'auto'"
+  <ngx-datatable ngx-resize-watcher class="bootstrap striped" #tableUsuarios
+    [rows]="rows"
+    [footerHeight]="25"
+    [columnMode]="'force'"
+    [columns]="columns"
+    [selected]="selected"
+    [selectionType]="'single'"
+    [rowHeight]="'auto'"
     (dblclick)="onDblclick($event)"
     [messages]="{'emptyMessage': 'Nenhum resultado encontrado...', 'totalMessage': 'total'}" [limit]="5">
     <ngx-datatable-column name="Nome" prop="name" [flexGrow]="2"></ngx-datatable-column>

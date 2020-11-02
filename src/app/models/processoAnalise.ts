@@ -1,5 +1,7 @@
 export class ProcessoAnalise {
   id: BigInteger;
-  nm_processo: String;
-  ds_processo: String;
+  // tslint:disable-next-line:variable-name
+  nm_processo: string;
+  // tslint:disable-next-line:variable-name
+  ds_processo: string;
 }

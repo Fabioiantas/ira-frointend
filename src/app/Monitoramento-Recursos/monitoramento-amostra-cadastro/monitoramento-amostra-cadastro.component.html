@@ -58,17 +58,17 @@
   <div *ngIf="monitoramentoRecuso?.entidade && monitoramentoRecuso?.entidade" class="bg-light border-bottom text-left">
     <div class="row">
       <div *ngIf="!isShowAmostras" class="col-sm-4">
-        <i class="lnr-drop mr-1 text-muted">
+        <i class="lnr-drop mr-1 text-muted text-center">
             AMOSTRA N°: {{nrAmostra}}
         </i>
       </div>
       <div class="col-sm-4">
-        <i class="lnr-user mx-1 text-muted">
+        <i class="lnr-user mx-1 text-muted text-center">
           {{monitoramentoRecuso.entidade.nm_reduzido}}
         </i>
       </div>
       <div class="col-sm-4">
-        <i class="lnr-map text-muted mx-1">
+        <i class="lnr-map text-muted text-center mx-1">
           {{monitoramentoRecuso.propriedade.nm_propriedade}}
           </i>
       </div>
@@ -199,8 +199,8 @@
                     <td>
                       <span>{{item.parametro.sg_parametro}}</span>
                     </td>
-                    <td>
-                      <span>{{item.cd_unidade_padrao}}</span>
+                    <td *ngFor="let un of item.parametro.unidades; let id = index">
+                      <span>{{un.cd_unidade_padrao}}</span>
                     </td>
                     <td>
                       <span>{{item.nr_padrao_inicial}}</span>
