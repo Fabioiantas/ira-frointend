@@ -22,6 +22,8 @@ export class MonitoramentoParametrosComponent implements OnInit {
   listUnidadeParametro: UnidadeParametro;
   tipoMonitoramentoParam: TipoMonitoramentoParametros;
 
+  isEdit = false;
+
   formGroup = new FormGroup({
     id: new FormControl(''),
     tipo_monitoramento_id: new FormControl('', Validators.required),
@@ -63,7 +65,6 @@ export class MonitoramentoParametrosComponent implements OnInit {
     } else {
       this.tipoMonitoramentoService.getParamByTipoMonitoramentoId(this.formGroup.value.tipo_monitoramento_id).subscribe(data => {
         this.tipoMonitoramentoParam = data.monitoramento_params;
-        console.log(JSON.stringify(this.tipoMonitoramentoParam));
       });
     }
   }
@@ -87,12 +88,52 @@ export class MonitoramentoParametrosComponent implements OnInit {
     if (!this.formGroup.valid) { return; }
     this.tipoMonitoramentoParamService[this.formGroup.value.id ? 'edit' : 'add'](this.formGroup.value).subscribe(data => {
       this.dialogBox.show('Parametro salvo com sucesso!', 'OK');
+      this.isEdit = false;
       this.changeTipoMonitoramento();
-      this.formGroup.reset();
+    });
+  }
+
+  editar(param: any) {
+    this.getParametros();
+    this.formGroup.patchValue({
+      parametro_id: param.parametro_id
+    });
+    this.unidadeParametroService.getListUnidadeByParametroId(this.formGroup.value.parametro_id).subscribe(data => {
+      this.listUnidadeParametro = data.unidades;
+    });
+    if (!param) { return; }
+    this.formGroup.patchValue({
+      id: param.id,
+      tipo_monitoramento_id: param.tipo_monitoramento_id,
+      // parametro_id: param.parametro_id,
+      unidade_parametro_id: param.unidade_parametro_id,
+      ds_operador: param.ds_operador,
+      nr_padrao_inicial: param.nr_padrao_inicial,
+      nr_padrao_final: param.nr_padrao_final,
+      nr_peso: param.nr_peso
+    });
+    this.isEdit = true;
+  }
+
+  remover(item: any) {
+    if (!item) { return; }
+    this.dialogBox.show('Confirma remocao do parametro?', 'CONFIRM').then(sim => {
+      if (sim) {
+        this.tipoMonitoramentoParamService.remove(item.id).subscribe(data => {
+          this.dialogBox.show('Parametro removido com sucesso!', 'OK');
+          this.changeTipoMonitoramento();
+        });
+      }
     });
   }
 
   cancelar() {
     this.formGroup.reset();
+    this.isEdit = false;
+    this.tipoMonitoramentoParam = null;
+  }
+
+  showEdit() {
+    this.isEdit = true;
   }
 }
