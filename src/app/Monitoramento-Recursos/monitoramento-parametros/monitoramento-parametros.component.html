@@ -139,7 +139,7 @@
             <tr *ngFor="let item of tipoMonitoramentoParam; let i = index">
               <!-- <td class="text-center text-muted">{{i+1}}</td> -->
               <td class="text-left">{{item.parametro.nm_parametro}}</td>
-              <td *ngFor="let unidade of item.parametro.unidades; let j = index2" class="text-center">{{unidade.cd_unidade_padrao}}</td>
+              <td class="text-center">{{item.unidade.cd_unidade_padrao}}</td>
               <td class="text-center">{{item.ds_operador}}</td>
               <td class="text-right">{{item.nr_padrao_inicial}}</td>
               <td class="text-right">{{item.nr_padrao_final}}</td>

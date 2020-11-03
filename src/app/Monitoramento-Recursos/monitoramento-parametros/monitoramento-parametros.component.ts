@@ -64,7 +64,7 @@ export class MonitoramentoParametrosComponent implements OnInit {
       return;
     } else {
       this.tipoMonitoramentoService.getParamByTipoMonitoramentoId(this.formGroup.value.tipo_monitoramento_id).subscribe(data => {
-        this.tipoMonitoramentoParam = data.monitoramento_params;
+        this.tipoMonitoramentoParam = data;
         console.log('this.tipoMonitoramentoParam ' + JSON.stringify(this.tipoMonitoramentoParam));
       });
     }

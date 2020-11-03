@@ -17,7 +17,7 @@ export class FonteEmissoraComponent implements OnInit {
   columnsFonteEmissora = [
     {name : 'FonteEmissora', prop : 'nm_fonte_emissora', width : '35%', selecionado: true},
     {name : 'Descrição', prop : 'ds_fonte_emissora', width : '20%', selecionado: false},
-    {name : 'Classificação', prop : 'nm_classificacao', width : '20%', selecionado: false},
+    {name : 'Classificação', prop : 'ds_classificacao', width : '20%', selecionado: false},
     {name : 'Observação', prop : 'ds_observacao', width : '20%', selecionado: false}
   ];
 

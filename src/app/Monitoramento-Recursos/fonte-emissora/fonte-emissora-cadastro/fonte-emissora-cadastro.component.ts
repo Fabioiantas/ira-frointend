@@ -19,7 +19,7 @@ export class FonteEmissoraCadastroComponent implements OnInit {
     id: new FormControl(''),
     nm_fonte_emissora: new FormControl('', Validators.required),
     ds_fonte_emissora: new FormControl(''),
-    nm_classificacao: new FormControl('', Validators.required),
+    ds_classificacao: new FormControl('', Validators.required),
     ds_observacao: new FormControl('')
   });
 
@@ -40,7 +40,7 @@ export class FonteEmissoraCadastroComponent implements OnInit {
         this.formGroup.patchValue({
           id: fonteEmissora.id,
           nm_fonte_emissora:  fonteEmissora.nm_fonte_emissora,
-          nm_classificacao: fonteEmissora.nm_classificacao,
+          ds_classificacao: fonteEmissora.ds_classificacao,
           ds_fonte_emissora:  fonteEmissora.ds_fonte_emissora,
           ds_observacao:  fonteEmissora.ds_observacao,
         });

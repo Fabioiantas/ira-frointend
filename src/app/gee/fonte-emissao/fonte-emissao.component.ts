@@ -16,7 +16,7 @@ export class FonteEmissaoComponent implements OnInit {
 
   columnsFonteEmissao = [
     {name : 'Fonte', prop : 'nm_fonte_emissao', width : '35%', selecionado: true},
-    {name : 'Class.', prop : 'nm_classificacao', width : '20%', selecionado: false},
+    {name : 'Class.', prop : 'ds_classificacao', width : '20%', selecionado: false},
     {name : 'UN.', prop : 'cd_unidade_consumo', width : '20%', selecionado: false},
     {name : 'co2', prop : 'nr_fator_co2_movel', width : '20%', selecionado: false},
     {name : 'n2o', prop : 'nr_fator_n2o_movel', width : '20%', selecionado: false},
