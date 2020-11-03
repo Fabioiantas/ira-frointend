@@ -27,14 +27,14 @@
   <div class="card-header">
     <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
       <i class="header-icon lnr-license mr-5 text-muted opacity-6" *ngIf="true">
-        <!-- {{tipoMonitoramento.nm_monitoramento}} -->
+        Parametrizar Tipo de Monitoramento
       </i>
     </div>
     <!-- BUUTONS -->
     <div class="btn-actions-pane-right pt-2">
       <div class="btn-group-xs btn-group" role="group">
         <div *ngIf="!isEdit">
-          <button (click)="showEdit()" class="btn btn-success mb-2 btn-sm">Inserir</button>
+          <button (click)="inserir()" class="btn btn-success mb-2">Inserir Novo Parametro</button>
         </div>
       </div>
     </div>
@@ -125,24 +125,24 @@
         <table class="align-middle mb-0 table table-borderless table-sm table-striped table-hover">
           <thead class="thead-light">
             <tr [ngClass]="{'table-active': !isAddEdit}">
-              <th class="text-left" width="8%">Parametro</th>
-              <th class="text-left" width="10%">UN.</th>
-              <th class="text-left">Operador</th>
-              <th class="text-left">Padrão</th>
-              <th class="text-left">Padrão Final</th>
-              <th class="text-center" width="10%">Editar</th>
-              <th class="text-center" width="10%">Deletar</th>
+              <th class="text-left" width="30%">Parametro</th>
+              <th class="text-center" width="10%">UN.</th>
+              <th class="text-center" width="10%">Operador</th>
+              <th class="text-right" width="10%">Padrão Inicial</th>
+              <th class="text-right" width="10%">Padrão Final</th>
+              <th class="text-center ml-3" width="5%">Editar</th>
+              <th class="text-center" width="5%">Deletar</th>
             </tr>
           </thead>
           <tbody>
             <!-- DADOS DA TABLE -->
             <tr *ngFor="let item of tipoMonitoramentoParam; let i = index">
               <!-- <td class="text-center text-muted">{{i+1}}</td> -->
-              <td class="text-left">{{item.parametro.sg_parametro}}</td>
-              <td class="text-left">{{item.parametro.unidades.cd_unidade_padrao}}</td>
-              <td class="text-left">{{item.ds_operador}}</td>
-              <td class="text-left">{{item.nr_padrao_inicial}}</td>
-              <td class="text-left">{{item.nr_padrao_final}}</td>
+              <td class="text-left">{{item.parametro.nm_parametro}}</td>
+              <td *ngFor="let unidade of item.parametro.unidades; let j = index2" class="text-center">{{unidade.cd_unidade_padrao}}</td>
+              <td class="text-center">{{item.ds_operador}}</td>
+              <td class="text-right">{{item.nr_padrao_inicial}}</td>
+              <td class="text-right">{{item.nr_padrao_final}}</td>
               <td class="text-center icons">
                 <i class="pe-7s-tools text-primary" (click)="editar(item)"></i>
               </td>

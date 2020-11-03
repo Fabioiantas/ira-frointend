@@ -29,15 +29,16 @@ export class TipoMonitoramentoService {
     return this.http.get<any>(`${environment.baseUrl}/auth/tipomonitoramentoparam/${tipoMonitoramentoId}`);
   }
 
-  add(tipoMonitoramento: TipoMonitoramento) {
-    return this.http.post<any>(environment.baseUrl + '/auth/tipomonitoramento', tipoMonitoramento);
+  add(tipoMonitoramento: TipoMonitoramento): Observable<TipoMonitoramento> {
+    return this.http.post<TipoMonitoramento>(environment.baseUrl + '/auth/tipomonitoramento', tipoMonitoramento);
   }
 
-  remove(id) {
+  edit(tipoMonitoramento: TipoMonitoramento): Observable<TipoMonitoramento> {
+    return this.http.put<TipoMonitoramento>(`${environment.baseUrl}/auth/tipomonitoramento`, tipoMonitoramento);
+  }
+
+  remove(id: any) {
     return this.http.delete(environment.baseUrl + '/auth/tipomonitoramento/' + id);
   }
 
-  edit(recurso: TipoMonitoramento) {
-    return this.http.put(`${environment.baseUrl}/auth/tipomonitoramento`, recurso);
-  }
 }

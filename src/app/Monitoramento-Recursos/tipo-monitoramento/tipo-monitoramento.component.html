@@ -32,8 +32,8 @@
     <div class="btn-actions-pane-right">
       <div class="btn-group-sm btn-group" role="group">
         <a class="btn btn-success" [routerLink]="['/tipomonitoramento/adicionar']">Adicionar</a>
-        <button class="btn btn-primary" type="button" (click)="editar(selected[0].id)">Editar</button>
-        <button class="btn btn-dark" type="button" (click)="remover()">Remover</button>
+        <button class="btn btn-primary" type="button" (click)="editar(selected[0])">Editar</button>
+        <button class="btn btn-dark" type="button" (click)="remover(selected[0])">Remover</button>
       </div>
     </div>
   </div>
@@ -55,6 +55,11 @@
     <ngx-datatable-column name="Número" prop="nr_monitoramento" [flexGrow]="2"></ngx-datatable-column>
     <ngx-datatable-column name="Recurso" prop="recurso.nm_recurso" [flexGrow]="2"></ngx-datatable-column>
     <ngx-datatable-column name="Monitoramento" prop="nm_monitoramento" [flexGrow]="2"></ngx-datatable-column>
+    <ngx-datatable-column name="Situacao" prop="ie_situacao" [flexGrow]="2">
+      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+        {{value == "A" ? "Ativo" : "Inativo"}}
+      </ng-template>
+    </ngx-datatable-column>
   </ngx-datatable>
 </section>
 

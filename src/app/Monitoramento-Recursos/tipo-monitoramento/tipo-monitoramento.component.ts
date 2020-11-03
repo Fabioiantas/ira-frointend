@@ -17,7 +17,8 @@ export class TipoMonitoramentoComponent implements OnInit {
   columnsTipoMonitoramento = [
     {name : 'Númer', prop : 'nr_monitoramento', width : '35%', selecionado: true},
     {name : 'Recurso', prop : 'nm_recurso', width : '20%', selecionado: false},
-    {name : 'Monitoramento', prop : 'nm_monitoramento', width : '20%', selecionado: false}
+    {name : 'Monitoramento', prop : 'nm_monitoramento', width : '20%', selecionado: false},
+    {name : 'Situacao', prop : 'ie_situacao', width : '20%', selecionado: false}
   ];
 
   constructor(private router: Router,
@@ -35,22 +36,27 @@ export class TipoMonitoramentoComponent implements OnInit {
     });
   }
 
-  remover() {
-    if (this.selected) {
-      this.dialogBox.show('Confirma remoção do Recurso?', 'CONFIRM').then(sim => {
-        if (sim) {
-          this.tipoMonitoramentoService.remove(this.selected[0].id).subscribe(data => {
-            this.dialogBox.show('Recurso removido com sucesso!', 'OK');
-            this.populaTable();
-          });
-        }
-      });
+  remover(selected: any) {
+    if (!selected) {
+      this.dialogBox.show('Selecione um Monitoramento!', 'ERROR');
+      return;
     }
+    this.dialogBox.show('Confirma remoção do Monitoramento?', 'CONFIRM').then(sim => {
+      if (sim) {
+        this.tipoMonitoramentoService.remove(selected[0].id).subscribe(data => {
+          this.dialogBox.show('Monitoramento removido com sucesso!', 'OK');
+          this.populaTable();
+        });
+      }
+    });
   }
 
-  editar(id) {
-    console.log('editar: ' + id);
-    this.router.navigate(['/recurso/adicionar/' + id]);
+  editar(selected: any) {
+    if (!selected) {
+      this.dialogBox.show('Selecione um Monitoramento!', 'ERROR');
+      return;
+    }
+    this.router.navigate(['/tipomonitoramento/adicionar/' + selected.id]);
   }
 
   editarForm(e) {

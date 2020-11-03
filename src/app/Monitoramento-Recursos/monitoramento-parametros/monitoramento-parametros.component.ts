@@ -65,6 +65,7 @@ export class MonitoramentoParametrosComponent implements OnInit {
     } else {
       this.tipoMonitoramentoService.getParamByTipoMonitoramentoId(this.formGroup.value.tipo_monitoramento_id).subscribe(data => {
         this.tipoMonitoramentoParam = data.monitoramento_params;
+        console.log('this.tipoMonitoramentoParam ' + JSON.stringify(this.tipoMonitoramentoParam));
       });
     }
   }
@@ -79,9 +80,28 @@ export class MonitoramentoParametrosComponent implements OnInit {
     this.formGroup.patchValue({
       unidade_parametro_id: null
     });
+    this.getUnidadeParamList();
+  }
+
+  getUnidadeParamList() {
     this.unidadeParametroService.getListUnidadeByParametroId(this.formGroup.value.parametro_id).subscribe(data => {
       this.listUnidadeParametro = data.unidades;
     });
+  }
+
+  inserir() {
+    if (!this.formGroup.value.tipo_monitoramento_id) {
+      this.formGroup.reset();
+    } else {
+      this.formGroup.patchValue({
+        parametro_id: null,
+        unidade_parametro_id: null,
+        ds_operador: null,
+        nr_padrao_inicial: null,
+        nr_padrao_final: null
+      });
+    }
+    this.isEdit = true;
   }
 
   salvar() {
@@ -95,6 +115,7 @@ export class MonitoramentoParametrosComponent implements OnInit {
 
   editar(param: any) {
     this.getParametros();
+    this.formGroup.reset();
     this.formGroup.patchValue({
       parametro_id: param.parametro_id
     });
@@ -131,9 +152,5 @@ export class MonitoramentoParametrosComponent implements OnInit {
     this.formGroup.reset();
     this.isEdit = false;
     this.tipoMonitoramentoParam = null;
-  }
-
-  showEdit() {
-    this.isEdit = true;
   }
 }
