@@ -119,15 +119,16 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
   }
 
   populaTable(id: any) {
+    this.loading = true;
     this.monitoramentoService.findAmostras(this.params.id).subscribe(data => {
       this.amostras = data.amostras;
       this.laudoAmostra = data;
       this.tipoMonitoramentoService.getTipoMonitoramentoById(this.laudoAmostra.tipo_monitoramento_id).subscribe(tipo => {
         this.tipoMonitoramento = tipo;
+        this.loading = false;
       });
       this.monitoramentoService.getMonitoramentoById(this.laudoAmostra.monitoramento_id).subscribe(monitoramentoRecuso => {
         this.monitoramentoRecuso = monitoramentoRecuso;
-        console.log('data ' + JSON.stringify(this.monitoramentoRecuso.entidade));
       });
     });
   }
@@ -160,12 +161,14 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
 
   getResultadoAmostra(amostra: any) {
     this.isShowTalhao = false;
+    this.loading = true;
     this.nrAmostra = amostra.nr_amostra;
     this.dsAmostra =  amostra.ds_amostra;
     this.amostraId =  amostra.id;
     this.monitoramentoService.getResultadoAmostra(amostra.id).subscribe(resultadoAmostra => {
       this.resultadoAmostra = resultadoAmostra;
       this.showParametros();
+      this.loading = false;
       this.isShowResultados = true;
       this.isShowAmostras = false;
     });
@@ -265,13 +268,13 @@ export class MonitoramentoAmostraCadastroComponent implements OnInit {
   salvarResultado() {
     this.isLoading = true;
     // tslint:disable-next-line:no-string-literal
-    this.monitoramentoService.putResultado(this.resultadoAmostra['resultados']).subscribe(data => {
+    this.monitoramentoService.putResultado(this.resultadoAmostra).subscribe(data => {
       this.dialogBox.show('Resultado(s) salvo(s) com sucesso!', 'OK');
+      this.isLoading = false;
+      this.populaTable(this.params.id);
+      this.isAddEditResult = false;
+      this.isAddEditResultB = false;
     });
-    this.populaTable(this.params.id);
-    this.isLoading = false;
-    this.isAddEditResult = false;
-    this.isAddEditResultB = false;
   }
 
   cancelarResultado() {

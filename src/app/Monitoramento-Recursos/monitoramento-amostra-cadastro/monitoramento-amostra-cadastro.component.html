@@ -128,7 +128,14 @@
 </section>
 
 <section class="content">
-  <div *ngIf="!isAddEditParam && !isShowTalhao" class="row">
+  <div class="loader-wrapper d-flex justify-content-center align-items-center" *ngIf="loading">
+    <div class="loader">
+      <div class="ball-scale-ripple">
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="!isAddEditParam && !isShowTalhao && !loading" class="row">
     <div class="col-md-12">
       <div class="table-responsive" style="min-height: 500px;">
         <table class="align-middle mb-0 table table-borderless table-sm table-striped table-hover">
@@ -173,7 +180,7 @@
   </div>
 
   <!--Resultado-->
-  <div *ngIf="isAddEditParam">
+  <div *ngIf="isAddEditParam && !loading">
     <div class="row">
       <div class="col-md-12">
         <div class="table-responsive" style="min-height: 500px;">
@@ -195,12 +202,12 @@
                     <th class="text-center">Operador</th>
                     <th class="text-center qtd-input" width="10%">Resultado</th>
                   </tr>
-                  <tr *ngFor="let item of resultadoAmostra.resultados; let id = index">
+                  <tr *ngFor="let item of resultadoAmostra; let id = index">
                     <td>
                       <span>{{item.parametro.sg_parametro}}</span>
                     </td>
-                    <td *ngFor="let un of item.parametro.unidades; let id = index">
-                      <span>{{un.cd_unidade_padrao}}</span>
+                    <td>
+                      <span>{{item.unidade_parametro.cd_unidade_padrao}}</span>
                     </td>
                     <td>
                       <span>{{item.nr_padrao_inicial}}</span>
@@ -218,7 +225,7 @@
                       <div class="form-group">
                         <input class="form-control form-control-xs text-right" name="nr_resultado"
                           placeholder="Resultado" type="number"
-                          [(ngModel)]="resultadoAmostra.resultados[id].nr_resultado">
+                          [(ngModel)]="resultadoAmostra[id].nr_resultado">
                       </div>
                     </td>
                   </tr>

@@ -20,6 +20,7 @@ import { FilterMonitoramentoRecurso } from 'src/app/models/filter-monitoramento-
 import { DataService } from 'src/app/services/data.service';
 import { TipoMonitoramentoService } from 'src/app/services/tipo-monitoramento.service';
 import { TipoMonitoramento } from 'src/app/models/tipoMonitoramento';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-monitoramento-cadastro',
@@ -106,7 +107,6 @@ export class MonitoramentoCadastroComponent implements OnInit {
         fonteEmissora: [null, Validators.required]
       });
     }
-
     this.entidadeService.listaEntidades().subscribe((entidades: Entidade) => {
       this.entidades = entidades;
     });
