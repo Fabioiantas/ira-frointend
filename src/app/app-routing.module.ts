@@ -66,6 +66,8 @@ import { TalhaoCadastroComponent } from './Monitoramento-Recursos/monitoramento-
 import { UnidadeParametroComponent } from './Monitoramento-Recursos/unidade-parametro/unidade-parametro.component';
 import { UnidadeParametroCadastroComponent } from './Monitoramento-Recursos/unidade-parametro/unidade-parametro-cadastro/unidade-parametro-cadastro.component';
 import { MonitoramentoParametrosComponent } from './Monitoramento-Recursos/monitoramento-parametros/monitoramento-parametros.component';
+import { AuditoriaNivelComponent } from './auditoria/auditoria-nivel/auditoria-nivel.component';
+import { AuditoriaNivelCadastroComponent } from './auditoria/auditoria-nivel/auditoria-nivel-cadastro/auditoria-nivel-cadastro.component';
 
 const routes: Routes = [
   {
@@ -636,6 +638,33 @@ const routes: Routes = [
 
     ]
   },
+
+  //AUDITORIA  NIVEL
+  {
+    path: 'auditorianivel',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: AuditoriaNivelComponent,
+        data: { extraParameter: 'mAuditoriaMenu' },
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'adicionar',
+        component: AuditoriaNivelCadastroComponent,
+        data: { roles: [Role.Admin], extraParameter: 'mAuditoriaMenu' },
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'adicionar/:id',
+        component: AuditoriaNivelCadastroComponent,
+        data: { extraParameter: 'mAuditoriaMenu' },
+        canActivate: [AuthGuard]
+      }
+    ]
+  },
+
   { path: '**', redirectTo: '' }
 ];
 

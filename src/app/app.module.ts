@@ -138,6 +138,8 @@ import { TalhaoCadastroComponent } from './Monitoramento-Recursos/monitoramento-
 import { UnidadeParametroComponent } from './Monitoramento-Recursos/unidade-parametro/unidade-parametro.component';
 import { UnidadeParametroCadastroComponent } from './Monitoramento-Recursos/unidade-parametro/unidade-parametro-cadastro/unidade-parametro-cadastro.component';
 import { MonitoramentoParametrosComponent } from './Monitoramento-Recursos/monitoramento-parametros/monitoramento-parametros.component';
+import { AuditoriaNivelComponent } from './auditoria/auditoria-nivel/auditoria-nivel.component';
+import { AuditoriaNivelCadastroComponent } from './auditoria/auditoria-nivel/auditoria-nivel-cadastro/auditoria-nivel-cadastro.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -239,6 +241,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     UnidadeParametroComponent,
     UnidadeParametroCadastroComponent,
     MonitoramentoParametrosComponent,
+    AuditoriaNivelComponent,
+    AuditoriaNivelCadastroComponent,
 
   ],
   imports: [
