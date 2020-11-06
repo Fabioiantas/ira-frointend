@@ -64,6 +64,7 @@ export class AuditoriaNivelCadastroComponent implements OnInit {
       this.listAtividade = data;
     });
   }
+
   salvar() {
     if (!this.formGroup.valid) { return; }
     console.log(this.formGroup.value.id);

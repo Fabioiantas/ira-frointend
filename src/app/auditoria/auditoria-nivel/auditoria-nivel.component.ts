@@ -15,7 +15,7 @@ export class AuditoriaNivelComponent implements OnInit {
   rowsNivel: any[];
 
   columnsNivel = [
-    {name : 'Tipo Atividade', prop : 'tipo_atividade.nm_atividade', width : '35%', selecionado: true},
+    {name : 'Atividade', prop : 'nm_atividade', width : '35%', selecionado: true},
     {name : 'Auditoria', prop : 'nm_nivel', width : '20%', selecionado: false},
     {name : 'Situação', prop : 'ie_situacao', width : '20%', selecionado: false}
   ];
@@ -31,7 +31,14 @@ export class AuditoriaNivelComponent implements OnInit {
   populaTable() {
     this.auditoriaNivelService.list().subscribe((response) => {
       this.nivel = [...response];
-      this.rowsNivel = [...response];
+      this.rowsNivel = [...response].map(row => ({
+        id: row.id,
+        tipo_atividade_id: row.tipo_atividade_id,
+        nm_atividade: row.tipo_atividade.nm_atividade,
+        nm_nivel: row.nm_nivel,
+        ds_nivel: row.ds_nivel,
+        ie_situacao: row.ie_situacao,
+      }));
     });
   }
 

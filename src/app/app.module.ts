@@ -140,6 +140,8 @@ import { UnidadeParametroCadastroComponent } from './Monitoramento-Recursos/unid
 import { MonitoramentoParametrosComponent } from './Monitoramento-Recursos/monitoramento-parametros/monitoramento-parametros.component';
 import { AuditoriaNivelComponent } from './auditoria/auditoria-nivel/auditoria-nivel.component';
 import { AuditoriaNivelCadastroComponent } from './auditoria/auditoria-nivel/auditoria-nivel-cadastro/auditoria-nivel-cadastro.component';
+import { ClassificacaoRequisitoComponent } from './auditoria/auditoria-nivel/classificacao-requisito/classificacao-requisito.component';
+import { ClassificacaoRequisitoCadastroComponent } from './auditoria/auditoria-nivel/classificacao-requisito/classificacao-requisito-cadastro/classificacao-requisito-cadastro.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -243,6 +245,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     MonitoramentoParametrosComponent,
     AuditoriaNivelComponent,
     AuditoriaNivelCadastroComponent,
+    ClassificacaoRequisitoComponent,
+    ClassificacaoRequisitoCadastroComponent,
 
   ],
   imports: [

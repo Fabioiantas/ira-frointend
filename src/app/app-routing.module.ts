@@ -68,6 +68,8 @@ import { UnidadeParametroCadastroComponent } from './Monitoramento-Recursos/unid
 import { MonitoramentoParametrosComponent } from './Monitoramento-Recursos/monitoramento-parametros/monitoramento-parametros.component';
 import { AuditoriaNivelComponent } from './auditoria/auditoria-nivel/auditoria-nivel.component';
 import { AuditoriaNivelCadastroComponent } from './auditoria/auditoria-nivel/auditoria-nivel-cadastro/auditoria-nivel-cadastro.component';
+import { ClassificacaoRequisitoComponent } from './auditoria/auditoria-nivel/classificacao-requisito/classificacao-requisito.component';
+import { ClassificacaoRequisitoCadastroComponent } from './auditoria/auditoria-nivel/classificacao-requisito/classificacao-requisito-cadastro/classificacao-requisito-cadastro.component';
 
 const routes: Routes = [
   {
@@ -659,6 +661,31 @@ const routes: Routes = [
       {
         path: 'adicionar/:id',
         component: AuditoriaNivelCadastroComponent,
+        data: { extraParameter: 'mAuditoriaMenu' },
+        canActivate: [AuthGuard]
+      }
+    ]
+  },
+  //CLASSIFICACAO REQUISITO
+  {
+    path: 'classificacaorequisito',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: ClassificacaoRequisitoComponent,
+        data: { extraParameter: 'mAuditoriaMenu' },
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'adicionar',
+        component: ClassificacaoRequisitoCadastroComponent,
+        data: { roles: [Role.Admin], extraParameter: 'mAuditoriaMenu' },
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'adicionar/:id',
+        component: ClassificacaoRequisitoCadastroComponent,
         data: { extraParameter: 'mAuditoriaMenu' },
         canActivate: [AuthGuard]
       }
