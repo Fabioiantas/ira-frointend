@@ -9,7 +9,7 @@ import { DialogBoxService } from 'src/app/_services/dialog-box.service';
   styleUrls: ['./auditoria-nivel.component.sass']
 })
 export class AuditoriaNivelComponent implements OnInit {
-
+  //--page
   nivel: any = [];
   selected: any = [];
   rowsNivel: any[];
@@ -44,8 +44,8 @@ export class AuditoriaNivelComponent implements OnInit {
 
   remover() {
     if (this.selected) {
-      this.dialogBox.show("Confirma remoção do Nível?","CONFIRM").then(sim=>{
-        if(sim){
+      this.dialogBox.show('Confirma remoção do Nível?', 'CONFIRM').then(sim => {
+        if (sim) {
           this.auditoriaNivelService.remove(this.selected[0].id).subscribe(data => {
             this.dialogBox.show('Nível removido com sucesso!', 'OK');
             this.populaTable();
@@ -57,10 +57,10 @@ export class AuditoriaNivelComponent implements OnInit {
 
   editar(id) {
     console.log('editar nivel: ' + id);
-    this.router.navigate(['/auditorianivel/adicionar/' + id])
+    this.router.navigate(['/auditorianivel/adicionar/' + id]);
   }
 
-  editarForm(e){
+  editarForm(e) {
     this.editar(this.selected[0].id);
   }
 

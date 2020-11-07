@@ -39,13 +39,16 @@
   </div>
   <div class="p-3 bg-white">
     <div class="form-group form-inline mb-0">
-      <ngx-datatable-filter [margin]="'-6px'" [float]="'left'" [columns]="columnsClassificacaoRequisito" [lista]="rowsClassificacaoRequisito"
-        [table]="tableNivel"></ngx-datatable-filter>
+      <ngx-datatable-filter [margin]="'-6px'"
+        [float]="'left'" [columns]="columnsClassificacaoRequisito"
+        [lista]="rowsClassificacaoRequisito"
+        [table]="tableClassificacaoRequisito"></ngx-datatable-filter>
     </div>
   </div>
 
-  <ngx-datatable ngx-resize-watcher class="bootstrap striped" #tableNivel
-    [rows]="rowsClassificacaoRequisito" [footerHeight]="25"
+  <ngx-datatable ngx-resize-watcher class="bootstrap striped" #tableClassificacaoRequisito
+    [rows]="rowsClassificacaoRequisito"
+    [footerHeight]="25"
     [columnMode]="'force'"
     [columns]="columnsClassificacaoRequisito"
     [selected]="selected"

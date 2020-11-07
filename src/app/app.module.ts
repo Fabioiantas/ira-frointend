@@ -142,6 +142,10 @@ import { AuditoriaNivelComponent } from './auditoria/auditoria-nivel/auditoria-n
 import { AuditoriaNivelCadastroComponent } from './auditoria/auditoria-nivel/auditoria-nivel-cadastro/auditoria-nivel-cadastro.component';
 import { ClassificacaoRequisitoComponent } from './auditoria/auditoria-nivel/classificacao-requisito/classificacao-requisito.component';
 import { ClassificacaoRequisitoCadastroComponent } from './auditoria/auditoria-nivel/classificacao-requisito/classificacao-requisito-cadastro/classificacao-requisito-cadastro.component';
+import { AuditoriaItemComponent } from './auditoria/auditoria-nivel/auditoria-item/auditoria-item.component';
+import { AuditoriaItemCadastroComponent } from './auditoria/auditoria-nivel/auditoria-item/auditoria-item-cadastro/auditoria-item-cadastro.component';
+import { AuditoriaRequisitoComponent } from './auditoria/auditoria-requisito/auditoria-requisito.component';
+import { AuditoriaRequisitoCadastroComponent } from './auditoria/auditoria-requisito/auditoria-requisito-cadastro/auditoria-requisito-cadastro.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -247,6 +251,10 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AuditoriaNivelCadastroComponent,
     ClassificacaoRequisitoComponent,
     ClassificacaoRequisitoCadastroComponent,
+    AuditoriaItemComponent,
+    AuditoriaItemCadastroComponent,
+    AuditoriaRequisitoComponent,
+    AuditoriaRequisitoCadastroComponent,
 
   ],
   imports: [

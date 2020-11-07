@@ -9,7 +9,7 @@ import { ClassificacaoRequisito } from 'src/app/models/classificacaoRequisito';
   providedIn: 'root'
 })
 export class ClassificacaoRequisitoService {
-
+  // --service
   constructor(private http: HttpClient, private router: Router) {}
 
   list(): Observable<any> {

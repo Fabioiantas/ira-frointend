@@ -13,7 +13,7 @@ import { DialogBoxService } from 'src/app/_services/dialog-box.service';
   styleUrls: ['./auditoria-nivel-cadastro.component.sass']
 })
 export class AuditoriaNivelCadastroComponent implements OnInit {
-
+  // --pagecad
   formGroup = new FormGroup({
     id: new FormControl(''),
     tipo_atividade_id: new FormControl('', Validators.required),
@@ -89,5 +89,4 @@ export class AuditoriaNivelCadastroComponent implements OnInit {
       tipo_atividade_id: this.tipoAtividade.id
     });
   }
-
 }
