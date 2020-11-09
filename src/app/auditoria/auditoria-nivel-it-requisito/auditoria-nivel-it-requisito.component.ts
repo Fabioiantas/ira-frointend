@@ -1,27 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { AuditoriaItem } from 'src/app/models/auditoriaItem';
 import { AuditoriaNivel } from 'src/app/models/auditoriaNivel';
 import { AuditoriaNivelItem } from 'src/app/models/auditoriaNivelItem';
 import { TipoAtividade } from 'src/app/models/tipoatividade';
 import { AuditoriaNivelService } from 'src/app/services/auditoria-nivel.service';
 import { AuditoriaItemService } from 'src/app/services/auditoria/auditoria-item.service';
+import { AuditoriaNivelItRequisitoService } from 'src/app/services/auditoria/auditoria-nivel-it-requisito.service';
 import { AuditoriaNivelItemServiceService } from 'src/app/services/auditoria/auditoria-nivel-item-service.service';
 import { TipoAtividadeService } from 'src/app/services/tipo-atividade.service';
 import { DialogBoxService } from 'src/app/_services/dialog-box.service';
-import { ToastrService } from 'ngx-toastr';
 
 @Component({
-  selector: 'app-auditoria-nivel-item',
-  templateUrl: './auditoria-nivel-item.component.html',
-  styleUrls: ['./auditoria-nivel-item.component.sass']
+  selector: 'app-auditoria-nivel-it-requisito',
+  templateUrl: './auditoria-nivel-it-requisito.component.html',
+  styleUrls: ['./auditoria-nivel-it-requisito.component.sass']
 })
-export class AuditoriaNivelItemComponent implements OnInit {
+export class AuditoriaNivelItRequisitoComponent implements OnInit {
 
   listTipoAtividade: TipoAtividade;
   auditoriaNivelItem: any[];
   listAuditoriaNivelItem: any[];
   auditoriaNivelItemCadastro: AuditoriaNivelItem;
+  auditoriaNivelItRequisito: any[];
   listAuditoriaItem: AuditoriaItem[];
   auditoriaItem: AuditoriaItem = new AuditoriaItem();
   listNivel: AuditoriaNivel;
@@ -41,6 +43,7 @@ export class AuditoriaNivelItemComponent implements OnInit {
               private auditoriaNivelService: AuditoriaNivelService,
               private auditoriaItemSerice: AuditoriaItemService,
               private auditoriaNivelItemService: AuditoriaNivelItemServiceService,
+              private auditoriaNivelItRequisitoService: AuditoriaNivelItRequisitoService,
               private formBuilder: FormBuilder,
               private dialogBox: DialogBoxService,
               private toastrService: ToastrService) { }
@@ -49,7 +52,7 @@ export class AuditoriaNivelItemComponent implements OnInit {
     this.filterForm = this.formBuilder.group({
       tipoAtividade: [null],
       auditoriaNivel: [null, Validators.required],
-      auditoriaItem: [null, Validators.required]
+      auditoriaNivelItem: [null, Validators.required]
     });
     this.getAtividade();
   }
@@ -104,19 +107,32 @@ export class AuditoriaNivelItemComponent implements OnInit {
 
   changeNivel() {
     this.auditoriaNivelItemService.getByNivel(this.filterForm.value.auditoriaNivel.id).subscribe(data => {
-      this.auditoriaNivelItem = data.map(row => ({
+      console.log('nivel item ' + JSON.stringify(data));
+      this.listAuditoriaNivelItem = data.map(row => ({
         id: row.id,
         auditoria_nivel_id: row.auditoria_nivel_id,
         auditoria_item: row.auditoria_item,
         ds_item: row.auditoria_item.ds_item
       }));
-      this.getItens();
     });
   }
 
-  changeItem() {
-    this.filterForm.patchValue({
-      auditoriaItem: this.auditoriaItem
+  getRequisitos() {
+    alert('get requisitos');
+  }
+
+  changeNivelItem() {
+    this.auditoriaNivelItRequisitoService.getRequisitosByNivelId(this.filterForm.value.auditoriaNivelItem.id).subscribe(data => {
+      this.auditoriaNivelItRequisito = data.map(row => ({
+        id: row.id,
+        auditoria_nivel_item_id: row.auditoria_nivel_item_id,
+        auditoria_requisito_id: row.auditoria_requisito_id,
+        ds_requisito: row.auditoria_requisito.ds_requisito,
+        classificacao_requisito_id: row.classificacao_requisito_id,
+        ds_orientacao: row.ds_orientacao,
+        nr_peso: row.nr_peso,
+        ie_evidencia: row.ie_evidencia
+      }));
     });
   }
 

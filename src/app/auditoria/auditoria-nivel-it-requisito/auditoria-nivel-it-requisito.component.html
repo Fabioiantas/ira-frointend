@@ -1,0 +1,136 @@
+<div class="app-inner-layout chat-layout">
+
+  <div class="app-inner-layout__wrapper" [ngClass]="{'open-mobile-menu' : toggleMobileSidebar}">
+    <div class="app-inner-layout__content card">
+      <!-- <div class="table-responsive"> -->
+        <div class="app-inner-layout__top-pane">
+          <div class="pane-left">
+            <div class="mobile-app-menu-btn">
+              <button type="button" class="hamburger hamburger--elastic" [ngClass]="{'is-active' : toggleMobileSidebar}"
+                (click)="toggleMobileSidebar = !toggleMobileSidebar">
+                <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+              </button>
+            </div>
+            <h4 class="mb-0 text-nowrap title">
+              <!-- <div class="opacity-7 mt-2">Última atualização: <span class="opacity-8">{{programacao?.dtAtualizacao | date:'d/MM/yyyy H:mm:ss'}}</span></div> -->
+            </h4>
+
+          </div>
+        </div>
+        <div class="app-inner-layout__bottom-pane d-flex" style="padding: 0px;">
+          <div class="mb-0 form-group" style="width: 100%;">
+            <div class="col-sm-12">
+
+              <div class="loader-wrapper d-flex justify-content-center align-items-center" *ngIf="loading">
+                <div class="loader">
+                  <div class="ball-scale-ripple">
+                    <div></div>
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="form-row bg-info">
+                <div class="col-md-12 mb-12 form-group">
+                  <label for="auditoria_item_id">Itens</label>
+                  <ng-select class="p-1" [items]="listAuditoriaItem" bindValue="id" (change)="changeItem()"
+                    [(ngModel)]="auditoriaItem.id"
+                    bindLabel="ds_item" name="auditoria_item_id" placeholder="Buscar Item...">
+                  </ng-select>
+                  <button type="button" (click)="addItem()" class="btn-primary">Inserir Item</button>
+                </div>
+              </div> -->
+              <div>
+                <div class="col-md-12">
+                  <div class="table-responsive" style="min-height: 500px;">
+
+                    <!-- <div class="p-2 bg-white">
+                      <div class="form-group form-inline mb-0">
+                        <ngx-datatable-filter [margin]="'-6px'" [float]="'left'" [columns]="columnsNivelItem"
+                          [lista]="listAuditoriaItem" [table]="tableNivelItens"></ngx-datatable-filter>
+                      </div>
+                    </div> -->
+
+
+                    <div class="col-md-12">
+                      <!-- <div class="table-responsive" style="min-height: 500px;"> -->
+                        <table class="align-middle mb-0 table table-borderless table-sm table-striped table-hover" #tableNivelItens>
+                          <thead class="thead-light">
+                            <tr [ngClass]="{'table-active': !isAddEdit}">
+                              <th class="text-left" width="76%">Requisito</th>
+                              <th class="text-center" width="10%">Requisitos</th>
+                              <th class="text-center" width="10%">Remover</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <!-- DADOS DA TABLE -->
+                            <tr *ngFor="let requisito of auditoriaNivelItRequisito; let i = index">
+                              <td class="text-left">{{requisito.ds_requisito}}</td>
+                              <td class="text-center icons">
+                                <i class="pe-7s-menu text-primary" (click)="editarItem(am)"></i>
+                              </td>
+                              <td class="text-center icons">
+                                <i class="pe-7s-trash text-danger" (click)="removeItem(it.id)"></i>
+                              </td>
+                            </tr>
+
+                          </tbody>
+                        </table>
+                        <div class="divider"></div>
+                      <!-- </div> -->
+                    </div>
+
+
+                    <div class="divider"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="text-center mt-3" *ngIf="!auditoriaNivelItem?.length">
+                <h6>Não foram encontradaos itens cadastrados</h6>
+                <!-- <button (click)="create()" class="mb-2 mr-2 mt-4 btn-icon btn-pill btn btn-outline-success"><i
+                    class="pe-7s-plus btn-icon-wrapper"></i>Inserir</button> -->
+              </div>
+            </div>
+          </div>
+        </div>
+      <!-- </div> -->
+    </div>
+
+    <!--Sidebar Filter Programação-->
+    <div class="app-inner-layout__sidebar card">
+      <div class="app-inner-layout__sidebar-header">
+        <form [formGroup]="filterForm">
+          <ul class="nav flex-column filter-programacao">
+            <li class="nav-item-header nav-item pt-3">Auditoria</li>
+
+            <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
+              <label class="mb-0 pl-1">Tipo Atividadae:</label>
+              <ng-select [items]="listTipoAtividade" (change)="changeTipoAtividade()" bindLabel="nm_atividade"
+                (change)="changeTipoAtividade()" formControlName="tipoAtividade" name="tipoAtividade" placeholder="Buscar Atividade...">
+              </ng-select>
+            </li>
+
+            <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
+              <label class="mb-0 pl-1">Nivel:</label>
+              <ng-select [items]="listNivel" bindLabel="nm_nivel"
+                (change)="changeNivel()" formControlName="auditoriaNivel" name="auditoriaNivel" placeholder="Buscar Nível Auditoria...">
+              </ng-select>
+            </li>
+
+            <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
+              <label class="mb-0 pl-1">Item:</label>
+              <ng-select [items]="listAuditoriaNivelItem" bindLabel="ds_item"
+                (change)="changeNivelItem()" formControlName="auditoriaNivelItem" name="auditoriaNivelItem" placeholder="Buscar Item...">
+              </ng-select>
+            </li>
+          </ul>
+        </form>
+      </div>
+      <div class="app-inner-layout__sidebar-footer pt-3 pb-3 pl-3 pr-3">
+        <button class="btn-wide btn-pill btn btn-success btn-sm btn-block" (click)="findLaudos()"
+          [ladda]="loading">Filtrar</button>
+        <button class="btn-wide btn-pill btn btn-danger btn-sm btn-block" (click)="cleanFilter()"
+          [ladda]="loadingC">Limpar</button>
+      </div>
+    </div>
+    <!--//Sidebar Filter-->
+  </div>
+</div>

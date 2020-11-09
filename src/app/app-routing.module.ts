@@ -81,6 +81,7 @@ import { AuditoriaItemCadastroComponent } from './auditoria/auditoria-item/audit
 import { AuditoriaRequisitoComponent } from './auditoria/auditoria-requisito/auditoria-requisito.component';
 import { AuditoriaRequisitoCadastroComponent } from './auditoria/auditoria-requisito/auditoria-requisito-cadastro/auditoria-requisito-cadastro.component';
 import { AuditoriaNivelItemComponent } from './auditoria/auditoria-nivel-item/auditoria-nivel-item.component';
+import { AuditoriaNivelItRequisitoComponent } from './auditoria/auditoria-nivel-it-requisito/auditoria-nivel-it-requisito.component';
 
 const routes: Routes = [
   {
@@ -752,6 +753,8 @@ const routes: Routes = [
       }
     ]
   },
+
+  // NIVEL ITEM
   {
     path: 'auditorianivelitem',
     component: BaseLayoutComponent,
@@ -759,6 +762,32 @@ const routes: Routes = [
       {
         path: '',
         component: AuditoriaNivelItemComponent,
+        data: { extraParameter: 'mAuditoriaMenu' },
+        canActivate: [AuthGuard]
+      }
+      // ,
+      // {
+      //   path: 'adicionar',
+      //   component: AuditoriaRequisitoCadastroComponent,
+      //   data: { roles: [Role.Admin], extraParameter: 'mAuditoriaMenu' },
+      //   canActivate: [AuthGuard]
+      // },
+      // {
+      //   path: 'adicionar/:id',
+      //   component: AuditoriaRequisitoCadastroComponent,
+      //   data: { extraParameter: 'mAuditoriaMenu' },
+      //   canActivate: [AuthGuard]
+      // }
+    ]
+  },
+  // NIVEL ITEM REQUISITO
+  {
+    path: 'nivelitrequisito',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: AuditoriaNivelItRequisitoComponent,
         data: { extraParameter: 'mAuditoriaMenu' },
         canActivate: [AuthGuard]
       }
