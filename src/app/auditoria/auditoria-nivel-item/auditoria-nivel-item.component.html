@@ -31,11 +31,11 @@
               <div class="form-row bg-info">
                 <div class="col-md-12 mb-12 form-group">
                   <label for="auditoria_item_id">Itens</label>
-                  <ng-select class="p-1" [items]="listItem" bindValue="id" (change)="changeItem()"
-                    ([(ngModel)="auditoriaItem.id"
+                  <ng-select class="p-1" [items]="listAuditoriaItem" bindValue="id" (change)="changeItem()"
+                    [(ngModel)]="auditoriaItem.id"
                     bindLabel="ds_item" name="auditoria_item_id" placeholder="Buscar Item...">
                   </ng-select>
-                  <button type="button" (click)="add()" class="btn-primary">Inserir Item</button>
+                  <button type="button" (click)="addItem()" class="btn-primary">Inserir Item</button>
                 </div>
               </div>
               <div>
@@ -45,7 +45,7 @@
                     <div class="p-2 bg-white">
                       <div class="form-group form-inline mb-0">
                         <ngx-datatable-filter [margin]="'-6px'" [float]="'left'" [columns]="columnsNivelItem"
-                          [lista]="auditoriaNivelItem" [table]="tableNivelItens"></ngx-datatable-filter>
+                          [lista]="listAuditoriaItem" [table]="tableNivelItens"></ngx-datatable-filter>
                       </div>
                     </div>
 
@@ -67,10 +67,10 @@
                               <td class="text-center text-muted">{{it.id}}</td>
                               <td class="text-left">{{it.ds_item}}</td>
                               <td class="text-center icons">
-                                <i class="pe-7s-tools text-primary" (click)="editarItem(am)"></i>
+                                <i class="pe-7s-menu text-primary" (click)="editarItem(am)"></i>
                               </td>
                               <td class="text-center icons">
-                                <i class="pe-7s-trash text-danger" (click)="removerAmostra(am.id)"></i>
+                                <i class="pe-7s-trash text-danger" (click)="removeItem(it.id)"></i>
                               </td>
                             </tr>
 
@@ -85,7 +85,7 @@
                   </div>
                 </div>
               </div>
-              <div class="text-center mt-3">
+              <div class="text-center mt-3" *ngIf="!auditoriaNivelItem?.length">
                 <h6>Não foram encontradaos itens cadastrados</h6>
                 <!-- <button (click)="create()" class="mb-2 mr-2 mt-4 btn-icon btn-pill btn btn-outline-success"><i
                     class="pe-7s-plus btn-icon-wrapper"></i>Inserir</button> -->

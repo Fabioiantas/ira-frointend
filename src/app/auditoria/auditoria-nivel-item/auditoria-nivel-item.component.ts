@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { AuditoriaItem } from 'src/app/models/auditoriaItem';
 import { AuditoriaNivel } from 'src/app/models/auditoriaNivel';
 import { AuditoriaNivelItem } from 'src/app/models/auditoriaNivelItem';
 import { TipoAtividade } from 'src/app/models/tipoatividade';
 import { AuditoriaNivelService } from 'src/app/services/auditoria-nivel.service';
+import { AuditoriaItemService } from 'src/app/services/auditoria/auditoria-item.service';
 import { AuditoriaNivelItemServiceService } from 'src/app/services/auditoria/auditoria-nivel-item-service.service';
 import { TipoAtividadeService } from 'src/app/services/tipo-atividade.service';
+import { DialogBoxService } from 'src/app/_services/dialog-box.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-auditoria-nivel-item',
@@ -16,6 +20,9 @@ export class AuditoriaNivelItemComponent implements OnInit {
 
   listTipoAtividade: TipoAtividade;
   auditoriaNivelItem: any[];
+  auditoriaNivelItemCadastro: AuditoriaNivelItem;
+  listAuditoriaItem: AuditoriaItem[];
+  auditoriaItem: AuditoriaItem = new AuditoriaItem();
   listNivel: AuditoriaNivel;
   filterForm: FormGroup;
 
@@ -23,23 +30,62 @@ export class AuditoriaNivelItemComponent implements OnInit {
     {name : 'Item', prop : 'ds_item', width : '20%', selecionado: true}
   ];
 
+  formGroup = new FormGroup({
+    id: new FormControl(''),
+    auditoria_item_id: new FormControl('', Validators.required),
+    ds_requisito: new FormControl('', Validators.required)
+  });
+
   constructor(private tipoAtividadeService: TipoAtividadeService,
              private auditoriaNivelService: AuditoriaNivelService,
+             private auditoriaItemSerice: AuditoriaItemService,
              private auditoriaNivelItemService: AuditoriaNivelItemServiceService,
-             private formBuilder: FormBuilder) { }
+             private formBuilder: FormBuilder,
+             private dialogBox: DialogBoxService,
+             private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.filterForm = this.formBuilder.group({
       tipoAtividade: [null],
-      auditoriaNivel: [null, Validators.required]
+      auditoriaNivel: [null, Validators.required],
+      auditoriaItem: [null, Validators.required]
     });
-
     this.getAtividade();
   }
 
   getAtividade() {
     this.tipoAtividadeService.listar().subscribe(data => {
       this.listTipoAtividade = data;
+    });
+  }
+
+  getItens() {
+    this.auditoriaItemSerice.list().subscribe(data => {
+      this.listAuditoriaItem = data;
+    });
+  }
+
+  addItem() {
+    if (this.filterForm.valid) {
+      this.auditoriaNivelItemCadastro = new AuditoriaNivelItem();
+      this.auditoriaNivelItemCadastro.auditoria_nivel_id = this.filterForm.value.auditoriaNivel.id;
+      this.auditoriaNivelItemCadastro.auditoria_item_id = this.filterForm.value.auditoriaItem.id;
+      this.auditoriaNivelItemService.add(this.auditoriaNivelItemCadastro).subscribe(() => {
+        // this.dialogBox.show('Item inserido com sucesso!', 'OK');
+        this.showSuccess('Item adicionado com sucesso!','Mensagem');
+        this.changeNivel();
+      });
+    }
+  }
+
+  removeItem(id: any) {
+    this.dialogBox.show('Confirma exclusão do Item e todos seus Requisitos?', 'CONFIRM').then(sim =>{
+      if (sim) {
+        this.auditoriaNivelItemService.remove(id).subscribe(() => {
+          this.showSuccess('Item removido com sucesso!','Mensagem');
+          this.changeNivel();
+        });
+      }
     });
   }
 
@@ -64,6 +110,19 @@ export class AuditoriaNivelItemComponent implements OnInit {
         auditoria_item: row.auditoria_item,
         ds_item: row.auditoria_item.ds_item
       }));
+      this.getItens();
+    });
+  }
+
+  changeItem() {
+    this.filterForm.patchValue({
+      auditoriaItem: this.auditoriaItem
+    });
+  }
+
+  showSuccess(message: string, title: string) {
+    this.toastrService.success(message, title, {
+      timeOut: 3000,
     });
   }
 
