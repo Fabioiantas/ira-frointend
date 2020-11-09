@@ -20,6 +20,9 @@ export class AuditoriaNivelService {
     return this.http.get<AuditoriaNivel>(environment.baseUrl + '/auth/auditorianivel/' + id);
   }
 
+  getByTipoAtividadeId(id: any) {
+    return this.http.get<AuditoriaNivel>(environment.baseUrl + '/auth/nivelbytipoatividade/' + id);
+  }
   add(auditoriaNivel: AuditoriaNivel): Observable<any> {
       return this.http.post<any>(`${environment.baseUrl}/auth/auditorianivel`, auditoriaNivel);
   }

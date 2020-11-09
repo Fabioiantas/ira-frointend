@@ -2,7 +2,7 @@
 
   <div class="app-inner-layout__wrapper" [ngClass]="{'open-mobile-menu' : toggleMobileSidebar}">
     <div class="app-inner-layout__content card">
-      <div class="table-responsive">
+      <!-- <div class="table-responsive"> -->
         <div class="app-inner-layout__top-pane">
           <div class="pane-left">
             <div class="mobile-app-menu-btn">
@@ -16,23 +16,6 @@
             </h4>
 
           </div>
-          <!-- <div class="pane-right">
-            <button type="button" (click)="add()" class="btn-shadow btn btn-success" *ngIf="monitoramentoRecurso?.id">
-              <fa name="plus-circle"></fa> Novo Laudo
-            </button>
-            <button type="button" (click)="editarLaudo(selected[0])" class="btn-shadow btn btn-warning"
-              *ngIf="laudos?.length">
-              <fa name="edit"></fa> Editar Laudo
-            </button>
-            <button type="button" (click)="removeLaudo(selected[0].id)" class="btn-shadow btn btn-danger"
-              *ngIf="laudos?.length">
-              <fa name="trash"></fa> Remover Laudo
-            </button>
-            <button type="button" (click)="addAmostra(selected[0])" class="btn-shadow btn btn-info"
-              *ngIf="laudos?.length">
-              <fa name="plus-circle"></fa> Inserir Resultados
-            </button>
-          </div> -->
         </div>
         <div class="app-inner-layout__bottom-pane d-flex" style="padding: 0px;">
           <div class="mb-0 form-group" style="width: 100%;">
@@ -47,11 +30,59 @@
               </div>
               <div class="form-row bg-info">
                 <div class="col-md-12 mb-12 form-group">
-                  <label for="tipo_monitoramento_id">Itens</label>
-                  <ng-select class="p-1" [items]="listTipoMonitoramento" bindValue="tipo_monitoramento_id"
-                    bindLabel="nm_monitoramento" name="tipo_monitoramento_id" placeholder="Buscar Monitoramento...">
+                  <label for="auditoria_item_id">Itens</label>
+                  <ng-select class="p-1" [items]="listItem" bindValue="id" (change)="changeItem()"
+                    ([(ngModel)="auditoriaItem.id"
+                    bindLabel="ds_item" name="auditoria_item_id" placeholder="Buscar Item...">
                   </ng-select>
                   <button type="button" (click)="add()" class="btn-primary">Inserir Item</button>
+                </div>
+              </div>
+              <div>
+                <div class="col-md-12">
+                  <div class="table-responsive" style="min-height: 500px;">
+
+                    <div class="p-2 bg-white">
+                      <div class="form-group form-inline mb-0">
+                        <ngx-datatable-filter [margin]="'-6px'" [float]="'left'" [columns]="columnsNivelItem"
+                          [lista]="auditoriaNivelItem" [table]="tableNivelItens"></ngx-datatable-filter>
+                      </div>
+                    </div>
+
+
+                    <div class="col-md-12">
+                      <!-- <div class="table-responsive" style="min-height: 500px;"> -->
+                        <table class="align-middle mb-0 table table-borderless table-sm table-striped table-hover" #tableNivelItens>
+                          <thead class="thead-light">
+                            <tr [ngClass]="{'table-active': !isAddEdit}">
+                              <th class="text-left" width="4%">Código</th>
+                              <th class="text-left" width="76%">Item</th>
+                              <th class="text-center" width="10%">Requisitos</th>
+                              <th class="text-center" width="10%">Remover</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <!-- DADOS DA TABLE -->
+                            <tr *ngFor="let it of auditoriaNivelItem; let i = index">
+                              <td class="text-center text-muted">{{it.id}}</td>
+                              <td class="text-left">{{it.ds_item}}</td>
+                              <td class="text-center icons">
+                                <i class="pe-7s-tools text-primary" (click)="editarItem(am)"></i>
+                              </td>
+                              <td class="text-center icons">
+                                <i class="pe-7s-trash text-danger" (click)="removerAmostra(am.id)"></i>
+                              </td>
+                            </tr>
+
+                          </tbody>
+                        </table>
+                        <div class="divider"></div>
+                      <!-- </div> -->
+                    </div>
+
+
+                    <div class="divider"></div>
+                  </div>
                 </div>
               </div>
               <div class="text-center mt-3">
@@ -59,29 +90,10 @@
                 <!-- <button (click)="create()" class="mb-2 mr-2 mt-4 btn-icon btn-pill btn btn-outline-success"><i
                     class="pe-7s-plus btn-icon-wrapper"></i>Inserir</button> -->
               </div>
-
-              <!-- adicionar -->
-              <div>
-
-
-                <div class="col-md-12">
-                  <div class="table-responsive" style="min-height: 500px;">
-                    <div class="p-3 bg-white" *ngIf="!isAddEdit">
-                      <div class="form-group form-inline mb-0">
-                        <ngx-datatable-filter [margin]="'-6px'" [float]="'left'" [columns]="columnsLaudo"
-                          [lista]="laudos" [table]="tableLaudo"></ngx-datatable-filter>
-                      </div>
-                    </div>
-
-                    <div class="divider"></div>
-                  </div>
-                </div>
-              </div>
-              <!-- FIM emissoes -->
             </div>
           </div>
         </div>
-      </div>
+      <!-- </div> -->
     </div>
 
     <!--Sidebar Filter Programação-->
@@ -93,15 +105,15 @@
 
             <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
               <label class="mb-0 pl-1">Tipo Atividadae:</label>
-              <ng-select [items]="itemTipoAtividade" (change)="changeTipoAtividade()" bindLabel="nm_atividade"
-                formControlName="tipoAtividade" name="tipoAtividade" placeholder="Buscar Atividade...">
+              <ng-select [items]="listTipoAtividade" (change)="changeTipoAtividade()" bindLabel="nm_atividade"
+                (change)="changeTipoAtividade()" formControlName="tipoAtividade" name="tipoAtividade" placeholder="Buscar Atividade...">
               </ng-select>
             </li>
 
             <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
               <label class="mb-0 pl-1">Nivel:</label>
-              <ng-select [items]="itemAuditoriaNivel" (change)="changeFilter()" bindLabel="nm_nivel"
-                formControlName="nm_nivel" name="nivel" placeholder="Buscar Nível Auditoria...">
+              <ng-select [items]="listNivel" bindLabel="nm_nivel"
+                (change)="changeNivel()" formControlName="auditoriaNivel" name="auditoriaNivel" placeholder="Buscar Nível Auditoria...">
               </ng-select>
             </li>
           </ul>
