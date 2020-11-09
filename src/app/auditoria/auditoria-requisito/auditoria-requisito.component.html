@@ -1,3 +1,60 @@
-<p>
-  auditoria-requisito works!
-</p>
+<div class="app-page-title app-page-title-simple" style="padding-bottom: 15px;">
+  <div class="page-title-wrapper">
+    <div class="page-title-heading">
+      <div>
+        <div class="page-title-subheading opacity-10">
+          <nav class="" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a [routerLink]="">
+                  <fa name="home"></fa>
+                </a>
+              </li>
+              <li class="breadcrumb-item">
+                Cadastro
+              </li>
+              <li class="active breadcrumb-item" aria-current="page">
+                Auditoria Requisito
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main content -->
+<section class="content">
+  <div class="card-header-tab card-header">
+    <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i
+        class="header-icon lnr-store mr-3 text-muted opacity-6"></i> Requisito </div>
+    <div class="btn-actions-pane-right">
+      <div class="btn-group-sm btn-group" role="group">
+        <a class="btn btn-success" [routerLink]="['/auditoriarequisito/adicionar']">Adicionar</a>
+        <button class="btn btn-primary" type="button" (click)="editar(selected[0].id)">Editar</button>
+        <button class="btn btn-dark" type="button" (click)="remover()">Remover</button>
+      </div>
+    </div>
+  </div>
+  <div class="p-2 bg-success">
+    <label class= "text-white" for="auditoria_item_id">Selecione o Item</label>
+    <ng-select [items]="listAuditoriaItem" bindValue="id" bindLabel="ds_item" [(ngModel)]="auditoriaItem.id"
+      (change)="changeItem()" name="list_auditoria_item_id" placeholder="Buscar Item...">
+    </ng-select>
+  </div>
+  <div class="p-2 bg-white">
+    <div class="form-group form-inline mb-0">
+      <ngx-datatable-filter [margin]="'-6px'" [float]="'left'" [columns]="columnsAuditoriaRequisito" [lista]="rowsAuditoriaRequisito"
+        [table]="tableRequisito">
+      </ngx-datatable-filter>
+    </div>
+  </div>
+  <ngx-datatable ngx-resize-watcher class="bootstrap striped" #tableRequisito [rows]="rowsAuditoriaRequisito" [footerHeight]="25"
+    [columnMode]="'flex'" [columns]="columnsAuditoriaRequisito" [selected]="selected" [selectionType]="'single'"
+    [rowHeight]="'auto'" (activate)="activate($event)"
+    [messages]="{'emptyMessage': 'Nenhum resultado encontrado...', 'totalMessage': 'total'}" [limit]="5">
+    <ngx-datatable-column name="Código" prop="id" [flexGrow]="2"></ngx-datatable-column>
+    <ngx-datatable-column name="Requisitos" prop="ds_requisito" [flexGrow]="2"></ngx-datatable-column>
+  </ngx-datatable>
+</section>

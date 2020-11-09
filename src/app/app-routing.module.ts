@@ -54,22 +54,33 @@ import { ParametroComponent } from './Monitoramento-Recursos/parametro/parametro
 import { ParametroCadastroComponent } from './Monitoramento-Recursos/parametro/parametro-cadastro/parametro-cadastro.component';
 import { RecursoCadastroComponent } from './Monitoramento-Recursos/recurso/recurso-cadastro/recurso-cadastro.component';
 import { ProcessoAnaliseComponent } from './Monitoramento-Recursos/processo-analise/processo-analise.component';
+// tslint:disable-next-line:max-line-length
 import { ProcessoAnaliseCadastroComponent } from './Monitoramento-Recursos/processo-analise/processo-analise-cadastro/processo-analise-cadastro.component';
+// tslint:disable-next-line:max-line-length
 import { FonteEmissoraCadastroComponent } from './Monitoramento-Recursos/fonte-emissora/fonte-emissora-cadastro/fonte-emissora-cadastro.component';
 import { MonitoramentoCadastroComponent } from './Monitoramento-Recursos/monitoramento-cadastro/monitoramento-cadastro.component';
+// tslint:disable-next-line:max-line-length
 import { MonitoramentoAmostraCadastroComponent } from './Monitoramento-Recursos/monitoramento-amostra-cadastro/monitoramento-amostra-cadastro.component';
 import { TipoMonitoramento } from './models/tipoMonitoramento';
+// tslint:disable-next-line:max-line-length
 import { TipoMonitoramentoCadastroComponent } from './Monitoramento-Recursos/tipo-monitoramento/tipo-monitoramento-cadastro/tipo-monitoramento-cadastro.component';
 import { TipoMonitoramentoComponent } from './Monitoramento-Recursos/tipo-monitoramento/tipo-monitoramento.component';
 import { MonitoramentoTalhaoComponent } from './Monitoramento-Recursos/monitoramento-talhao/monitoramento-talhao.component';
 import { TalhaoCadastroComponent } from './Monitoramento-Recursos/monitoramento-talhao/talhao-cadastro/talhao-cadastro.component';
 import { UnidadeParametroComponent } from './Monitoramento-Recursos/unidade-parametro/unidade-parametro.component';
+// tslint:disable-next-line:max-line-length
 import { UnidadeParametroCadastroComponent } from './Monitoramento-Recursos/unidade-parametro/unidade-parametro-cadastro/unidade-parametro-cadastro.component';
 import { MonitoramentoParametrosComponent } from './Monitoramento-Recursos/monitoramento-parametros/monitoramento-parametros.component';
 import { AuditoriaNivelComponent } from './auditoria/auditoria-nivel/auditoria-nivel.component';
 import { AuditoriaNivelCadastroComponent } from './auditoria/auditoria-nivel/auditoria-nivel-cadastro/auditoria-nivel-cadastro.component';
-import { ClassificacaoRequisitoComponent } from './auditoria/auditoria-nivel/classificacao-requisito/classificacao-requisito.component';
-import { ClassificacaoRequisitoCadastroComponent } from './auditoria/auditoria-nivel/classificacao-requisito/classificacao-requisito-cadastro/classificacao-requisito-cadastro.component';
+import { ClassificacaoRequisitoComponent } from './auditoria/classificacao-requisito/classificacao-requisito.component';
+// tslint:disable-next-line:max-line-length
+import { ClassificacaoRequisitoCadastroComponent } from './auditoria/classificacao-requisito/classificacao-requisito-cadastro/classificacao-requisito-cadastro.component';
+import { AuditoriaItemComponent } from './auditoria/auditoria-item/auditoria-item.component';
+import { AuditoriaItemCadastroComponent } from './auditoria/auditoria-item/auditoria-item-cadastro/auditoria-item-cadastro.component';
+import { AuditoriaRequisitoComponent } from './auditoria/auditoria-requisito/auditoria-requisito.component';
+import { AuditoriaRequisitoCadastroComponent } from './auditoria/auditoria-requisito/auditoria-requisito-cadastro/auditoria-requisito-cadastro.component';
+import { AuditoriaNivelItemComponent } from './auditoria/auditoria-nivel-item/auditoria-nivel-item.component';
 
 const routes: Routes = [
   {
@@ -641,7 +652,7 @@ const routes: Routes = [
     ]
   },
 
-  //AUDITORIA  NIVEL
+  // AUDITORIA  NIVEL
   {
     path: 'auditorianivel',
     component: BaseLayoutComponent,
@@ -666,7 +677,7 @@ const routes: Routes = [
       }
     ]
   },
-  //CLASSIFICACAO REQUISITO
+  // CLASSIFICACAO REQUISITO
   {
     path: 'classificacaorequisito',
     component: BaseLayoutComponent,
@@ -689,6 +700,81 @@ const routes: Routes = [
         data: { extraParameter: 'mAuditoriaMenu' },
         canActivate: [AuthGuard]
       }
+    ]
+  },
+  // AUDITORIA ITEM
+  {
+    path: 'auditoriaitem',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: AuditoriaItemComponent,
+        data: { extraParameter: 'mAuditoriaMenu' },
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'adicionar',
+        component: AuditoriaItemCadastroComponent,
+        data: { roles: [Role.Admin], extraParameter: 'mAuditoriaMenu' },
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'adicionar/:id',
+        component: AuditoriaItemCadastroComponent,
+        data: { extraParameter: 'mAuditoriaMenu' },
+        canActivate: [AuthGuard]
+      }
+    ]
+  },
+  // AUDITORIA REQUISITO
+  {
+    path: 'auditoriarequisito',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: AuditoriaRequisitoComponent,
+        data: { extraParameter: 'mAuditoriaMenu' },
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'adicionar',
+        component: AuditoriaRequisitoCadastroComponent,
+        data: { roles: [Role.Admin], extraParameter: 'mAuditoriaMenu' },
+        canActivate: [AuthGuard]
+      },
+      {
+        path: 'adicionar/:id',
+        component: AuditoriaRequisitoCadastroComponent,
+        data: { extraParameter: 'mAuditoriaMenu' },
+        canActivate: [AuthGuard]
+      }
+    ]
+  },
+  {
+    path: 'auditorianivelitem',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: AuditoriaNivelItemComponent,
+        data: { extraParameter: 'mAuditoriaMenu' },
+        canActivate: [AuthGuard]
+      }
+      // ,
+      // {
+      //   path: 'adicionar',
+      //   component: AuditoriaRequisitoCadastroComponent,
+      //   data: { roles: [Role.Admin], extraParameter: 'mAuditoriaMenu' },
+      //   canActivate: [AuthGuard]
+      // },
+      // {
+      //   path: 'adicionar/:id',
+      //   component: AuditoriaRequisitoCadastroComponent,
+      //   data: { extraParameter: 'mAuditoriaMenu' },
+      //   canActivate: [AuthGuard]
+      // }
     ]
   },
 

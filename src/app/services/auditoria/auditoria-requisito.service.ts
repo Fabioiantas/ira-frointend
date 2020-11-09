@@ -21,6 +21,10 @@ export class AuditoriaRequisitoService {
     return this.http.get<AuditoriaRequisito>(environment.baseUrl + '/auth/auditoriarequisito/' + id);
   }
 
+  getByItemId(itemId: string): Observable<any> {
+    return this.http.get<AuditoriaRequisito>(environment.baseUrl + '/auth/requisitosbyitemid/' + itemId);
+  }
+
   add(auditoriaRequisito: AuditoriaRequisito): Observable<any> {
       return this.http.post<any>(`${environment.baseUrl}/auth/auditoriarequisito`, auditoriaRequisito);
   }

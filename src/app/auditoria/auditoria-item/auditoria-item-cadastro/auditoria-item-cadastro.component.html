@@ -11,10 +11,10 @@
                 </a>
               </li>
               <li class="breadcrumb-item">
-                Requisito
+                Item
               </li>
               <li class="active breadcrumb-item" aria-current="page">
-                Cadastrar Requisito
+                Cadastrar Item
               </li>
             </ol>
           </nav>
@@ -28,22 +28,26 @@
 <div class="tabs-animated tabs-animated-shadow card">
   <div class="card-body">
 
-      <h5 class="card-title">Cadastro de Requisitos</h5>
-      <div class="col-md-12 mb-12 form-group">
-        <div class="p-2 bg-info">
-          <label class="text-white" for="auditoria_item_id">Item</label>
-          <ng-select [items]="listAuditoriaItem" bindValue="id" bindLabel="ds_item"
-            [(ngModel)]="auditoriaItem.id"
-            (change)="changeItem()" name="list_auditoria_item_id" placeholder="Buscar Item...">
-          </ng-select>
-        </div>
-      </div>
+      <h5 class="card-title">Cadastro de Item</h5>
       <form [formGroup]="this.formGroup" class="needs-validation">
+      <input formControlName="tipo_atividade_id" type="text" class="form-control" id="tipo_atividade_id" required hidden>
       <div class="form-row">
         <div class="col-md-12 mb-12 form-group">
-          <label for="ds_requisito">Requisito</label>
-          <input formControlName="ds_requisito" type="text" class="form-control" id="ds_requisito"
-            placeholder="Requisito" value="" required>
+          <label for="ds_item">Item</label>
+          <input formControlName="ds_item" type="text" class="form-control" id="ds_item"
+            placeholder="Nome do Item" value="" required>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="custom-radio custom-control">
+          <input formControlName="ie_situacao" type="radio" id="situacaoAtivo" name="ie_situacao"
+            class="custom-control-input" value="A">
+          <label for="situacaoAtivo" class="custom-control-label">Ativo</label>
+        </div>
+        <div class="custom-radio custom-control">
+          <input formControlName="ie_situacao" type="radio" id="situacaoInativo" name="ie_situacao"
+            class="custom-control-input" value="I">
+          <label for="situacaoInativo" class="custom-control-label">Inativo</label>
         </div>
       </div>
       <div class="form-group">

@@ -125,27 +125,37 @@ import { FonteEmissoraComponent } from './Monitoramento-Recursos/fonte-emissora/
 import { RecursoCadastroComponent } from './Monitoramento-Recursos/recurso/recurso-cadastro/recurso-cadastro.component';
 import { ParametroComponent } from './Monitoramento-Recursos/parametro/parametro.component';
 import { ParametroCadastroComponent } from './Monitoramento-Recursos/parametro/parametro-cadastro/parametro-cadastro.component';
+// tslint:disable-next-line:max-line-length
 import { ProcessoAnaliseCadastroComponent } from './Monitoramento-Recursos/processo-analise/processo-analise-cadastro/processo-analise-cadastro.component';
+// tslint:disable-next-line:max-line-length
 import { FonteEmissoraCadastroComponent } from './Monitoramento-Recursos/fonte-emissora/fonte-emissora-cadastro/fonte-emissora-cadastro.component';
 import { MonitoramentoCadastroComponent } from './Monitoramento-Recursos/monitoramento-cadastro/monitoramento-cadastro.component';
+// tslint:disable-next-line:max-line-length
 import { MonitoramentoAmostraCadastroComponent } from './Monitoramento-Recursos/monitoramento-amostra-cadastro/monitoramento-amostra-cadastro.component';
+// tslint:disable-next-line:max-line-length
 import { TipoMonitoramentoComponent } from './Monitoramento-Recursos/tipo-monitoramento/tipo-monitoramento.component';
+// tslint:disable-next-line:max-line-length
 import { TipoMonitoramentoCadastroComponent } from './Monitoramento-Recursos/tipo-monitoramento/tipo-monitoramento-cadastro/tipo-monitoramento-cadastro.component';
 import { ParametroUnidadeComponent } from './Monitoramento-Recursos/parametro/parametro-unidade/parametro-unidade.component';
 import { MonitoramentoTalhaoComponent } from './Monitoramento-Recursos/monitoramento-talhao/monitoramento-talhao.component';
 import { TalhaoComponent } from './Monitoramento-Recursos/talhao/talhao.component';
 import { TalhaoCadastroComponent } from './Monitoramento-Recursos/monitoramento-talhao/talhao-cadastro/talhao-cadastro.component';
 import { UnidadeParametroComponent } from './Monitoramento-Recursos/unidade-parametro/unidade-parametro.component';
+// tslint:disable-next-line:max-line-length
 import { UnidadeParametroCadastroComponent } from './Monitoramento-Recursos/unidade-parametro/unidade-parametro-cadastro/unidade-parametro-cadastro.component';
 import { MonitoramentoParametrosComponent } from './Monitoramento-Recursos/monitoramento-parametros/monitoramento-parametros.component';
 import { AuditoriaNivelComponent } from './auditoria/auditoria-nivel/auditoria-nivel.component';
 import { AuditoriaNivelCadastroComponent } from './auditoria/auditoria-nivel/auditoria-nivel-cadastro/auditoria-nivel-cadastro.component';
-import { ClassificacaoRequisitoComponent } from './auditoria/auditoria-nivel/classificacao-requisito/classificacao-requisito.component';
-import { ClassificacaoRequisitoCadastroComponent } from './auditoria/auditoria-nivel/classificacao-requisito/classificacao-requisito-cadastro/classificacao-requisito-cadastro.component';
-import { AuditoriaItemComponent } from './auditoria/auditoria-nivel/auditoria-item/auditoria-item.component';
-import { AuditoriaItemCadastroComponent } from './auditoria/auditoria-nivel/auditoria-item/auditoria-item-cadastro/auditoria-item-cadastro.component';
+import { ClassificacaoRequisitoComponent } from './auditoria/classificacao-requisito/classificacao-requisito.component';
+// tslint:disable-next-line:max-line-length
+import { ClassificacaoRequisitoCadastroComponent } from './auditoria/classificacao-requisito/classificacao-requisito-cadastro/classificacao-requisito-cadastro.component';
+import { AuditoriaItemComponent } from './auditoria/auditoria-item/auditoria-item.component';
+import { AuditoriaItemCadastroComponent } from './auditoria/auditoria-item/auditoria-item-cadastro/auditoria-item-cadastro.component';
 import { AuditoriaRequisitoComponent } from './auditoria/auditoria-requisito/auditoria-requisito.component';
+// tslint:disable-next-line:max-line-length
 import { AuditoriaRequisitoCadastroComponent } from './auditoria/auditoria-requisito/auditoria-requisito-cadastro/auditoria-requisito-cadastro.component';
+import { AuditoriaNivelItemComponent } from './auditoria/auditoria-nivel-item/auditoria-nivel-item.component';
+import { HeaderLayoutComponent } from './layout/header-layout/header-layout.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -255,6 +265,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AuditoriaItemCadastroComponent,
     AuditoriaRequisitoComponent,
     AuditoriaRequisitoCadastroComponent,
+    AuditoriaNivelItemComponent,
+    HeaderLayoutComponent,
 
   ],
   imports: [

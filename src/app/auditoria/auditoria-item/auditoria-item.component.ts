@@ -16,9 +16,8 @@ export class AuditoriaItemComponent implements OnInit {
   rowsItem: any[];
 
   columnsItem = [
-    {name : 'Nome', prop : 'nm_classificacao', width : '35%', selecionado: true},
-    {name : 'Sigla', prop : 'sg_classificacao', width : '20%', selecionado: false},
-    {name : 'Descricão', prop : 'ds_classificacao', width : '20%', selecionado: false}
+    {name : 'Item', prop : 'ds_item', width : '35%', selecionado: true},
+    {name : 'Situacao', prop : 'ie_situacao', width : '20%', selecionado: false}
   ];
 
   constructor(private router: Router,
