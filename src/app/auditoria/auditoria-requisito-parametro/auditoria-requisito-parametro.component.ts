@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
 import { AuditoriaNivelItRequisito } from 'src/app/models/auditoriaNivelItRequisito';
+import { ClassificacaoRequisito } from 'src/app/models/classificacaoRequisito';
+import { AuditoriaNivelItRequisitoService } from 'src/app/services/auditoria/auditoria-nivel-it-requisito.service';
+import { ClassificacaoRequisitoService } from 'src/app/services/auditoria/classificacao-requisito.service';
 import { DialogBoxService } from 'src/app/_services/dialog-box.service';
 
 @Component({
@@ -11,19 +15,21 @@ import { DialogBoxService } from 'src/app/_services/dialog-box.service';
 })
 export class AuditoriaRequisitoParametroComponent implements OnInit {
 
-  // monitoramentoGee: MonitoramentoGee;
-  // filterGee: FilterGee;
-  // amostraGee: AmostraGee;
   auditoriaNivelItRequisito: AuditoriaNivelItRequisito;
+  listClassificacaoRequisito: ClassificacaoRequisito;
+  filterForm: FormGroup;
 
   public onClose: Subject<AuditoriaNivelItRequisito>;
   loading = false;
 
-  constructor(private dialogBox: DialogBoxService, public modalRef: BsModalRef) { }
+  constructor(private dialogBox: DialogBoxService, public modalRef: BsModalRef,
+              private auditoriaNivelItRequisitoService: AuditoriaNivelItRequisitoService,
+              private classificacaoRequisitoService: ClassificacaoRequisitoService) { }
 
   ngOnInit() {
+    this.getClassificacaoRequisito();
+    console.log(JSON.stringify(this.filterForm));
     this.onClose = new Subject();
-    console.log(JSON.stringify(this.onClose));
   }
 
   public closeModal(): void {
@@ -31,14 +37,20 @@ export class AuditoriaRequisitoParametroComponent implements OnInit {
     this.modalRef.hide();
   }
 
+  getClassificacaoRequisito() {
+    this.classificacaoRequisitoService.list().subscribe(data => {
+      this.listClassificacaoRequisito = data;
+    });
+  }
+
   salvar() {
-  //   if (!this.amostraGee.dt_amostra || !this.amostraGee.cd_unidade_padrao || !this.amostraGee.qt_consumo_total) {
-  //     return this.dialogBox.show('É nescessário preencher todos os campos', 'Warning');
-  //   }
-  //   this.loading = true;
-  //   this.amostraService.editar(this.amostraGee).subscribe(data => {
-  //     this.loading = false;
-  //     this.closeModal();
-  //   }, () => this.loading = false);
+     if (!this.auditoriaNivelItRequisito.ds_orientacao && !this.auditoriaNivelItRequisito.classificacao_requisito_id && !this.auditoriaNivelItRequisito.nr_peso && !this.auditoriaNivelItRequisito.ie_evidencia) {
+       return this.dialogBox.show('Nenhum campo foi alterado!', 'Warning');
+     }
+     this.loading = true;
+     this.auditoriaNivelItRequisitoService.edit(this.auditoriaNivelItRequisito).subscribe(data => {
+       this.loading = false;
+       this.closeModal();
+     }, () => this.loading = false);
    }
 }

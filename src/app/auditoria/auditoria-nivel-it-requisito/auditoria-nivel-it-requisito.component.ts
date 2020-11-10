@@ -5,11 +5,14 @@ import { ToastrService } from 'ngx-toastr';
 import { AuditoriaItem } from 'src/app/models/auditoriaItem';
 import { AuditoriaNivel } from 'src/app/models/auditoriaNivel';
 import { AuditoriaNivelItem } from 'src/app/models/auditoriaNivelItem';
+import { AuditoriaNivelItRequisito } from 'src/app/models/auditoriaNivelItRequisito';
+import { AuditoriaRequisito } from 'src/app/models/auditoriaRequisito';
 import { TipoAtividade } from 'src/app/models/tipoatividade';
 import { AuditoriaNivelService } from 'src/app/services/auditoria-nivel.service';
 import { AuditoriaItemService } from 'src/app/services/auditoria/auditoria-item.service';
 import { AuditoriaNivelItRequisitoService } from 'src/app/services/auditoria/auditoria-nivel-it-requisito.service';
 import { AuditoriaNivelItemServiceService } from 'src/app/services/auditoria/auditoria-nivel-item-service.service';
+import { AuditoriaRequisitoService } from 'src/app/services/auditoria/auditoria-requisito.service';
 import { TipoAtividadeService } from 'src/app/services/tipo-atividade.service';
 import { DialogBoxService } from 'src/app/_services/dialog-box.service';
 import { AuditoriaRequisitoParametroComponent } from '../auditoria-requisito-parametro/auditoria-requisito-parametro.component';
@@ -30,6 +33,9 @@ export class AuditoriaNivelItRequisitoComponent implements OnInit {
   auditoriaItem: AuditoriaItem = new AuditoriaItem();
   listNivel: AuditoriaNivel;
   filterForm: FormGroup;
+  auditoriaRequisito = new AuditoriaRequisito();
+  listAuditoriaRequisito: any[];
+  isInsertRequisito = false;
 
   columnsNivelItem = [
     {name : 'Item', prop : 'ds_item', width : '20%', selecionado: true}
@@ -46,6 +52,7 @@ export class AuditoriaNivelItRequisitoComponent implements OnInit {
               private auditoriaItemSerice: AuditoriaItemService,
               private auditoriaNivelItemService: AuditoriaNivelItemServiceService,
               private auditoriaNivelItRequisitoService: AuditoriaNivelItRequisitoService,
+              private auditoriaRequisitoService: AuditoriaRequisitoService,
               private formBuilder: FormBuilder,
               private dialogBox: DialogBoxService,
               private toastrService: ToastrService,
@@ -58,6 +65,7 @@ export class AuditoriaNivelItRequisitoComponent implements OnInit {
       auditoriaNivelItem: [null, Validators.required]
     });
     this.getAtividade();
+    this.getNiveis();
   }
 
   getAtividade() {
@@ -66,6 +74,11 @@ export class AuditoriaNivelItRequisitoComponent implements OnInit {
     });
   }
 
+  getNiveis() {
+    this.auditoriaNivelService.list().subscribe(data => {
+      this.listNivel = data;
+    });
+  }
   getItens() {
     this.auditoriaItemSerice.list().subscribe(data => {
       this.listAuditoriaItem = data;
@@ -97,6 +110,7 @@ export class AuditoriaNivelItRequisitoComponent implements OnInit {
 
   changeTipoAtividade() {
     this.filterForm.get('auditoriaNivel').setValue(null);
+    this.filterForm.get('auditoriaNivelItem').setValue(null);
     if (this.filterForm.value.tipoAtividade.id) {
       this.auditoriaNivelService.getByTipoAtividadeId(this.filterForm.value.tipoAtividade.id).subscribe(data => {
         this.listNivel = data;
@@ -110,7 +124,6 @@ export class AuditoriaNivelItRequisitoComponent implements OnInit {
 
   changeNivel() {
     this.auditoriaNivelItemService.getByNivel(this.filterForm.value.auditoriaNivel.id).subscribe(data => {
-      console.log('nivel item ' + JSON.stringify(data));
       this.listAuditoriaNivelItem = data.map(row => ({
         id: row.id,
         auditoria_nivel_id: row.auditoria_nivel_id,
@@ -121,7 +134,9 @@ export class AuditoriaNivelItRequisitoComponent implements OnInit {
   }
 
   getRequisitos() {
-    alert('get requisitos');
+    this.auditoriaRequisitoService.list().subscribe(data => {
+      this.listAuditoriaRequisito = data;
+    });
   }
 
   changeNivelItem() {
@@ -146,14 +161,56 @@ export class AuditoriaNivelItRequisitoComponent implements OnInit {
   }
 
   editRequisito(requisito: any) {
-    console.log(JSON.stringify(requisito));
     const initialState = {
-      auditoriaNivelItRequisito: requisito
+      auditoriaNivelItRequisito: requisito,
+      filterForm: this.filterForm.value
     };
-    this.modalService.show(AuditoriaRequisitoParametroComponent, { initialState, backdrop: 'static', class: 'modal-md'})
+    this.modalService.show(AuditoriaRequisitoParametroComponent, { initialState, backdrop: 'static', class: 'modal-lg'})
     .content.onClose.subscribe(itemReturn => {
       requisito = itemReturn;
-      // this.findProgramacao();
+      this.changeNivelItem();
     });
+  }
+
+  remove(id: any) {
+    this.dialogBox.show('Confirma remoção do Requisito?', 'CONFIRM').then((sim) => {
+        this.auditoriaNivelItRequisitoService.remove(id).subscribe(()=> {
+          this.showSuccess('Requisito removido com sucesso', 'Mensagem');
+          this.changeNivelItem();
+        });
+    });
+  }
+
+  inserirRequisito() {
+    this.isInsertRequisito = true;
+    this.getRequisitos();
+  }
+
+  salvarRequisito() {
+    this.isInsertRequisito = false;
+    this.listAuditoriaRequisito = [];
+    const nivelItRequisito = new AuditoriaNivelItRequisito();
+    nivelItRequisito.auditoria_nivel_item_id = this.filterForm.value.auditoriaNivelItem.id;
+    nivelItRequisito.auditoria_requisito_id = this.auditoriaRequisito.id;
+    this.auditoriaNivelItRequisitoService.add(nivelItRequisito).subscribe(data => {
+      this.showSuccess('Requisito inserido com sucesso!', 'Mensagem');
+      this.changeNivelItem();
+    });
+  }
+
+  cancelarRequisto() {
+    this.isInsertRequisito = false;
+    this.listAuditoriaRequisito = [];
+  }
+
+  filtrar() {
+    if (this.filterForm.valid) {
+      this.changeNivelItem();
+    }
+  }
+
+  cleanFilter() {
+    this.filterForm.reset();
+    this.auditoriaNivelItRequisito = [];
   }
 }

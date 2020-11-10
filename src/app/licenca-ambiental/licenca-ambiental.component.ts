@@ -54,7 +54,7 @@ export class LicencaAmbientalComponent implements OnInit {
 
   remover() {
     if (this.selected) {
-      this.dialogBox.show('Confirma remoção da Licença Ambiental?', 'CONFIRM').then(sim => {
+      this.dialogBox.show('Confirma remoção da Licença Ambiental?', 'CONFIRM').then((sim: any) => {
         if(sim) {
           this.licencaAmbientalService.remove(this.selected[0].id).subscribe(data => {
             this.dialogBox.show('Licença removida com sucesso!', 'OK');

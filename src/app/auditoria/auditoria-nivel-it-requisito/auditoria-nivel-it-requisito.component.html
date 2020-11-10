@@ -2,7 +2,7 @@
 
   <div class="app-inner-layout__wrapper" [ngClass]="{'open-mobile-menu' : toggleMobileSidebar}">
     <div class="app-inner-layout__content card">
-      <!-- <div class="table-responsive"> -->
+      <div class="table-responsive">
         <div class="app-inner-layout__top-pane">
           <div class="pane-left">
             <div class="mobile-app-menu-btn">
@@ -11,10 +11,30 @@
                 <span class="hamburger-box"><span class="hamburger-inner"></span></span>
               </button>
             </div>
-            <h4 class="mb-0 text-nowrap title">
-              <!-- <div class="opacity-7 mt-2">Última atualização: <span class="opacity-8">{{programacao?.dtAtualizacao | date:'d/MM/yyyy H:mm:ss'}}</span></div> -->
-            </h4>
 
+            <h4 *ngIf="!isInsertRequisito" class="mb-0 text-nowrap title">Configuração de Requisitos
+              <div *ngIf="filterForm.valid" class="opacity-7 mt-2">ITEM: <span class="opacity-8">{{filterForm.value.auditoriaNivelItem.ds_item}}</span></div>
+            </h4>
+          </div>
+          <div *ngIf="isInsertRequisito" class="col-sm-12 form-group">
+            <label for="ds_requisito">Requisito</label>
+            <ng-select [items]="listAuditoriaRequisito" bindValue="id"
+              bindLabel="ds_requisito" [(ngModel)]="auditoriaRequisito.id"
+              name="ds_requisito" placeholder="Buscar Requisito...">
+            </ng-select>
+            <div class="p-2">
+              <button *ngIf="isInsertRequisito" type="button" (click)="salvarRequisito()" class="btn-shadow btn btn-success">
+                Salvar
+              </button>
+              <button *ngIf="isInsertRequisito" type="button" (click)="cancelarRequisto()" class="btn-shadow btn btn-danger">
+                Cancelar
+              </button>
+            </div>
+          </div>
+          <div class="pane-right">
+            <button *ngIf="!isInsertRequisito && filterForm.valid" type="button" (click)="inserirRequisito()" class="btn-shadow btn btn-success">
+              Inserir Requisito
+            </button>
           </div>
         </div>
         <div class="app-inner-layout__bottom-pane d-flex" style="padding: 0px;">
@@ -53,22 +73,28 @@
                     <div class="col-md-12">
                       <!-- <div class="table-responsive" style="min-height: 500px;"> -->
                         <table class="align-middle mb-0 table table-borderless table-sm table-striped table-hover" #tableNivelItens>
-                          <thead class="thead-light">
+                          <thead>
                             <tr [ngClass]="{'table-active': !isAddEdit}">
-                              <th class="text-left" width="76%">Requisito</th>
-                              <th class="text-center" width="10%">Requisitos</th>
-                              <th class="text-center" width="10%">Remover</th>
+                              <th class="text-left">Requisito</th>
+                              <th class="text-left" width="87%"></th>
+                              <th class="text-center" width="5%">Atributos</th>
+                              <th class="text-center" width="5%">Remover</th>
                             </tr>
                           </thead>
                           <tbody>
                             <!-- DADOS DA TABLE -->
                             <tr *ngFor="let requisito of auditoriaNivelItRequisito; let i = index">
+                              <td class="text-left">{{requisito.id}}</td>
                               <td class="text-left">{{requisito.ds_requisito}}</td>
                               <td class="text-center icons">
-                                <i class="pe-7s-menu text-primary" (click)="editRequisito(requisito)"></i>
+                                <i *ngIf="!requisito?.ds_orientacao && !requisito?.nr_peso && !requisito?.classificacao_requisito_id && !requisito?.ie_evidencia"
+                                  class="pe-7s-note2 text-primary"  data-toggle="tooltip" title="Nenhum atributo foi alterado."
+                                  (click)="editRequisito(requisito)"></i>
+                                <i *ngIf="requisito?.ds_orientacao || requisito?.nr_peso || requisito?.classificacao_requisito_id || requisito?.ie_evidencia"
+                                  class="pe-7s-note text-primary" (click)="editRequisito(requisito)" data-toggle="tooltip" title="Existem atributos alterados."></i>
                               </td>
                               <td class="text-center icons">
-                                <i class="pe-7s-trash text-danger" (click)="removeItem(it.id)"></i>
+                                <i class="pe-7s-trash text-danger" data-toggle="tooltip" title="Remover Requisito." (click)="remove(requisito.id)"></i>
                               </td>
                             </tr>
 
@@ -83,7 +109,7 @@
                   </div>
                 </div>
               </div>
-              <div class="text-center mt-3" *ngIf="!auditoriaNivelItem?.length">
+              <div class="text-center mt-3" *ngIf="!auditoriaNivelItRequisito?.length">
                 <h6>Não foram encontradaos itens cadastrados</h6>
                 <!-- <button (click)="create()" class="mb-2 mr-2 mt-4 btn-icon btn-pill btn btn-outline-success"><i
                     class="pe-7s-plus btn-icon-wrapper"></i>Inserir</button> -->
@@ -91,7 +117,7 @@
             </div>
           </div>
         </div>
-      <!-- </div> -->
+      </div>
     </div>
 
     <!--Sidebar Filter Programação-->
@@ -99,7 +125,7 @@
       <div class="app-inner-layout__sidebar-header">
         <form [formGroup]="filterForm">
           <ul class="nav flex-column filter-programacao">
-            <li class="nav-item-header nav-item pt-3">Auditoria</li>
+            <li class="nav-item-header nav-item pt-3">Auditoria Nível Item</li>
 
             <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
               <label class="mb-0 pl-1">Tipo Atividadae:</label>
@@ -125,7 +151,7 @@
         </form>
       </div>
       <div class="app-inner-layout__sidebar-footer pt-3 pb-3 pl-3 pr-3">
-        <button class="btn-wide btn-pill btn btn-success btn-sm btn-block" (click)="findLaudos()"
+        <button class="btn-wide btn-pill btn btn-success btn-sm btn-block" (click)="filtrar()"
           [ladda]="loading">Filtrar</button>
         <button class="btn-wide btn-pill btn btn-danger btn-sm btn-block" (click)="cleanFilter()"
           [ladda]="loadingC">Limpar</button>
