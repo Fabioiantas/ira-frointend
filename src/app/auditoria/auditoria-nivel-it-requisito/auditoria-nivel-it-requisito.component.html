@@ -65,7 +65,7 @@
                             <tr *ngFor="let requisito of auditoriaNivelItRequisito; let i = index">
                               <td class="text-left">{{requisito.ds_requisito}}</td>
                               <td class="text-center icons">
-                                <i class="pe-7s-menu text-primary" (click)="editarItem(am)"></i>
+                                <i class="pe-7s-menu text-primary" (click)="editRequisito(requisito)"></i>
                               </td>
                               <td class="text-center icons">
                                 <i class="pe-7s-trash text-danger" (click)="removeItem(it.id)"></i>

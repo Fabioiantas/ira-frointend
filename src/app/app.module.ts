@@ -157,6 +157,7 @@ import { AuditoriaRequisitoCadastroComponent } from './auditoria/auditoria-requi
 import { AuditoriaNivelItemComponent } from './auditoria/auditoria-nivel-item/auditoria-nivel-item.component';
 import { HeaderLayoutComponent } from './layout/header-layout/header-layout.component';
 import { AuditoriaNivelItRequisitoComponent } from './auditoria/auditoria-nivel-it-requisito/auditoria-nivel-it-requisito.component';
+import { AuditoriaRequisitoParametroComponent } from './auditoria/auditoria-requisito-parametro/auditoria-requisito-parametro.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -269,6 +270,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AuditoriaNivelItemComponent,
     HeaderLayoutComponent,
     AuditoriaNivelItRequisitoComponent,
+    AuditoriaRequisitoParametroComponent,
 
   ],
   imports: [
@@ -346,7 +348,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ThemeOptions
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  entryComponents: [DialogBoxComponent, AmostraEditarComponent],
+  entryComponents: [DialogBoxComponent, AmostraEditarComponent, AuditoriaRequisitoParametroComponent],
   bootstrap: [AppComponent]
 })
 

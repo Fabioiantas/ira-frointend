@@ -1,0 +1,73 @@
+<div class="modal-header">
+  <h5 class="modal-title pull-left">Editar Requisito</h5>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="d-flex justify-content-center align-items-center" *ngIf="loading">
+    <div class="loader">
+      <div class="ball-scale-ripple">
+        <div></div>
+      </div>
+    </div>
+  </div>
+  <form>
+    <div class="row">
+      <div class="form-row">
+        <div class="col-md-12 mb-12 form-group">
+          <label for="tipo_monitoramento_id">Classificacao</label>
+          <ng-select [items]="listClassificacaoRequisito" bindValue="id"
+            bindLabel="nm_classificacao" name="classificacao_requisito_id" placeholder="Buscar Classificacao...">
+          </ng-select>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <label class="mt-2">Orientacao:</label>
+        <input name="ds_orientacao" placeholder="Orientacoes." type="text" [(ngModel)]="auditoriaNivelItRequisito.ds_orientacao">
+      </div>
+      <div class="col-md-6">
+        <label class="mt-2">Peso:</label>
+        <input name="nr_peso" placeholder="Consumo total" type="number"
+          [(ngModel)]="auditoriaNivelItRequisito.nr_peso">
+      </div>
+      <label class="mt-2">Evidencia?</label>
+      <div class="custom-radio custom-control">
+        <input type="radio" id="ie_evidenciaAtivo" name="ie_evidencia"
+          class="custom-control-input" value="S">
+        <label for="ie_evidenciaAtivo" class="custom-control-label">Sim</label>
+      </div>
+      <div class="custom-radio custom-control">
+        <input type="radio" id="ie_evidenciaInativo" name="ie_evidencia"
+          class="custom-control-input" value="N">
+        <label for="ie_evidenciaInativo" class="custom-control-label">Não</label>
+      </div>
+    </div>
+
+
+    <!-- aaaa -->
+    <!-- <div class="col-md-6 mb-6 form-group">
+      <label class="mt-2">Data Amostra:</label>
+      <input placeholder="yyyy-mm-dd"
+             name="dt_amostra" [(ngModel)]="auditoriaNivelItRequisito.dt_amostra" ngbDatepicker #d="ngbDatepicker" readonly>
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary fa fa-calendar" (click)="d.toggle()" type="button"></button>
+      </div>
+    </div>
+    <div class="col-md-4 mb-4 form-group">
+      <label class="mt-2">UN:</label>
+      <input name="ds_orientacao" placeholder="Un." type="text"
+        [(ngModel)]="auditoriaNivelItRequisito.ds_orientacao">
+    </div>
+    <div class="col-md-4 mb-4 form-group">
+      <label class="mt-2">Consumo:</label>
+      <input name="nr_peso" placeholder="Consumo total" type="number"
+        [(ngModel)]="auditoriaNivelItRequisito.nr_peso">
+    </div> -->
+  </form>
+</div>
+<div class="modal-footer" style="clear: both;">
+  <button type="button" class="btn btn-default btn-sm" (click)="closeModal()">Fechar</button>
+  <button type="button" class="btn btn-primary btn-sm" (click)="salvar()">Salvar</button>
+</div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { AuditoriaItem } from 'src/app/models/auditoriaItem';
 import { AuditoriaNivel } from 'src/app/models/auditoriaNivel';
@@ -11,6 +12,7 @@ import { AuditoriaNivelItRequisitoService } from 'src/app/services/auditoria/aud
 import { AuditoriaNivelItemServiceService } from 'src/app/services/auditoria/auditoria-nivel-item-service.service';
 import { TipoAtividadeService } from 'src/app/services/tipo-atividade.service';
 import { DialogBoxService } from 'src/app/_services/dialog-box.service';
+import { AuditoriaRequisitoParametroComponent } from '../auditoria-requisito-parametro/auditoria-requisito-parametro.component';
 
 @Component({
   selector: 'app-auditoria-nivel-it-requisito',
@@ -46,7 +48,8 @@ export class AuditoriaNivelItRequisitoComponent implements OnInit {
               private auditoriaNivelItRequisitoService: AuditoriaNivelItRequisitoService,
               private formBuilder: FormBuilder,
               private dialogBox: DialogBoxService,
-              private toastrService: ToastrService) { }
+              private toastrService: ToastrService,
+              private modalService: BsModalService) { }
 
   ngOnInit() {
     this.filterForm = this.formBuilder.group({
@@ -75,17 +78,17 @@ export class AuditoriaNivelItRequisitoComponent implements OnInit {
       this.auditoriaNivelItemCadastro.auditoria_nivel_id = this.filterForm.value.auditoriaNivel.id;
       this.auditoriaNivelItemCadastro.auditoria_item_id = this.filterForm.value.auditoriaItem.id;
       this.auditoriaNivelItemService.add(this.auditoriaNivelItemCadastro).subscribe(() => {
-        this.showSuccess('Item adicionado com sucesso!','Mensagem');
+        this.showSuccess('Item adicionado com sucesso!', 'Mensagem');
         this.changeNivel();
       });
     }
   }
 
   removeItem(id: any) {
-    this.dialogBox.show('Confirma exclusão do Item e todos seus Requisitos?', 'CONFIRM').then(sim =>{
+    this.dialogBox.show('Confirma exclusão do Item e todos seus Requisitos?', 'CONFIRM').then((sim: any) => {
       if (sim) {
         this.auditoriaNivelItemService.remove(id).subscribe(() => {
-          this.showSuccess('Item removido com sucesso!','Mensagem');
+          this.showSuccess('Item removido com sucesso!', 'Mensagem');
           this.changeNivel();
         });
       }
@@ -142,4 +145,15 @@ export class AuditoriaNivelItRequisitoComponent implements OnInit {
     });
   }
 
+  editRequisito(requisito: any) {
+    console.log(JSON.stringify(requisito));
+    const initialState = {
+      auditoriaNivelItRequisito: requisito
+    };
+    this.modalService.show(AuditoriaRequisitoParametroComponent, { initialState, backdrop: 'static', class: 'modal-md'})
+    .content.onClose.subscribe(itemReturn => {
+      requisito = itemReturn;
+      // this.findProgramacao();
+    });
+  }
 }
