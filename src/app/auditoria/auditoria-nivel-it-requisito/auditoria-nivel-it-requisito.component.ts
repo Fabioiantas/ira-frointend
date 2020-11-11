@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
+import { Subject } from 'rxjs';
 import { AuditoriaItem } from 'src/app/models/auditoriaItem';
 import { AuditoriaNivel } from 'src/app/models/auditoriaNivel';
 import { AuditoriaNivelItem } from 'src/app/models/auditoriaNivelItem';
@@ -13,6 +15,7 @@ import { AuditoriaItemService } from 'src/app/services/auditoria/auditoria-item.
 import { AuditoriaNivelItRequisitoService } from 'src/app/services/auditoria/auditoria-nivel-it-requisito.service';
 import { AuditoriaNivelItemServiceService } from 'src/app/services/auditoria/auditoria-nivel-item-service.service';
 import { AuditoriaRequisitoService } from 'src/app/services/auditoria/auditoria-requisito.service';
+import { DataService } from 'src/app/services/data.service';
 import { TipoAtividadeService } from 'src/app/services/tipo-atividade.service';
 import { DialogBoxService } from 'src/app/_services/dialog-box.service';
 import { AuditoriaRequisitoParametroComponent } from '../auditoria-requisito-parametro/auditoria-requisito-parametro.component';
@@ -37,6 +40,8 @@ export class AuditoriaNivelItRequisitoComponent implements OnInit {
   listAuditoriaRequisito: any[];
   isInsertRequisito = false;
 
+  public onClose: Subject<FormGroup>;
+
   columnsNivelItem = [
     {name : 'Item', prop : 'ds_item', width : '20%', selecionado: true}
   ];
@@ -53,7 +58,9 @@ export class AuditoriaNivelItRequisitoComponent implements OnInit {
               private auditoriaNivelItemService: AuditoriaNivelItemServiceService,
               private auditoriaNivelItRequisitoService: AuditoriaNivelItRequisitoService,
               private auditoriaRequisitoService: AuditoriaRequisitoService,
+              private dataService: DataService,
               private formBuilder: FormBuilder,
+              private route: ActivatedRoute,
               private dialogBox: DialogBoxService,
               private toastrService: ToastrService,
               private modalService: BsModalService) { }
@@ -64,8 +71,12 @@ export class AuditoriaNivelItRequisitoComponent implements OnInit {
       auditoriaNivel: [null, Validators.required],
       auditoriaNivelItem: [null, Validators.required]
     });
+
     this.getAtividade();
     this.getNiveis();
+    this.dataService.curAuditoriaNivelItem.subscribe(data => {
+      console.log('data ' + JSON.stringify(data));
+    });
   }
 
   getAtividade() {
@@ -174,10 +185,12 @@ export class AuditoriaNivelItRequisitoComponent implements OnInit {
 
   remove(id: any) {
     this.dialogBox.show('Confirma remoção do Requisito?', 'CONFIRM').then((sim) => {
-        this.auditoriaNivelItRequisitoService.remove(id).subscribe(()=> {
+      if (sim) {
+        this.auditoriaNivelItRequisitoService.remove(id).subscribe(() => {
           this.showSuccess('Requisito removido com sucesso', 'Mensagem');
           this.changeNivelItem();
         });
+      }
     });
   }
 

@@ -1,12 +1,6 @@
 import { FonteEntidadeComponent } from './gee/fonte-entidade/fonte-entidade.component';
 import { GeeComponent } from './gee/gee.component';
 import { RecursoComponent } from './Recurso/Recurso.component';
-import { ProgramacaoComponent } from './programacao/programacao.component';
-import { ProdutosLiberadosComponent } from './produtos-liberados/produtos-liberados.component';
-import { TecnicoComponent } from './tecnico/tecnico.component';
-import { AdicionarUsuarioComponent } from './usuario/adicionar-usuario/adicionar-usuario.component';
-import { ProdutoComponent } from './produto/produto.component';
-import { AdicionarCampanhaComponent } from './campanhas/adicionar-campanha/adicionar-campanha.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 // Components
@@ -19,12 +13,8 @@ import { PagesLayoutComponent } from './layout/pages-layout/pages-layout.compone
 import { AuthGuard } from './guards/auth.guard';
 import { Role } from './_models/role';
 import { AdminComponent } from './admin/admin.component';
-import { UsuarioComponent } from './usuario/usuario.component';
 import { LoginBoxedComponent } from './login/login-boxed.component';
 import { ForgotPasswordBoxedComponent } from './login/forgot-password/forgot-password-boxed.component';
-import { CampanhasComponent } from './campanhas/campanhas.component';
-import { AdicionarProdutoComponent } from './produto/adicionar-produto/adicionar-produto.component';
-import { ProgramacaoPendenteAnaliseComponent } from './programacao-pendente-analise/programacao-pendente-analise.component';
 import { LicencaAmbientalComponent } from './licenca-ambiental/licenca-ambiental.component';
 import { OrgaoResponsavelComponent } from './orgao-responsavel/orgao-responsavel.component';
 import { OrgaoResponsavelCadastroComponent } from './orgao-responsavel/orgao-responsavel-cadastro/orgao-responsavel-cadastro.component';
@@ -61,7 +51,6 @@ import { FonteEmissoraCadastroComponent } from './Monitoramento-Recursos/fonte-e
 import { MonitoramentoCadastroComponent } from './Monitoramento-Recursos/monitoramento-cadastro/monitoramento-cadastro.component';
 // tslint:disable-next-line:max-line-length
 import { MonitoramentoAmostraCadastroComponent } from './Monitoramento-Recursos/monitoramento-amostra-cadastro/monitoramento-amostra-cadastro.component';
-import { TipoMonitoramento } from './models/tipoMonitoramento';
 // tslint:disable-next-line:max-line-length
 import { TipoMonitoramentoCadastroComponent } from './Monitoramento-Recursos/tipo-monitoramento/tipo-monitoramento-cadastro/tipo-monitoramento-cadastro.component';
 import { TipoMonitoramentoComponent } from './Monitoramento-Recursos/tipo-monitoramento/tipo-monitoramento.component';
@@ -79,6 +68,7 @@ import { ClassificacaoRequisitoCadastroComponent } from './auditoria/classificac
 import { AuditoriaItemComponent } from './auditoria/auditoria-item/auditoria-item.component';
 import { AuditoriaItemCadastroComponent } from './auditoria/auditoria-item/auditoria-item-cadastro/auditoria-item-cadastro.component';
 import { AuditoriaRequisitoComponent } from './auditoria/auditoria-requisito/auditoria-requisito.component';
+// tslint:disable-next-line:max-line-length
 import { AuditoriaRequisitoCadastroComponent } from './auditoria/auditoria-requisito/auditoria-requisito-cadastro/auditoria-requisito-cadastro.component';
 import { AuditoriaNivelItemComponent } from './auditoria/auditoria-nivel-item/auditoria-nivel-item.component';
 import { AuditoriaNivelItRequisitoComponent } from './auditoria/auditoria-nivel-it-requisito/auditoria-nivel-it-requisito.component';
@@ -785,6 +775,12 @@ const routes: Routes = [
     path: 'nivelitrequisito',
     component: BaseLayoutComponent,
     children: [
+      {
+        path: ':id',
+        component: AuditoriaNivelItRequisitoComponent,
+        data: { extraParameter: 'mAuditoriaMenu' },
+        canActivate: [AuthGuard]
+      },
       {
         path: '',
         component: AuditoriaNivelItRequisitoComponent,

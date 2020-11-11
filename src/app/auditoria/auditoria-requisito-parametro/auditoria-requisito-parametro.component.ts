@@ -44,6 +44,7 @@ export class AuditoriaRequisitoParametroComponent implements OnInit {
   }
 
   salvar() {
+     // tslint:disable-next-line:max-line-length
      if (!this.auditoriaNivelItRequisito.ds_orientacao && !this.auditoriaNivelItRequisito.classificacao_requisito_id && !this.auditoriaNivelItRequisito.nr_peso && !this.auditoriaNivelItRequisito.ie_evidencia) {
        return this.dialogBox.show('Nenhum campo foi alterado!', 'Warning');
      }

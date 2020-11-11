@@ -5,6 +5,7 @@ import { MonitoramentoLaudo } from '../models/monitoramentoLaudo';
 import { FontesEntidade } from '../models/fontesEntidade';
 import { MonitoramentoRecursoAmostra } from '../models/monitoramentoRecursoAmostra';
 import { Parametro } from '../models/Parametro';
+import { AuditoriaNivelItem } from '../models/auditoriaNivelItem';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,10 @@ export class DataService {
   public parametroBehavior = new BehaviorSubject(this.parametro);
   curParametro = this.parametroBehavior.asObservable();
 
+  public auditoriaNivelItem: AuditoriaNivelItem = null;
+  public auditoriaNivelItemBehavior = new BehaviorSubject(this.auditoriaNivelItem);
+  curAuditoriaNivelItem = this.auditoriaNivelItemBehavior.asObservable();
+
   constructor() { }
 
   changeFilter(filter: FormGroup) {
@@ -59,5 +64,9 @@ export class DataService {
 
   changeParametro(parametro: Parametro) {
     this.parametroBehavior.next(parametro);
+  }
+
+  changeAuditoriaNivelItem(auditoriaNivelItemBehavior: AuditoriaNivelItem) {
+    this.auditoriaNivelItemBehavior.next(auditoriaNivelItemBehavior);
   }
 }

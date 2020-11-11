@@ -10,6 +10,8 @@ import { AuditoriaNivelItemServiceService } from 'src/app/services/auditoria/aud
 import { TipoAtividadeService } from 'src/app/services/tipo-atividade.service';
 import { DialogBoxService } from 'src/app/_services/dialog-box.service';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
+import { DataService } from 'src/app/services/data.service';
 
 @Component({
   selector: 'app-auditoria-nivel-item',
@@ -41,7 +43,9 @@ export class AuditoriaNivelItemComponent implements OnInit {
               private auditoriaNivelService: AuditoriaNivelService,
               private auditoriaItemSerice: AuditoriaItemService,
               private auditoriaNivelItemService: AuditoriaNivelItemServiceService,
+              private dataService: DataService,
               private formBuilder: FormBuilder,
+              private router: Router,
               private dialogBox: DialogBoxService,
               private toastrService: ToastrService) { }
 
@@ -52,6 +56,7 @@ export class AuditoriaNivelItemComponent implements OnInit {
       auditoriaItem: [null, Validators.required]
     });
     this.getAtividade();
+    this.getNiveis();
   }
 
   getAtividade() {
@@ -66,23 +71,29 @@ export class AuditoriaNivelItemComponent implements OnInit {
     });
   }
 
+  getNiveis() {
+    this.auditoriaNivelService.list().subscribe(data => {
+      this.listNivel = data;
+    });
+  }
+
   addItem() {
     if (this.filterForm.valid) {
       this.auditoriaNivelItemCadastro = new AuditoriaNivelItem();
       this.auditoriaNivelItemCadastro.auditoria_nivel_id = this.filterForm.value.auditoriaNivel.id;
       this.auditoriaNivelItemCadastro.auditoria_item_id = this.filterForm.value.auditoriaItem.id;
       this.auditoriaNivelItemService.add(this.auditoriaNivelItemCadastro).subscribe(() => {
-        this.showSuccess('Item adicionado com sucesso!','Mensagem');
+        this.showSuccess('Item adicionado com sucesso!', 'Mensagem');
         this.changeNivel();
       });
     }
   }
 
   removeItem(id: any) {
-    this.dialogBox.show('Confirma exclusão do Item e todos seus Requisitos?', 'CONFIRM').then(sim =>{
+    this.dialogBox.show('Confirma exclusão do Item e todos seus Requisitos?', 'CONFIRM').then(sim => {
       if (sim) {
         this.auditoriaNivelItemService.remove(id).subscribe(() => {
-          this.showSuccess('Item removido com sucesso!','Mensagem');
+          this.showSuccess('Item removido com sucesso!', 'Mensagem');
           this.changeNivel();
         });
       }
@@ -96,9 +107,7 @@ export class AuditoriaNivelItemComponent implements OnInit {
         this.listNivel = data;
       });
     } else {
-      this.auditoriaNivelService.list().subscribe(data => {
-        this.listNivel = data;
-      });
+      this.getNiveis();
     }
   }
 
@@ -124,6 +133,11 @@ export class AuditoriaNivelItemComponent implements OnInit {
     this.toastrService.success(message, title, {
       timeOut: 3000,
     });
+  }
+
+  showRequisitos(nivelItem: any) {
+    this.dataService.changeAuditoriaNivelItem(nivelItem);
+    this.router.navigate([`/nivelitrequisito`]);
   }
 
 }

@@ -1,12 +1,15 @@
 <div class="modal-header">
-  <h5 class="modal-title pull-left">Editar Atributos - <i class="pe-7s-menu">{{filterForm.auditoriaNivel.nm_nivel}}</i></h5>
+  <h5 class="modal-title pull-left">
+    <i class="pe-7s-edit">Editar Atributos</i>
+  </h5>
   <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body">
   <div class="col-sm-12">
-    <h6 class="card-title"><i class="pe-7s-pin p-1"></i> {{filterForm.auditoriaNivelItem.auditoria_item.ds_item}}
+    <h6 class="card-title">
+      <i class="pe-7s-pin p-1"></i> {{filterForm.auditoriaNivelItem.auditoria_item.ds_item}}
       <div>
         <span class="opacity-8"><i class="pe-7s-angle-right-circle p-1"></i>{{auditoriaNivelItRequisito.ds_requisito}}</span>
       </div>

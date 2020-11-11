@@ -57,7 +57,7 @@ export class TalhaoCadastroComponent implements OnInit {
           qt_area_agricultavel: data.qt_area_agricultavel,
           ie_situacao:  data.ie_situacao
         });
-        this.propriedadeService.getById(data.propriedade_id).subscribe(data => {
+         this.propriedadeService.getById(data.propriedade_id).subscribe(data => {
           this.propriedade = data;
         });
       });
