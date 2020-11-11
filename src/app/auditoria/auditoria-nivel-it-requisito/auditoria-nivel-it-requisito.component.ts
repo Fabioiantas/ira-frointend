@@ -74,8 +74,16 @@ export class AuditoriaNivelItRequisitoComponent implements OnInit {
 
     this.getAtividade();
     this.getNiveis();
-    this.dataService.curAuditoriaNivelItem.subscribe(data => {
-      console.log('data ' + JSON.stringify(data));
+    this.dataService.curFilterAuditoriaNivelItem.subscribe(data => {
+      if (data) {
+        this.filterForm.patchValue({
+          tipoAtividade: data.value.tipoAtividade,
+          auditoriaNivel: data.value.auditoriaNivel,
+          auditoriaNivelItem: data.value.auditoriaNivelItem,
+        });
+        this.changeNivelItem();
+      }
+
     });
   }
 

@@ -7,6 +7,7 @@ import { ClassificacaoRequisito } from 'src/app/models/classificacaoRequisito';
 import { AuditoriaNivelItRequisitoService } from 'src/app/services/auditoria/auditoria-nivel-it-requisito.service';
 import { ClassificacaoRequisitoService } from 'src/app/services/auditoria/classificacao-requisito.service';
 import { DialogBoxService } from 'src/app/_services/dialog-box.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-auditoria-requisito-parametro',
@@ -24,12 +25,18 @@ export class AuditoriaRequisitoParametroComponent implements OnInit {
 
   constructor(private dialogBox: DialogBoxService, public modalRef: BsModalRef,
               private auditoriaNivelItRequisitoService: AuditoriaNivelItRequisitoService,
-              private classificacaoRequisitoService: ClassificacaoRequisitoService) { }
+              private classificacaoRequisitoService: ClassificacaoRequisitoService,
+              private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.getClassificacaoRequisito();
-    console.log(JSON.stringify(this.filterForm));
     this.onClose = new Subject();
+  }
+
+  showSuccess(message: string, title: string) {
+    this.toastrService.success(message, title, {
+      timeOut: 3000,
+    });
   }
 
   public closeModal(): void {
@@ -51,6 +58,7 @@ export class AuditoriaRequisitoParametroComponent implements OnInit {
      this.loading = true;
      this.auditoriaNivelItRequisitoService.edit(this.auditoriaNivelItRequisito).subscribe(data => {
        this.loading = false;
+       this.showSuccess('Atributo salvo com sucesso!', 'Mensagem');
        this.closeModal();
      }, () => this.loading = false);
    }

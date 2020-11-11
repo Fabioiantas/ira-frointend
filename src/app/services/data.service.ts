@@ -36,9 +36,9 @@ export class DataService {
   public parametroBehavior = new BehaviorSubject(this.parametro);
   curParametro = this.parametroBehavior.asObservable();
 
-  public auditoriaNivelItem: AuditoriaNivelItem = null;
-  public auditoriaNivelItemBehavior = new BehaviorSubject(this.auditoriaNivelItem);
-  curAuditoriaNivelItem = this.auditoriaNivelItemBehavior.asObservable();
+  public filterAuditoriaNivelItem: FormGroup = null;
+  public filterAuditoriaNivelItemBehavior = new BehaviorSubject(this.filterAuditoriaNivelItem);
+  curFilterAuditoriaNivelItem = this.filterAuditoriaNivelItemBehavior.asObservable();
 
   constructor() { }
 
@@ -66,7 +66,7 @@ export class DataService {
     this.parametroBehavior.next(parametro);
   }
 
-  changeAuditoriaNivelItem(auditoriaNivelItemBehavior: AuditoriaNivelItem) {
-    this.auditoriaNivelItemBehavior.next(auditoriaNivelItemBehavior);
+  changeFilterAuditoriaNivelItem(filterForm: FormGroup) {
+    this.filterAuditoriaNivelItemBehavior.next(filterForm);
   }
 }

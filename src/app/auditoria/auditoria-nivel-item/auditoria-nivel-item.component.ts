@@ -53,7 +53,8 @@ export class AuditoriaNivelItemComponent implements OnInit {
     this.filterForm = this.formBuilder.group({
       tipoAtividade: [null],
       auditoriaNivel: [null, Validators.required],
-      auditoriaItem: [null, Validators.required]
+      auditoriaItem: [null, Validators.required],
+      auditoriaNivelItem: [null]
     });
     this.getAtividade();
     this.getNiveis();
@@ -136,7 +137,10 @@ export class AuditoriaNivelItemComponent implements OnInit {
   }
 
   showRequisitos(nivelItem: any) {
-    this.dataService.changeAuditoriaNivelItem(nivelItem);
+    this.filterForm.patchValue({
+      auditoriaNivelItem: nivelItem
+    });
+    this.dataService.changeFilterAuditoriaNivelItem(this.filterForm);
     this.router.navigate([`/nivelitrequisito`]);
   }
 
