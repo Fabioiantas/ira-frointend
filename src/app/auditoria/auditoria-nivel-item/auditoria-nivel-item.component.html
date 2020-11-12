@@ -21,13 +21,13 @@
           <div class="mb-0 form-group" style="width: 100%;">
             <div class="col-sm-12">
 
-              <div class="loader-wrapper d-flex justify-content-center align-items-center" *ngIf="loading">
+              <!-- <div class="loader-wrapper d-flex justify-content-center align-items-center" *ngIf="loading">
                 <div class="loader">
                   <div class="ball-scale-ripple">
                     <div></div>
                   </div>
                 </div>
-              </div>
+              </div> -->
               <div class="form-row bg-info">
                 <div class="col-md-12 mb-12 form-group">
                   <label for="auditoria_item_id">Itens</label>
@@ -49,8 +49,14 @@
                       </div>
                     </div>
 
-
-                    <div class="col-md-12">
+                    <div class="loader-wrapper d-flex justify-content-center align-items-center" *ngIf="loading">
+                      <div class="loader">
+                        <div class="ball-scale-ripple">
+                          <div></div>
+                        </div>
+                      </div>
+                    </div>
+                    <div *ngIf="!loading" class="col-md-12">
                       <!-- <div class="table-responsive" style="min-height: 500px;"> -->
                         <table class="align-middle mb-0 table table-borderless table-sm table-striped table-hover" #tableNivelItens>
                           <thead class="thead-light">
@@ -79,8 +85,6 @@
                         <div class="divider"></div>
                       <!-- </div> -->
                     </div>
-
-
                     <div class="divider"></div>
                   </div>
                 </div>

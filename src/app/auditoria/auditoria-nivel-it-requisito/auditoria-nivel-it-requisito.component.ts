@@ -39,7 +39,8 @@ export class AuditoriaNivelItRequisitoComponent implements OnInit {
   auditoriaRequisito = new AuditoriaRequisito();
   listAuditoriaRequisito: any[];
   isInsertRequisito = false;
-
+  loading = false;
+  isLoading = false;
   public onClose: Subject<FormGroup>;
 
   columnsNivelItem = [
@@ -159,6 +160,7 @@ export class AuditoriaNivelItRequisitoComponent implements OnInit {
   }
 
   changeNivelItem() {
+    this.loading = true;
     this.auditoriaNivelItRequisitoService.getRequisitosByNivelId(this.filterForm.value.auditoriaNivelItem.id).subscribe(data => {
       this.auditoriaNivelItRequisito = data.map(row => ({
         id: row.id,
@@ -170,6 +172,7 @@ export class AuditoriaNivelItRequisitoComponent implements OnInit {
         nr_peso: row.nr_peso,
         ie_evidencia: row.ie_evidencia
       }));
+      this.loading = false;
     });
   }
 

@@ -28,7 +28,7 @@ export class AuditoriaNivelItemComponent implements OnInit {
   auditoriaItem: AuditoriaItem = new AuditoriaItem();
   listNivel: AuditoriaNivel;
   filterForm: FormGroup;
-
+  loading = false;
   columnsNivelItem = [
     {name : 'Item', prop : 'ds_item', width : '20%', selecionado: true}
   ];
@@ -67,8 +67,10 @@ export class AuditoriaNivelItemComponent implements OnInit {
   }
 
   getItens() {
+    this.loading = true;
     this.auditoriaItemSerice.list().subscribe(data => {
       this.listAuditoriaItem = data;
+      this.loading = false;
     });
   }
 
