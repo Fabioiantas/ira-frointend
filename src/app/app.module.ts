@@ -159,6 +159,7 @@ import { HeaderLayoutComponent } from './layout/header-layout/header-layout.comp
 import { AuditoriaNivelItRequisitoComponent } from './auditoria/auditoria-nivel-it-requisito/auditoria-nivel-it-requisito.component';
 import { AuditoriaRequisitoParametroComponent } from './auditoria/auditoria-requisito-parametro/auditoria-requisito-parametro.component';
 import { AuditoriaEntidadeCadastroComponent } from './auditoria/auditoria-entidade-cadastro/auditoria-entidade-cadastro.component';
+import { AuditoriaEntidadeComponent } from './auditoria/auditoria-entidade/auditoria-entidade.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -273,6 +274,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AuditoriaNivelItRequisitoComponent,
     AuditoriaRequisitoParametroComponent,
     AuditoriaEntidadeCadastroComponent,
+    AuditoriaEntidadeComponent,
 
   ],
   imports: [
