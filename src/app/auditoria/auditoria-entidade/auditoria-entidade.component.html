@@ -1,3 +1,84 @@
-<p>
-  auditoria-entidade works!
-</p>
+<div class="app-inner-layout chat-layout">
+  <div class="app-inner-layout__wrapper" [ngClass]="{'open-mobile-menu' : toggleMobileSidebar}">
+    <div class="app-inner-layout__content card">
+      <div class="table-responsive">
+        <div class="app-inner-layout__top-pane">
+          <div class="pane-left">
+            <div class="mobile-app-menu-btn">
+              <button type="button" class="hamburger hamburger--elastic" [ngClass]="{'is-active' : toggleMobileSidebar}"
+                (click)="toggleMobileSidebar = !toggleMobileSidebar">
+                <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="app-inner-layout__bottom-pane d-flex" style="padding: 0px;">
+          <div class="mb-0 form-group" style="width: 100%;">
+            <div class="col-sm-12">
+              <div class="table-responsive" style="min-height: 500px;">
+                <div class="p-3 bg-white">
+                  <div class="form-group form-inline mb-0">
+                    <ngx-datatable-filter [margin]="'-6px'" [float]="'left'" [columns]="columnsAuditoriaEntidade"
+                      [lista]="rowsAuditoriaEntidade"
+                      [table]="tableAuditoriaEntidade"></ngx-datatable-filter>
+                  </div>
+                </div>
+                <ngx-datatable ngx-resize-watcher class="bootstrap striped" #tableAuditoriaEntidade
+                  [rows]="rowsAuditoriaEntidade"
+                  [footerHeight]="25"
+                  [columnMode]="'force'"
+                  [columns]="columnsAuditoriaEntidade"
+                  [selected]="selected"
+                  [selectionType]="'single'" [rowHeight]="'auto'" (activate)="activate($event)"
+                  [messages]="{'emptyMessage': 'Nenhum resultado encontrado...', 'totalMessage': 'total'}" [limit]="15">
+                  <ngx-datatable-column name="Auditoria" prop="nm_nivel" [width]="50" [flexGrow]="2"></ngx-datatable-column>
+                  <ngx-datatable-column name="Validade" prop="dt_validade" [flexGrow]="2"></ngx-datatable-column>
+                </ngx-datatable>
+                <div class="divider"></div>
+              </div>
+
+              <div class="text-center mt-3">
+                <h6>Não foram encontradaos itens cadastrados</h6>
+                <button (click)="create()" class="mb-2 mr-2 mt-4 btn-icon btn-pill btn btn-outline-success"><i
+                    class="pe-7s-plus btn-icon-wrapper"></i>Inserir Auditoria</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Sidebar Filter Programação-->
+    <div class="app-inner-layout__sidebar card">
+      <div class="app-inner-layout__sidebar-header">
+        <form [formGroup]="filterForm">
+          <ul class="nav flex-column filter-programacao">
+            <li class="nav-item-header nav-item pt-3">Entidade Auditoria</li>
+
+            <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
+              <label class="mb-0 pl-1">Entidade:</label>
+              <ng-select [items]="listEntidade" (change)="changeEntidade()" bindLabel="nm_reduzido"
+                formControlName="entidade" name="entidade" placeholder="Buscar Entidade...">
+              </ng-select>
+            </li>
+
+            <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
+              <label class="mb-0 pl-1">Propriedade:</label>
+              <ng-select [items]="listPropriedade" (change)="changePropriedade()" bindLabel="nm_propriedade"
+                formControlName="propriedade" name="propriedade" placeholder="Buscar Propriedade...">
+              </ng-select>
+            </li>
+
+          </ul>
+        </form>
+      </div>
+      <div class="app-inner-layout__sidebar-footer pt-3 pb-3 pl-3 pr-3">
+        <button class="btn-wide btn-pill btn btn-success btn-sm btn-block" (click)="filtrar()"
+          [ladda]="isLoading">Filtrar</button>
+        <button class="btn-wide btn-pill btn btn-danger btn-sm btn-block" (click)="cleanFilter()"
+          [ladda]="isLoading">Limpar</button>
+      </div>
+    </div>
+    <!--//Sidebar Filter-->
+  </div>
+</div>
