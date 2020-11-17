@@ -31,17 +31,6 @@
       <i class="header-icon lnr-license mr-3 text-muted opacity-6"></i>
       Licenças Ambientais
     </div>
-    <!-- <div class="btn-actions-pane-right">
-      <div class="btn-group-sm btn-group" role="group">
-        <a class="btn btn-warning" (click)="licenciar(selected[0])">Licenciar</a>
-      </div>
-      <div class="btn-group-sm btn-group" role="group">
-        <a class="btn btn-primary" (click)="protocolar(selected[0])">Protocolar</a>
-      </div>
-      <div class="btn-group-sm btn-group" role="group">
-        <a class="btn btn-success" (click)="renova(selected[0])">Renovar</a>
-      </div>
-    </div> -->
     <div class="btn-actions-pane-right">
       <div class="btn-group-sm btn-group" role="group">
         <a class="btn btn-success" [routerLink]="['/licencaambiental/adicionar']">Inserir Nova Licença</a>
@@ -94,28 +83,10 @@
           <a class="btn btn-outline-warning btn-xs">{{getProximaAcao(row)}}</a>
       </ng-template>
     </ngx-datatable-column>
-
-    <!-- <ngx-datatable-column name="Telefone" prop="ds_email_alerta" [flexGrow]="2"></ngx-datatable-column> -->
-    <!-- <ngx-datatable-column name="Vigência" prop="vigencia" [flexGrow]="2">
-      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-        {{row.dtIniVigencia | date:'d/MM/yyyy' }} - {{row.dtFimVigencia | date:'d/MM/yyyy' }}
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Período Programação" prop="dtIniProgramacao" [flexGrow]="1">
-      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-        {{row.dtIniProgramacao| date:'d/MM/yyyy'}} - {{row.dtFimProgramacao| date:'d/MM/yyyy'}}
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Período Programação" prop="dtIniRetirada" [flexGrow]="1">
-      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-        {{row.dtIniRetirada| date:'d/MM/yyyy'}} - {{row.dtFimRetirada| date:'d/MM/yyyy'}}
-      </ng-template>
-    </ngx-datatable-column> -->
   </ngx-datatable>
 </section>
 
 <ng-template #detalhes let-c="close" let-d="dismiss">
-
   <div class="main-card mb-3 card">
     <div class="card-body">
       <h5 class="card-title">Detalhes da Licença</h5>
@@ -219,38 +190,6 @@
       </div>
     </div>
   </div>
-  <!-- <div class="modal-header">
-    <h4 class="modal-title">Detalhes</h4>
-    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body">
-
-    <p>
-      <b>ENTIDADE:</b> <br> {{selected[0].nm_entidade}}
-    </p>
-    <p *ngIf="selected[0].nr_cnpj !== null">
-      <b>CNPJ:</b> <br> {{selected[0].nr_cnpj}}
-    </p>
-    <p *ngIf="selected[0].nr_cpf !== null">
-     <b>CPF:</b> <br> {{selected[0].nr_cpf}}
-    </p>
-    <p>
-      <b>ATIVIDADE:</b> <br> {{selected[0].nm_atividade}}
-    </p>
-    <p>
-      <b>TIPO LICENÇA:</b> <br> {{selected[0].nm_licenca}}
-    </p>
-    <p>
-      <b>ORGÃO:</b> <br> {{selected[0].nm_orgao}}
-    </p>
-  </div>
-  <div class="modal-footer">
-    <button type="button" class="btn btn-secondary" (click)="c('Close click')">Close</button>
-  </div> -->
 </ng-template>
-
-<!-- ############################## -->
 
 

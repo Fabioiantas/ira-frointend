@@ -21,7 +21,7 @@ export class SidebarComponent implements OnInit {
 
   private newInnerWidth: number;
   private innerWidth: number;
-  activeId = 'licenciamentoMenu';
+  activeId = '';
 
   toggleSidebar() {
     this.globals.toggleSidebar = !this.globals.toggleSidebar;
@@ -45,7 +45,6 @@ export class SidebarComponent implements OnInit {
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.newInnerWidth = event.target.innerWidth;
-
     if (this.newInnerWidth < 1200) {
       this.globals.toggleSidebar = true;
     } else {

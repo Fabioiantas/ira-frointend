@@ -28,7 +28,7 @@
 <section class="content">
   <div class="card-header-tab card-header">
     <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i
-        class="header-icon lnr-store mr-3 text-muted opacity-6"></i> Tipo Atividade </div>
+        class="header-icon fa fa-check mr-3 text-muted opacity-6"></i> Atividade </div>
     <div class="btn-actions-pane-right">
       <div class="btn-group-sm btn-group" role="group">
         <a class="btn btn-success" [routerLink]="['/tipoatividade/adicionar']">Adicionar</a>
@@ -49,20 +49,6 @@
     (activate)="activate($event)"
     [messages]="{'emptyMessage': 'Nenhum resultado encontrado...', 'totalMessage': 'total'}" [limit]="5">
     <ngx-datatable-column name="tableTipoAtividade" prop="nm_atividade" [flexGrow]="2"></ngx-datatable-column>
-    <!-- <ngx-datatable-column name="Vigência" prop="vigencia" [flexGrow]="2">
-      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-        {{row.dtIniVigencia | date:'d/MM/yyyy' }} - {{row.dtFimVigencia | date:'d/MM/yyyy' }}
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Período Programação" prop="dtIniProgramacao" [flexGrow]="1">
-      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-        {{row.dtIniProgramacao| date:'d/MM/yyyy'}} - {{row.dtFimProgramacao| date:'d/MM/yyyy'}}
-      </ng-template>
-    </ngx-datatable-column>
-    <ngx-datatable-column name="Período Programação" prop="dtIniRetirada" [flexGrow]="1">
-      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-        {{row.dtIniRetirada| date:'d/MM/yyyy'}} - {{row.dtFimRetirada| date:'d/MM/yyyy'}}
-      </ng-template>
-    </ngx-datatable-column> -->
+
   </ngx-datatable>
 </section>
