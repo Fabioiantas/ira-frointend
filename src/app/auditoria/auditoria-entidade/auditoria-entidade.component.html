@@ -1,6 +1,42 @@
+<div class="app-page-title app-page-title-simple" style="padding-bottom: 5px;">
+  <div class="page-title-wrapper">
+    <div class="page-title-heading">
+      <div>
+        <div class="page-title-subheading opacity-10">
+          <nav class="" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a [routerLink]="">
+                  <fa name="home"></fa>
+                </a>
+              </li>
+              <li class="breadcrumb-item">
+                Auditoria
+              </li>
+              <li class="active breadcrumb-item" aria-current="page">
+                Auditoria Requisito
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="app-inner-layout chat-layout">
   <div class="app-inner-layout__wrapper" [ngClass]="{'open-mobile-menu' : toggleMobileSidebar}">
     <div class="app-inner-layout__content card">
+      <div class="card-header-tab card-header">
+        <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i
+            class="header-icon lnr-license mr-3 text-muted opacity-6"></i> Entidade Auditada </div>
+        <div class="btn-actions-pane-right">
+          <div class="btn-group-sm btn-group" role="group">
+            <a class="btn btn-success" [routerLink]="['/auditoriaentidade/adicionar']">Adicionar</a>
+            <button class="btn btn-primary" type="button" (click)="editar(selected[0].id)">Editar</button>
+            <button class="btn btn-dark" type="button" (click)="remover()">Remover</button>
+          </div>
+        </div>
+      </div>
       <div class="table-responsive">
         <div class="app-inner-layout__top-pane">
           <div class="pane-left">
@@ -20,30 +56,26 @@
                   <div class="form-group form-inline mb-0">
                     <ngx-datatable-filter [margin]="'-6px'" [float]="'left'" [columns]="columnsAuditoriaEntidade"
                       [lista]="rowsAuditoriaEntidade" [table]="tableAuditoriaEntidade"></ngx-datatable-filter>
-                    <div class="btn-actions-pane-right">
-                      <div class="btn-group-sm btn-group" role="group">
-                        <a class="btn btn-success" [routerLink]="['/auditoriaentidade/adicionar']">Adicionar</a>
-                        <button class="btn btn-primary" type="button" (click)="editar(selected[0].id)">Editar</button>
-                        <button class="btn btn-dark" type="button" (click)="remover()">Remover</button>
-                      </div>
+                  </div>
+                </div>
+                <div class="loader-wrapper d-flex justify-content-center align-items-center" *ngIf="loading">
+                  <div class="loader">
+                    <div class="ball-scale-ripple">
+                      <div></div>
                     </div>
                   </div>
                 </div>
-                <!-- <div class="btn-actions-pane-right">
-                  <div class="btn-group-sm btn-group" role="group">
-                    <a class="btn btn-success" [routerLink]="['/auditoriarequisito/adicionar']">Adicionar</a>
-                    <button class="btn btn-primary" type="button" (click)="editar(selected[0].id)">Editar</button>
-                    <button class="btn btn-dark" type="button" (click)="remover()">Remover</button>
-                  </div>
-                </div> -->
-                <ngx-datatable ngx-resize-watcher class="bootstrap striped" #tableAuditoriaEntidade
-                  [rows]="rowsAuditoriaEntidade" [footerHeight]="25" [columnMode]="'force'"
-                  [columns]="columnsAuditoriaEntidade" [selected]="selected" [selectionType]="'single'"
-                  [rowHeight]="'auto'" (activate)="activate($event)"
+
+                <ngx-datatable *ngIf="!loading" ngx-resize-watcher class="bootstrap striped" #tableAuditoriaEntidade
+                  (activate)="activate($event)" [rows]="rowsAuditoriaEntidade" [footerHeight]="25"
+                  [columnMode]="'force'" [columns]="columnsAuditoriaEntidade" [selected]="selected"
+                  [selectionType]="'single'" [rowHeight]="'auto'"
                   [messages]="{'emptyMessage': 'Nenhum resultado encontrado...', 'totalMessage': 'total'}" [limit]="15">
+                  <ngx-datatable-column name="Número" prop="nr_auditoria" [width]="50" [flexGrow]="2">
+                  </ngx-datatable-column>
                   <ngx-datatable-column name="Auditoria" prop="nm_nivel" [width]="50" [flexGrow]="2">
                   </ngx-datatable-column>
-                  <ngx-datatable-column name="Data" prop="dt_auditoria" [width]="50" [flexGrow]="2">
+                  <ngx-datatable-column name="Data Prevista" prop="dt_auditoria" [width]="50" [flexGrow]="2">
                     <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
                       {{row.dt_auditoria | date:'dd/MM/yyyy' }}
                     </ng-template>
@@ -57,11 +89,6 @@
                 <div class="divider"></div>
               </div>
 
-              <div class="text-center mt-3">
-                <h6>Não foram encontradaos itens cadastrados</h6>
-                <button (click)="create()" class="mb-2 mr-2 mt-4 btn-icon btn-pill btn btn-outline-success"><i
-                    class="pe-7s-plus btn-icon-wrapper"></i>Inserir Auditoria</button>
-              </div>
             </div>
           </div>
         </div>
@@ -73,7 +100,7 @@
       <div class="app-inner-layout__sidebar-header">
         <form [formGroup]="filterForm">
           <ul class="nav flex-column filter-programacao">
-            <li class="nav-item-header nav-item pt-3">Entidade Auditoria</li>
+            <li class="nav-item-header nav-item pt-3">Filtrar Entidade</li>
 
             <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
               <label class="mb-0 pl-1">Entidade:</label>
@@ -89,18 +116,11 @@
               </ng-select>
             </li>
 
-            <!-- <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
-              <label class="mb-0 pl-1">Nível Auditoria:</label>
-              <ng-select [items]="listNivel" (change)="changeNivel()" bindLabel="nm_nivel"
-                formControlName="nivel" name="nivel" placeholder="Buscar Nível...">
-              </ng-select>
-            </li> -->
-
           </ul>
         </form>
       </div>
       <div class="app-inner-layout__sidebar-footer pt-3 pb-3 pl-3 pr-3">
-        <button class="btn-wide btn-pill btn btn-success btn-sm btn-block" (click)="filtrar()"
+        <button class="btn-wide btn-pill btn btn-success btn-sm btn-block" (click)="changePropriedade()"
           [ladda]="isLoading">Filtrar</button>
         <button class="btn-wide btn-pill btn btn-danger btn-sm btn-block" (click)="cleanFilter()"
           [ladda]="isLoading">Limpar</button>

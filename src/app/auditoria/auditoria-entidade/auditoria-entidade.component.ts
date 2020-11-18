@@ -24,10 +24,12 @@ export class AuditoriaEntidadeComponent implements OnInit {
   listNivel: any;
   rowsAuditoriaEntidade: any;
   selected: any = [];
+  loading = false;
 
   columnsAuditoriaEntidade = [
+    {name : 'Número', prop : 'nr_auditoria', width : '35%', selecionado: true},
     {name : 'Auditoria', prop : 'nm_nivel', width : '35%', selecionado: true},
-    {name : 'Data', prop : 'dt_auditoria', width : '35%', selecionado: true},
+    {name : 'Data Prevista', prop : 'dt_auditoria', width : '35%', selecionado: true},
     {name : 'Validade', prop : 'dt_validade', width : '20%', selecionado: false}
   ];
 
@@ -63,8 +65,10 @@ export class AuditoriaEntidadeComponent implements OnInit {
   }
 
   changePropriedade() {
+    if (!this.filterForm.valid) { return; }
     const propriedadeId = this.filterForm.value.propriedade.propriedade_id;
     this.auditoriaDataService.changeAuditoriaEntidade(this.filterForm);
+    this.loading = true;
     this.auditoriaEntidadeService.getByEntidadePropriedade(propriedadeId).subscribe(data => {
       this.rowsAuditoriaEntidade = data.map(row => ({
         id: row.id,
@@ -76,6 +80,7 @@ export class AuditoriaEntidadeComponent implements OnInit {
         dt_auditoria: row.dt_auditoria,
         dt_validade: row.dt_validade
       }));
+      this.loading = false;
     });
   }
 
@@ -106,5 +111,11 @@ export class AuditoriaEntidadeComponent implements OnInit {
     if ($event.type === 'dblclick') {
       this.router.navigate(['/auditoriaentidade/adicionar/' + $event.row.id]);
     }
+  }
+
+  cleanFilter() {
+    this.filterForm.reset();
+    this.filterForm.get('propriedade_id').setValue(null);
+    this.rowsAuditoriaEntidade = [];
   }
 }
