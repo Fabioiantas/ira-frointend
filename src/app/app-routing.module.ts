@@ -73,6 +73,7 @@ import { AuditoriaRequisitoCadastroComponent } from './auditoria/auditoria-requi
 import { AuditoriaNivelItemComponent } from './auditoria/auditoria-nivel-item/auditoria-nivel-item.component';
 import { AuditoriaNivelItRequisitoComponent } from './auditoria/auditoria-nivel-it-requisito/auditoria-nivel-it-requisito.component';
 import { AuditoriaEntidadeComponent } from './auditoria/auditoria-entidade/auditoria-entidade.component';
+import { AuditoriaEntidadeCadastroComponent } from './auditoria/auditoria-entidade-cadastro/auditoria-entidade-cadastro.component';
 
 const routes: Routes = [
   {
@@ -803,7 +804,7 @@ const routes: Routes = [
       // }
     ]
   },
-
+  // AUDITORIA ENTIDADE
   {
     path: 'auditoriaentidade',
     component: BaseLayoutComponent,
@@ -817,13 +818,13 @@ const routes: Routes = [
       ,
       {
         path: 'adicionar',
-        component: AuditoriaRequisitoCadastroComponent,
+        component: AuditoriaEntidadeCadastroComponent,
         data: { roles: [Role.Admin], extraParameter: 'mAuditoriaMenu' },
         canActivate: [AuthGuard]
       },
       {
         path: 'adicionar/:id',
-        component: AuditoriaRequisitoCadastroComponent,
+        component: AuditoriaEntidadeCadastroComponent,
         data: { extraParameter: 'mAuditoriaMenu' },
         canActivate: [AuthGuard]
       }

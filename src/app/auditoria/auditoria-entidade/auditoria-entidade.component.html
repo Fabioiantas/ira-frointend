@@ -21,8 +21,22 @@
                     <ngx-datatable-filter [margin]="'-6px'" [float]="'left'" [columns]="columnsAuditoriaEntidade"
                       [lista]="rowsAuditoriaEntidade"
                       [table]="tableAuditoriaEntidade"></ngx-datatable-filter>
+                      <div class="btn-actions-pane-right">
+                        <div class="btn-group-sm btn-group" role="group">
+                          <a class="btn btn-success" [routerLink]="['/auditoriaentidade/adicionar']">Adicionar</a>
+                          <button class="btn btn-primary" type="button" (click)="editar(selected[0].id)">Editar</button>
+                          <button class="btn btn-dark" type="button" (click)="remover()">Remover</button>
+                        </div>
+                      </div>
                   </div>
                 </div>
+                <!-- <div class="btn-actions-pane-right">
+                  <div class="btn-group-sm btn-group" role="group">
+                    <a class="btn btn-success" [routerLink]="['/auditoriarequisito/adicionar']">Adicionar</a>
+                    <button class="btn btn-primary" type="button" (click)="editar(selected[0].id)">Editar</button>
+                    <button class="btn btn-dark" type="button" (click)="remover()">Remover</button>
+                  </div>
+                </div> -->
                 <ngx-datatable ngx-resize-watcher class="bootstrap striped" #tableAuditoriaEntidade
                   [rows]="rowsAuditoriaEntidade"
                   [footerHeight]="25"
@@ -68,6 +82,13 @@
                 formControlName="propriedade" name="propriedade" placeholder="Buscar Propriedade...">
               </ng-select>
             </li>
+
+            <!-- <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
+              <label class="mb-0 pl-1">Nível Auditoria:</label>
+              <ng-select [items]="listNivel" (change)="changeNivel()" bindLabel="nm_nivel"
+                formControlName="nivel" name="nivel" placeholder="Buscar Nível...">
+              </ng-select>
+            </li> -->
 
           </ul>
         </form>
