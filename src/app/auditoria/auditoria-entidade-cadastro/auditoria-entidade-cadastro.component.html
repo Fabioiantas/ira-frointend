@@ -1,3 +1,98 @@
-<p>
-  auditoria-entidade-cadastro works!
-</p>
+<div class="app-page-title app-page-title-simple" style="padding-bottom: 15px;">
+  <div class="page-title-wrapper">
+    <div class="page-title-heading">
+      <div>
+        <div class="page-title-subheading opacity-10">
+          <nav class="" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a [routerLink]="">
+                  <fa name="home"></fa>
+                </a>
+              </li>
+              <li class="breadcrumb-item">
+                Auditoria Entidade
+              </li>
+              <li class="active breadcrumb-item" aria-current="page">
+                Cadastrar Entidade Auditada
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main content -->
+<div class="tabs-animated tabs-animated-shadow card">
+  <div class="card-body">
+
+    <h5 class="card-title">Cadastro de Nível</h5>
+    <div class="form-row">
+      <div class="col-sm-4 mb-6 form-group">
+        <label for="entidade_id">Entidade</label>
+        <ng-select [items]="listEntidade" bindValue="id" bindLabel="nm_reduzido"
+          [(ngModel)]="auditoriaEntidade.entidade_id" (change)="changeEntidade()" name="entidade_id"
+          placeholder="Buscar Entidade...">
+        </ng-select>
+      </div>
+      <div class="col-sm-4 mb-6 form-group">
+        <label for="propriedade_id">Propriedade</label>
+        <ng-select [items]="listPropriedade" bindValue="propriedade_id" bindLabel="nm_propriedade"
+          [(ngModel)]="auditoriaEntidade.propriedade_id" (change)="changePropriedade()" name="propriedade_id"
+          placeholder="Buscar Propriedade...">
+        </ng-select>
+      </div>
+      <div class="col-sm-4 mb-6 form-group">
+        <label for="auditoria_nivel_id">Nível Auditoria</label>
+        <ng-select [items]="listAuditoriaNivel" bindValue="id" bindLabel="nm_nivel"
+          [(ngModel)]="auditoriaEntidade.auditoria_nivel_id" (change)="changeAuditoriaNivel()" name="auditoria_nivel_id"
+          placeholder="Buscar Nível...">
+        </ng-select>
+      </div>
+    </div>
+    <form [formGroup]="this.formGroup" class="needs-validation">
+
+      <input formControlName="entidade_id" type="text" class="form-control" id="entidade_id" required hidden>
+      <input formControlName="propriedade_id" type="text" class="form-control" id="propriedade_id" required hidden>
+      <input formControlName="auditoria_nivel_id" type="text" class="form-control" id="auditoria_nivel_id" required hidden>
+
+      <div class="form-row">
+        <div class="col-md-6 mb-6 form-group">
+          <label for="dt_auditoria">Data Auditoria</label>
+          <div class="input-group">
+            <input class="form-control" placeholder="dia-mes-ano" (click)="dt_auditoria.toggle()" name="dt_auditoria"
+              formControlName="dt_auditoria" ngbDatepicker #dt_auditoria="ngbDatepicker" autocomplete="off">
+            <div class="input-group-append">
+              <button class="btn btn-primary" (click)="dt_auditoria.toggle()" type="button">
+                <i class="fa fa-calendar"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 mb-6 form-group">
+          <label for="dt_validade">Validade</label>
+          <div class="input-group">
+            <input class="form-control" placeholder="dia-mes-ano" (click)="dt_validade.toggle()" name="dt_validade"
+              formControlName="dt_validade" ngbDatepicker #dt_validade="ngbDatepicker" autocomplete="off">
+            <div class="input-group-append">
+              <button class="btn btn-primary" (click)="dt_validade.toggle()" type="button">
+                <i class="fa fa-calendar"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="form-group">
+        <bfv-messages></bfv-messages>
+      </div>
+      <div class="text-right">
+        <button class="btn btn-danger" (click)="handleReset()" type="button">Cancelar</button>
+        <button class="btn btn-success ml-2" (click)="salvar()" type="submit" [ladda]="isLoading">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>

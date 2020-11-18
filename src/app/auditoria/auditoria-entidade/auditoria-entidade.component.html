@@ -19,15 +19,14 @@
                 <div class="p-3 bg-white">
                   <div class="form-group form-inline mb-0">
                     <ngx-datatable-filter [margin]="'-6px'" [float]="'left'" [columns]="columnsAuditoriaEntidade"
-                      [lista]="rowsAuditoriaEntidade"
-                      [table]="tableAuditoriaEntidade"></ngx-datatable-filter>
-                      <div class="btn-actions-pane-right">
-                        <div class="btn-group-sm btn-group" role="group">
-                          <a class="btn btn-success" [routerLink]="['/auditoriaentidade/adicionar']">Adicionar</a>
-                          <button class="btn btn-primary" type="button" (click)="editar(selected[0].id)">Editar</button>
-                          <button class="btn btn-dark" type="button" (click)="remover()">Remover</button>
-                        </div>
+                      [lista]="rowsAuditoriaEntidade" [table]="tableAuditoriaEntidade"></ngx-datatable-filter>
+                    <div class="btn-actions-pane-right">
+                      <div class="btn-group-sm btn-group" role="group">
+                        <a class="btn btn-success" [routerLink]="['/auditoriaentidade/adicionar']">Adicionar</a>
+                        <button class="btn btn-primary" type="button" (click)="editar(selected[0].id)">Editar</button>
+                        <button class="btn btn-dark" type="button" (click)="remover()">Remover</button>
                       </div>
+                    </div>
                   </div>
                 </div>
                 <!-- <div class="btn-actions-pane-right">
@@ -38,15 +37,22 @@
                   </div>
                 </div> -->
                 <ngx-datatable ngx-resize-watcher class="bootstrap striped" #tableAuditoriaEntidade
-                  [rows]="rowsAuditoriaEntidade"
-                  [footerHeight]="25"
-                  [columnMode]="'force'"
-                  [columns]="columnsAuditoriaEntidade"
-                  [selected]="selected"
-                  [selectionType]="'single'" [rowHeight]="'auto'" (activate)="activate($event)"
+                  [rows]="rowsAuditoriaEntidade" [footerHeight]="25" [columnMode]="'force'"
+                  [columns]="columnsAuditoriaEntidade" [selected]="selected" [selectionType]="'single'"
+                  [rowHeight]="'auto'" (activate)="activate($event)"
                   [messages]="{'emptyMessage': 'Nenhum resultado encontrado...', 'totalMessage': 'total'}" [limit]="15">
-                  <ngx-datatable-column name="Auditoria" prop="nm_nivel" [width]="50" [flexGrow]="2"></ngx-datatable-column>
-                  <ngx-datatable-column name="Validade" prop="dt_validade" [flexGrow]="2"></ngx-datatable-column>
+                  <ngx-datatable-column name="Auditoria" prop="nm_nivel" [width]="50" [flexGrow]="2">
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Data" prop="dt_auditoria" [width]="50" [flexGrow]="2">
+                    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                      {{row.dt_auditoria | date:'dd/MM/yyyy' }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Validade" prop="dt_validade" [flexGrow]="2">
+                    <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+                      {{row.dt_validade | date:'dd/MM/yyyy' }}
+                    </ng-template>
+                  </ngx-datatable-column>
                 </ngx-datatable>
                 <div class="divider"></div>
               </div>

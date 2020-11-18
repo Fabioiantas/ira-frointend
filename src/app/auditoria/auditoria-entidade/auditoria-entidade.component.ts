@@ -3,9 +3,11 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuditoriaEntidade } from 'src/app/models/auditoriaEntidade';
 import { AuditoriaNivelService } from 'src/app/services/auditoria-nivel.service';
+import { AuditoriaDataService } from 'src/app/services/auditoria/auditoria-data.service';
 import { AuditoriaEntidadeService } from 'src/app/services/auditoria/auditoria-entidade.service';
 import { EntidadeService } from 'src/app/services/entidade.service';
 import { PropriedadeService } from 'src/app/services/propriedade.service';
+import { DialogBoxService } from 'src/app/_services/dialog-box.service';
 
 @Component({
   selector: 'app-auditoria-entidade',
@@ -25,6 +27,7 @@ export class AuditoriaEntidadeComponent implements OnInit {
 
   columnsAuditoriaEntidade = [
     {name : 'Auditoria', prop : 'nm_nivel', width : '35%', selecionado: true},
+    {name : 'Data', prop : 'dt_auditoria', width : '35%', selecionado: true},
     {name : 'Validade', prop : 'dt_validade', width : '20%', selecionado: false}
   ];
 
@@ -33,13 +36,14 @@ export class AuditoriaEntidadeComponent implements OnInit {
               private entidadeService: EntidadeService,
               private propriedadeService: PropriedadeService,
               private nivelService: AuditoriaNivelService,
+              private auditoriaDataService: AuditoriaDataService,
+              private dialogBox: DialogBoxService,
               private router: Router) { }
 
   ngOnInit() {
     this.filterForm = this.formBuilder.group({
-      entidade: [null],
-      propriedade: [null, Validators.required],
-      nivel: [null, Validators.required]
+      entidade: [null, Validators.required],
+      propriedade: [null, Validators.required]
     });
     this.getListEntidade();
   }
@@ -51,6 +55,7 @@ export class AuditoriaEntidadeComponent implements OnInit {
   }
 
   changeEntidade() {
+    this.rowsAuditoriaEntidade = [];
     this.filterForm.get('propriedade').setValue(null);
     this.propriedadeService.byEntidade(this.filterForm.value.entidade.id).subscribe(data => {
       this.listPropriedade = data;
@@ -59,6 +64,7 @@ export class AuditoriaEntidadeComponent implements OnInit {
 
   changePropriedade() {
     const propriedadeId = this.filterForm.value.propriedade.propriedade_id;
+    this.auditoriaDataService.changeAuditoriaEntidade(this.filterForm);
     this.auditoriaEntidadeService.getByEntidadePropriedade(propriedadeId).subscribe(data => {
       this.rowsAuditoriaEntidade = data.map(row => ({
         id: row.id,
@@ -77,6 +83,23 @@ export class AuditoriaEntidadeComponent implements OnInit {
     this.nivelService.list().subscribe(data => {
       this.listNivel = data;
     });
+  }
+
+  editar(id: any) {
+      this.router.navigate(['/auditoriaentidade/adicionar/' + id]);
+  }
+
+  remover() {
+    if (this.selected) {
+      this.dialogBox.show('Confirma remoção da Entidade auditada?', 'CONFIRM').then(sim => {
+        if (sim) {
+          this.auditoriaEntidadeService.remove(this.selected[0].id).subscribe(data => {
+            this.dialogBox.show('Entidade removida com sucesso!', 'OK');
+            this.changePropriedade();
+          });
+        }
+      });
+    }
   }
 
   activate($event) {
