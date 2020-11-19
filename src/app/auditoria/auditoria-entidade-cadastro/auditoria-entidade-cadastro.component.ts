@@ -31,7 +31,7 @@ export class AuditoriaEntidadeCadastroComponent implements OnInit {
   });
 
   constructor(private auditoriaEntidadeService: AuditoriaEntidadeService,
-             private entidadeService: EntidadeService,
+              private entidadeService: EntidadeService,
               private propriedadeService: PropriedadeService,
               private auditoriaNivelService: AuditoriaNivelService,
               private auditoriaDataService: AuditoriaDataService,
@@ -47,10 +47,10 @@ export class AuditoriaEntidadeCadastroComponent implements OnInit {
       if (this.params.id) {
         this.getAuditoriaEntidade(this.params.id);
       } else {
-        this.auditoriaDataService.curFilterAuditoriaEntidade.subscribe(data => {
-          if (data) {
-            this.auditoriaEntidade.entidade_id = data.value.entidade.id,
-            this.auditoriaEntidade.propriedade_id = data.value.propriedade.propriedade_id
+        this.auditoriaDataService.curFilterAuditoriaEntidade.subscribe(dados => {
+          if (dados) {
+            this.auditoriaEntidade.entidade_id = dados.value.entidade.id,
+            this.auditoriaEntidade.propriedade_id = dados.value.propriedade.propriedade_id;
           }
           this.getPropriedade(this.auditoriaEntidade.entidade_id);
           this.formGroup.patchValue({
@@ -92,7 +92,7 @@ export class AuditoriaEntidadeCadastroComponent implements OnInit {
   }
 
   getPropriedade(entidadeId: any) {
-    this.propriedadeService.byEntidade(entidadeId).subscribe(data => {
+    this.propriedadeService.byEntidade(entidadeId).subscribe((data: any) => {
       this.listPropriedade = data;
     });
   }
@@ -130,6 +130,11 @@ export class AuditoriaEntidadeCadastroComponent implements OnInit {
         }
       });
     });
+  }
+
+  handleReset() {
+    this.formGroup.reset();
+    this.router.navigate(['/auditoriaentidade']);
   }
 
 }
