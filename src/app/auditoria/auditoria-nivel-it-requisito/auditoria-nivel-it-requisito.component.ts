@@ -41,6 +41,9 @@ export class AuditoriaNivelItRequisitoComponent implements OnInit {
   isInsertRequisito = false;
   loading = false;
   isLoading = false;
+  loadNivel = false;
+  loadItem = false;
+
   public onClose: Subject<FormGroup>;
 
   columnsNivelItem = [
@@ -73,7 +76,7 @@ export class AuditoriaNivelItRequisitoComponent implements OnInit {
       auditoriaNivelItem: [null, Validators.required]
     });
 
-    this.getAtividade();
+    this.getAtividadesExistsAuditoria();
     this.getNiveis();
     this.dataService.curFilterAuditoriaNivelItem.subscribe(data => {
       if (data) {
@@ -94,9 +97,17 @@ export class AuditoriaNivelItRequisitoComponent implements OnInit {
     });
   }
 
+  getAtividadesExistsAuditoria() {
+    this.auditoriaNivelItRequisitoService.getAtividadesExistsAuditoria().subscribe(data => {
+      this.listTipoAtividade = data;
+    });
+  }
+
   getNiveis() {
+    this.loadNivel = true;
     this.auditoriaNivelService.list().subscribe(data => {
       this.listNivel = data;
+      this.loadNivel = false;
     });
   }
   getItens() {
@@ -131,18 +142,26 @@ export class AuditoriaNivelItRequisitoComponent implements OnInit {
   changeTipoAtividade() {
     this.filterForm.get('auditoriaNivel').setValue(null);
     this.filterForm.get('auditoriaNivelItem').setValue(null);
-    if (this.filterForm.value.tipoAtividade.id) {
+    this.loadNivel = true;
+    if (this.filterForm.value.tipoAtividade) {
       this.auditoriaNivelService.getByTipoAtividadeId(this.filterForm.value.tipoAtividade.id).subscribe(data => {
         this.listNivel = data;
+        this.loadNivel = false;
       });
     } else {
       this.auditoriaNivelService.list().subscribe(data => {
         this.listNivel = data;
+        this.loadNivel = false;
       });
     }
   }
 
   changeNivel() {
+    this.filterForm.get('auditoriaNivelItem').setValue(null);
+    this.auditoriaNivelItRequisito = [];
+    this.listAuditoriaNivelItem = [];
+    if (!this.filterForm.value.auditoriaNivel) { return; }
+    this.loadItem = true;
     this.auditoriaNivelItemService.getByNivel(this.filterForm.value.auditoriaNivel.id).subscribe(data => {
       this.listAuditoriaNivelItem = data.map(row => ({
         id: row.id,
@@ -150,6 +169,7 @@ export class AuditoriaNivelItRequisitoComponent implements OnInit {
         auditoria_item: row.auditoria_item,
         ds_item: row.auditoria_item.ds_item
       }));
+      this.loadItem = false;
     });
   }
 

@@ -110,6 +110,7 @@
             </li>
 
             <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
+              <span *ngIf="loadPropriedade" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
               <label class="mb-0 pl-1">Propriedade:</label>
               <ng-select [items]="listPropriedade" (change)="changePropriedade()" bindLabel="nm_propriedade"
                 formControlName="propriedade" name="propriedade" placeholder="Buscar Propriedade...">

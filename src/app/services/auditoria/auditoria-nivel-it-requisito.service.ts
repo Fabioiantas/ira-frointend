@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuditoriaNivelItRequisito } from 'src/app/models/auditoriaNivelItRequisito';
+import { TipoAtividade } from 'src/app/models/tipoatividade';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -23,6 +24,10 @@ export class AuditoriaNivelItRequisitoService {
 
   getRequisitosByNivelId(id: any): Observable<any> {
     return this.http.get<AuditoriaNivelItRequisito>(environment.baseUrl + '/auth/nivelitrequisitobyitem/' + id);
+  }
+
+  getAtividadesExistsAuditoria() {
+    return this.http.get<TipoAtividade>(`${environment.baseUrl}/auth/atividadesexistsauditoria`);
   }
 
   add(auditoriaItemReq: AuditoriaNivelItRequisito): Observable<any> {

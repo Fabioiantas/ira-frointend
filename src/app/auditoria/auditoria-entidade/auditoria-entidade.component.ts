@@ -25,6 +25,7 @@ export class AuditoriaEntidadeComponent implements OnInit {
   rowsAuditoriaEntidade: any;
   selected: any = [];
   loading = false;
+  loadPropriedade = false;
 
   columnsAuditoriaEntidade = [
     {name : 'Número', prop : 'nr_auditoria', width : '35%', selecionado: true},
@@ -58,9 +59,13 @@ export class AuditoriaEntidadeComponent implements OnInit {
 
   changeEntidade() {
     this.rowsAuditoriaEntidade = [];
+    this.listPropriedade = [];
     this.filterForm.get('propriedade').setValue(null);
+    if (!this.filterForm.value.entidade.id) { return; }
+    this.loadPropriedade = true;
     this.propriedadeService.byEntidade(this.filterForm.value.entidade.id).subscribe(data => {
       this.listPropriedade = data;
+      this.loadPropriedade = false;
     });
   }
 

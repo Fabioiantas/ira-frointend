@@ -20,6 +20,8 @@ export class AuditoriaEntidadeCadastroComponent implements OnInit {
   listPropriedade: any;
   listAuditoriaNivel: any;
   params: any;
+  loadPropriedade = false;
+  loadEntidade = false;
 
   formGroup = new FormGroup({
     id: new FormControl(''),
@@ -78,13 +80,17 @@ export class AuditoriaEntidadeCadastroComponent implements OnInit {
   }
 
   getEntidade() {
+    this.loadEntidade = true;
     this.entidadeService.listar().subscribe(data => {
       this.listEntidade = data;
+      this.loadEntidade = false;
     });
   }
 
   changeEntidade() {
+    this.loadPropriedade  = true;
     this.formGroup.get('propriedade_id').setValue(null);
+    this.auditoriaEntidade.propriedade_id = null;
     this.formGroup.patchValue({
       entidade_id: this.auditoriaEntidade.entidade_id
     });
@@ -92,8 +98,10 @@ export class AuditoriaEntidadeCadastroComponent implements OnInit {
   }
 
   getPropriedade(entidadeId: any) {
+    this.loadPropriedade = true;
     this.propriedadeService.byEntidade(entidadeId).subscribe((data: any) => {
       this.listPropriedade = data;
+      this.loadPropriedade = false;
     });
   }
 

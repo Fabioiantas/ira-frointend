@@ -31,6 +31,7 @@
     <h5 class="card-title">Cadastro de Nível</h5>
     <div class="form-row">
       <div class="col-sm-4 mb-6 form-group">
+        <span *ngIf="loadEntidade" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
         <label for="entidade_id">Entidade</label>
         <ng-select [items]="listEntidade" bindValue="id" bindLabel="nm_reduzido"
           [(ngModel)]="auditoriaEntidade.entidade_id" (change)="changeEntidade()" name="entidade_id"
@@ -38,6 +39,7 @@
         </ng-select>
       </div>
       <div class="col-sm-4 mb-6 form-group">
+        <span *ngIf="loadPropriedade" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
         <label for="propriedade_id">Propriedade</label>
         <ng-select [items]="listPropriedade" bindValue="propriedade_id" bindLabel="nm_propriedade"
           [(ngModel)]="auditoriaEntidade.propriedade_id" (change)="changePropriedade()" name="propriedade_id"

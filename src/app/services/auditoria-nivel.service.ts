@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { AuditoriaNivel } from '../models/auditoriaNivel';
+import { TipoAtividade } from '../models/tipoatividade';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,7 @@ export class AuditoriaNivelService {
   getByTipoAtividadeId(id: any) {
     return this.http.get<AuditoriaNivel>(environment.baseUrl + '/auth/nivelbytipoatividade/' + id);
   }
+
   add(auditoriaNivel: AuditoriaNivel): Observable<any> {
       return this.http.post<any>(`${environment.baseUrl}/auth/auditorianivel`, auditoriaNivel);
   }
