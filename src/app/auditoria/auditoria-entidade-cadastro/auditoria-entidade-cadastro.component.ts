@@ -121,7 +121,7 @@ export class AuditoriaEntidadeCadastroComponent implements OnInit {
     console.log(this.formGroup.value.id);
 
     this.auditoriaEntidadeService[this.formGroup.value.id ? 'edit' : 'add'](this.formGroup.value).subscribe(() => {
-      this.dialogBox.show('Entidade auditada salva com sucesso, deseja continuar cadastrando?', 'CONFIRM').then(sim =>{
+      this.dialogBox.show('Entidade auditada salva com sucesso, deseja continuar cadastrando?', 'CONFIRM').then(sim => {
         if (sim) {
           this.formGroup.reset();
           this.auditoriaEntidade = new AuditoriaEntidade();

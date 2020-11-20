@@ -51,7 +51,7 @@ export class AuditoriaEntidadeComponent implements OnInit {
   }
 
   getListEntidade() {
-    this.entidadeService.listar().subscribe(data => {
+    this.auditoriaEntidadeService.getEntidadesAuditadas().subscribe(data => {
       this.listEntidade = data;
     });
   }

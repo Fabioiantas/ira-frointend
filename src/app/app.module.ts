@@ -160,6 +160,7 @@ import { AuditoriaNivelItRequisitoComponent } from './auditoria/auditoria-nivel-
 import { AuditoriaRequisitoParametroComponent } from './auditoria/auditoria-requisito-parametro/auditoria-requisito-parametro.component';
 import { AuditoriaEntidadeCadastroComponent } from './auditoria/auditoria-entidade-cadastro/auditoria-entidade-cadastro.component';
 import { AuditoriaEntidadeComponent } from './auditoria/auditoria-entidade/auditoria-entidade.component';
+import { EntidadeAuditadaComponent } from './auditoria/entidade-auditada/entidade-auditada.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -275,6 +276,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AuditoriaRequisitoParametroComponent,
     AuditoriaEntidadeCadastroComponent,
     AuditoriaEntidadeComponent,
+    EntidadeAuditadaComponent,
 
   ],
   imports: [
