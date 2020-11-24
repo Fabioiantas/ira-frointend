@@ -13,22 +13,24 @@ export class UserBoxComponent implements OnInit {
   userName: string;
   userFirstName: string;
 
-  constructor(public globals: ThemeOptions
-             ,private authenticationService: AuthenticationService
-             ,private router: Router)
+  constructor(public globals: ThemeOptions,
+              private authenticationService: AuthenticationService,
+              private router: Router)
   {
   }
 
   ngOnInit() {
-    this.authenticationService.getCurrentUser().subscribe(user => {
-      this.currentUser = user;
-      this.userName = user.user.name;
-      this.userFirstName = user.user.name.substr(0, user.user.name.indexOf( " " ));
-    });
+    this.currentUser = this.authenticationService.currentUserValue.user;
+    this.userFirstName = this.currentUser.name.substr(0, this.currentUser.name.indexOf(' '));
+    // this.authenticationService.getCurrentUser().subscribe(user => {
+    //   this.currentUser = user;
+    //   this.userName = user.user.name;
+    //   this.userFirstName = user.user.name.substr(0, user.user.name.indexOf(' '));
+    // });
   }
 
   editPerfil() {
-    this.router.navigate(['/usuario/editar/' + this.currentUser.user.id])
+    this.router.navigate(['/usuario/editar/' + this.currentUser.user.id]);
   }
 
 }

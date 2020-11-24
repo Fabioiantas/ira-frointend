@@ -12,14 +12,16 @@ export class HeaderComponent {
 
   userEmail: string;
 
-  constructor(public globals: ThemeOptions
-             ,private authenticationService: AuthenticationService) {
+  constructor(public globals: ThemeOptions,
+              private authenticationService: AuthenticationService) {
   }
 
+  // tslint:disable-next-line:use-life-cycle-interface
   ngOnInit() {
-    this.authenticationService.getCurrentUser().subscribe(user => {
-      this.userEmail = user.user.email;
-    });
+    this.userEmail = this.authenticationService.currentUserValue.user.email;
+    // this.authenticationService.getCurrentUser().subscribe(user => {
+    //   this.userEmail = user.user.email;
+    // });
   }
 
   @HostBinding('class.isActive')
@@ -27,8 +29,10 @@ export class HeaderComponent {
     return this.isActive;
   }
 
+  // tslint:disable-next-line:member-ordering
   isActive: boolean;
 
+  // tslint:disable-next-line:member-ordering
   @select('config') public config$: Observable<any>;
 
   toggleSidebarMobile() {
