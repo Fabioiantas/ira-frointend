@@ -22,7 +22,7 @@ export class AuditoriaNivelItRequisitoService {
     return this.http.get<AuditoriaNivelItRequisito>(environment.baseUrl + '/auth/nivelitrequisito/' + id);
   }
 
-  getRequisitosByNivelId(id: any): Observable<any> {
+  getRequisitosByNivelItemId(id: any): Observable<any> {
     return this.http.get<AuditoriaNivelItRequisito>(environment.baseUrl + '/auth/nivelitrequisitobyitem/' + id);
   }
 

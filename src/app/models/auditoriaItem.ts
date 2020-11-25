@@ -1,7 +1,9 @@
 export class AuditoriaItem {
   id: BigInteger;
   // tslint:disable-next-line:variable-name
-  ds_item: string;
+  auditoria_entidade_id: BigInteger;
   // tslint:disable-next-line:variable-name
-  ie_situacao: string;
+  auditoria_item_id: BigInteger;
+  // tslint:disable-next-line:variable-name
+  nr_porcentagem: string;
 }

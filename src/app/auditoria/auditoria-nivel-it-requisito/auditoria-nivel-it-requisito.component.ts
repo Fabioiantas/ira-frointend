@@ -181,7 +181,7 @@ export class AuditoriaNivelItRequisitoComponent implements OnInit {
 
   changeNivelItem() {
     this.loading = true;
-    this.auditoriaNivelItRequisitoService.getRequisitosByNivelId(this.filterForm.value.auditoriaNivelItem.id).subscribe(data => {
+    this.auditoriaNivelItRequisitoService.getRequisitosByNivelItemId(this.filterForm.value.auditoriaNivelItem.id).subscribe(data => {
       this.auditoriaNivelItRequisito = data.map(row => ({
         id: row.id,
         auditoria_nivel_item_id: row.auditoria_nivel_item_id,

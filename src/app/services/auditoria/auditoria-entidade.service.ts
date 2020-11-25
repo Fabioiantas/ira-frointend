@@ -27,8 +27,12 @@ export class AuditoriaEntidadeService {
     return this.http.get<any>(`${environment.baseUrl}/auth/auditoriaentidadebypropriedade/${propriedadeId}`);
   }
 
-  getEntidadesAuditadas() {
+  getEntidadesAuditadas(): Observable<any> {
     return this.http.get<any>(`${environment.baseUrl}/auth/entidadesauditadas`);
+  }
+
+  getAuditoriaEntidadeItReqById(auditoriaEntidadeId: any): Observable<any> {
+    return this.http.get<any>(`${environment.baseUrl}/auth/auditoriaentidadeitreqs/${auditoriaEntidadeId}`);
   }
 
   add(auditoriaItem: AuditoriaEntidade): Observable<any> {

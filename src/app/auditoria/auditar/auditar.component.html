@@ -1,3 +1,64 @@
-<p>
-  auditar works!
-</p>
+
+<div class="app-inner-layout chat-layout">
+  <div class="app-inner-layout__wrapper" [ngClass]="{'open-mobile-menu' : toggleMobileSidebar}">
+    <div class="app-inner-layout__content card">
+      <div class="table-responsive">
+        <div class="app-inner-layout__top-pane">
+          <div class="pane-left">
+            <div class="mobile-app-menu-btn">
+              <button type="button" class="hamburger hamburger--elastic" [ngClass]="{'is-active' : toggleMobileSidebar}"
+                (click)="toggleMobileSidebar = !toggleMobileSidebar">
+                <span class="hamburger-box"><span class="hamburger-inner"></span></span>
+              </button>
+            </div>
+
+
+          </div>
+          <div class="pane-right">
+            <button type="button" (click)="inserirRequisito()" class="btn-shadow btn btn-success">
+              Inserir Requisito
+            </button>
+          </div>
+        </div>
+        <div class="app-inner-layout__bottom-pane d-flex" style="padding: 0px;">
+          <div class="mb-0 form-group" style="width: 100%;">
+            <div class="col-sm-12">
+              <div>
+                <div class="col-md-12">
+                  <accordion [closeOthers]="oneAtATime">
+                    <accordion-group *ngFor="let requisitos of auditoriaEntidadeItRequisito.auditoria_entidade_items.auditoria_entidade_it_requisitos; let i= index" (isOpenChange)="log($event)">
+                      <button class="btn btn-link btn-block clearfix" accordion-heading type="button">
+                        <div class="pull-left float-left">{{requisitos.auditoria_entidade_item_id}}</div>
+                        <span
+                          class="badge badge-warning float-right pull-right">{{requisitos.auditoria_requisito_id}}</span>
+                        <span *ngIf="requisitos.ie_evidencia == 'S'" class="badge badge-danger float-right pull-right">Requer
+                          Evidência</span>
+                      </button>
+                    </accordion-group>
+                  </accordion>
+
+                  <!--Sidebar Filter Programação-->
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Sidebar Filter Programação-->
+    <div class="app-inner-layout__sidebar card">
+      <div class="app-inner-layout__sidebar-header">
+
+      </div>
+      <div class="app-inner-layout__sidebar-footer pt-3 pb-3 pl-3 pr-3">
+        <button class="btn-wide btn-pill btn btn-success btn-sm btn-block" (click)="filtrar()"
+          [ladda]="isLoading">Filtrar</button>
+        <button class="btn-wide btn-pill btn btn-danger btn-sm btn-block" (click)="cleanFilter()"
+          [ladda]="isLoading">Limpar</button>
+      </div>
+    </div>
+    <!--//Sidebar Filter-->
+  </div>
+</div>
