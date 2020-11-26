@@ -9,7 +9,7 @@ import { AuditoriaEntidadeService } from 'src/app/services/auditoria/auditoria-e
 export class AuditarComponent implements OnInit {
   nivelItRequisitos: any;
   auditoriaEntidadeItRequisito: any[] = [];
-  oneAtATime: boolean = true;
+  oneAtATime = true;
 
   constructor(private auditoriaEntidadeService: AuditoriaEntidadeService) { }
 
@@ -20,7 +20,7 @@ export class AuditarComponent implements OnInit {
   getAuditoriaEntidadeItRequisito() {
     this.auditoriaEntidadeService.getAuditoriaEntidadeItReqById(1).subscribe(data => {
       this.auditoriaEntidadeItRequisito = data;
-      console.log(JSON.stringify(this.auditoriaEntidadeItRequisito));
+      console.log(JSON.stringify(data));
     });
   }
 

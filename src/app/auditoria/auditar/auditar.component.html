@@ -26,12 +26,12 @@
               <div>
                 <div class="col-md-12">
                   <accordion [closeOthers]="oneAtATime">
-                    <accordion-group *ngFor="let requisitos of auditoriaEntidadeItRequisito.auditoria_entidade_items.auditoria_entidade_it_requisitos; let i= index" (isOpenChange)="log($event)">
+                    <accordion-group (isOpenChange)="log($event)">
                       <button class="btn btn-link btn-block clearfix" accordion-heading type="button">
-                        <div class="pull-left float-left">{{requisitos.auditoria_entidade_item_id}}</div>
+                        <div class="pull-left float-left">tes</div>
                         <span
-                          class="badge badge-warning float-right pull-right">{{requisitos.auditoria_requisito_id}}</span>
-                        <span *ngIf="requisitos.ie_evidencia == 'S'" class="badge badge-danger float-right pull-right">Requer
+                          class="badge badge-warning float-right pull-right">teste02</span>
+                        <span class="badge badge-danger float-right pull-right">Requer
                           Evidência</span>
                       </button>
                     </accordion-group>
