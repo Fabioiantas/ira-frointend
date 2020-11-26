@@ -1,4 +1,3 @@
-
 <div class="app-inner-layout chat-layout">
   <div class="app-inner-layout__wrapper" [ngClass]="{'open-mobile-menu' : toggleMobileSidebar}">
     <div class="app-inner-layout__content card">
@@ -23,24 +22,16 @@
         <div class="app-inner-layout__bottom-pane d-flex" style="padding: 0px;">
           <div class="mb-0 form-group" style="width: 100%;">
             <div class="col-sm-12">
-              <div>
-                <div class="col-md-12">
-                  <accordion [closeOthers]="oneAtATime">
-                    <accordion-group (isOpenChange)="log($event)">
-                      <button class="btn btn-link btn-block clearfix" accordion-heading type="button">
-                        <div class="pull-left float-left">tes</div>
-                        <span
-                          class="badge badge-warning float-right pull-right">teste02</span>
-                        <span class="badge badge-danger float-right pull-right">Requer
-                          Evidência</span>
-                      </button>
-                    </accordion-group>
-                  </accordion>
+              <div class="col-md-12">
 
-                  <!--Sidebar Filter Programação-->
-                </div>
+                <accordion>
+                  <panel title="one">... any ...</panel>
+                  <panel title="two">... any ...</panel>
+                  <panel title="three">... any ...</panel>
+                </accordion>
+
+
               </div>
-
             </div>
           </div>
         </div>
@@ -62,3 +53,22 @@
     <!--//Sidebar Filter-->
   </div>
 </div>
+<!-- <accordion>
+                    <accordion-group class="panel-danger"
+                      *ngFor="let item of auditoriaEntidadeItRequisito.auditoria_entidade_items; let i= index"
+                       heading="{{item.ds_item}}">
+
+                      <accordion-group *ngFor="let requisitos of item.auditoria_entidade_it_requisitos; let j= index"
+                        (isOpenChange)="log($event)" heading="{{requisitos.auditoria_requisito.ds_requisito}}">
+                        <div class="btn-group" data-toggle="buttons">
+                          <label class="btn btn-primary active">CONFORME
+                            <input type="radio" name="{{requisitos.id}}" id="{{requisitos.id}}" autocomplete="off" checked>
+                          </label>
+                          <label class="btn btn-danger">NÃO CONFORME
+                            <input type="radio" name="{{requisitos.id}}" id="{{requisitos.id}}" autocomplete="off">
+                          </label>
+                        </div>
+                      </accordion-group>
+
+                    </accordion-group>
+                  </accordion> -->

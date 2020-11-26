@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ThemeOptions} from '../../theme-options';
 import { AuditoriaEntidadeService } from 'src/app/services/auditoria/auditoria-entidade.service';
 
 @Component({
@@ -11,16 +12,15 @@ export class AuditarComponent implements OnInit {
   auditoriaEntidadeItRequisito: any[] = [];
   oneAtATime = true;
 
-  constructor(private auditoriaEntidadeService: AuditoriaEntidadeService) { }
+  constructor(public globals: ThemeOptions, private auditoriaEntidadeService: AuditoriaEntidadeService) { }
 
   ngOnInit() {
     this.getAuditoriaEntidadeItRequisito();
   }
 
   getAuditoriaEntidadeItRequisito() {
-    this.auditoriaEntidadeService.getAuditoriaEntidadeItReqById(1).subscribe(data => {
+    this.auditoriaEntidadeService.getAuditoriaEntidadeItReqById(2).subscribe(data => {
       this.auditoriaEntidadeItRequisito = data;
-      console.log(JSON.stringify(data));
     });
   }
 
