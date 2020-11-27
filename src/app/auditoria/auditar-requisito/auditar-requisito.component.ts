@@ -12,7 +12,8 @@ import { AuditoriaEntidadeItRequisito } from 'src/app/models/auditoriaEntidadeIt
 export class AuditarRequisitoComponent implements OnInit {
 
   auditoriaEntidadeItRequisito: any;
-
+  item: any;
+  auditoria: any;
   public onClose: Subject<AuditoriaEntidadeItRequisito>;
   loading = false;
 
@@ -20,7 +21,7 @@ export class AuditarRequisitoComponent implements OnInit {
               public modalRef: BsModalRef) { }
 
   ngOnInit() {
-    console.log('aa: ' + JSON.stringify(this.auditoriaEntidadeItRequisito));
+    console.log('auditoria ' + JSON.stringify(this.auditoria));
     this.onClose = new Subject();
   }
 

@@ -1,3 +1,5 @@
+import { AuditoriaItem } from './auditoriaItem';
+import { AuditoriaNivel } from './auditoriaNivel';
 import { AuditoriaRequisito } from './auditoriaRequisito';
 
 export class AuditoriaEntidadeItRequisito {
@@ -6,6 +8,8 @@ export class AuditoriaEntidadeItRequisito {
   auditoria_requisito_id: BigInteger;
   ds_requisito: string;
   auditoria_requisito: AuditoriaRequisito;
+  auditoria_nivel: AuditoriaNivel;
+  auditoria_item: AuditoriaItem;
   classificacao_requisito_id: BigInteger;
   nr_peso: number;
   nm_classificacao: string;

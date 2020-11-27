@@ -26,19 +26,20 @@ export class AuditarComponent implements OnInit {
 
   getAuditoriaEntidadeItRequisito() {
     this.auditoriaEntidadeService.getAuditoriaEntidadeItReqById(1).subscribe(data => {
-      this.auditoriaEntidadeItRequisito = data.auditoria_entidade_items;
-      console.log(JSON.stringify(this.auditoriaEntidadeItRequisito[0].auditoria_entidade_it_requisitos));
+      this.auditoriaEntidadeItRequisito = data;
     });
   }
 
-  onClick(index: number, requisito: any) {
+  onClick(index: number, requisito: any, item: any, auditoria: any) {
     this.active = index;
-    this.editarRequisito(requisito);
+    this.editarRequisito(requisito, item, auditoria);
   }
 
-  editarRequisito(requisito: AuditoriaEntidadeItRequisito) {
+  editarRequisito(requisito: AuditoriaEntidadeItRequisito, item: any, auditoria: any) {
     const initialState = {
-      auditoriaEntidadeItRequisito: requisito
+      auditoriaEntidadeItRequisito: requisito,
+      item: item,
+      auditoria: auditoria
     };
     this.modalService.show(AuditarRequisitoComponent, { initialState, backdrop: 'static', class: 'modal-lg'})
     .content.onClose.subscribe((requisiroReturn: AuditoriaEntidadeItRequisito) => {

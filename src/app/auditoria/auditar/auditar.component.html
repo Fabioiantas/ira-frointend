@@ -23,14 +23,14 @@
           <div class="mb-0 form-group" style="width: 100%;">
             <div class="col-sm-12">
               <ngb-accordion [closeOthers]="true" type="ligth">
-                <div *ngFor="let itens of auditoriaEntidadeItRequisito; let i= index">
+                <div *ngFor="let itens of auditoriaEntidadeItRequisito.auditoria_entidade_items; let i= index">
                   <ngb-panel title="{{itens.ds_item}}">
                     <ng-template ngbPanelContent>
                       <div>
                         <ul *ngFor="let requisitos of itens.auditoria_entidade_it_requisitos; let j= index;"
                           class="list-group">
-                          <li class="list-group-item" [class.active]="active === j" (click)="onClick(j, requisitos)" [value]="requisitos.$id">
-                            {{requisitos.auditoria_requisito.ds_requisito}}
+                          <li class="list-group-item" [class.active]="active === j" (click)="onClick(j, requisitos, itens, auditoriaEntidadeItRequisito)" [value]="requisitos.$id">
+                            {{j}} - {{requisitos.auditoria_requisito.ds_requisito}}
                           </li>
                         </ul>
                       </div>
