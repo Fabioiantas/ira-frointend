@@ -1,3 +1,4 @@
+import { AuditarRequisitoComponent } from './auditoria/auditar-requisito/auditar-requisito.component';
 import { FonteEntidadeComponent } from './gee/fonte-entidade/fonte-entidade.component';
 import { GeeComponent } from './gee/gee.component';
 import { RecursoComponent } from './Recurso/Recurso.component';
@@ -841,14 +842,14 @@ const routes: Routes = [
         component: AuditarComponent,
         data: { extraParameter: 'mAuditoriaMenu' },
         canActivate: [AuthGuard]
-      }/*
+      }
       ,
       {
-        path: 'adicionar',
-        component: AuditoriaEntidadeCadastroComponent,
+        path: 'requisito',
+        component: AuditarRequisitoComponent,
         data: { roles: [Role.Admin], extraParameter: 'mAuditoriaMenu' },
         canActivate: [AuthGuard]
-      },
+      }/*,
       {
         path: 'adicionar/:id',
         component: AuditoriaEntidadeCadastroComponent,
