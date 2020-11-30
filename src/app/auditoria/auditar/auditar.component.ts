@@ -1,8 +1,6 @@
 import { AuditarRequisitoComponent } from './../auditar-requisito/auditar-requisito.component';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { Component, OnInit, ViewChild  } from '@angular/core';
-import {ThemeOptions} from '../../theme-options';
-import { NgbPanelChangeEvent, NgbAccordion } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit  } from '@angular/core';
 import { AuditoriaEntidadeService } from 'src/app/services/auditoria/auditoria-entidade.service';
 import { AuditoriaEntidadeItRequisito } from 'src/app/models/auditoriaEntidadeItRequisito';
 

@@ -14,6 +14,9 @@ export class AuditoriaEntidadeItRequisito {
   nr_peso: number;
   nm_classificacao: string;
   ds_orientacao: string;
+  ds_observacao: string;
   ie_evidencia: string;
   ie_conforme: string;
+  dt_avalicacao: Date;
+  dt_prazo_adequacao: Date;
 }

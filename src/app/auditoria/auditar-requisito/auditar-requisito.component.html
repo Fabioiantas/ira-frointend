@@ -10,42 +10,68 @@
   <div class="card">
     <div class="card-body">
       <h5 class="card-title text-center"><i class="pe-7s-news-paper p-1"></i>{{auditoria.auditoria_nivel.nm_nivel}}</h5>
-      <h6 class="card-subtitle mb-2 text-muted text-center"><i class="pe-7s-pin p-1"></i>{{item.ds_item}}</h6>
-      <p class="card-text">{{auditoriaEntidadeItRequisito.auditoria_requisito.ds_requisito}}</p>
-      <ngb-accordion [closeOthers]="true" type="ligth">
-        <div>
-          <ngb-panel title="Orientacoes">
-            <ng-template ngbPanelContent>
-              Orientações: {{auditoriaEntidadeItRequisito.ds_orientacao}}
-            </ng-template>
-          </ngb-panel>
-        </div>
-      </ngb-accordion>
+      <h6 class="card-subtitle mb-2 text-muted text-center text-black-50"><i class="pe-7s-pin p-1"></i>{{item.ds_item}}</h6>
+      <p class="card-text"><u>{{auditoriaEntidadeItRequisito.auditoria_requisito.ds_requisito}}</u></p>
+
     </div>
-
-      <div class="row">
-        <div class="col-4">
-          test5e
-        </div>
-        <div class="col-4">
-          teste
-        </div>
-        <div class="col-4">
-          teste
-        </div>
-      </div>
   </div>
-
-  <div class="d-flex justify-content-center align-items-center">
-    <div class="loader" *ngIf="false">
-      <div class="ball-scale-ripple">
-        <div></div>
+  <ngb-accordion [closeOthers]="true" type="ligth">
+    <div>
+      <ngb-panel *ngIf="auditoriaEntidadeItRequisito?.ds_orientacao" title="Orientações">
+        <ng-template ngbPanelContent>
+          {{auditoriaEntidadeItRequisito.ds_orientacao}}
+        </ng-template>
+      </ngb-panel>
+    </div>
+  </ngb-accordion>
+  <div class="row">
+    <div *ngIf="auditoriaEntidadeItRequisito?.nm_classificacao" class="col text-center m-2">
+      <div class="badge badge-pill badge-primary">Requisito {{auditoriaEntidadeItRequisito.nm_classificacao}}</div>
+    </div>
+    <div *ngIf="auditoriaEntidadeItRequisito?.nr_peso" class="col text-center m-2">
+      <div class="badge badge-pill badge-primary">Peso: {{auditoriaEntidadeItRequisito.nr_peso}}</div>
+    </div>
+    <div class="col text-center">
+      <div *ngIf="auditoriaEntidadeItRequisito.ie_evidencia == 'S'"
+        class="badge badge-pill badge-warning m-2">Exige Evidência
+      </div>
+      <div *ngIf="auditoriaEntidadeItRequisito.ie_evidencia == 'N' || !auditoriaEntidadeItRequisito?.ie_evidencia"
+        class="badge badge-pill badge-success m-2">Não Exige Evidência
       </div>
     </div>
   </div>
-  <form>
 
-  </form>
+  <div class="form-row p-2">
+    <div class="col-sm-4">
+      <label for="ie_conforme">Avaliação</label>
+      <select class="form-control" id="ie_conforme" type="select" [(ngModel)]="auditoriaEntidadeRequisito.ie_conforme" required>
+        <option [ngValue]="S">CONFORME</option>
+        <option [ngValue]="N">NÃO CONFORME</option>
+        <option [ngValue]="A">NÃO SE APLICA</option>
+      </select>
+    </div>
+    <div class="col-sm-3 form-group">
+      <label for="dt_prazo_adquacao">Prazo Adequação</label>
+      <div class="input-group">
+        <input class="form-control" placeholder="dia-mes-ano" (click)="dtPrazoAdequacao.toggle()"
+          [(ngModel)]="auditoriaEntidadeRequisito.dt_prazo_adquacao" name="dtPrazoAdequacao" ngbDatepicker #dtPrazoAdequacao="ngbDatepicker"
+          autocomplete="off" readonly>
+        <div class="input-group-append">
+          <button class="btn btn-primary" (click)="dtPrazoAdequacao.toggle()" type="button">
+            <i class="fa fa-calendar"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-5 form-group">
+      <label for="exampleFormControlFile1">Evidência</label>
+      <input type="file" class="form-control-file" id="exampleFormControlFile1">
+    </div>
+  </div>
+  <div class="form-row">
+    <label class="mb-1">Observações</label>
+    <textarea class="form-control" name="ds_observacao" rows="2" type="text" [(ngModel)]="auditoriaEntidadeRequisito.ds_observacao" required></textarea>
+  </div>
 </div>
 <div class="modal-footer" style="clear: both;">
   <button type="button" class="btn btn-default btn-sm" (click)="closeModal()">Fechar</button>
