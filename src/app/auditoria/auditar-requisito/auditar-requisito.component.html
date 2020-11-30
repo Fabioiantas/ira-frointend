@@ -1,28 +1,3 @@
-<!-- <div class="modal-header">
-  <h5 class="modal-title pull-left">{{auditoriaEntidadeItRequisito.auditoria_requisito.ds_requisito}}</h5>
-  <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
-    <span aria-hidden="true">&times;</span>
-  </button>
-</div>
-<div class="modal-body">
-  <div class="d-flex justify-content-center align-items-center" *ngIf="loading">
-    <div class="loader">
-      <div class="ball-scale-ripple">
-        <div></div>
-      </div>
-    </div>
-  </div>
-  <form>
-
-  </form>
-</div>
-<div class="modal-footer" style="clear: both;">
-  <button type="button" class="btn btn-default btn-sm" (click)="closeModal()">Fechar</button>
-  <button type="button" class="btn btn-primary btn-sm" (click)="salvar()">Salvar</button>
-</div> -->
-
-
-<!-- ffffffffffffff -->
 <div class="modal-header">
   <h5 class="modal-title pull-left">
     <i class="pe-7s-config p-1"></i>Auditar Requisito
@@ -32,28 +7,33 @@
   </button>
 </div>
 <div class="modal-body">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-title text-center"><i class="pe-7s-news-paper p-1"></i>{{auditoria.auditoria_nivel.nm_nivel}}</h5>
+      <h6 class="card-subtitle mb-2 text-muted text-center"><i class="pe-7s-pin p-1"></i>{{item.ds_item}}</h6>
+      <p class="card-text">{{auditoriaEntidadeItRequisito.auditoria_requisito.ds_requisito}}</p>
+      <ngb-accordion [closeOthers]="true" type="ligth">
+        <div>
+          <ngb-panel title="Orientacoes">
+            <ng-template ngbPanelContent>
+              Orientações: {{auditoriaEntidadeItRequisito.ds_orientacao}}
+            </ng-template>
+          </ngb-panel>
+        </div>
+      </ngb-accordion>
+    </div>
 
-
-  <div class="col-sm-12 p-0 text-center">
-    <h5 class="card-title mb-0">
-      <i class="pe-7s-news-paper p-1"></i>{{auditoria.auditoria_nivel.nm_nivel}}
-    </h5>
-  </div>
-  <div class="col-sm-12">
-    <div class="card mb-0 p-1 widget-content">
-      <div class="widget-content-outer">
-        <div class="widget-content-wrapper">
-          <div class="widget-content-center">
-            <div class="widget-subheading text-center text-black-50">
-              <i class="pe-7s-pin p-1"></i>
-              {{item.ds_item}}
-            </div>
-            <div class="widget-heading p-2"><i class="fa fa-check p-1"></i>{{auditoriaEntidadeItRequisito.auditoria_requisito.ds_requisito}}
-            </div>
-          </div>
+      <div class="row">
+        <div class="col-4">
+          test5e
+        </div>
+        <div class="col-4">
+          teste
+        </div>
+        <div class="col-4">
+          teste
         </div>
       </div>
-    </div>
   </div>
 
   <div class="d-flex justify-content-center align-items-center">
@@ -64,46 +44,7 @@
     </div>
   </div>
   <form>
-    <div class="form-row">
-      <div class="col-sm-12">
-        <label class="mb-1">Orientações</label>
-        <textarea class="form-control" name="ds_orientacao" rows="2" type="text"
-          [(ngModel)]="auditoriaEntidadeItRequisito.ds_orientacao" required></textarea>
-      </div>
-    </div>
-    <div class="form-row">
-      <div class="col-sm-6">
-        <label for="classificacao_requisito_id">Classificação</label>
-        <ng-select [items]="listClassificacaoRequisito" bindValue="id"
-          [(ngModel)]="auditoriaEntidadeItRequisito.classificacao_requisito_id" bindLabel="nm_classificacao"
-          name="classificacao_requisito_id" placeholder="Buscar Classificacao...">
-        </ng-select>
-      </div>
-      <div class="col-sm-3">
-        <label for="nr_peso">Peso</label>
-        <input class="form-control" name="nr_peso" type="number" [(ngModel)]="auditoriaEntidadeItRequisito.nr_peso"
-          required>
-      </div>
-      <div class="col-sm-3">
-        <label for="ie_evidencia">Requer Evidência?</label>
-        <div class="custom-radio custom-control">
-          <input class="form-control" type="radio" id="ie_evidenciaAtivo" name="ie_evidencia"
-            [(ngModel)]="auditoriaEntidadeItRequisito.ie_evidencia" class="custom-control-input" value="S">
-          <label for="ie_evidenciaAtivo" class="custom-control-label">Sim</label>
-        </div>
-        <div class="custom-radio custom-control">
-          <input class="form-control" type="radio" id="ie_evidenciaInativo" name="ie_evidencia"
-            [(ngModel)]="auditoriaEntidadeItRequisito.ie_evidencia" class="custom-control-input" value="N">
-          <label for="ie_evidenciaInativo" class="custom-control-label">Não</label>
-        </div>
-      </div>
-    </div>
-    <div class="form-row">
 
-    </div>
-    <div class="form-row">
-
-    </div>
   </form>
 </div>
 <div class="modal-footer" style="clear: both;">

@@ -24,16 +24,30 @@
             <div class="col-sm-12">
               <ngb-accordion [closeOthers]="true" type="ligth">
                 <div *ngFor="let itens of auditoriaEntidadeItRequisito.auditoria_entidade_items; let i= index">
-                  <ngb-panel title="{{itens.ds_item}}">
+                  <ngb-panel title="{{i+1}} - {{itens.ds_item}}">
                     <ng-template ngbPanelContent>
-                      <div>
-                        <ul *ngFor="let requisitos of itens.auditoria_entidade_it_requisitos; let j= index;"
-                          class="list-group">
-                          <li class="list-group-item" [class.active]="active === j" (click)="onClick(j, requisitos, itens, auditoriaEntidadeItRequisito)" [value]="requisitos.$id">
-                            {{j}} - {{requisitos.auditoria_requisito.ds_requisito}}
-                          </li>
-                        </ul>
-                      </div>
+                      <ul class="list-group">
+                        <li *ngFor="let requisitos of itens.auditoria_entidade_it_requisitos; let j= index;"
+                          (click)="onClick(j)" class="list-group-item" [class.active]="active === j"
+                          [value]="requisitos.$id">
+                          <div class="form-row">
+                            <div class="col-sm-10">
+                              <a class="btn btn-pill text-left"
+                                (click)="editarRequisito(requisitos, itens, auditoriaEntidadeItRequisito)">
+                                {{i+1}}.{{j+1}} - {{requisitos.auditoria_requisito.ds_requisito}}
+                              </a>
+                            </div>
+                            <div class="col-sm-2">
+                              <div *ngIf="requisitos?.ie_conforme">
+                                <span *ngIf="requisitos.ie_conforme == 'S'"
+                                  class="badge badge-success float-right pull-right">Conforme</span>
+                                <span *ngIf="requisitos.ie_conforme == 'N'"
+                                  class="badge badge-danger float-right pull-right">Não Conforme</span>
+                              </div>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
                     </ng-template>
                   </ngb-panel>
                 </div>

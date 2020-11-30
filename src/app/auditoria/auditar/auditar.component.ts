@@ -30,16 +30,16 @@ export class AuditarComponent implements OnInit {
     });
   }
 
-  onClick(index: number, requisito: any, item: any, auditoria: any) {
+  onClick(index: number) {
     this.active = index;
-    this.editarRequisito(requisito, item, auditoria);
+    // this.editarRequisito(requisito, item, auditoria);
   }
 
   editarRequisito(requisito: AuditoriaEntidadeItRequisito, item: any, auditoria: any) {
     const initialState = {
       auditoriaEntidadeItRequisito: requisito,
-      item: item,
-      auditoria: auditoria
+      item,
+      auditoria
     };
     this.modalService.show(AuditarRequisitoComponent, { initialState, backdrop: 'static', class: 'modal-lg'})
     .content.onClose.subscribe((requisiroReturn: AuditoriaEntidadeItRequisito) => {
