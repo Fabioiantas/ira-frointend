@@ -44,10 +44,11 @@
   <div class="form-row p-2">
     <div class="col-sm-4">
       <label for="ie_conforme">Avaliação</label>
-      <select class="form-control" id="ie_conforme" type="select" [(ngModel)]="auditoriaEntidadeRequisito.ie_conforme" required>
-        <option [ngValue]="S">CONFORME</option>
-        <option [ngValue]="N">NÃO CONFORME</option>
-        <option [ngValue]="A">NÃO SE APLICA</option>
+      <select class="form-control" id="ie_conforme" type="select"
+        [(ngModel)]="auditoriaEntidadeRequisito.ie_conforme">
+        <option value="S">CONFORME</option>
+        <option value="N">NÃO CONFORME</option>
+        <option value="A">NÃO SE APLICA</option>
       </select>
     </div>
     <div class="col-sm-3 form-group">

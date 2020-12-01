@@ -15,6 +15,11 @@ export class AuditarComponent implements OnInit {
   active: number;
   requisito: any;
 
+  max = 200;
+  showWarning: boolean;
+  dynamic: number;
+  type: string;
+
   constructor(private auditoriaEntidadeService: AuditoriaEntidadeService,
               private modalService: BsModalService) { }
 
