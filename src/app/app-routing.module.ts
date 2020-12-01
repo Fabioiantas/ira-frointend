@@ -834,7 +834,7 @@ const routes: Routes = [
   },
   // AUDITAR
   {
-    path: 'auditar',
+    path: 'auditar/:id',
     component: BaseLayoutComponent,
     children: [
       {
@@ -842,20 +842,13 @@ const routes: Routes = [
         component: AuditarComponent,
         data: { extraParameter: 'mAuditoriaMenu' },
         canActivate: [AuthGuard]
-      }
-      ,
+      },
       {
         path: 'requisito',
         component: AuditarRequisitoComponent,
         data: { roles: [Role.Admin], extraParameter: 'mAuditoriaMenu' },
         canActivate: [AuthGuard]
-      }/*,
-      {
-        path: 'adicionar/:id',
-        component: AuditoriaEntidadeCadastroComponent,
-        data: { extraParameter: 'mAuditoriaMenu' },
-        canActivate: [AuthGuard]
-      }*/
+      },
     ]
   },
 

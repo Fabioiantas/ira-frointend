@@ -123,4 +123,10 @@ export class AuditoriaEntidadeComponent implements OnInit {
     this.filterForm.get('propriedade_id').setValue(null);
     this.rowsAuditoriaEntidade = [];
   }
+
+  auditar() {
+    if(this.selected[0]) {
+      this.router.navigate([`/auditar/${this.selected[0].id}`]);
+    }
+  }
 }

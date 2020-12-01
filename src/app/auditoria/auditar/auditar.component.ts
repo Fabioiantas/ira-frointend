@@ -3,6 +3,7 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 import { Component, OnInit  } from '@angular/core';
 import { AuditoriaEntidadeService } from 'src/app/services/auditoria/auditoria-entidade.service';
 import { AuditoriaEntidadeItRequisito } from 'src/app/models/auditoriaEntidadeItRequisito';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-auditar',
@@ -14,6 +15,8 @@ export class AuditarComponent implements OnInit {
   auditoriaEntidadeItRequisito: any[] = [];
   active: number;
   requisito: any;
+  lastItem: any;
+  params: any;
 
   max = 200;
   showWarning: boolean;
@@ -21,14 +24,18 @@ export class AuditarComponent implements OnInit {
   type: string;
 
   constructor(private auditoriaEntidadeService: AuditoriaEntidadeService,
-              private modalService: BsModalService) { }
+              private modalService: BsModalService,
+              public route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.getAuditoriaEntidadeItRequisito();
+    this.route.params.subscribe(data => {
+      this.params = data;
+      this.getAuditoriaEntidadeItRequisito(this.params.id);
+    });
   }
 
-  getAuditoriaEntidadeItRequisito() {
-    this.auditoriaEntidadeService.getAuditoriaEntidadeItReqById(1).subscribe(data => {
+  getAuditoriaEntidadeItRequisito(id) {
+    this.auditoriaEntidadeService.getAuditoriaEntidadeItReqById(id).subscribe(data => {
       this.auditoriaEntidadeItRequisito = data;
     });
   }
@@ -42,12 +49,18 @@ export class AuditarComponent implements OnInit {
     const initialState = {
       auditoriaEntidadeItRequisito: requisito,
       item,
-      auditoria
+      auditoria,
+      j: this.active
     };
     this.modalService.show(AuditarRequisitoComponent, { initialState, backdrop: 'static', class: 'modal-lg'})
     .content.onClose.subscribe((requisiroReturn: AuditoriaEntidadeItRequisito) => {
       requisito = requisiroReturn;
-      // this.findMonitoramento();
+      this.getAuditoriaEntidadeItRequisito(this.params.id);
     });
+  }
+
+  setLastItem(id: any) {
+    this.lastItem = id;
+    console.log('id ' + this.lastItem);
   }
 }

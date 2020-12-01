@@ -22,9 +22,16 @@
         <div class="app-inner-layout__bottom-pane d-flex" style="padding: 0px;">
           <div class="mb-0 form-group" style="width: 100%;">
             <div class="col-sm-12">
-              <ngb-accordion [closeOthers]="true" type="ligth">
+              <ngb-accordion [closeOthers]="true" type="ligth" activeIds="{{lastItem}}">
                 <div *ngFor="let itens of auditoriaEntidadeItRequisito.auditoria_entidade_items; let i= index">
-                  <ngb-panel title="{{i+1}} - {{itens.ds_item}}">
+                  <ngb-panel id="{{itens.id}}">
+                    <ng-template ngbPanelHeader>
+                      <div class="d-flex align-items-center justify-content-between">
+                        <button (click)="setLastItem(itens.id)" ngbPanelToggle class="btn btn-link p-0">{{i+1}} -
+                          {{itens.ds_item}}</button>
+                      </div>
+                      <div class="badge badge-info ml-3">50%</div>
+                    </ng-template>
                     <ng-template ngbPanelContent>
                       <ul class="list-group">
                         <li *ngFor="let requisitos of itens.auditoria_entidade_it_requisitos; let j= index;"
@@ -38,26 +45,36 @@
                               </a>
                             </div>
 
-                            <div class="col-sm-1">
-                              <div>
-                                <span *ngIf="requisitos.ie_conforme == 'S'"
-                                  data-toggle="tooltip" data-placement="top"  title="Conforme"
-                                  class="badge badge-success float-right pull-right"><i class="fa fa-smile-o"></i></span>
-                                <span *ngIf="requisitos.ie_conforme == 'N'"
-                                  data-toggle="tooltip" data-placement="top"  title="Não Conforme."
-                                  class="badge badge-danger float-right pull-right"><i class="fa fa-frown-o"></i></span>
-                                <span *ngIf="requisitos.ie_conforme == 'A'"
-                                  data-toggle="tooltip" data-placement="top"  title="Não se Aplica."
-                                  class="badge badge-warning float-right pull-right"><i class="fa fa-ban"></i></span>
-                                <span *ngIf="!requisitos?.ie_conforme"
-                                  data-toggle="tooltip" data-placement="top"  title="Não Avaliado."
-                                  class="badge badge-secondary float-right pull-right"><i class="fa fa-eye-slash"></i></span>
-                              </div>
+                            <div class="col-sm-1 text-center">
+                              <h4>
+                                <span *ngIf="requisitos.ie_conforme == 'S'" data-toggle="tooltip" data-placement="top"
+                                  title="Conforme" class="badge badge-success"><i class="fa fa-smile-o"></i></span>
+                                <span *ngIf="requisitos.ie_conforme == 'N'" data-toggle="tooltip" data-placement="top"
+                                  title="Não Conforme." class="badge badge-danger"><i class="fa fa-frown-o"></i></span>
+                                <span *ngIf="requisitos.ie_conforme == 'A'" data-toggle="tooltip" data-placement="top"
+                                  title="Não se Aplica." class="badge badge-warning"><i class="fa fa-ban"></i></span>
+                                <span *ngIf="!requisitos?.ie_conforme" data-toggle="tooltip" data-placement="top"
+                                  title="Não Avaliado." class="badge badge-fill"><i
+                                    class="fa fa-eye-slash"></i></span>
+                              </h4>
                             </div>
-                            <div *ngIf="requisitos?.dt_prazo_adequacao" class="col-sm-2"
-                              data-toggle="tooltip" data-placement="top"  title="Data Limite para Adequacao do Requisito">
-                              {{requisitos.dt_prazo_adequacao | date:'dd/MM/yyyy'}}
+                            <div class="col-sm-1" *ngIf="requisitos?.dt_prazo_adequacao && requisitos.ie_conforme == 'N'">
+                              <!-- <p>Prazo: {{requisitos.dt_prazo_adequacao | date:'dd/MM/yyyy'}}</p> -->
+                              <h5><span class="badge badge-danger" data-toggle="tooltip" data-placement="top"
+                                title="Prazo para Adequação de Não Conformidade">
+                                <fa name="calendar-check-o"></fa> {{requisitos.dt_prazo_adequacao | date:'dd/MM/yyyy'}}</span>
+                              </h5>
                             </div>
+                            <div class="col-sm-1 text-center icons" *ngIf="requisitos?.ds_observacao"
+                              data-toggle="tooltip" data-placement="top"
+                              title="Clique para vizualizar as observações.">
+                              <i class="fa fa-pencil" placement="left" ngbPopover="{{requisitos.ds_observacao}}"></i>
+                            </div>
+                            <!-- <p>{{requisitos.dt_prazo_adequacao | date:'dd/MM/yyyy'}}</p> -->
+                            <!-- <span *ngIf="requisitos?.dt_prazo_adequacao && requisitos.ie_conforme == 'N'"
+                                  data-toggle="tooltip" data-placement="top"  title="Prazo Limite para adequação do Requisito."
+                                  class="badge badge- badge-warning p-0">
+                            </span> -->
                           </div>
                         </li>
                       </ul>

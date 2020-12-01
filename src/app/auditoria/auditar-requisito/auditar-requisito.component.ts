@@ -1,6 +1,8 @@
+import { ActivatedRoute } from '@angular/router';
 import { AuditoriaEntidadeItRequisitoService } from './../../services/auditoria/auditoria-entidade-it-requisito.service';
 import { Subject } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
+import * as moment from 'moment';
 import { DialogBoxService } from 'src/app/_services/dialog-box.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { AuditoriaEntidadeItRequisito } from 'src/app/models/auditoriaEntidadeItRequisito';
@@ -24,12 +26,11 @@ export class AuditarRequisitoComponent implements OnInit {
               public modalRef: BsModalRef) { }
 
   ngOnInit() {
-    console.log('auditoria ' + JSON.stringify(this.auditoria));
     this.onClose = new Subject();
     this.auditoriaEntidadeRequisito = new AuditoriaEntidadeItRequisito();
     this.auditoriaEntidadeRequisito.id = this.auditoriaEntidadeItRequisito.id;
     this.auditoriaEntidadeRequisito.ie_conforme = this.auditoriaEntidadeItRequisito.ie_conforme;
-    this.auditoriaEntidadeRequisito.dt_prazo_adequacao = this.auditoriaEntidadeItRequisito.dt_prazo_adequacao;
+    this.auditoriaEntidadeRequisito.dt_prazo_adequacao = new Date(this.auditoriaEntidadeItRequisito.dt_prazo_adequacao ? this.auditoriaEntidadeItRequisito.dt_prazo_adequacao : '');
     this.auditoriaEntidadeRequisito.ds_observacao = this.auditoriaEntidadeItRequisito.ds_observacao;
   }
 
@@ -52,6 +53,10 @@ export class AuditarRequisitoComponent implements OnInit {
       this.loading = false;
       this.closeModal();
     }, () => this.loading = false);*/
+  }
+
+  clearDate() {
+    this.auditoriaEntidadeRequisito.dt_prazo_adequacao = null;
   }
 
 }

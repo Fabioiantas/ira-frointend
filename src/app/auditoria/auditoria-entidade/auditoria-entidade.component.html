@@ -31,6 +31,9 @@
             class="header-icon lnr-license mr-3 text-muted opacity-6"></i> Entidade Auditada </div>
         <div class="btn-actions-pane-right">
           <div class="btn-group-sm btn-group" role="group">
+            <button (click)="auditar()" type="button" class="btn-shadow btn btn-dark btn-xs">
+              <fa name="star"></fa> Auditar
+            </button>
             <a class="btn btn-success" [routerLink]="['/auditoriaentidade/adicionar']">Adicionar</a>
             <button class="btn btn-primary" type="button" (click)="editar(selected[0].id)">Editar</button>
             <button class="btn btn-dark" type="button" (click)="remover()">Remover</button>

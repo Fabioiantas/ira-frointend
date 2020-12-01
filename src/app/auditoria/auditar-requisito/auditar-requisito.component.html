@@ -52,11 +52,11 @@
       </select>
     </div>
     <div class="col-sm-3 form-group">
-      <label for="dt_prazo_adquacao">Prazo Adequação</label>
+      <label for="dt_prazo_adequacao">Prazo Adequação</label>
       <div class="input-group">
         <input class="form-control" placeholder="dia-mes-ano" (click)="dtPrazoAdequacao.toggle()"
-          [(ngModel)]="auditoriaEntidadeRequisito.dt_prazo_adquacao" name="dtPrazoAdequacao" ngbDatepicker #dtPrazoAdequacao="ngbDatepicker"
-          autocomplete="off" readonly>
+          [(ngModel)]="auditoriaEntidadeRequisito.dt_prazo_adequacao" name="dtPrazoAdequacao" ngbDatepicker #dtPrazoAdequacao="ngbDatepicker"
+          autocomplete="off">
         <div class="input-group-append">
           <button class="btn btn-primary" (click)="dtPrazoAdequacao.toggle()" type="button">
             <i class="fa fa-calendar"></i>
