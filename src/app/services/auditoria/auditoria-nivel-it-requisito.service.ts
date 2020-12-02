@@ -41,4 +41,8 @@ export class AuditoriaNivelItRequisitoService {
   remove(id: string): Observable<any> {
     return this.http.delete(`${environment.baseUrl}/auth/nivelitrequisito/${id}`);
   }
+
+  removeSelected(requisito: any): Observable<any> {
+    return this.http.post(`${environment.baseUrl}/auth/nivelitrequisitos`, requisito);
+  }
 }

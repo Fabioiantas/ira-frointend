@@ -132,9 +132,28 @@ export class AuditoriaNivelItRequisitoComponent implements OnInit {
     this.dialogBox.show('Confirma exclusão do Item e todos seus Requisitos?', 'CONFIRM').then((sim: any) => {
       if (sim) {
         this.auditoriaNivelItemService.remove(id).subscribe(() => {
-          this.showSuccess('Item removido com sucesso!', 'Mensagem');
+          this.showSuccess('Requisito removido com sucesso!', 'Mensagem');
           this.changeNivel();
         });
+      }
+    });
+  }
+
+  removeSelected()  {
+    this.dialogBox.show('Confirma exclusão de todos os requisitos selecionados?', 'CONFIRM').then((sim: any) => {
+      if (sim) {
+        var requisito = [];
+        this.auditoriaNivelItRequisito.forEach(function (value) {
+          if (value.remover) {
+            requisito.push(value);
+          }
+        });
+        if (requisito.length){
+          this.auditoriaNivelItRequisitoService.removeSelected(requisito).subscribe(() => {
+            this.showSuccess('Requisitos removidos com sucesso!', 'OK');
+          });
+          this.changeNivelItem();
+        }
       }
     });
   }
@@ -256,5 +275,9 @@ export class AuditoriaNivelItRequisitoComponent implements OnInit {
   cleanFilter() {
     this.filterForm.reset();
     this.auditoriaNivelItRequisito = [];
+  }
+
+  changeCheck(requisito: any) {
+    console.log(requisito);
   }
 }
