@@ -38,14 +38,15 @@
                           (click)="onClick(j)" class="list-group-item" [class.active]="active === j"
                           [value]="requisitos.$id">
                           <div class="form-row">
-                            <div class="col-sm-8">
+
+                            <div class="col-sm-6">
                               <a class="btn btn-pill text-left"
                                 (click)="editarRequisito(requisitos, itens, auditoriaEntidadeItRequisito)">
                                 {{i+1}}.{{j+1}} - {{requisitos.auditoria_requisito.ds_requisito}}
                               </a>
                             </div>
 
-                            <div class="col-sm-1 text-center">
+                            <div class="col-sm-2 text-center">
                               <h4>
                                 <span *ngIf="requisitos.ie_conforme == 'S'" data-toggle="tooltip" data-placement="top"
                                   title="Conforme" class="badge badge-success"><i class="fa fa-smile-o"></i></span>
@@ -58,14 +59,14 @@
                                     class="fa fa-eye-slash"></i></span>
                               </h4>
                             </div>
-                            <div class="col-sm-1" *ngIf="requisitos?.dt_prazo_adequacao && requisitos.ie_conforme == 'N'">
+                            <div class="col-sm-2" *ngIf="requisitos?.dt_prazo_adequacao && requisitos.ie_conforme == 'N'">
                               <!-- <p>Prazo: {{requisitos.dt_prazo_adequacao | date:'dd/MM/yyyy'}}</p> -->
                               <h5><span class="badge badge-danger" data-toggle="tooltip" data-placement="top"
                                 title="Prazo para Adequação de Não Conformidade">
                                 <fa name="calendar-check-o"></fa> {{requisitos.dt_prazo_adequacao | date:'dd/MM/yyyy'}}</span>
                               </h5>
                             </div>
-                            <div class="col-sm-1 text-center icons" *ngIf="requisitos?.ds_observacao"
+                            <div class="col-sm-2 text-center icons" *ngIf="requisitos?.ds_observacao"
                               data-toggle="tooltip" data-placement="top"
                               title="Clique para vizualizar as observações.">
                               <i class="fa fa-pencil" placement="left" ngbPopover="{{requisitos.ds_observacao}}"></i>
