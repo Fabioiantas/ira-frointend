@@ -11,7 +11,13 @@
               </button>
             </div>
           </div>
-          <!-- <div *ngIf="auditoriaEntidadeItRequisito?.auditoria_nivel"> -->
+
+          <div class="card-header-tab card-header">
+            <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i
+                class="header-icon lnr-eye mr-3 text-muted opacity-6"></i> Auditar Requisitos </div>
+          </div>
+
+          <div class="pane-right">
             <div *ngIf="auditoriaEntidadeItRequisito?.auditoria_nivel" class="ml-2"
             data-toggle="tooltip" data-placement="bottom" title="Nome da Auditoria">
               <i class="fa fa-flag p-1"></i>{{auditoriaEntidadeItRequisito.auditoria_nivel.nm_nivel}}
@@ -20,12 +26,6 @@
               <i class="fa fa-user-circle p-1"></i>{{auditoriaEntidadeItRequisito.entidade.nm_reduzido}}</div>
             <div *ngIf="auditoriaEntidadeItRequisito?.propriedade" class="ml-3" data-placement="bottom" title="Nome da Propriedade">
               <i class="fa fa-map-marker p-1"></i>{{auditoriaEntidadeItRequisito.propriedade.nm_propriedade}}</div>
-          <!-- </div> -->
-
-          <div class="pane-right">
-            <button type="button" (click)="inserirRequisito()" class="btn-shadow btn btn-success">
-              Inserir Requisito
-            </button>
           </div>
         </div>
         <div class="app-inner-layout__bottom-pane d-flex" style="padding: 0px;">

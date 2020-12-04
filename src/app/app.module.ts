@@ -163,6 +163,7 @@ import { AuditoriaEntidadeComponent } from './auditoria/auditoria-entidade/audit
 import { EntidadeAuditadaComponent } from './auditoria/entidade-auditada/entidade-auditada.component';
 import { AuditarComponent } from './auditoria/auditar/auditar.component';
 import { AuditarRequisitoComponent } from './auditoria/auditar-requisito/auditar-requisito.component';
+import { PainelComponent } from './painel/painel.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -281,6 +282,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     EntidadeAuditadaComponent,
     AuditarComponent,
     AuditarRequisitoComponent,
+    PainelComponent,
 
   ],
   imports: [

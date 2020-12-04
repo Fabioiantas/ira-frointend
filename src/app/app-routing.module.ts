@@ -1,3 +1,4 @@
+import { PainelComponent } from './painel/painel.component';
 import { AuditarRequisitoComponent } from './auditoria/auditar-requisito/auditar-requisito.component';
 import { FonteEntidadeComponent } from './gee/fonte-entidade/fonte-entidade.component';
 import { GeeComponent } from './gee/gee.component';
@@ -849,6 +850,25 @@ const routes: Routes = [
         data: { roles: [Role.Admin], extraParameter: 'mAuditoriaMenu' },
         canActivate: [AuthGuard]
       },
+    ]
+  },
+  // PAINEL
+  {
+    path: 'painel',
+    component: BaseLayoutComponent,
+    children: [
+      {
+        path: '',
+        component: PainelComponent,
+        data: { extraParameter: 'dashboardsMenu' },
+        canActivate: [AuthGuard]
+      },/*
+      {
+        path: 'requisito',
+        component: AuditarRequisitoComponent,
+        data: { roles: [Role.Admin], extraParameter: 'mAuditoriaMenu' },
+        canActivate: [AuthGuard]
+      },*/
     ]
   },
 
