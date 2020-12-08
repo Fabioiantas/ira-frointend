@@ -29,54 +29,26 @@
 <!-- Main content -->
 <section class="content">
   <div class="card-header-tab card-header">
-    <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i
-        class="header-icon fa fa-industry mr-3 text-muted opacity-6"></i>{{nmReduzido}}</div>
+    <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
+      <i class="header-icon fa fa-industry mr-3 text-muted opacity-6"></i>{{nmReduzido}}
+    </div>
     <div class="btn-actions-pane-right">
       <div class="btn-group-sm btn-group" role="group">
         <a class="btn btn-success" (click)="inserirEmissao(selected[0])">Inserir Emissão</a>
-        <!-- <button class="btn btn-primary" type="button" (click)="editar(selected[0].id)">Editar</button> -->
-        <!-- <button class="btn btn-danger" type="button" (click)="remover()">Remover</button> -->
       </div>
     </div>
   </div>
   <div class="p-3 bg-white">
     <div class="form-group form-inline mb-0">
-      <ngx-datatable-filter
-        [margin]="'-6px'"
-        [float]="'left'"
-        [columns]="columnsFonteEntidade"
-        [lista]="fonteEntidade"
+      <ngx-datatable-filter [float]="'left'" [columns]="columnsFonteEntidade" [lista]="fonteEntidade"
         [table]="tableFonteEntidade">
       </ngx-datatable-filter>
-
-      <label class="mb-1 pl-2">Entidade:</label>
-      <ng-select class="large"
-        [items]="entidades"
-        [width]="175"
-        [(ngModel)]="entidade"
-        [virtualScroll]="true"
-        (change)="changeEntidade()"
-        bindLabel="nm_entidade"
-        name="entidade" placeholder="Buscar Entidade...">
-      </ng-select>
     </div>
-    <div class="">
-
-    </div>
-
   </div>
-
-  <ngx-datatable ngx-resize-watcher class="bootstrap striped" #tableFonteEntidade
-    [rows]="rowsFonteEntidade"
-    [footerHeight]="25"
-    [rowHeight]="45"
-    [columns]="columnsFonteEntidade"
-    [columnMode]="'force'"
-    [selected]="selected"
-    [selectionType]="'single'"
-    (activate)="activate($event)"
-    [messages]="{'emptyMessage': 'Nenhum resultado encontrado...', 'totalMessage': 'total'}"
-    [limit]="10">
+  <ngx-datatable ngx-resize-watcher class="bootstrap striped" #tableFonteEntidade [rows]="rowsFonteEntidade"
+    [footerHeight]="25" [rowHeight]="45" [columns]="columnsFonteEntidade" [columnMode]="'force'" [selected]="selected"
+    [selectionType]="'single'" (activate)="activate($event)"
+    [messages]="{'emptyMessage': 'Nenhum resultado encontrado...', 'totalMessage': 'total'}" [limit]="10">
 
     <ngx-datatable-column name="Classificação" prop="nm_classificacao" [width]="175" [flexGrow]="1">
       <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
@@ -90,18 +62,14 @@
 
     <ngx-datatable-column name="Total CO2 Fóssel" prop="qt_total_co2_fossel" [flexGrow]="1">
       <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-        {{value | number}}
+        {{value | quantidadePipe}}
       </ng-template>
     </ngx-datatable-column>
 
     <ngx-datatable-column name="Total CO2 Bio" prop="qt_total_co2_bio" [flexGrow]="1">
       <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-        {{value | number}}
+        {{value | quantidadePipe}}
       </ng-template>
     </ngx-datatable-column>
-</ngx-datatable>
+  </ngx-datatable>
 </section>
-
-
-
-

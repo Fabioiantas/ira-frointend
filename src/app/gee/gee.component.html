@@ -67,8 +67,16 @@
     [limit]="10">
     <ngx-datatable-column name="Entidade" prop="nm_reduzido" [width]="175" [flexGrow]="1"></ngx-datatable-column>
     <ngx-datatable-column name="CNPJ" prop="nr_cnpj" [flexGrow]="1"></ngx-datatable-column>
-    <ngx-datatable-column name="Total CO2 Fóssel" prop="qt_total_fossel" [flexGrow]="1"></ngx-datatable-column>
-    <ngx-datatable-column name="Total CO2 Bio" prop="qt_total_bio" [flexGrow]="1"></ngx-datatable-column>
+    <ngx-datatable-column name="Total CO2 Fóssel (TON)" prop="qt_total_fossel" [flexGrow]="1">
+      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+        {{value | quantidadePipe}}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Total CO2 Bio (TON)" prop="qt_total_bio" [flexGrow]="1">
+      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+        {{value | quantidadePipe}}
+      </ng-template>
+    </ngx-datatable-column>
 </ngx-datatable>
 </section>
 

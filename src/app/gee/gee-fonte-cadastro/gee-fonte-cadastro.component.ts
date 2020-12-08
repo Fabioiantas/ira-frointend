@@ -1,3 +1,4 @@
+import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import { AmostraGee } from 'src/app/models/amostraGee';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -30,7 +31,8 @@ export class GeeFonteCadastroComponent implements OnInit {
               private data: DataService,
               private route: ActivatedRoute,
               private router: Router,
-              private dialogBox: DialogBoxService) { }
+              private dialogBox: DialogBoxService,
+              private toastrService: ToastrService) { }
 
   ngOnInit() {
     this.amostraGee = new AmostraGee();
@@ -43,6 +45,9 @@ export class GeeFonteCadastroComponent implements OnInit {
       });
       this.populaTable(this.params.id);
       this.findFonte(this.params.id);
+      if (!this.fontesEntidade) {
+        this.router.navigate(['/gee']);
+      }
     }
   }
 
@@ -56,9 +61,7 @@ export class GeeFonteCadastroComponent implements OnInit {
     this.data.curFonteEmissao.subscribe(fonte => {
       this.fontesEntidade = fonte;
     });
-    /*this.monitoramentoGeeService.findFonte(id).subscribe(fonte => {
-      this.fonte = fonte[0];
-    });*/
+
   }
 
   add() {
@@ -77,6 +80,7 @@ export class GeeFonteCadastroComponent implements OnInit {
       this.isAddEdit = false;
       this.amostraGee = new AmostraGee();
       this.populaTable(this.params.id);
+      this.showSuccess('Amostra Adicionada com Sucesso!', 'Mensagem');
     }, () => this.loading = false);
   }
 
@@ -86,6 +90,7 @@ export class GeeFonteCadastroComponent implements OnInit {
         this.loading = true;
         this.amostraGeeService.remover(amostra.id).subscribe(data => {
           this.loading = false;
+          this.showSuccess('Amostra Removida com Sucesso!', 'Mensagem');
           this.populaTable(this.params.id);
         }, () => this.loading = false);
       }
@@ -93,12 +98,18 @@ export class GeeFonteCadastroComponent implements OnInit {
   }
 
   changeQuilometragem() {
-    this.amostraGee.qt_consumo_total = this.amostraGee.qt_quilometragem_total * this.fontesEntidade.qt_consumo;
+    this.amostraGee.qt_consumo_total = Number((this.amostraGee.qt_quilometragem_total / this.fontesEntidade.qt_consumo).toFixed(2));
  }
 
  goFontesMonitoradas() {
   console.log(this.params.id);
   this.router.navigate(['/gee/fontes/' + this.monitoramentoGee.entidade_id]);
  }
+
+ showSuccess(message: string, title: string) {
+  this.toastrService.success(message, title, {
+    timeOut: 3000,
+  });
+}
 
 }

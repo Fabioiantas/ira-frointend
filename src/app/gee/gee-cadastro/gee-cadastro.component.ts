@@ -193,18 +193,6 @@ export class GeeCadastroComponent implements OnInit {
   }
 
   changeQuilometragem() {
-     this.amostras.qt_consumo_total = this.amostras.qt_quilometragem_total / this.filterForm.value.fonteEmissao.qt_consumo;
+     this.amostras.qt_consumo_total = Number((this.amostras.qt_quilometragem_total / this.filterForm.value.fonteEmissao.qt_consumo).toFixed(2));
   }
-
-  /*onBlurQuilometragem(event) {
-    if(event.target.value !== ''){
-      this.amostras.qt_quilometragem_total = Number(parseFloat(event.target.value).toFixed(2));
-    }
-  }*/
-
-  /*onBlurConsumo(event){
-    if(event.target.value !== '') {
-      this.amostras.qt_consumo_total = Number(parseFloat(this.amostras.qt_consumo_total.toString()).toFixed(2));
-    }
-  }*/
 }
