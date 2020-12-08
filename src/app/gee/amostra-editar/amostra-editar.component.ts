@@ -17,7 +17,10 @@ export class AmostraEditarComponent implements OnInit {
 
   monitoramentoGee: MonitoramentoGee;
   filterGee: FilterGee;
-  amostraGee: AmostraGee;
+  amostraGee: any;
+  amostra: AmostraGee;
+  kmTotal: any;
+  qtConsumo: any;
 
 
   public onClose: Subject<AmostraGee>;
@@ -28,21 +31,26 @@ export class AmostraEditarComponent implements OnInit {
               public modalRef: BsModalRef) { }
 
   ngOnInit() {
-    console.log('a: ' + JSON.stringify(this.amostraGee));
+    console.log('a: ' + this.qtConsumo);
+    this.amostra = new AmostraGee();
+    this.amostra.dt_amostra = new Date(this.amostraGee.dt_amostra);
+    this.amostra.cd_unidade_padrao = this.amostraGee.cd_unidade_padrao;
+    this.amostra.qt_consumo_total = this.amostraGee.qt_consumo_total;
+    this.kmTotal = this.amostra.qt_consumo_total * this.qtConsumo;
     this.onClose = new Subject();
   }
 
   public closeModal(): void {
-    this.onClose.next(this.amostraGee);
+    this.onClose.next(this.amostra);
     this.modalRef.hide();
   }
 
   salvar() {
-    if (!this.amostraGee.dt_amostra || !this.amostraGee.cd_unidade_padrao || !this.amostraGee.qt_consumo_total) {
+    if (!this.amostra.dt_amostra || !this.amostra.cd_unidade_padrao || !this.amostra.qt_consumo_total) {
       return this.dialogBox.show('É nescessário preencher todos os campos', 'Warning');
     }
     this.loading = true;
-    this.amostraService.editar(this.amostraGee).subscribe(data => {
+    this.amostraService.editar(this.amostra).subscribe(data => {
       this.loading = false;
       this.closeModal();
     }, () => this.loading = false);

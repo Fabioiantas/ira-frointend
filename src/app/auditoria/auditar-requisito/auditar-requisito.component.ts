@@ -30,6 +30,7 @@ export class AuditarRequisitoComponent implements OnInit {
     this.auditoriaEntidadeRequisito = new AuditoriaEntidadeItRequisito();
     this.auditoriaEntidadeRequisito.id = this.auditoriaEntidadeItRequisito.id;
     this.auditoriaEntidadeRequisito.ie_conforme = this.auditoriaEntidadeItRequisito.ie_conforme;
+    // tslint:disable-next-line:max-line-length
     this.auditoriaEntidadeRequisito.dt_prazo_adequacao = new Date(this.auditoriaEntidadeItRequisito.dt_prazo_adequacao ? this.auditoriaEntidadeItRequisito.dt_prazo_adequacao : '');
     this.auditoriaEntidadeRequisito.ds_observacao = this.auditoriaEntidadeItRequisito.ds_observacao;
   }

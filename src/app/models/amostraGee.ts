@@ -3,7 +3,7 @@ export class AmostraGee {
   // tslint:disable-next-line:variable-name
   monitoramento_gee_id: BigInteger;
   // tslint:disable-next-line:variable-name
-  dt_amostra: string;
+  dt_amostra: Date;
   // tslint:disable-next-line:variable-name
   cd_unidade_padrao: string;
   // tslint:disable-next-line:variable-name

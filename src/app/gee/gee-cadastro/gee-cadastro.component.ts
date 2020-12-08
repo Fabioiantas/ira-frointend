@@ -105,6 +105,7 @@ export class GeeCadastroComponent implements OnInit {
       amostraGee: amostra,
       filteGee: this.filterForm.value,
       MonitoramentoGee: this.monitoramentoGee,
+      qtConsumo: this.filterForm.value.fonteEmissao.qt_consumo
     };
     this.modalService.show(AmostraEditarComponent, { initialState, backdrop: 'static', class: 'modal-md'})
     .content.onClose.subscribe((amostraReturn: AmostraGee) => {
