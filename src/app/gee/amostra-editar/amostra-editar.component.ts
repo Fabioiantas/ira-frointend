@@ -33,6 +33,8 @@ export class AmostraEditarComponent implements OnInit {
   ngOnInit() {
     console.log('a: ' + this.qtConsumo);
     this.amostra = new AmostraGee();
+    this.amostra.id = this.amostraGee.id;
+    this.amostra.monitoramento_gee_id = this.amostraGee.monitoramento_gee_id;
     this.amostra.dt_amostra = new Date(this.amostraGee.dt_amostra);
     this.amostra.cd_unidade_padrao = this.amostraGee.cd_unidade_padrao;
     this.amostra.qt_consumo_total = this.amostraGee.qt_consumo_total;
@@ -55,4 +57,15 @@ export class AmostraEditarComponent implements OnInit {
       this.closeModal();
     }, () => this.loading = false);
   }
+
+  changeQuilometragem() {
+    this.amostra.qt_consumo_total = this.kmTotal / this.qtConsumo;
+  }
+
+  onBlur(event){
+    if(event.target.value !== ''){
+      event.target.value = parseFloat(event.target.value).toFixed(2);
+    }
+  }
+
 }

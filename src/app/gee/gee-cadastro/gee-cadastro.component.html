@@ -39,9 +39,6 @@
             </h4>
           </div>
           <div class="pane-right">
-            <button type="button" (click)="salvar()" class="btn-shadow btn btn-dark" *ngIf="monitoramentoGee?.id">
-              <fa name="star"></fa> Reprocessar
-            </button>
             <button type="button" (click)="add()" class="btn-shadow btn btn-success" *ngIf="monitoramentoGee?.id">
               <fa name="plus-circle"></fa> Inserir
             </button>
@@ -72,13 +69,13 @@
                   <div class="col-sm-3">
                     <label for="qt_quilometragem_total">Km total</label>
                     <input class="form-control" name="qt_quilometragem_total" placeholder="Km" type="text"
-                      [(ngModel)]="amostras.qt_quilometragem_total" (change)="changeQuilometragem()">
+                      [(ngModel)]="amostras.qt_quilometragem_total" (change)="changeQuilometragem()" mask="99999999999999.00">
                   </div>
 
                   <div class="col-sm-3">
                     <label for="qt_consumo_total">{{amostras.cd_unidade_padrao == "L" ?  "LITROS" : "M³"}}</label>
                     <input class="form-control" name="qt_consumo_total" placeholder="Consumo total" type="text"
-                      [(ngModel)]="amostras.qt_consumo_total">
+                      [(ngModel)]="amostras.qt_consumo_total" mask="99999999999999.00">
                   </div>
                   <div class="col-sm-3">
                     <label for="">Data</label>
@@ -89,43 +86,15 @@
                         type="button"></button>
                     </div>
                   </div>
-                  <div class="col-sm-1 py-4 px-sm-0 icon">
+                  <div class="col-sm-1 py-4 px-sm-0 icons">
                     <i class="pe-7s-check btn-icon-wrapper text-success" style="font-size: 33px; margin-right: 0px;"
                       (click)="addItem()"></i>
                   </div>
-                  <div class="col-sm-1 py-4 px-sm-0 icon">
+                  <div class="col-sm-1 py-4 px-sm-0 icons">
                     <i class="pe-7s-close-circle btn-icon-wrapper text-danger hover"
                       style="font-size: 33px; margin-right: 0px;" (click)="closeEdit()"></i>
                   </div>
                 </div>
-
-                <!-- <div class="row mx-md-n5" *ngIf="isAddEdit">
-                  <div class="col-sm-2 py-3 px-md-5">
-                    Km Total
-                    <input name="qt_quilometragem_total" placeholder="Km" type="text"
-                      [(ngModel)]="amostras.qt_quilometragem_total" (change)="changeQuilometragem()">
-                  </div>
-                  <div class="col-sm-2 py-3 px-md-5">
-                    {{amostras.cd_unidade_padrao == "L" ?  "LITROS" : "M³"}}
-                    <input name="qt_consumo_total" placeholder="Consumo total" type="text"
-                      [(ngModel)]="amostras.qt_consumo_total">
-                  </div>
-                  <div class="col-sm-2 py-3 px-md-5">
-                    Data Amostragem
-                    <input placeholder="DD/MM/AAAA" [(ngModel)]="amostras.dt_amostra" name="dt_amostra" ngbDatepicker
-                      #d="ngbDatepicker" readonly>
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-secondary fa fa-calendar" (click)="d.toggle()"
-                        type="button"></button>
-                    </div>
-                  </div>
-                  <div class="col-sm-2 py-4 px-md-5 icons">
-                    <i class="pe-7s-check btn-icon-wrapper text-success" style="font-size: 33px; margin-right: 0px;"
-                      (click)="addItem()"></i>
-                    <i class="pe-7s-close-circle btn-icon-wrapper text-danger hover"
-                      style="font-size: 33px; margin-right: 0px;" (click)="closeEdit()"></i>
-                  </div>
-                </div> -->
 
                 <div class="row">
                   <div class="col-md-12">
@@ -166,7 +135,7 @@
                               </div>
                             </td>
                             <td class="text-center">{{gee.cd_unidade_padrao}}</td>
-                            <td class="text-center">{{gee.qt_consumo_total}}</td>
+                            <td class="text-center">{{gee.qt_consumo_total | number}}</td>
                             <td class="text-center">{{gee.qt_total_co2_fossel | number}}</td>
                             <td class="text-center">{{gee.qt_total_co2_bio | number}}</td>
                             <td class="text-right icons">

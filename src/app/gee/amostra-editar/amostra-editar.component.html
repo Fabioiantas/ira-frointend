@@ -51,12 +51,12 @@
     <div class="col-md-8 mb-4 form-group">
       <label class="mt-2">Km total:</label>
       <input class="form-control" name="km_total" placeholder="Quilometragem total" type="number"
-        [(ngModel)]="kmTotal">
+        [(ngModel)]="kmTotal" (change)="changeQuilometragem()" mask="99999999999999.00" (blur)="onBlur($event)">
     </div>
     <div class="col-md-8 mb-4 form-group">
       <label class="mt-2">Consumo:</label>
       <input class="form-control" name="qt_consumo_total" placeholder="Consumo total" type="number"
-        [(ngModel)]="amostra.qt_consumo_total">
+        [(ngModel)]="amostra.qt_consumo_total" mask="99999999999999.00" (blur)="onBlur($event)">
     </div>
   </form>
 </div>
