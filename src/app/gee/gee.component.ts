@@ -64,7 +64,8 @@ export class GeeComponent implements OnInit {
 
   activate($event) {
     if ($event.type === 'dblclick') {
-      this.router.navigate(['/gee/adicionar/' + $event.row.id]);
+      this.fontes($event.row.id);
+      //this.router.navigate(['/gee/adicionar/' + $event.row.id]);
     }
   }
 

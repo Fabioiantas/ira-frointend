@@ -29,5 +29,8 @@ export class MonitoramentoGeeService {
     return this.http.get<MonitoramentoGee>(`${environment.baseUrl}/auth/gee/${id}`);
   }
 
+  deleteMonitoramentoGee(id: any): Observable<any> {
+    return this.http.delete<any>(`${environment.baseUrl}/auth/gee/${id}`);
+  }
 
 }

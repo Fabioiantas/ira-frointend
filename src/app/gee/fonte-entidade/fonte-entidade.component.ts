@@ -1,3 +1,4 @@
+import { MonitoramentoGeeService } from './../../services/monitoramento-gee.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { GeeService } from 'src/app/services/gee.service';
@@ -5,6 +6,7 @@ import { DialogBoxService } from 'src/app/_services/dialog-box.service';
 import { EntidadeService } from 'src/app/services/entidade.service';
 import { Entidade } from 'src/app/models/entidade';
 import { DataService } from 'src/app/services/data.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-fonte-entidade',
@@ -36,6 +38,8 @@ export class FonteEntidadeComponent implements OnInit {
               private geeService: GeeService,
               private data: DataService,
               private dialogBox: DialogBoxService,
+              private toastrService: ToastrService,
+              private monitoramentoGeeService: MonitoramentoGeeService,
               private entidadeService: EntidadeService) { }
 
 
@@ -86,8 +90,27 @@ export class FonteEntidadeComponent implements OnInit {
     this.router.navigate(['/gee/fontes-cadastro/' + monitoramento.monitoramento_gee_id]);
   }
 
+  removerFonte(monitoramento: any) {
+    console.log(JSON.stringify(monitoramento));
+
+    this.dialogBox.show('Confirme remoção da Fonte e todas suas Amostras?', 'CONFIRM').then(sim =>{
+      if (sim) {
+        this.monitoramentoGeeService.deleteMonitoramentoGee(monitoramento.monitoramento_gee_id).subscribe(data => {
+          this.showSuccess('Fonte Monitorada removida com Sucesso!', 'Mensagem');
+          this.populaTable(this.params.id);
+        });
+      }
+    });
+  }
+
   goEntidadesMonitoradas() {
     this.router.navigate(['/gee'])
+  }
+
+  showSuccess(message: string, title: string) {
+    this.toastrService.success(message, title, {
+      timeOut: 3000,
+    });
   }
 
 }

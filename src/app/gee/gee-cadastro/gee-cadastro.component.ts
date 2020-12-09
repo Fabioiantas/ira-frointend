@@ -193,6 +193,7 @@ export class GeeCadastroComponent implements OnInit {
   }
 
   changeQuilometragem() {
-     this.amostras.qt_consumo_total = Number((this.amostras.qt_quilometragem_total / this.filterForm.value.fonteEmissao.qt_consumo).toFixed(2));
+    console.log('res: ' + this.amostras.qt_quilometragem_total + '-' + this.filterForm.value.fonteEmissao.qt_consumo);
+    this.amostras.qt_consumo_total = Number((this.amostras.qt_quilometragem_total / this.filterForm.value.fonteEmissao.qt_consumo).toFixed(2));
   }
 }

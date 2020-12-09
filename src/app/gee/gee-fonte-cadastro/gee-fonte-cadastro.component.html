@@ -61,7 +61,10 @@
       </div>
     </div>
     <div class="form-row">
-      <button class="btn btn-success" type="button" (click)="addItem()">Salvar</button>
+      <div class="col-sm-8 text-right">
+        <button class="btn btn-success float-right" type="button" (click)="addItem()">Salvar</button>
+        <button class="btn btn-danger float-right" type="button" (click)="cancelar()">Cancelar</button>
+      </div>
     </div>
   </div>
 </section>

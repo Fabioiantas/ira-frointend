@@ -75,13 +75,25 @@ export class GeeFonteCadastroComponent implements OnInit {
     }
     this.loading = true;
     this.amostraGee.monitoramento_gee_id = this.monitoramentoGee.id;
-    this.amostraGeeService.salvar(this.amostraGee).subscribe(data => {
+    this.amostraGeeService[this.amostraGee.id ? 'editar' : 'salvar'](this.amostraGee).subscribe(data => {
       this.loading = false;
       this.isAddEdit = false;
       this.amostraGee = new AmostraGee();
       this.populaTable(this.params.id);
       this.showSuccess('Amostra Adicionada com Sucesso!', 'Mensagem');
     }, () => this.loading = false);
+  }
+
+  editarItem(amostra: AmostraGee) {
+    this.amostraGee.id = amostra.id;
+    this.amostraGee.dt_amostra = new Date(amostra.dt_amostra);
+    this.amostraGee.cd_unidade_padrao = amostra.cd_unidade_padrao;
+    this.amostraGee.qt_quilometragem_total = amostra.qt_quilometragem_total;
+    this.amostraGee.qt_consumo_total = amostra.qt_consumo_total;
+  }
+
+  cancelar() {
+    this.amostraGee = new AmostraGee();
   }
 
   removerAmostra(amostra: AmostraGee) {
