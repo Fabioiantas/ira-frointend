@@ -39,7 +39,7 @@
             </h4>
           </div>
           <div class="pane-right">
-            <button type="button" (click)="add()" class="btn-shadow btn btn-success" *ngIf="monitoramentoGee?.id">
+            <button type="button" (click)="add()" class="btn-shadow btn btn-success" *ngIf="monitoramentoGee?.id && !isAddEdit">
               <fa name="plus-circle"></fa> Inserir
             </button>
           </div>
