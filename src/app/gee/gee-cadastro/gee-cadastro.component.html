@@ -39,7 +39,7 @@
             </h4>
           </div>
           <div class="pane-right">
-            <button type="button" (click)="add()" class="btn-shadow btn btn-success" *ngIf="monitoramentoGee?.id && !isAddEdit">
+            <button type="button" (click)="add()" class="btn-shadow btn btn-success" *ngIf="monitoramentoGee?.length && !isAddEdit">
               <fa name="plus-circle"></fa> Inserir
             </button>
           </div>
@@ -56,14 +56,14 @@
                 </div>
               </div>
 
-              <div *ngIf="!loading && !monitoramentoGee?.id && filterForm.valid" class="text-center mt-3">
+              <div *ngIf="!monitoramentoGee?.length && filterForm.valid" class="text-center mt-3">
                 <h6>Não foram encontradas emissões cadastradas, para iniciar pressione o botão abaixo;</h6>
                 <button (click)="create()" class="mb-2 mr-2 mt-4 btn-icon btn-pill btn btn-outline-success"><i
                     class="pe-7s-plus btn-icon-wrapper"></i>Emissões</button>
               </div>
 
               <!--adicionar-->
-              <div *ngIf="!loading && monitoramentoGee?.id">
+              <div *ngIf="monitoramentoGee?.length">
 
                 <div class="form-row" *ngIf="isAddEdit">
                   <div class="col-sm-3">
@@ -73,7 +73,7 @@
                   </div>
 
                   <div class="col-sm-3">
-                    <label for="qt_consumo_total">{{amostras.cd_unidade_padrao == "L" ?  "LITROS" : "M³"}}</label>
+                    <label for="qt_consumo_total">Consumo em {{amostras.cd_unidade_padrao | uppercase}}</label>
                     <input class="form-control" name="qt_consumo_total" placeholder="Consumo total" type="text"
                       [(ngModel)]="amostras.qt_consumo_total" mask="99999999999999.00">
                   </div>
