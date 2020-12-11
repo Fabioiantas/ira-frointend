@@ -155,7 +155,8 @@ export class GeeCadastroComponent implements OnInit {
 
   add() {
     this.amostras = new AmostraGee();
-    this.amostras.cd_unidade_padrao = this.filterForm.value.fonteEmissao.cd_unidade_calculo ? this.filterForm.value.fonteEmissao.cd_unidade_calculo: this.filterForm.value.tipoCombustivel.cd_unidade_padrao;
+    // tslint:disable-next-line:max-line-length
+    this.amostras.cd_unidade_padrao = this.filterForm.value.fonteEmissao.cd_unidade_calculo ? this.filterForm.value.fonteEmissao.cd_unidade_calculo : this.filterForm.value.tipoCombustivel.cd_unidade_padrao;
     this.isAddEdit = true;
   }
 
@@ -194,6 +195,7 @@ export class GeeCadastroComponent implements OnInit {
   }
 
   changeQuilometragem() {
+    // tslint:disable-next-line:max-line-length
     this.amostras.qt_consumo_total = Number((this.amostras.qt_quilometragem_total / this.filterForm.value.fonteEmissao.qt_consumo).toFixed(2));
   }
 }

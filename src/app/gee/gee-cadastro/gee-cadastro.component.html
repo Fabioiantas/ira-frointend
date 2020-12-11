@@ -64,9 +64,8 @@
 
               <!--adicionar-->
               <div *ngIf="monitoramentoGee?.length">
-
                 <div class="form-row" *ngIf="isAddEdit">
-                  <div class="col-sm-3">
+                  <div *ngIf="!monitoramentoGee?.tipo_combustivel.id" class="col-sm-3">
                     <label for="qt_quilometragem_total">Km total</label>
                     <input class="form-control" name="qt_quilometragem_total" placeholder="Km" type="text"
                       [(ngModel)]="amostras.qt_quilometragem_total" (change)="changeQuilometragem()" mask="99999999999999.00">
@@ -112,13 +111,13 @@
                           </tr>
                         </thead>
                         <tbody>
-                          <tr *ngIf="!amostrasGee?.length">
+                          <tr *ngIf="!amostrasGee?.length && monitoramentoGee?.length">
                             <td colspan="6" class="text-center">
                               <h6 class="mt-3">Nenhuma amosrtra adicionada</h6>
                               <button *ngIf="!isAddEdit"
                                 class="mb-2 mr-2 mt-3 btn-icon btn-pill btn btn-outline-success"
                                 style="margin-right: 7px;" (click)="add()"><i
-                                  class="pe-7s-check btn-icon-wrapper"></i>Inserir</button>
+                                  class="pe-7s-check btn-icon-wrapper"></i>Inserir Amostra</button>
                             </td>
                           </tr>
 
