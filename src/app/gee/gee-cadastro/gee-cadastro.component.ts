@@ -100,8 +100,16 @@ export class GeeCadastroComponent implements OnInit {
   }
 
   editarItem(amostra: AmostraGee) {
+    this.isAddEdit = true;
+    this.amostras = new AmostraGee();
+    this.amostras.id = amostra.id;
+    this.amostras.dt_amostra = new Date(amostra.dt_amostra);
+    this.amostras.cd_unidade_padrao = amostra.cd_unidade_padrao;
+    this.amostras.qt_quilometragem_total = amostra.qt_quilometragem_total;
+    this.amostras.qt_consumo_total = amostra.qt_consumo_total;
+
     // amostra.dt_amostra = moment(amostra.dt_amostra).format('DD/MM/YYYY');
-    const initialState = {
+    /*const initialState = {
       amostraGee: amostra,
       filteGee: this.filterForm.value,
       MonitoramentoGee: this.monitoramentoGee,
@@ -111,7 +119,7 @@ export class GeeCadastroComponent implements OnInit {
     .content.onClose.subscribe((amostraReturn: AmostraGee) => {
       amostra = amostraReturn;
       this.findMonitoramento();
-    });
+    });*/
   }
 
   removerAmostra(amostra: AmostraGee) {
@@ -135,11 +143,17 @@ export class GeeCadastroComponent implements OnInit {
 
   changeFonteEmissao() {
     this.isAddEdit = false;
-    if (this.filterForm.value.fonteEmissao.nm_classificacao === 'M') {
+    if (!this.filterForm.value.fonteEmissao) {
+      this.filterForm.get('tipoCombustivel').clearValidators();
+      this.filterForm.get('tipoCombustivel').updateValueAndValidity();
+      this.filterForm.get('tipoCombustivel').setValue(null);
+      this.monitoramentoGee = null;
+      this.showCombustivel = false;
+      this.filterForm.get('tipoCombustivel').setValue(null);
+    } else if (this.filterForm.value.fonteEmissao.nm_classificacao === 'M') {
       this.filterForm.get('tipoCombustivel').clearValidators();
       this.filterForm.get('tipoCombustivel').updateValueAndValidity();
       this.showCombustivel = false;
-      this.filterForm.get('tipoCombustivel').setValue(null);
       this.findMonitoramento();
     } else {
       this.showCombustivel = true;
@@ -157,6 +171,7 @@ export class GeeCadastroComponent implements OnInit {
     this.amostras = new AmostraGee();
     // tslint:disable-next-line:max-line-length
     this.amostras.cd_unidade_padrao = this.filterForm.value.fonteEmissao.cd_unidade_calculo ? this.filterForm.value.fonteEmissao.cd_unidade_calculo : this.filterForm.value.tipoCombustivel.cd_unidade_padrao;
+    // this.amostras.monitoramento_gee_id = this.monitoramentoGee.id;
     this.isAddEdit = true;
   }
 
@@ -164,10 +179,10 @@ export class GeeCadastroComponent implements OnInit {
     if (!this.amostras.dt_amostra || !this.amostras.cd_unidade_padrao || !this.amostras.qt_consumo_total) {
       return this.dialogBox.show('É nescessário preencher todos os campos', 'Warning');
     }
+
     this.loading = true;
     this.amostras.monitoramento_gee_id = this.monitoramentoGee.id;
-
-    this.amostraGeeService.salvar(this.amostras).subscribe(data => {
+    this.amostraGeeService[this.amostras.id ? 'editar' : 'salvar'](this.amostras).subscribe(data => {
       this.loading = false;
       this.isAddEdit = false;
       this.amostras = new AmostraGee();
@@ -182,7 +197,6 @@ export class GeeCadastroComponent implements OnInit {
       this.monitoramentoGeeService.findMonitoramento(this.filterForm.value).subscribe(data => {
         this.loading = false;
         this.monitoramentoGee = data;
-        console.log(' this.monitoramentoGee ' + JSON.stringify(this.monitoramentoGee));
         this.findAmostras(this.monitoramentoGee.id);
       });
     }

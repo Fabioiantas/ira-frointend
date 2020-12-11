@@ -22,6 +22,7 @@ export class FonteEntidadeComponent implements OnInit {
   groups = [];
   params: any;
   nmReduzido: string;
+  nmPropriedade: string;
 
   columnsFonteEntidade = [
     {name : 'Classificação', prop : 'nm_classificacao', width : '35%', selecionado: true},
@@ -67,6 +68,7 @@ export class FonteEntidadeComponent implements OnInit {
       this.groups = [...response];
       if (this.rowsFonteEntidade.length) {
         this.nmReduzido = this.rowsFonteEntidade[0].nm_reduzido;
+        this.nmPropriedade = this.rowsFonteEntidade[0].nm_propriedade;
       } else {
         this.nmReduzido = null;
       }
@@ -75,7 +77,7 @@ export class FonteEntidadeComponent implements OnInit {
 
   activate($event) {
     if ($event.type === 'dblclick') {
-      this.router.navigate(['/gee/adicionar/' + $event.row.id]);
+      this.inserirEmissao($event.row);
     }
   }
 
@@ -86,6 +88,10 @@ export class FonteEntidadeComponent implements OnInit {
   }
 
   inserirEmissao(monitoramento: any) {
+    if (monitoramento == null) {
+      alert('Selecione uma Fonte de Emissao!');
+      return;
+    }
     this.data.changeFonteEmissao(monitoramento);
     this.router.navigate(['/gee/fontes-cadastro/' + monitoramento.monitoramento_gee_id]);
   }

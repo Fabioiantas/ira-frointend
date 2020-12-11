@@ -30,7 +30,8 @@
 <section class="content">
   <div class="card-header-tab card-header">
     <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
-      <i class="header-icon fa fa-industry mr-3 text-muted opacity-6"></i>{{nmReduzido}}
+      <i *ngIf="nmReduzido" class="header-icon fa fa-user-circle-o mr-2 text-muted opacity-6"></i>{{nmReduzido}}
+      <i *ngIf="nmPropriedade" class="header-icon fa fa-map-marker mr-2 ml-3 text-muted opacity-6"></i>{{nmPropriedade}}
     </div>
     <div class="btn-actions-pane-right">
       <div class="btn-group-sm btn-group" role="group">

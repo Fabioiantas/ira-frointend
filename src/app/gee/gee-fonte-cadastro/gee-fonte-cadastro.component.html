@@ -28,14 +28,36 @@
 <section class="content">
   <div class="card-header-tab card-header">
     <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
-      <i class="header-icon lnr-car mr-3 text-muted opacity-6" *ngIf="fontesEntidade?.monitoramento_gee_id">
-        {{fontesEntidade.nm_fonte_emissao}}
-      </i>
+      <div *ngIf="monitoramentoGee?.id && monitoramentoGee.fonte_emissao.nm_classificacao == 'M'">
+        <i class="fa fa-user-circle-o mr-3 text-muted opacity-6">
+          {{monitoramentoGee.entidade.nm_reduzido}}
+        </i>
+        <i class="fa fa-map-marker mr-3 text-muted opacity-6">
+          {{monitoramentoGee.propriedade.nm_propriedade}}
+        </i>
+        <i class="fa fa-car mr-3 text-muted opacity-6">
+          {{monitoramentoGee.fonte_emissao.nm_fonte_emissao}}
+        </i>
+      </div>
+      <div *ngIf="monitoramentoGee?.id && monitoramentoGee.fonte_emissao.nm_classificacao == 'E'">
+        <i class="fa fa-user-circle-o mr-3 text-muted opacity-6">
+          {{monitoramentoGee.entidade.nm_reduzido}}
+        </i>
+        <i class="fa fa-map-marker mr-3 text-muted opacity-6">
+          {{monitoramentoGee.propriedade.nm_propriedade}}
+        </i>
+        <i class="fa fa-gears mr-3 text-muted opacity-6">
+          {{monitoramentoGee.fonte_emissao.nm_fonte_emissao}}
+        </i>
+        <i class="fa fa-fire mr-3 text-muted opacity-6">
+          {{monitoramentoGee.tipo_combustivel.nm_combustivel}}
+        </i>
+      </div>
     </div>
   </div>
 
   <div class="p-3 bg-white">
-    <div class="form-row">
+    <div *ngIf="inseting" class="form-row">
       <div class="form-group col-lg-2">
         <label for="dt_amostra">Data Amostragem:</label>
         <input class="form-control"  (click)="dt_amostra.toggle()" placeholder="dia/mês/ano"
@@ -45,7 +67,7 @@
           <i class="fa fa-calendar"></i>
         </button> -->
       </div>
-      <div class="form-group col-sm-2">
+      <div *ngIf="monitoramentoGee?.fonte_emissao && monitoramentoGee.fonte_emissao.nm_classificacao == 'M'" class="form-group col-sm-2">
         <label for="qt_quilometragem_total">Kilometragem total: </label>
         <input class="form-control" name="qt_quilometragem_total" (change)="changeQuilometragem()" placeholder="Consumo total" type="number"
           [(ngModel)]="amostraGee.qt_quilometragem_total">
@@ -57,14 +79,17 @@
       </div>
       <div class="form-group col-sm-2">
         <label for="cd_unidade_padrao">Unidade Consumo: </label>
-        <input class="form-control" name="cd_unidade_padrao" placeholder="UN." type="text" [(ngModel)]="amostraGee.cd_unidade_padrao" onkeyup="this.value = this.value.toUpperCase();">
+        <input class="form-control" name="cd_unidade_padrao" placeholder="UN." type="text" [(ngModel)]="amostraGee.cd_unidade_padrao" onkeyup="this.value = this.value.toUpperCase();" readonly>
       </div>
     </div>
-    <div class="form-row">
-      <div class="col-sm-8 text-right">
+    <div *ngIf="inseting" class="form-row">
+      <!-- <div class="col-sm-8 text-right"> -->
         <button class="btn btn-success float-right" type="button" (click)="addItem()">Salvar</button>
         <button class="btn btn-danger float-right" type="button" (click)="cancelar()">Cancelar</button>
-      </div>
+      <!-- </div> -->
+    </div>
+    <div *ngIf="!inseting" class="form-row">
+      <button class="btn btn-primary float-right" type="button" (click)="add()">Inserir Amostragem</button>
     </div>
   </div>
 </section>

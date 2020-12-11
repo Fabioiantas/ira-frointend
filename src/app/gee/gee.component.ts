@@ -14,8 +14,10 @@ export class GeeComponent implements OnInit {
   selected: any = [];
   rowsGee: any[];
   groups = [];
+  isOpen = true;
   columnsGee = [
     {name : 'Entidade', prop : 'nm_reduzido', width : '35%', selecionado: true},
+    {name : 'Propriedade', prop : 'nm_propriedade', width : '35%', selecionado: true},
     {name : 'CNPJ', prop : 'nr_cnpj', width : '35%', selecionado: true},
     {name : 'CO2 Fóssel', prop : 'qt_co2_fossel', width : '35%', selecionado: true},
     {name : 'CO2 Bio', prop : 'qt_co2_bio', width : '35%', selecionado: true}
@@ -64,7 +66,7 @@ export class GeeComponent implements OnInit {
 
   activate($event) {
     if ($event.type === 'dblclick') {
-      this.fontes($event.row.id);
+      this.fontes($event.row);
       //this.router.navigate(['/gee/adicionar/' + $event.row.id]);
     }
   }
@@ -73,8 +75,9 @@ export class GeeComponent implements OnInit {
     alert('teste');
   }
 
-  fontes(id: string) {
-    this.router.navigate(['/gee/fontes/' + id]);
+  fontes(fonte: any) {
+    if (fonte == null) { alert('Selecione uma Entidade'); return; }
+    this.router.navigate(['/gee/fontes/' + fonte.id]);
   }
 
 }

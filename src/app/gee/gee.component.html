@@ -28,10 +28,10 @@
 <section class="content">
   <div class="card-header-tab card-header">
     <div class="card-header-title font-size-lg text-capitalize font-weight-normal"><i
-        class="header-icon fa fa-industry mr-3 text-muted opacity-6"></i>Entidades Monitoradas</div>
+        class="header-icon fa fa-users mr-3 text-muted opacity-6"></i>Entidades Monitoradas</div>
     <div class="btn-actions-pane-right">
       <div class="btn-group-sm btn-group" role="group">
-        <a class="btn btn-warning  fa fa-eye" (click)="fontes(selected[0].id)"
+        <a class="btn btn-warning  fa fa-free-code-camp" (click)="fontes(selected[0])"
           data-toggle="tooltip" data-placement="top"  title="Ver Fontes Monitradas da Entidade Selecionada">
            Ver Fontes
         </a>
@@ -66,6 +66,7 @@
     [messages]="{'emptyMessage': 'Nenhum resultado encontrado...', 'totalMessage': 'total'}"
     [limit]="10">
     <ngx-datatable-column name="Entidade" prop="nm_reduzido" [width]="175" [flexGrow]="1"></ngx-datatable-column>
+    <ngx-datatable-column name="Propriedade" prop="nm_propriedade" [flexGrow]="1"></ngx-datatable-column>
     <ngx-datatable-column name="CNPJ" prop="nr_cnpj" [flexGrow]="1"></ngx-datatable-column>
     <ngx-datatable-column name="Total CO2 Fóssel (TON)" prop="qt_total_fossel" [flexGrow]="1">
       <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">

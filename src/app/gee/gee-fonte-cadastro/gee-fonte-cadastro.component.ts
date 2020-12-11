@@ -2,7 +2,6 @@ import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import { AmostraGee } from 'src/app/models/amostraGee';
 import { ActivatedRoute, Router } from '@angular/router';
-import * as moment from 'moment';
 import { MonitoramentoGeeService } from 'src/app/services/monitoramento-gee.service';
 import { DialogBoxService } from 'src/app/_services/dialog-box.service';
 import { MonitoramentoGee } from 'src/app/models/monitoramentoGee';
@@ -25,6 +24,7 @@ export class GeeFonteCadastroComponent implements OnInit {
   params: any;
   isAddEdit: boolean;
   loading: boolean;
+  inseting = false;
 
   constructor(private amostraGeeService: AmostraService,
               private monitoramentoGeeService: MonitoramentoGeeService,
@@ -42,9 +42,10 @@ export class GeeFonteCadastroComponent implements OnInit {
     if (this.params.id) {
       this.monitoramentoGeeService.findById(this.params.id).subscribe(monitoramento => {
         this.monitoramentoGee = monitoramento;
+        console.log('monitoramento ' + JSON.stringify(this.monitoramentoGee));
       });
       this.populaTable(this.params.id);
-      this.findFonte(this.params.id);
+      this.findFonte();
       if (!this.fontesEntidade) {
         this.router.navigate(['/gee']);
       }
@@ -57,16 +58,19 @@ export class GeeFonteCadastroComponent implements OnInit {
     });
   }
 
-  findFonte(id: any) {
+  findFonte() {
     this.data.curFonteEmissao.subscribe(fonte => {
       this.fontesEntidade = fonte;
     });
-
   }
 
   add() {
     this.amostraGee = new AmostraGee();
     this.isAddEdit = true;
+    this.inseting = true;
+    if (this.fontesEntidade) {
+      this.amostraGee.cd_unidade_padrao = this.fontesEntidade.cd_unidade_calculo ? this.fontesEntidade.cd_unidade_calculo : this.fontesEntidade.cd_unidade_combustivel;
+    }
   }
 
   addItem() {
@@ -75,8 +79,9 @@ export class GeeFonteCadastroComponent implements OnInit {
     }
     this.loading = true;
     this.amostraGee.monitoramento_gee_id = this.monitoramentoGee.id;
-    this.amostraGeeService[this.amostraGee.id ? 'editar' : 'salvar'](this.amostraGee).subscribe(data => {
+    this.amostraGeeService[this.amostraGee.id ? 'editar' : 'salvar'](this.amostraGee).subscribe(() => {
       this.loading = false;
+      this.inseting = false;
       this.isAddEdit = false;
       this.amostraGee = new AmostraGee();
       this.populaTable(this.params.id);
@@ -94,13 +99,14 @@ export class GeeFonteCadastroComponent implements OnInit {
 
   cancelar() {
     this.amostraGee = new AmostraGee();
+    this.inseting = false;
   }
 
   removerAmostra(amostra: AmostraGee) {
     this.dialogBox.show('Tem certeza que deseja remover a amostra?', 'Confirm').then((sim) => {
       if (sim) {
         this.loading = true;
-        this.amostraGeeService.remover(amostra.id).subscribe(data => {
+        this.amostraGeeService.remover(amostra.id).subscribe(() => {
           this.loading = false;
           this.showSuccess('Amostra Removida com Sucesso!', 'Mensagem');
           this.populaTable(this.params.id);

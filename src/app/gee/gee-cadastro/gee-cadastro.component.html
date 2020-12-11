@@ -39,7 +39,8 @@
             </h4>
           </div>
           <div class="pane-right">
-            <button type="button" (click)="add()" class="btn-shadow btn btn-success" *ngIf="monitoramentoGee?.length && !isAddEdit">
+            <button type="button" (click)="add()" class="btn-shadow btn btn-success"
+              *ngIf="monitoramentoGee?.id && !isAddEdit">
               <fa name="plus-circle"></fa> Inserir
             </button>
           </div>
@@ -48,7 +49,7 @@
           <div class="mb-0 form-group" style="width: 100%;">
             <div class="col-sm-12">
 
-              <div class="loader-wrapper d-flex justify-content-center align-items-center" *ngIf="loading">
+              <div *ngIf="loading" class="loader-wrapper d-flex justify-content-center align-items-center">
                 <div class="loader">
                   <div class="ball-scale-ripple">
                     <div></div>
@@ -56,19 +57,20 @@
                 </div>
               </div>
 
-              <div *ngIf="!monitoramentoGee?.length && filterForm.valid" class="text-center mt-3">
+              <div *ngIf="!loading && filterForm.valid && !monitoramentoGee?.id" class="text-center mt-3">
                 <h6>Não foram encontradas emissões cadastradas, para iniciar pressione o botão abaixo;</h6>
-                <button (click)="create()" class="mb-2 mr-2 mt-4 btn-icon btn-pill btn btn-outline-success"><i
-                    class="pe-7s-plus btn-icon-wrapper"></i>Emissões</button>
+                <button (click)="create()" class="mb-2 mr-2 mt-4 btn-icon btn-pill btn btn-outline-success">
+                  <i class="pe-7s-plus btn-icon-wrapper"></i>Emissões</button>
               </div>
 
               <!--adicionar-->
-              <div *ngIf="monitoramentoGee?.length">
+              <div *ngIf="monitoramentoGee?.id">
                 <div class="form-row" *ngIf="isAddEdit">
-                  <div *ngIf="!monitoramentoGee?.tipo_combustivel.id" class="col-sm-3">
+                  <div *ngIf="!monitoramentoGee?.tipo_combustivel" class="col-sm-3">
                     <label for="qt_quilometragem_total">Km total</label>
                     <input class="form-control" name="qt_quilometragem_total" placeholder="Km" type="text"
-                      [(ngModel)]="amostras.qt_quilometragem_total" (change)="changeQuilometragem()" mask="99999999999999.00">
+                      [(ngModel)]="amostras.qt_quilometragem_total" (change)="changeQuilometragem()"
+                      mask="99999999999999.00">
                   </div>
 
                   <div class="col-sm-3">
@@ -78,27 +80,31 @@
                   </div>
                   <div class="col-sm-3">
                     <label for="">Data</label>
-                    <input class="form-control" placeholder="DD/MM/AAAA" [(ngModel)]="amostras.dt_amostra" name="dt_amostra" ngbDatepicker
-                      #d="ngbDatepicker" readonly>
+                    <input class="form-control" placeholder="DD/MM/AAAA" [(ngModel)]="amostras.dt_amostra"
+                      name="dt_amostra" ngbDatepicker #d="ngbDatepicker" readonly>
                     <div class="input-group-append">
                       <button class="btn btn-outline-secondary fa fa-calendar" (click)="d.toggle()"
                         type="button"></button>
                     </div>
                   </div>
-                  <div class="col-sm-1 py-4 px-sm-0 icons">
-                    <i class="pe-7s-check btn-icon-wrapper text-success" style="font-size: 33px; margin-right: 0px;"
-                      (click)="addItem()"></i>
-                  </div>
-                  <div class="col-sm-1 py-4 px-sm-0 icons">
-                    <i class="pe-7s-close-circle btn-icon-wrapper text-danger hover"
-                      style="font-size: 33px; margin-right: 0px;" (click)="closeEdit()"></i>
+                  <div class="col-sm-2 py-4 px-sm-0 icons">
+                    <button class="mr-3 btn-icon btn-pill btn btn-success" (click)="addItem()" data-toggle="tooltip"
+                      data-placement="top" title="Salvar Amostra">
+                      <i class="fa fa-save"></i>
+                    </button>
+                    <button class="btn-icon btn-pill btn btn-danger" (click)="closeEdit()" data-toggle="tooltip"
+                      data-placement="top" title="Cancelar">
+                      <i class="fa fa-close"></i>
+                    </button>
                   </div>
                 </div>
-
                 <div class="row">
                   <div class="col-md-12">
                     <div class="table-responsive" style="min-height: 500px;">
-                      <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+
+                      <table *ngIf="!loading"
+                        class="align-middle mb-0 table table-borderless table-striped table-hover">
+
                         <thead>
                           <tr [ngClass]="{'table-active': !isAddEdit}">
                             <th class="text-center"></th>
@@ -107,11 +113,13 @@
                             <th class="text-center qtd-input">Consumo</th>
                             <th class="text-center qtd-input">CO2 Fóssel</th>
                             <th class="text-center qtd-input">CO2 Bio</th>
-                            <th class="text-right"></th>
+                            <th class="text-right">Editar/Remover</th>
                           </tr>
                         </thead>
+
                         <tbody>
-                          <tr *ngIf="!amostrasGee?.length && monitoramentoGee?.length">
+
+                          <tr *ngIf="!loading && filterForm.valid && !amostrasGee?.length">
                             <td colspan="6" class="text-center">
                               <h6 class="mt-3">Nenhuma amosrtra adicionada</h6>
                               <button *ngIf="!isAddEdit"
