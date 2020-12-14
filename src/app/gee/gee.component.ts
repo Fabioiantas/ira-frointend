@@ -57,7 +57,7 @@ export class GeeComponent implements OnInit {
   }
 
   editar(id: string) {
-    this.router.navigate(['/gee/adicionar/' + id]);
+    this.router.navigate(['/gee/editar/' + id]);
   }
 
   editarForm() {
@@ -67,7 +67,7 @@ export class GeeComponent implements OnInit {
   activate($event) {
     if ($event.type === 'dblclick') {
       this.fontes($event.row);
-      //this.router.navigate(['/gee/adicionar/' + $event.row.id]);
+      // this.router.navigate(['/gee/adicionar/' + $event.row.id]);
     }
   }
 
@@ -76,8 +76,9 @@ export class GeeComponent implements OnInit {
   }
 
   fontes(fonte: any) {
+    console.log(JSON.stringify(fonte));
     if (fonte == null) { alert('Selecione uma Entidade'); return; }
-    this.router.navigate(['/gee/fontes/' + fonte.id]);
+    this.router.navigate(['/gee/fontes/' + fonte.entidade_id]);
   }
 
 }

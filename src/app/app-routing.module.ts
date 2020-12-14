@@ -77,6 +77,7 @@ import { AuditoriaNivelItRequisitoComponent } from './auditoria/auditoria-nivel-
 import { AuditoriaEntidadeComponent } from './auditoria/auditoria-entidade/auditoria-entidade.component';
 import { AuditoriaEntidadeCadastroComponent } from './auditoria/auditoria-entidade-cadastro/auditoria-entidade-cadastro.component';
 import { AuditarComponent } from './auditoria/auditar/auditar.component';
+import { GeeEditarComponent } from './gee/gee-editar/gee-editar.component';
 
 const routes: Routes = [
   {
@@ -319,6 +320,12 @@ const routes: Routes = [
       {
         path: 'adicionar',
         component: GeeCadastroComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'geeMenu' }
+      },
+      {
+        path: 'editar/:id',
+        component: GeeEditarComponent,
         canActivate: [AuthGuard],
         data: { roles: [Role.Admin], extraParameter: 'geeMenu' }
       },

@@ -107,19 +107,6 @@ export class GeeCadastroComponent implements OnInit {
     this.amostras.cd_unidade_padrao = amostra.cd_unidade_padrao;
     this.amostras.qt_quilometragem_total = amostra.qt_quilometragem_total;
     this.amostras.qt_consumo_total = amostra.qt_consumo_total;
-
-    // amostra.dt_amostra = moment(amostra.dt_amostra).format('DD/MM/YYYY');
-    /*const initialState = {
-      amostraGee: amostra,
-      filteGee: this.filterForm.value,
-      MonitoramentoGee: this.monitoramentoGee,
-      qtConsumo: this.filterForm.value.fonteEmissao.qt_consumo
-    };
-    this.modalService.show(AmostraEditarComponent, { initialState, backdrop: 'static', class: 'modal-md'})
-    .content.onClose.subscribe((amostraReturn: AmostraGee) => {
-      amostra = amostraReturn;
-      this.findMonitoramento();
-    });*/
   }
 
   removerAmostra(amostra: AmostraGee) {
@@ -136,9 +123,27 @@ export class GeeCadastroComponent implements OnInit {
 
   changeEntidade() {
     this.isAddEdit = false;
+    this.filterForm.get('propriedade').setValue(null);
+    this.filterForm.get('fonteEmissao').setValue(null);
+    this.filterForm.get('tipoCombustivel').setValue(null);
+    this.filterForm.get('tipoCombustivel').clearValidators();
+    this.filterForm.get('tipoCombustivel').updateValueAndValidity();
+    this.showCombustivel = false;
+    this.monitoramentoGee = null;
+    this.amostrasGee = null;
     this.propriedadeService.byEntidade(this.filterForm.value.entidade.entidade_id).subscribe((propriedades: Propriedade) => {
       this.propriedades = propriedades;
     });
+  }
+
+  changePropriedade() {
+    this.filterForm.get('fonteEmissao').setValue(null);
+    this.filterForm.get('tipoCombustivel').setValue(null);
+    this.filterForm.get('tipoCombustivel').clearValidators();
+    this.filterForm.get('tipoCombustivel').updateValueAndValidity();
+    this.showCombustivel = false;
+    this.monitoramentoGee = null;
+    this.amostrasGee = null;
   }
 
   changeFonteEmissao() {
@@ -197,6 +202,7 @@ export class GeeCadastroComponent implements OnInit {
       this.monitoramentoGeeService.findMonitoramento(this.filterForm.value).subscribe(data => {
         this.loading = false;
         this.monitoramentoGee = data;
+        console.log('this.monitoramentoGee ' + JSON.stringify(this.monitoramentoGee));
         this.findAmostras(this.monitoramentoGee.id);
       });
     }

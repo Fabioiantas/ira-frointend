@@ -35,8 +35,12 @@
     </div>
     <div class="btn-actions-pane-right">
       <div class="btn-group-sm btn-group" role="group">
-        <a class="btn btn-success" (click)="inserirEmissao(selected[0])">Inserir Emissão</a>
+        <a class="btn btn-primary" (click)="inserirEmissao(selected[0])">Inserir Emissão</a>
         <a class="btn btn-danger" (click)="removerFonte(selected[0])">Remover Fonte</a>
+        <a class="btn btn-secondary fa fa-edit" (click)="editar(selected[0].monitoramento_gee_id)"
+          data-toggle="tooltip" data-placement="top"  title="Edita um Monitoramento">
+          Editar
+        </a>
       </div>
     </div>
   </div>

@@ -165,6 +165,7 @@ import { AuditarComponent } from './auditoria/auditar/auditar.component';
 import { AuditarRequisitoComponent } from './auditoria/auditar-requisito/auditar-requisito.component';
 import { PainelComponent } from './painel/painel.component';
 import { QuantidadePipePipe } from './pipes/quantidade-pipe.pipe';
+import { GeeEditarComponent } from './gee/gee-editar/gee-editar.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -285,6 +286,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     AuditarRequisitoComponent,
     PainelComponent,
     QuantidadePipePipe,
+    GeeEditarComponent,
 
   ],
   imports: [

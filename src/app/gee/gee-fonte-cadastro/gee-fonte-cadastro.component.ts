@@ -69,6 +69,7 @@ export class GeeFonteCadastroComponent implements OnInit {
     this.isAddEdit = true;
     this.inseting = true;
     if (this.fontesEntidade) {
+      // tslint:disable-next-line:max-line-length
       this.amostraGee.cd_unidade_padrao = this.fontesEntidade.cd_unidade_calculo ? this.fontesEntidade.cd_unidade_calculo : this.fontesEntidade.cd_unidade_combustivel;
     }
   }

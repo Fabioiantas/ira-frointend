@@ -65,7 +65,7 @@
 
               <!--adicionar-->
               <div *ngIf="monitoramentoGee?.id">
-                <div class="form-row" *ngIf="isAddEdit">
+                <div class="form-row" *ngIf="isAddEdit && !loading">
                   <div *ngIf="!monitoramentoGee?.tipo_combustivel" class="col-sm-3">
                     <label for="qt_quilometragem_total">Km total</label>
                     <input class="form-control" name="qt_quilometragem_total" placeholder="Km" type="text"
@@ -87,12 +87,12 @@
                         type="button"></button>
                     </div>
                   </div>
-                  <div class="col-sm-2 py-4 px-sm-0 icons">
-                    <button class="mr-3 btn-icon btn-pill btn btn-success" (click)="addItem()" data-toggle="tooltip"
+                  <div class="col-sm-3 icons">
+                    <button class="mr-3 mt-4 btn-icon btn-pill btn btn-success" (click)="addItem()" data-toggle="tooltip"
                       data-placement="top" title="Salvar Amostra">
                       <i class="fa fa-save"></i>
                     </button>
-                    <button class="btn-icon btn-pill btn btn-danger" (click)="closeEdit()" data-toggle="tooltip"
+                    <button class="btn-icon btn-pill btn btn-danger mt-4" (click)="closeEdit()" data-toggle="tooltip"
                       data-placement="top" title="Cancelar">
                       <i class="fa fa-close"></i>
                     </button>
@@ -118,8 +118,8 @@
                         </thead>
 
                         <tbody>
-
-                          <tr *ngIf="!loading && filterForm.valid && !amostrasGee?.length">
+                          <!-- && !loading && filterForm.valid -->
+                          <tr *ngIf="!loading && !amostrasGee?.length">
                             <td colspan="6" class="text-center">
                               <h6 class="mt-3">Nenhuma amosrtra adicionada</h6>
                               <button *ngIf="!isAddEdit"
@@ -189,7 +189,7 @@
 
             <li class="pt-1 pb-1 pl-3 pr-3 nav-item">
               <label class="mb-0 pl-1">Propriedade:</label>
-              <ng-select [items]="propriedades" bindLabel="nm_propriedade" formControlName="propriedade"
+              <ng-select [items]="propriedades" (change)="changePropriedade()" bindLabel="nm_propriedade" formControlName="propriedade"
                 name="propriedade" placeholder="Buscar Propriedade...">
               </ng-select>
             </li>

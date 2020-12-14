@@ -96,10 +96,12 @@ export class FonteEntidadeComponent implements OnInit {
     this.router.navigate(['/gee/fontes-cadastro/' + monitoramento.monitoramento_gee_id]);
   }
 
-  removerFonte(monitoramento: any) {
-    console.log(JSON.stringify(monitoramento));
+  editar(id: string) {
+    this.router.navigate(['/gee/editar/' + id]);
+  }
 
-    this.dialogBox.show('Confirme remoção da Fonte e todas suas Amostras?', 'CONFIRM').then(sim =>{
+  removerFonte(monitoramento: any) {
+    this.dialogBox.show('Confirme remoção da Fonte e todas suas Amostras?', 'CONFIRM').then(sim => {
       if (sim) {
         this.monitoramentoGeeService.deleteMonitoramentoGee(monitoramento.monitoramento_gee_id).subscribe(data => {
           this.showSuccess('Fonte Monitorada removida com Sucesso!', 'Mensagem');
@@ -110,7 +112,7 @@ export class FonteEntidadeComponent implements OnInit {
   }
 
   goEntidadesMonitoradas() {
-    this.router.navigate(['/gee'])
+    this.router.navigate(['/gee']);
   }
 
   showSuccess(message: string, title: string) {

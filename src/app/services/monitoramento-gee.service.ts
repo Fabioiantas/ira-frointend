@@ -17,6 +17,10 @@ export class MonitoramentoGeeService {
     return this.http.post<MonitoramentoGee>(`${environment.baseUrl}/auth/gee`, filter);
   }
 
+  edit(monitoramento: MonitoramentoGee) {
+    return this.http.put(environment.baseUrl + '/auth/gee', monitoramento);
+  }
+
   findMonitoramento(filter: FilterGee): Observable<MonitoramentoGee> {
     return this.http.post<MonitoramentoGee>(`${environment.baseUrl}/auth/findgee`, filter);
   }
