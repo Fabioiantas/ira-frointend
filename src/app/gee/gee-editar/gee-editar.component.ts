@@ -74,7 +74,7 @@ export class GeeEditarComponent implements OnInit {
         });
         console.log(JSON.stringify(this.formGroup.value));
         this.changeEntidade();
-        this.formGroup.get('propriedade_id').setValue(this.formGroup.value.entidade_id);
+        this.formGroup.get('propriedade_id').setValue(monitoramento.propriedade_id);
         this.isLoading = false;
       });
     }

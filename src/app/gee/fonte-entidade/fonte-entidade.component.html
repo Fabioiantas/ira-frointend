@@ -35,11 +35,15 @@
     </div>
     <div class="btn-actions-pane-right">
       <div class="btn-group-sm btn-group" role="group">
-        <a class="btn btn-primary" (click)="inserirEmissao(selected[0])">Inserir Emissão</a>
-        <a class="btn btn-danger" (click)="removerFonte(selected[0])">Remover Fonte</a>
-        <a class="btn btn-secondary fa fa-edit" (click)="editar(selected[0].monitoramento_gee_id)"
-          data-toggle="tooltip" data-placement="top"  title="Edita um Monitoramento">
-          Editar
+        <a class="btn btn-primary" (click)="inserirEmissao(selected[0])">
+          <fa class="mr-1" name="plus-circle"></fa>Inserir Emissão
+        </a>
+        <a class="btn btn-info" (click)="editar(selected[0].monitoramento_gee_id)" data-toggle="tooltip"
+          data-placement="top" title="Edita um Monitoramento">
+          <fa class="mr-1" name="edit"></fa>Editar
+        </a>
+        <a class="btn btn-danger" (click)="removerFonte(selected[0])">
+          <fa class="mr-1" name="trash"></fa>Remover Fonte
         </a>
       </div>
     </div>
@@ -58,7 +62,7 @@
 
     <ngx-datatable-column name="Classificação" prop="nm_classificacao" [width]="175" [flexGrow]="1">
       <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
-        {{value  == "M" ? "Móvel" : "Estacionária"}}
+        {{value == "M" ? "Móvel" : "Estacionária"}}
       </ng-template>
     </ngx-datatable-column>
 

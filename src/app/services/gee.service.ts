@@ -1,3 +1,4 @@
+import { MonitoramentoGee } from 'src/app/models/monitoramentoGee';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -19,8 +20,8 @@ export class GeeService {
     return this.http.get(`${environment.baseUrl}/auth/geeslist`);
   }
 
-  listaFonteEntidade(id: any): any {
-    return this.http.get(`${environment.baseUrl}/auth/geeslistfe/` + id);
+  listaFonteEntidade(gee: MonitoramentoGee): any {
+    return this.http.post(`${environment.baseUrl}/auth/geeslistfe`, gee);
   }
 
   add(gee: Gee) {

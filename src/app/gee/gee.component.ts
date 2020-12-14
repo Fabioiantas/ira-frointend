@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DialogBoxService } from 'src/app/_services/dialog-box.service';
 import { GeeService } from 'src/app/services/gee.service';
+import { GeeDataServiceService } from '../services/auditoria/gee/gee-data-service.service';
 
 @Component({
   selector: 'app-gee',
@@ -23,13 +24,10 @@ export class GeeComponent implements OnInit {
     {name : 'CO2 Bio', prop : 'qt_co2_bio', width : '35%', selecionado: true}
   ];
 
-
   constructor(private router: Router,
               private geeService: GeeService,
-              private dialogBox: DialogBoxService) { }
-
-
-
+              private dialogBox: DialogBoxService,
+              private geeDataServiceService: GeeDataServiceService) { }
 
   ngOnInit() {
     this.populaTable();
@@ -76,9 +74,9 @@ export class GeeComponent implements OnInit {
   }
 
   fontes(fonte: any) {
-    console.log(JSON.stringify(fonte));
     if (fonte == null) { alert('Selecione uma Entidade'); return; }
-    this.router.navigate(['/gee/fontes/' + fonte.entidade_id]);
+    this.geeDataServiceService.changeMonitoramentoGee(fonte);
+    this.router.navigate(['/gee/fontes']);
   }
 
 }

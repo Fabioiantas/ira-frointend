@@ -7,6 +7,8 @@ import { EntidadeService } from 'src/app/services/entidade.service';
 import { Entidade } from 'src/app/models/entidade';
 import { DataService } from 'src/app/services/data.service';
 import { ToastrService } from 'ngx-toastr';
+import { GeeDataServiceService } from 'src/app/services/auditoria/gee/gee-data-service.service';
+import { MonitoramentoGee } from 'src/app/models/monitoramentoGee';
 
 @Component({
   selector: 'app-fonte-entidade',
@@ -23,6 +25,7 @@ export class FonteEntidadeComponent implements OnInit {
   params: any;
   nmReduzido: string;
   nmPropriedade: string;
+  currentMonitoramentoGee: MonitoramentoGee;
 
   columnsFonteEntidade = [
     {name : 'Classificação', prop : 'nm_classificacao', width : '35%', selecionado: true},
@@ -41,18 +44,21 @@ export class FonteEntidadeComponent implements OnInit {
               private dialogBox: DialogBoxService,
               private toastrService: ToastrService,
               private monitoramentoGeeService: MonitoramentoGeeService,
-              private entidadeService: EntidadeService) { }
+              private entidadeService: EntidadeService,
+              private geeDataServiceService: GeeDataServiceService) { }
 
 
 
   ngOnInit() {
-    this.populaEntidades();
-    this.route.params.subscribe(data => {
-      this.params = data;
-      if (this.params.id) {
-        this.populaTable(this.params.id);
-      }
+    // this.populaEntidades();
+    this.geeDataServiceService.currentMonitoramentoGee.subscribe(data => {
+      this.currentMonitoramentoGee = data;
     });
+    if (!this.currentMonitoramentoGee) {
+      this.router.navigate(['/gee']);
+    } else {
+      this.populaTable(this.currentMonitoramentoGee);
+    }
   }
 
   populaEntidades() {
@@ -61,8 +67,8 @@ export class FonteEntidadeComponent implements OnInit {
     });
   }
 
-  populaTable(id: any) {
-    this.geeService.listaFonteEntidade(id).subscribe((response) => {
+  populaTable(gee: MonitoramentoGee) {
+    this.geeService.listaFonteEntidade(gee).subscribe((response) => {
       this.fonteEntidade = [...response];
       this.rowsFonteEntidade = [...response];
       this.groups = [...response];

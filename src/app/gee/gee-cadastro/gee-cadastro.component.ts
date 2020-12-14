@@ -38,6 +38,7 @@ export class GeeCadastroComponent implements OnInit {
   filter: FilterGee = new FilterGee();
   produtoSelecionado = null;
   loading = false;
+  loadAmostrasGee = false;
 
   escopos: EscopoGee;
   entidades: Entidade;
@@ -148,6 +149,7 @@ export class GeeCadastroComponent implements OnInit {
 
   changeFonteEmissao() {
     this.isAddEdit = false;
+    this.amostrasGee = null;
     if (!this.filterForm.value.fonteEmissao) {
       this.filterForm.get('tipoCombustivel').clearValidators();
       this.filterForm.get('tipoCombustivel').updateValueAndValidity();
@@ -158,12 +160,14 @@ export class GeeCadastroComponent implements OnInit {
     } else if (this.filterForm.value.fonteEmissao.nm_classificacao === 'M') {
       this.filterForm.get('tipoCombustivel').clearValidators();
       this.filterForm.get('tipoCombustivel').updateValueAndValidity();
+      this.filterForm.get('tipoCombustivel').setValue(null);
       this.showCombustivel = false;
       this.findMonitoramento();
     } else {
       this.showCombustivel = true;
       this.filterForm.get('tipoCombustivel').setValidators([Validators.required]);
       this.filterForm.get('tipoCombustivel').updateValueAndValidity();
+      this.filterForm.get('tipoCombustivel').setValue(null);
     }
   }
 
@@ -174,7 +178,6 @@ export class GeeCadastroComponent implements OnInit {
 
   add() {
     this.amostras = new AmostraGee();
-    // tslint:disable-next-line:max-line-length
     this.amostras.cd_unidade_padrao = this.filterForm.value.fonteEmissao.cd_unidade_calculo ? this.filterForm.value.fonteEmissao.cd_unidade_calculo : this.filterForm.value.tipoCombustivel.cd_unidade_padrao;
     // this.amostras.monitoramento_gee_id = this.monitoramentoGee.id;
     this.isAddEdit = true;
@@ -183,6 +186,10 @@ export class GeeCadastroComponent implements OnInit {
   addItem() {
     if (!this.amostras.dt_amostra || !this.amostras.cd_unidade_padrao || !this.amostras.qt_consumo_total) {
       return this.dialogBox.show('É nescessário preencher todos os campos', 'Warning');
+    }
+
+    if (this.amostras.qt_consumo_total <= 0) {
+      return this.dialogBox.show('Consumo total deve ser maior que Zero!', 'Warning');
     }
 
     this.loading = true;
@@ -202,7 +209,6 @@ export class GeeCadastroComponent implements OnInit {
       this.monitoramentoGeeService.findMonitoramento(this.filterForm.value).subscribe(data => {
         this.loading = false;
         this.monitoramentoGee = data;
-        console.log('this.monitoramentoGee ' + JSON.stringify(this.monitoramentoGee));
         this.findAmostras(this.monitoramentoGee.id);
       });
     }
