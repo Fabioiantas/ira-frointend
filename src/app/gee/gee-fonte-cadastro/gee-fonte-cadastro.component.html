@@ -93,7 +93,8 @@
         <button class="btn btn-primary text-right" type="button" (click)="add()">Inserir Amostragem</button>
       </div>
       <div class="col-sm-6 text-right">
-        Total:
+        <fa name="industry" class="mr-1"> </fa><b> CO2 Fóssel:</b> {{totalCo2Fossel  | quantidadePipe}} /
+        <fa name="leaf" class="mr-1"></fa><b>CO2 Bio:</b> {{totalCo2Bio  | quantidadePipe}}
       </div>
     </div>
   </div>
@@ -138,8 +139,8 @@
               </td>
               <td class="text-center">{{gee.qt_consumo_total}}</td>
               <td class="text-center">{{gee.cd_unidade_padrao}}</td>
-              <td class="text-center">{{gee.qt_total_co2_fossel | number}}</td>
-              <td class="text-center">{{gee.qt_total_co2_bio | number}}</td>
+              <td class="text-center">{{gee.qt_total_co2_fossel | quantidadePipe}}</td>
+              <td class="text-center">{{gee.qt_total_co2_bio | quantidadePipe}}</td>
               <td class="text-right icons">
                 <!-- <i (click)="add()" *ngIf="!isAddEdit && i==0" class="pe-7s-plus text-success touch"></i> -->
                 <i class="pe-7s-tools text-primary" (click)="editarItem(gee)"></i>

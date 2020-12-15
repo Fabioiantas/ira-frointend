@@ -8,6 +8,7 @@ import { MonitoramentoGee } from 'src/app/models/monitoramentoGee';
 import { AmostraService } from 'src/app/services/amostra.service';
 import { DataService } from 'src/app/services/data.service';
 import { FontesEntidade } from 'src/app/models/fontesEntidade';
+import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
 
 @Component({
   selector: 'app-gee-fonte-cadastro',
@@ -22,6 +23,8 @@ export class GeeFonteCadastroComponent implements OnInit {
   fontesEntidade: FontesEntidade;
   fonte: any;
   params: any;
+  totalCo2Fossel = 0;
+  totalCo2Bio = 0;
   isAddEdit: boolean;
   loading: boolean;
   inseting = false;
@@ -42,7 +45,7 @@ export class GeeFonteCadastroComponent implements OnInit {
     if (this.params.id) {
       this.monitoramentoGeeService.findById(this.params.id).subscribe(monitoramento => {
         this.monitoramentoGee = monitoramento;
-        console.log('monitoramento ' + JSON.stringify(this.monitoramentoGee));
+
       });
       this.populaTable(this.params.id);
       this.findFonte();
@@ -55,7 +58,12 @@ export class GeeFonteCadastroComponent implements OnInit {
   populaTable(id: any) {
     this.amostraGeeService.findAmostra(id).subscribe(amostras => {
       this.amostras = amostras;
+      this.amostras.forEach((value)  => {
+        this.totalCo2Fossel += value.qt_total_co2_fossel;
+        this.totalCo2Bio += value.qt_total_co2_bio;
+      });
     });
+    // tslint:disable-next-line:only-arrow-functions
   }
 
   findFonte() {
@@ -121,7 +129,6 @@ export class GeeFonteCadastroComponent implements OnInit {
  }
 
  goFontesMonitoradas() {
-  console.log(this.params.id);
   this.router.navigate(['/gee/fontes/' + this.monitoramentoGee.entidade_id]);
  }
 
