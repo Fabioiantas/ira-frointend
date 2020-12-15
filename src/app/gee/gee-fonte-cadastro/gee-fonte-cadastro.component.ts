@@ -1,3 +1,4 @@
+import { CommaPipe } from './../../pipes/comma.pipe';
 import { ToastrService } from 'ngx-toastr';
 import { Component, OnInit } from '@angular/core';
 import { AmostraGee } from 'src/app/models/amostraGee';
@@ -13,7 +14,8 @@ import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
 @Component({
   selector: 'app-gee-fonte-cadastro',
   templateUrl: './gee-fonte-cadastro.component.html',
-  styleUrls: ['./gee-fonte-cadastro.component.sass']
+  styleUrls: ['./gee-fonte-cadastro.component.sass'],
+  providers: [CommaPipe]
 })
 export class GeeFonteCadastroComponent implements OnInit {
 
@@ -35,7 +37,8 @@ export class GeeFonteCadastroComponent implements OnInit {
               private route: ActivatedRoute,
               private router: Router,
               private dialogBox: DialogBoxService,
-              private toastrService: ToastrService) { }
+              private toastrService: ToastrService,
+              private commaPipe: CommaPipe) { }
 
   ngOnInit() {
     this.amostraGee = new AmostraGee();
@@ -58,12 +61,12 @@ export class GeeFonteCadastroComponent implements OnInit {
   populaTable(id: any) {
     this.amostraGeeService.findAmostra(id).subscribe(amostras => {
       this.amostras = amostras;
-      this.amostras.forEach((value)  => {
-        this.totalCo2Fossel += value.qt_total_co2_fossel;
-        this.totalCo2Bio += value.qt_total_co2_bio;
+      Object.entries(this.amostras).forEach(
+          ([key, value]) => {
+            this.totalCo2Fossel += value.qt_total_co2_fossel;
+            this.totalCo2Bio += value.qt_total_co2_bio;
       });
     });
-    // tslint:disable-next-line:only-arrow-functions
   }
 
   findFonte() {
@@ -132,10 +135,14 @@ export class GeeFonteCadastroComponent implements OnInit {
   this.router.navigate(['/gee/fontes/' + this.monitoramentoGee.entidade_id]);
  }
 
- showSuccess(message: string, title: string) {
-  this.toastrService.success(message, title, {
+  showSuccess(message: string, title: string) {
+    this.toastrService.success(message, title, {
     timeOut: 3000,
-  });
-}
+    });
+  }
+
+  formatUserNumber() {
+    this.amostraGee.qt_consumo_total = this.commaPipe.transform(this.amostraGee.qt_consumo_total);
+  }
 
 }

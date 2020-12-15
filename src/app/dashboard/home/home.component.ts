@@ -200,6 +200,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.setTotais();
+    console.log('window.location.host' + window.location.host);
   }
 
   public setTotais() {

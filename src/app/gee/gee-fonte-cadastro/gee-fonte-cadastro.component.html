@@ -74,8 +74,9 @@
       </div>
       <div class="form-group col-sm-2">
         <label for="qt_consumo_total">Consumo Total: </label>
-        <input class="form-control"  name="qt_consumo_total" placeholder="Consumo total" type="text"
+        <input class="form-control"  name="qt_consumo_total" placeholder="Consumo total" type="number"
           [(ngModel)]="amostraGee.qt_consumo_total">
+          <p> {{ amostraGee.qt_consumo_total }} </p>
       </div>
       <div class="form-group col-sm-2">
         <label for="cd_unidade_padrao">Unidade Consumo: </label>
@@ -93,8 +94,8 @@
         <button class="btn btn-primary text-right" type="button" (click)="add()">Inserir Amostragem</button>
       </div>
       <div class="col-sm-6 text-right">
-        <fa name="industry" class="mr-1"> </fa><b> CO2 Fóssel:</b> {{totalCo2Fossel  | quantidadePipe}} /
-        <fa name="leaf" class="mr-1"></fa><b>CO2 Bio:</b> {{totalCo2Bio  | quantidadePipe}}
+        <fa name="industry" class="mr-1"> </fa><b>TON CO2 Fóssel:</b> {{totalCo2Fossel  | quantidadePipe}} /
+        <fa name="leaf" class="mr-1"></fa><b>TON CO2 Bio:</b> {{totalCo2Bio  | quantidadePipe}}
       </div>
     </div>
   </div>
