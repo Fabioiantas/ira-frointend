@@ -4,6 +4,7 @@ import { EscopoGeeService } from 'src/app/services/escopo-gee.service';
 import { DialogBoxService } from 'src/app/_services/dialog-box.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EscopoGee } from 'src/app/models/escopoGee';
+import { Arquivo } from 'src/app/models/arquivo';
 
 @Component({
   selector: 'app-escopo-cadastro-gee',
@@ -24,6 +25,9 @@ export class EscopoCadastroGeeComponent implements OnInit {
   id: any;
   nmRecurso: any;
   dsRecurso: any;
+
+  byteArray: string | ArrayBuffer;
+  file: any;
 
   registro: any;
   constructor(private escopoService: EscopoGeeService,
@@ -55,7 +59,13 @@ export class EscopoCadastroGeeComponent implements OnInit {
 
   salvar() {
     if (!this.formGroup.valid) { return; }
-    this.escopoService[this.formGroup.value.id ? 'edit' : 'add'](this.formGroup.value).subscribe(() => {
+
+    let doc: any = document;
+    let file = doc.querySelector('input[type=file]').files[0];
+    let arquivo = new Arquivo();
+    arquivo.nm_arquivo = file.name;
+    arquivo.arquivo = this.byteArray.toString();
+    this.escopoService[this.formGroup.value.id ? 'edit' : 'add'](this.formGroup.value, arquivo).subscribe(() => {
       this.dialogBox.show('Escopo salvo com sucesso!', 'OK');
       this.router.navigate(['/escopo']);
     });
@@ -64,6 +74,32 @@ export class EscopoCadastroGeeComponent implements OnInit {
   handleReset() {
     this.formGroup.reset();
     this.router.navigate(['/escopo']);
+  }
+
+  prepareFile(event){
+    let doc: any = document;
+    let file = doc.querySelector('input[type=file]').files[0];
+
+    if (file) {
+      var reader = new FileReader();
+      reader.onload = (e) =>{
+        this.byteArray = reader.result;
+      };
+    }
+    reader.readAsDataURL(file);
+  }
+
+  save() {
+    let doc: any = document;
+    let file = doc.querySelector('input[type=file]').files[0];
+
+    let arquivo = new Arquivo();
+    arquivo.nm_arquivo = file.name;
+    arquivo.arquivo = this.byteArray.toString();
+
+    this.escopoService.saveFile(arquivo).subscribe(data => {
+      console.log('file ' + JSON.stringify(data));
+    });
   }
 
 }

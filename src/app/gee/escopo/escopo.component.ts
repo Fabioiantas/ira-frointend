@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DialogBoxService } from 'src/app/_services/dialog-box.service';
 import { EscopoGeeService } from 'src/app/services/escopo-gee.service';
+import { Arquivo } from 'src/app/models/arquivo';
+import { Utils } from '../../services/utils.service';
 
 @Component({
   selector: 'app-escopo',
@@ -15,7 +17,8 @@ export class EscopoComponent implements OnInit {
 
   columnsEscopo = [
     {name : 'Escopo', prop : 'nm_escopo', width : '35%', selecionado: true},
-    {name : 'Descrição', prop : 'ds_escopo', width : '20%', selecionado: false}
+    {name : 'Descrição', prop : 'ds_escopo', width : '20%', selecionado: false},
+    {name : 'Arquivo', prop : 'arquivo', width : '20%', selecionado: false}
   ];
   constructor(private router: Router,
               private dialogBox: DialogBoxService,
@@ -58,6 +61,10 @@ export class EscopoComponent implements OnInit {
     if ($event.type === 'dblclick') {
       this.router.navigate(['/escopo/adicionar/' + $event.row.id]);
     }
+  }
+
+  download(arquivo: Arquivo){
+    Utils.downloadFile(Utils.dataURItoBlob(arquivo.arquivo), '', arquivo.nm_arquivo);
   }
 
 }

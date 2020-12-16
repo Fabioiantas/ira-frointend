@@ -1,3 +1,4 @@
+import { Arquivo } from './../models/arquivo';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -23,8 +24,12 @@ export class EscopoGeeService {
     return this.http.delete(environment.baseUrl + '/auth/escopo/' + id);
   }
 
-  add(escopo: EscopoGee) {
-    return this.http.post<any>(`${environment.baseUrl}/auth/escopo`, escopo);
+  add(escopo: EscopoGee, arquivo: any) {
+    return this.http.post<any>(`${environment.baseUrl}/auth/escopo`, [escopo, arquivo]);
+  }
+
+  saveFile(arquivo: Arquivo) {
+    return this.http.post<any>(`${environment.baseUrl}/auth/arquivo`, arquivo);
   }
 
 
