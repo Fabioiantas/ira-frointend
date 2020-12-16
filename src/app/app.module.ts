@@ -168,6 +168,8 @@ import { QuantidadePipePipe } from './pipes/quantidade-pipe.pipe';
 import { GeeEditarComponent } from './gee/gee-editar/gee-editar.component';
 import { CommaNumberPipePipe } from './comma-number-pipe.pipe';
 import { CommaPipe } from './pipes/comma.pipe';
+import { ArquivoLicencaAmbientalComponent } from './licenca-ambiental/arquivo-licenca-ambiental/arquivo-licenca-ambiental.component';
+import { ArquivoLicencaCadastroComponent } from './licenca-ambiental/arquivo-licenca-ambiental/arquivo-licenca-cadastro/arquivo-licenca-cadastro.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -291,6 +293,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     GeeEditarComponent,
     CommaNumberPipePipe,
     CommaPipe,
+    ArquivoLicencaAmbientalComponent,
+    ArquivoLicencaCadastroComponent,
 
   ],
   imports: [
