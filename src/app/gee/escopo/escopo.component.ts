@@ -1,9 +1,9 @@
+import { UtilsService } from './../../services/utils.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { DialogBoxService } from 'src/app/_services/dialog-box.service';
 import { EscopoGeeService } from 'src/app/services/escopo-gee.service';
 import { Arquivo } from 'src/app/models/arquivo';
-import { Utils } from '../../services/utils.service';
 
 @Component({
   selector: 'app-escopo',
@@ -63,8 +63,9 @@ export class EscopoComponent implements OnInit {
     }
   }
 
-  download(arquivo: Arquivo){
-    Utils.downloadFile(Utils.dataURItoBlob(arquivo.arquivo), '', arquivo.nm_arquivo);
+  download(arquivo: any){
+    console.log(JSON.stringify(arquivo));
+    UtilsService.downloadFile(UtilsService.dataURItoBlob(arquivo), '', 'teste');
   }
 
 }

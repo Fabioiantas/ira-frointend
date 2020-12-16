@@ -50,7 +50,11 @@
     [messages]="{'emptyMessage': 'Nenhum resultado encontrado...', 'totalMessage': 'total'}" [limit]="5">
     <ngx-datatable-column name="Escopo" prop="nm_escopo" [flexGrow]="2"></ngx-datatable-column>
     <ngx-datatable-column name="Descrição" prop="ds_escopo" [flexGrow]="2"></ngx-datatable-column>
-    <ngx-datatable-column name="Arquivo" prop="arquivo" [flexGrow]="2"></ngx-datatable-column>
+    <ngx-datatable-column name="Arquivo" prop="arquivo" [flexGrow]="2">
+      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+        <i class="fa fa-download" (click)="download(value)"></i>
+      </ng-template>
+    </ngx-datatable-column>
 
   </ngx-datatable>
 </section>
