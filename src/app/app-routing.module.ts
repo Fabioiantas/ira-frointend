@@ -78,6 +78,7 @@ import { AuditoriaEntidadeComponent } from './auditoria/auditoria-entidade/audit
 import { AuditoriaEntidadeCadastroComponent } from './auditoria/auditoria-entidade-cadastro/auditoria-entidade-cadastro.component';
 import { AuditarComponent } from './auditoria/auditar/auditar.component';
 import { GeeEditarComponent } from './gee/gee-editar/gee-editar.component';
+import { ArquivoLicencaCadastroComponent } from './licenca-ambiental/arquivo-licenca-ambiental/arquivo-licenca-cadastro/arquivo-licenca-cadastro.component';
 
 const routes: Routes = [
   {
@@ -119,6 +120,12 @@ const routes: Routes = [
       {
         path: 'adicionar/:id',
         component: LicencaAmbientalComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'licenciamentoMenu' }
+      },
+      {
+        path: 'arquivo',
+        component: ArquivoLicencaCadastroComponent,
         canActivate: [AuthGuard],
         data: { roles: [Role.Admin], extraParameter: 'licenciamentoMenu' }
       }

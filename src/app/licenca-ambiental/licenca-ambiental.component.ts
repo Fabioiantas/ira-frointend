@@ -6,6 +6,8 @@ import { LicencaAmbientalService } from '../services/licenca-ambiental.service';
 import * as moment from 'moment';
 import { LicencaIap } from '../models/licencaIap';
 import { HttpRequest, HttpClient } from '@angular/common/http';
+import { ArquivoLicencaCadastroComponent } from './arquivo-licenca-ambiental/arquivo-licenca-cadastro/arquivo-licenca-cadastro.component';
+import { BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-licenca-ambiental',
@@ -38,6 +40,7 @@ export class LicencaAmbientalComponent implements OnInit {
               private licencaAmbientalService: LicencaAmbientalService,
               private dialogBox: DialogBoxService,
               public modalService: NgbModal,
+              private bsModalService: BsModalService,
               private http: HttpClient) { }
 
   ngOnInit() {
@@ -139,5 +142,15 @@ export class LicencaAmbientalComponent implements OnInit {
       });
       this.modalService.open(this.detalheTemplate);
     }
+  }
+
+  anexo(licenca: any) {
+    const initialState = {
+      licenca
+    };
+    this.bsModalService.show(ArquivoLicencaCadastroComponent, { initialState, backdrop: 'static', class: 'modal-lg'})
+    .content.onClose.subscribe(itemReturn => {
+      console.log();
+    });
   }
 }

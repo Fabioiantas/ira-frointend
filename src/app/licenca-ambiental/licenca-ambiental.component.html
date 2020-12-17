@@ -33,9 +33,10 @@
     </div>
     <div class="btn-actions-pane-right">
       <div class="btn-group-sm btn-group" role="group">
-        <a class="btn btn-success" [routerLink]="['/licencaambiental/adicionar']">Inserir Nova Licença</a>
+        <a class="btn btn-success" [routerLink]="['/licencaambiental/adicionar']">Nova Licença</a>
         <button class="btn btn-primary" type="button" (click)="editar(selected[0].id)">Editar</button>
         <button class="btn btn-danger" type="button" (click)="remover()">Remover</button>
+        <button class="btn btn-danger" type="button" (click)="anexo(selected[0])">Anexos</button>
         <button class="btn btn-info" type="button" (click)="detalhar()">Detalhar</button>
         <!-- <button class="btn btn-outline-secondary" type="button" (click)="download(selected[0].nr_protocolo)">PDF</button> -->
       </div>

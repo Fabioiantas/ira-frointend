@@ -372,7 +372,8 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ThemeOptions
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  entryComponents: [DialogBoxComponent, AmostraEditarComponent, AuditoriaRequisitoParametroComponent, AuditarRequisitoComponent],
+  // tslint:disable-next-line:max-line-length
+  entryComponents: [DialogBoxComponent, AmostraEditarComponent, AuditoriaRequisitoParametroComponent, AuditarRequisitoComponent, ArquivoLicencaCadastroComponent],
   bootstrap: [AppComponent]
 })
 

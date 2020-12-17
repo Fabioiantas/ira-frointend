@@ -37,11 +37,11 @@ export class AuditarComponent implements OnInit {
   getAuditoriaEntidadeItRequisito(id) {
     this.auditoriaEntidadeService.getAuditoriaEntidadeItReqById(id).subscribe(data => {
       this.auditoriaEntidadeItRequisito = data;
-        data.auditoria_entidade_items.forEach(function (value) {
-        if (value) {
-          console.log(JSON.stringify(value.auditoria_entidade_it_requisitos));
-        }
-      });
+      data.auditoria_entidade_items.forEach((value) => {
+          if (value) {
+            console.log(JSON.stringify(value.auditoria_entidade_it_requisitos));
+          }
+        });
     });
   }
 

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BsModalRef } from 'ngx-bootstrap/modal';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-arquivo-licenca-cadastro',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ArquivoLicencaCadastroComponent implements OnInit {
 
-  constructor() { }
+  licenca: any;
+  isAddEdit = false;
+  public onClose: Subject<any>;
+  constructor(public modalRef: BsModalRef) { }
 
   ngOnInit() {
+    this.onClose = new Subject();
+    console.log(JSON.stringify(this.licenca));
+  }
+
+  public closeModal(): void {
+    this.onClose.next(this.licenca);
+    this.modalRef.hide();
   }
 
 }
