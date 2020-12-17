@@ -33,12 +33,41 @@
     </div>
     <div class="btn-actions-pane-right">
       <div class="btn-group-sm btn-group" role="group">
-        <a class="btn btn-success" [routerLink]="['/licencaambiental/adicionar']">Nova Licença</a>
-        <button class="btn btn-primary" type="button" (click)="editar(selected[0].id)">Editar</button>
-        <button class="btn btn-danger" type="button" (click)="remover()">Remover</button>
-        <button class="btn btn-danger" type="button" (click)="anexo(selected[0])">Anexos</button>
-        <button class="btn btn-info" type="button" (click)="detalhar()">Detalhar</button>
-        <!-- <button class="btn btn-outline-secondary" type="button" (click)="download(selected[0].nr_protocolo)">PDF</button> -->
+        <div ngbDropdown class="d-inline-block">
+          <button class="btn btn-outline-primary" id="dropdownForm1" ngbDropdownToggle>Ações</button>
+          <div ngbDropdownMenu aria-labelledby="dropdownForm1">
+            <form class="px-4 py-1">
+              <div class="row p-1">
+                <button class="btn btn-success btn-block" [routerLink]="['/licencaambiental/adicionar']"><i class="fa fa-plus-circle mr-1"></i>Adicionar</button>
+              </div>
+              <div class="row p-1">
+                <button class="btn btn-secondary btn-block" (click)="editar(selected[0].id)"><i class="fa fa-edit mr-1"></i>Editar</button>
+              </div>
+              <div class="row p-1">
+                <button class="btn btn-danger btn-block" (click)="remover()"><i class="fa fa-trash mr-1"></i>Remover</button>
+              </div>
+              <div class="row p-1">
+                <button class="btn btn-info btn-block" (click)="anexo(selected[0])"><i class="fa fa-paperclip mr-1"></i>Anexos</button>
+              </div>
+              <div class="row p-1">
+                <button class="btn btn-primary btn-block" (click)="detalhar()"><i class="fa fa-eye mr-1"></i>Detalhar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <!-- <a class="btn btn-success" [routerLink]="['/licencaambiental/adicionar']">
+          <i class="fa fa-plus-circle"></i> Nova Licença</a>
+        <button class="btn btn-primary" type="button" (click)="editar(selected[0].id)">
+          <i class="fa fa-edit"></i> Editar</button>
+        <button class="btn btn-danger" type="button" (click)="remover()">
+          <i class="fa fa-trash"></i> Remover</button>
+        <button class="btn btn-warning" type="button" (click)="anexo(selected[0])">
+          <i class="fa fa-paperclip"></i> Anexos</button>
+        <button class="btn btn-info" type="button" (click)="detalhar()">
+          <i class="fa fa-bars"></i> Detalhar</button>
+        <button class="btn btn-outline-secondary" type="button" (click)="download(selected[0].nr_protocolo)">PDF</button> -->
+
       </div>
     </div>
   </div>

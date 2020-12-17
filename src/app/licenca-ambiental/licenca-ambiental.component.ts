@@ -145,6 +145,7 @@ export class LicencaAmbientalComponent implements OnInit {
   }
 
   anexo(licenca: any) {
+    if (!licenca) { alert('selecione uma Licença!'); return; }
     const initialState = {
       licenca
     };
