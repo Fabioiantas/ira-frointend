@@ -1,3 +1,84 @@
-<p>
-  arquivo-monitoramento-recurso works!
-</p>
+<div class="modal-header">
+  <h5 class="modal-title pull-left">
+    <i class="pe-7s-paperclip p-1"></i>Anexos
+  </h5>
+  <button type="button" class="close pull-right" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <!-- <div class="card"> -->
+    <!-- <div class="card-body"> -->
+      <div class="card-title">
+        <i class="fa fa-user-circle p-1"></i>
+      </div>
+      <div class="card-subtitle">
+        <i class="fa fa-map-marker p-1" aria-hidden="true"></i>Propriedade Teste
+      </div>
+      <div class="form-row">
+        <div class="col-sm-6">
+          <i class="fa fa-chevron-right"><b> Atividade: </b> </i>
+        </div>
+        <div class="col-sm-6">
+          <i class="fa fa-chevron-right"><b> Tipo: </b></i>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="col-sm-6">
+          <i class="fa fa-chevron-right"><b> N° Licença: </b></i>
+        </div>
+        <div class="col-sm-6">
+          <i class="fa fa-chevron-right"><b> N° Protocolo: </b></i>
+        </div>
+      </div>
+      <div class="form-row p-2">
+        <div class="col-sm-6">
+          <!-- <label for="exampleFormControlFile1">Evidência</label> -->
+          <input type="file" class="form-control-file" id="exampleFormControlFile1" (change)="prepareFile($event)" [(ngModel)]="file">
+        </div>
+        <div class="col-sm-6 text-left">
+          <button *ngIf="byteArray?.length" data-toggle="tooltip" data-placement="top" title="Não é possível alterar a fonte." type="button" class="btn btn-primary btn-xs p-2" (click)="save()">
+            <i class="fa fa-upload"></i>
+          </button>
+        </div>
+        <!-- <div class="col-sm-1 py-4">
+        </div> -->
+      </div>
+    <!-- </div> -->
+  <!-- </div> -->
+  <div class="table-responsive" style="min-height: 500px;">
+    <table class="align-middle mb-0 table table-borderless table-striped table-hover">
+      <thead>
+        <tr [ngClass]="{'table-active': !isAddEdit}">
+          <th class="text-left">Arquivo</th>
+          <th class="text-right" width="2%">Baixar</th>
+          <th class="text-right" width="2%">Remover</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngIf="!arquivos?.length">
+          <td colspan="6" class="text-center">
+            <h6 class="mt-3">Nenhuma arquivo adicionado</h6>
+          </td>
+        </tr>
+        <!-- DADOS DA TABLE -->
+        <tr *ngFor="let file of arquivos; let i = index">
+          <td>
+            {{file.nm_arquivo}}
+          </td>
+          <td class="text-right icons">
+            <i class="pe-7s-download text-primary" (click)="download(file.arquivo, file.nm_arquivo)"></i>
+          </td>
+          <td class="text-right icons">
+            <i class="pe-7s-trash text-danger" (click)="remover(file.id)"></i>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+    <!-- <div class="divider"></div> -->
+  </div>
+
+  <div class="modal-footer" style="clear: both;">
+    <button type="button" class="btn btn-default btn-sm" (click)="closeModal()">Fechar</button>
+  </div>
