@@ -59,4 +59,9 @@ export class TipoMonitoramentoCadastroComponent implements OnInit {
       this.router.navigate(['/tipomonitoramento']);
     });
   }
+
+  cancelar() {
+    this.formGroup.reset();
+    this.router.navigate(['/tipomonitoramento']);
+  }
 }

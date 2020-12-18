@@ -58,12 +58,12 @@ export class ArquivoLicencaCadastroComponent implements OnInit {
       };
     }
     reader.readAsDataURL(file);
+    // this.save(this.byteArray)
   }
 
   save() {
     let doc: any = document;
     let file = doc.querySelector('input[type=file]').files[0];
-
     let arquivo = new ArquivoLicencaAmbiental();
 
     arquivo.licenca_ambiental_id = this.licenca.id;

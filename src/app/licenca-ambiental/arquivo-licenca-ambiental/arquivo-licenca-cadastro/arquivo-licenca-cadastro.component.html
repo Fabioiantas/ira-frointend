@@ -32,11 +32,15 @@
         </div>
       </div>
       <div class="form-row p-2">
-        <div class="col-sm-11 form-group">
+        <div class="col-sm-6">
           <!-- <label for="exampleFormControlFile1">Evidência</label> -->
           <input type="file" class="form-control-file" id="exampleFormControlFile1" (change)="prepareFile($event)" [(ngModel)]="file">
-          <button *ngIf="byteArray?.length" type="button" class="btn btn-primary btn-xs p-2" (click)="save()"><i class="fa fa-upload"></i></button>
         </div>
+        <!-- <div class="col-sm-6 text-left">
+          <button *ngIf="byteArray?.length" data-toggle="tooltip" data-placement="top" title="Não é possível alterar a fonte." type="button" class="btn btn-primary btn-xs p-2" (click)="save()">
+            <i class="fa fa-upload"></i>
+          </button>
+        </div> -->
         <!-- <div class="col-sm-1 py-4">
         </div> -->
       </div>
@@ -47,8 +51,8 @@
       <thead>
         <tr [ngClass]="{'table-active': !isAddEdit}">
           <th class="text-left">Arquivo</th>
-          <th class="text-right">Baixar</th>
-          <th class="text-right">Remover</th>
+          <th class="text-right" width="2%">Baixar</th>
+          <th class="text-right" width="2%">Remover</th>
         </tr>
       </thead>
       <tbody>
