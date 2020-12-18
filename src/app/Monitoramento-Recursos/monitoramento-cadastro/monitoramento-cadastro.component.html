@@ -39,8 +39,34 @@
             </h4>
 
           </div>
+
           <div class="pane-right">
-            <button type="button" (click)="add()" class="btn-shadow btn btn-success" *ngIf="monitoramentoRecurso?.id">
+            <div class="btn-group-xs btn-group" role="group">
+              <div ngbDropdown class="d-inline-block">
+                <button class="btn btn-outline-primary" id="dropdownForm1" ngbDropdownToggle>Ações</button>
+                <div ngbDropdownMenu aria-labelledby="dropdownForm1">
+                  <div class="px-4 py-1">
+                    <div class="row p-1">
+                      <button class="btn btn-success btn-block" (click)="add()"><i class="fa fa-plus-circle mr-1"></i>Adicionar</button>
+                    </div>
+                    <div class="row p-1">
+                      <button class="btn btn-secondary btn-block" (click)="editarLaudo(selected[0])"><i class="fa fa-edit mr-1"></i>Editar</button>
+                    </div>
+                    <div class="row p-1">
+                      <button class="btn btn-danger btn-block" (click)="removeLaudo(selected[0].id)"><i class="fa fa-trash mr-1"></i>Remover</button>
+                    </div>
+                    <div class="row p-1">
+                      <button *ngIf="laudos?.length" class="btn btn-primary btn-block" (click)="addAmostra(selected[0])"><i class="fa fa-flask mr-1"></i>Resultados</button>
+                    </div>
+                    <div class="row p-1">
+                      <button class="btn btn-info btn-block" (click)="anexo(selected[0])"><i class="fa fa-paperclip mr-1"></i>Anexos</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- <button type="button" (click)="add()" class="btn-shadow btn btn-success" *ngIf="monitoramentoRecurso?.id">
               <fa name="plus-circle"></fa> Novo Laudo
             </button>
             <button type="button" (click)="editarLaudo(selected[0])" class="btn-shadow btn btn-warning"
@@ -54,7 +80,7 @@
             <button type="button" (click)="addAmostra(selected[0])" class="btn-shadow btn btn-info"
               *ngIf="laudos?.length">
               <fa name="plus-circle"></fa> Inserir Resultados
-            </button>
+            </button> -->
           </div>
         </div>
         <div class="app-inner-layout__bottom-pane d-flex" style="padding: 0px;">

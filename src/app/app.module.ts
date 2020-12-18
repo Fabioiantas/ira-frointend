@@ -170,6 +170,7 @@ import { CommaNumberPipePipe } from './comma-number-pipe.pipe';
 import { CommaPipe } from './pipes/comma.pipe';
 import { ArquivoLicencaAmbientalComponent } from './licenca-ambiental/arquivo-licenca-ambiental/arquivo-licenca-ambiental.component';
 import { ArquivoLicencaCadastroComponent } from './licenca-ambiental/arquivo-licenca-ambiental/arquivo-licenca-cadastro/arquivo-licenca-cadastro.component';
+import { ArquivoMonitoramentoRecursoComponent } from './Monitoramento-Recursos/arquivo-monitoramento-recurso/arquivo-monitoramento-recurso.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -295,6 +296,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CommaPipe,
     ArquivoLicencaAmbientalComponent,
     ArquivoLicencaCadastroComponent,
+    ArquivoMonitoramentoRecursoComponent,
 
   ],
   imports: [
@@ -373,7 +375,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   // tslint:disable-next-line:max-line-length
-  entryComponents: [DialogBoxComponent, AmostraEditarComponent, AuditoriaRequisitoParametroComponent, AuditarRequisitoComponent, ArquivoLicencaCadastroComponent],
+  entryComponents: [DialogBoxComponent, AmostraEditarComponent, AuditoriaRequisitoParametroComponent, AuditarRequisitoComponent, ArquivoLicencaCadastroComponent, ArquivoMonitoramentoRecursoComponent],
   bootstrap: [AppComponent]
 })
 

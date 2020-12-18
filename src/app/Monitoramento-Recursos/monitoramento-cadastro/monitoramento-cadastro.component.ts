@@ -1,3 +1,4 @@
+import { ArquivoMonitoramentoRecursoComponent } from './../arquivo-monitoramento-recurso/arquivo-monitoramento-recurso.component';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import * as moment from 'moment';
@@ -21,6 +22,7 @@ import { DataService } from 'src/app/services/data.service';
 import { TipoMonitoramentoService } from 'src/app/services/tipo-monitoramento.service';
 import { TipoMonitoramento } from 'src/app/models/tipoMonitoramento';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { BsModalService } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'app-monitoramento-cadastro',
@@ -74,6 +76,7 @@ export class MonitoramentoCadastroComponent implements OnInit {
               private tipoMonitoramentoService: TipoMonitoramentoService,
               private data: DataService,
               private dialogBox: DialogBoxService,
+              private bsModalService: BsModalService,
               private formBuilder: FormBuilder,
               private router: Router,
               private route: ActivatedRoute) { }
@@ -257,6 +260,17 @@ export class MonitoramentoCadastroComponent implements OnInit {
     if ($event.type === 'dblclick') {
       // this.router.navigate(['/fonteemissora/adicionar/' + $event.row.id]);
     }
+  }
+
+  anexo(monitoramento: any) {
+    console.log('monitoramento ' + JSON.stringify(monitoramento));
+    if (!monitoramento) { alert('selecione um Monitoramento!'); return; }
+    const initialState = {
+      monitoramento
+    };
+    this.bsModalService.show(ArquivoMonitoramentoRecursoComponent, { initialState, backdrop: 'static', class: 'modal-lg'})
+    .content.onClose.subscribe(itemReturn => {
+    });
   }
 
 }

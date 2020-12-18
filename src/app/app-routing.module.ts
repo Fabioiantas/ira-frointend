@@ -1,3 +1,4 @@
+import { ArquivoMonitoramentoRecursoComponent } from './Monitoramento-Recursos/arquivo-monitoramento-recurso/arquivo-monitoramento-recurso.component';
 import { PainelComponent } from './painel/painel.component';
 import { AuditarRequisitoComponent } from './auditoria/auditar-requisito/auditar-requisito.component';
 import { FonteEntidadeComponent } from './gee/fonte-entidade/fonte-entidade.component';
@@ -573,6 +574,12 @@ const routes: Routes = [
       {
         path: 'amostra/:id',
         component: MonitoramentoAmostraCadastroComponent,
+        canActivate: [AuthGuard],
+        data: { roles: [Role.Admin], extraParameter: 'mRecursoMenu' }
+      },
+      {
+        path: 'arquivo/:id',
+        component: ArquivoMonitoramentoRecursoComponent,
         canActivate: [AuthGuard],
         data: { roles: [Role.Admin], extraParameter: 'mRecursoMenu' }
       }
