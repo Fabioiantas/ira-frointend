@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { BsModalRef } from 'ngx-bootstrap/modal';
+import { ToastrService } from 'ngx-toastr';
+import { Subject } from 'rxjs';
+import { ArquivoMonitoramentoRecurso } from 'src/app/models/arquivoMonitoramentoRecurso';
+import { ArquivoMonitoramentoService } from 'src/app/services/monitoramentoRecurso/arquivo-monitoramento.service';
+import { UtilsService } from 'src/app/services/utils.service';
+import { DialogBoxService } from 'src/app/_services/dialog-box.service';
 
 @Component({
   selector: 'app-arquivo-monitoramento-recurso',
@@ -8,9 +15,10 @@ import { Component, OnInit } from '@angular/core';
 export class ArquivoMonitoramentoRecursoComponent implements OnInit {
 
   monitoramento: any;
+  laudo: any;
   isAddEdit = false;
   arquivos: [];
-  arquivoLa: ArquivoLicencaAmbiental;
+  arquivoLa: ArquivoMonitoramentoRecurso;
   byteArray: string | ArrayBuffer;
   file: any;
 
@@ -19,11 +27,13 @@ export class ArquivoMonitoramentoRecursoComponent implements OnInit {
   constructor(public modalRef: BsModalRef,
               private dialogBox: DialogBoxService,
               private toastrService: ToastrService,
-              private arquivoLicencaAmbientalService: ArquivoLicencaAmbientalService) { }
+              private arquivoMonitoramentoService: ArquivoMonitoramentoService) { }
 
   ngOnInit() {
     this.onClose = new Subject();
-    this.getByLicencaId(this.monitoramento.id);
+    console.log(JSON.stringify(this.monitoramento));
+    console.log(JSON.stringify(this.laudo));
+    this.getByLicencaId(this.laudo.id);
   }
 
   public closeModal(): void {
@@ -32,19 +42,17 @@ export class ArquivoMonitoramentoRecursoComponent implements OnInit {
   }
 
   getByLicencaId(id: any) {
-    this.arquivoLicencaAmbientalService.getByLicencaId(id).subscribe(data =>{
+    this.arquivoMonitoramentoService.getByMonitoramentoId(id).subscribe(data => {
       this.arquivos = data;
-      console.log('arq ' + JSON.stringify(this.arquivos));
     });
   }
 
-  prepareFile(event){
-    let doc: any = document;
-    let file = doc.querySelector('input[type=file]').files[0];
-
+  prepareFile(event) {
+    const doc: any = document;
+    const file = doc.querySelector('input[type=file]').files[0];
+    const reader = new FileReader();
     if (file) {
-      var reader = new FileReader();
-      reader.onload = (e) =>{
+      reader.onload = (e) => {
         this.byteArray = reader.result;
       };
     }
@@ -53,16 +61,15 @@ export class ArquivoMonitoramentoRecursoComponent implements OnInit {
   }
 
   save() {
-    let doc: any = document;
-    let file = doc.querySelector('input[type=file]').files[0];
-    let arquivo = new ArquivoLicencaAmbiental();
+    const doc: any = document;
+    const file = doc.querySelector('input[type=file]').files[0];
+    const arquivo = new ArquivoMonitoramentoRecurso();
 
-    arquivo.monitoramento_ambiental_id = this.monitoramento.id;
-    arquivo.nr_monitoramento_ambiental = this.monitoramento.nr_monitoramento_ambiental;
-    arquivo.nr_protocolo = this.monitoramento.nr_protocolo;
+    arquivo.monitoramento_laudo_id = this.laudo.id;
+    arquivo.nr_laudo = this.laudo.nr_laudo;
     arquivo.nm_arquivo = file.name;
     arquivo.arquivo = this.byteArray.toString();
-    this.arquivoLicencaAmbientalService.add(arquivo).subscribe(data => {
+    this.arquivoMonitoramentoService.add(arquivo).subscribe(data => {
       this.showSuccess('Arquivo adicionado com sucesso!', 'Mensagem');
       this.getByLicencaId(this.monitoramento.id);
       this.byteArray = null;
@@ -72,7 +79,7 @@ export class ArquivoMonitoramentoRecursoComponent implements OnInit {
   remover(id: string) {
     this.dialogBox.show('Confirma remoção do anexo?', 'CONFIRM').then(sim => {
       if (sim) {
-        this.arquivoLicencaAmbientalService.remove(id).subscribe(data => {
+        this.arquivoMonitoramentoService.remove(id).subscribe(data => {
           this.showSuccess('Arquivo removido com sucesso!', 'Mensagem');
           this.getByLicencaId(this.monitoramento.id);
         });

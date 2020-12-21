@@ -262,43 +262,17 @@ export class MonitoramentoCadastroComponent implements OnInit {
     }
   }
 
-  anexo(monitoramento: any) {
-    console.log('monitoramento ' + JSON.stringify(monitoramento));
-    if (!monitoramento) { alert('selecione um Monitoramento!'); return; }
+  anexo(laudo: any, monitoramento: any) {
+    console.log(JSON.stringify(laudo));
+    if (!laudo) { alert('selecione um Laudo!'); return; }
     const initialState = {
+      laudo,
       monitoramento
+
     };
     this.bsModalService.show(ArquivoMonitoramentoRecursoComponent, { initialState, backdrop: 'static', class: 'modal-lg'})
     .content.onClose.subscribe(itemReturn => {
     });
   }
-
 }
-
-
-/* editarItem(amostra: MonitoramentoRecurso) {
-    amostra.dt_amostra = moment(amostra.dt_amostra).format('DD/MM/YYYY');
-    const initialState = {
-      amostraGee: amostra,
-      filteGee: this.filterForm.value,
-      MonitoramentoGee: this.mon,
-    };
-    this.modalService.show(AmostraEditarComponent, { initialState, backdrop: 'static', class: 'modal-md'})
-    .content.onClose.subscribe((amostraReturn: MonitoramentoRecursoAmostra) => {
-      amostra = amostraReturn;
-      this.findMonitoramento();
-    });
-  }*/
-
-  /*removerAmostra(amostra: MonitoramentoRecursoAmostra) {
-    this.dialogBox.show('Tem certeza que deseja remover a amostra?', 'Confirm').then((sim) => {
-      if (sim) {
-        this.loading = true;
-        this.amostraGeeService.remover(amostra.id).subscribe(data => {
-          this.loading = false;
-          this.findMonitoramento();
-        }, () => this.loading = false);
-      }
-    });
-  }*/
 

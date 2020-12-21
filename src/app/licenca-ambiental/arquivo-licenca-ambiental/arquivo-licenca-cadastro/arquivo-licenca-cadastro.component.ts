@@ -41,30 +41,28 @@ export class ArquivoLicencaCadastroComponent implements OnInit {
   }
 
   getByLicencaId(id: any) {
-    this.arquivoLicencaAmbientalService.getByLicencaId(id).subscribe(data =>{
+    this.arquivoLicencaAmbientalService.getByLicencaId(id).subscribe(data => {
       this.arquivos = data;
       console.log('arq ' + JSON.stringify(this.arquivos));
     });
   }
 
-  prepareFile(event){
-    let doc: any = document;
-    let file = doc.querySelector('input[type=file]').files[0];
-
+  prepareFile(event) {
+    const doc: any = document;
+    const file = doc.querySelector('input[type=file]').files[0];
+    const reader = new FileReader();
     if (file) {
-      var reader = new FileReader();
-      reader.onload = (e) =>{
+      reader.onload = (e) => {
         this.byteArray = reader.result;
       };
     }
     reader.readAsDataURL(file);
-    // this.save(this.byteArray)
   }
 
   save() {
-    let doc: any = document;
-    let file = doc.querySelector('input[type=file]').files[0];
-    let arquivo = new ArquivoLicencaAmbiental();
+    const doc: any = document;
+    const file = doc.querySelector('input[type=file]').files[0];
+    const arquivo = new ArquivoLicencaAmbiental();
 
     arquivo.licenca_ambiental_id = this.licenca.id;
     arquivo.nr_licenca_ambiental = this.licenca.nr_licenca_ambiental;

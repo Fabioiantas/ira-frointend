@@ -56,10 +56,10 @@
                       <button class="btn btn-danger btn-block" (click)="removeLaudo(selected[0].id)"><i class="fa fa-trash mr-1"></i>Remover</button>
                     </div>
                     <div class="row p-1">
-                      <button *ngIf="laudos?.length" class="btn btn-primary btn-block" (click)="addAmostra(selected[0])"><i class="fa fa-flask mr-1"></i>Resultados</button>
+                      <button *ngIf="laudos?.length" class="btn btn-primary btn-block" (click)="addAmostra(selected[0])"><i class="fa fa-line-chart mr-1"></i>Resultados</button>
                     </div>
                     <div class="row p-1">
-                      <button class="btn btn-info btn-block" (click)="anexo(selected[0])"><i class="fa fa-paperclip mr-1"></i>Anexos</button>
+                      <button class="btn btn-info btn-block" (click)="anexo(selected[0],monitoramentoRecurso)"><i class="fa fa-paperclip mr-1"></i>Anexos</button>
                     </div>
                   </div>
                 </div>
