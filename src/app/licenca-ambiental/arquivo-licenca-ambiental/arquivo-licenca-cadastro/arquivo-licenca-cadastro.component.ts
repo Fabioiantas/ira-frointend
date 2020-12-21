@@ -54,6 +54,11 @@ export class ArquivoLicencaCadastroComponent implements OnInit {
     if (file) {
       reader.onload = (e) => {
         this.byteArray = reader.result;
+        if (new Blob([this.byteArray.toString()]).size > 10000000) {
+          this.dialogBox.show('Arquivo deve ser menor que 10MB!', 'ERROR');
+          this.byteArray = null;
+          return;
+        }
       };
     }
     reader.readAsDataURL(file);

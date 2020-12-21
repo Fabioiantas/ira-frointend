@@ -18,6 +18,7 @@ export class ArquivoMonitoramentoRecursoComponent implements OnInit {
   laudo: any;
   isAddEdit = false;
   arquivos: [];
+  loading = false;
   arquivoLa: ArquivoMonitoramentoRecurso;
   byteArray: string | ArrayBuffer;
   file: any;
@@ -33,7 +34,7 @@ export class ArquivoMonitoramentoRecursoComponent implements OnInit {
     this.onClose = new Subject();
     console.log(JSON.stringify(this.monitoramento));
     console.log(JSON.stringify(this.laudo));
-    this.getByLicencaId(this.laudo.id);
+    this.getByMonitoramentoId(this.laudo.id);
   }
 
   public closeModal(): void {
@@ -41,26 +42,31 @@ export class ArquivoMonitoramentoRecursoComponent implements OnInit {
     this.modalRef.hide();
   }
 
-  getByLicencaId(id: any) {
+  getByMonitoramentoId(id: any) {
+    this.loading = true;
     this.arquivoMonitoramentoService.getByMonitoramentoId(id).subscribe(data => {
       this.arquivos = data;
-    });
+      this.loading = false;
+    }, () => this.loading = false);
   }
 
   prepareFile(event) {
     const doc: any = document;
     const file = doc.querySelector('input[type=file]').files[0];
+    if (!file) { return; }
+
     const reader = new FileReader();
     if (file) {
       reader.onload = (e) => {
         this.byteArray = reader.result;
       };
     }
+    console.log('len ' + this.byteArray.slice);
     reader.readAsDataURL(file);
-    // this.save(this.byteArray)
   }
 
   save() {
+    this.loading = true;
     const doc: any = document;
     const file = doc.querySelector('input[type=file]').files[0];
     const arquivo = new ArquivoMonitoramentoRecurso();
@@ -71,9 +77,11 @@ export class ArquivoMonitoramentoRecursoComponent implements OnInit {
     arquivo.arquivo = this.byteArray.toString();
     this.arquivoMonitoramentoService.add(arquivo).subscribe(data => {
       this.showSuccess('Arquivo adicionado com sucesso!', 'Mensagem');
-      this.getByLicencaId(this.monitoramento.id);
+      this.getByMonitoramentoId(this.monitoramento.id);
       this.byteArray = null;
-    });
+      this.file = null;
+      this.loading = false;
+    },() => this.loading = false);
   }
 
   remover(id: string) {
@@ -81,7 +89,7 @@ export class ArquivoMonitoramentoRecursoComponent implements OnInit {
       if (sim) {
         this.arquivoMonitoramentoService.remove(id).subscribe(data => {
           this.showSuccess('Arquivo removido com sucesso!', 'Mensagem');
-          this.getByLicencaId(this.monitoramento.id);
+          this.getByMonitoramentoId(this.monitoramento.id);
         });
       }
     });

@@ -7,52 +7,55 @@
   </button>
 </div>
 <div class="modal-body">
-  <!-- <div class="card"> -->
-    <!-- <div class="card-body"> -->
-      <div class="form-row">
-        <div class="col-sm-6">
-          <div class="card-title">
-            <i class="fa fa-user-circle p-1">{{monitoramento.entidade.nm_reduzido}}</i>
+  <div class="form-row">
+    <div class="col-sm-6">
+      <div class="card-title">
+        <i class="fa fa-user-circle p-1" aria-hidden="true"></i> {{monitoramento.entidade.nm_reduzido}}
+      </div>
+    </div>
+    <div class="col-sm-6">
+      <div class="card-subtitle">
+        <i class="fa fa-map-marker p-1" aria-hidden="true"></i>{{monitoramento.propriedade.nm_propriedade}}
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-sm-6">
+      <i class="fa fa-globe p-1"><b> Recurso:</b> {{monitoramento.recurso.nm_recurso}} </i>
+    </div>
+    <div class="col-sm-6">
+      <i class="fa fa-gears"><b> Fonte:</b> {{monitoramento.fonte_emissora.nm_fonte_emissora}}</i>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-sm-6">
+      <i class="fa fa-flask p-1"><b> Monitoramento:</b> {{laudo.nm_monitoramento}} </i>
+    </div>
+    <div class="col-sm-6">
+      <i class="fa fa-angle-double-right p-1"><b> Laudo Número:</b> {{laudo.nr_laudo}}</i>
+    </div>
+  </div>
+  <div class="divider mb-0"></div>
+  <div class="form-row p-2">
+    <div class="col-sm-6">
+      <div class="loader-wrapper d-flex justify-content-center align-items-center" *ngIf="loading">
+        <div class="loader">
+          <div class="ball-scale-ripple">
+            <div></div>
           </div>
         </div>
-        <div class="col-sm-6">
-          <div class="card-subtitle">
-            <i class="fa fa-map-marker p-1" aria-hidden="true"></i>{{monitoramento.propriedade.nm_propriedade}}
-          </div>
-        </div>
       </div>
-      <div class="form-row">
-        <div class="col-sm-6">
-          <i class="fa fa-globe"><b> Recurso: {{monitoramento.recurso.nm_recurso}}</b> </i>
-        </div>
-        <div class="col-sm-6">
-          <i class="fa fa-gears"><b> Fonte: {{monitoramento.fonte_emissora.nm_fonte_emissora}}</b></i>
-        </div>
-      </div>
-      <div class="form-row">
-        <div class="col-sm-6">
-          <i class="fa fa-flask"><b> Monitoramento: {{laudo.nm_monitoramento}}</b> </i>
-        </div>
-        <div class="col-sm-6">
-          <i class="fa fa-angle-double-right"><b> Laudo Número: {{laudo.nr_laudo}}</b></i>
-        </div>
-      </div>
-      <div class="form-row p-2">
-        <div class="col-sm-6">
-          <!-- <label for="exampleFormControlFile1">Evidência</label> -->
-          <input type="file" class="form-control-file" id="exampleFormControlFile1" (change)="prepareFile($event)" [(ngModel)]="file">
-        </div>
-        <div class="col-sm-6 text-left">
-          <button *ngIf="byteArray?.length" data-toggle="tooltip" data-placement="top" title="Não é possível alterar a fonte." type="button" class="btn btn-primary btn-xs p-2" (click)="save()">
-            <i class="fa fa-upload"></i>
-          </button>
-        </div>
-        <!-- <div class="col-sm-1 py-4">
-        </div> -->
-      </div>
-    <!-- </div> -->
-  <!-- </div> -->
-  <div class="table-responsive" style="min-height: 500px;">
+      <input *ngIf="!loading" type="file" class="form-control-file" id="exampleFormControlFile1" data-toggle="tooltip" data-placement="top" title="Arquivo até 10MB - Selecione em seguida pressione Enviar!"
+        (change)="prepareFile($event)" [(ngModel)]="file">
+    </div>
+    <div class="col-sm-6 text-left">
+      <button *ngIf="byteArray?.length" data-toggle="tooltip" data-placement="top" title="Gravar arquivo selecionado."
+        type="button" class="btn btn-primary btn-xs p-2" (click)="save()">
+        Enviar<i class="fa fa-upload p-1"></i>
+      </button>
+    </div>
+  </div>
+  <div *ngIf="!loading" class="table-responsive" style="min-height: 500px;">
     <table class="align-middle mb-0 table table-borderless table-striped table-hover">
       <thead>
         <tr [ngClass]="{'table-active': !isAddEdit}">
