@@ -5,7 +5,7 @@ export class AuditoriaEvidenciaRequisto {
   // tslint:disable-next-line:variable-name
   ds_evidencia: string;
   // tslint:disable-next-line:variable-name
-  dt_evidencia: string;
+  dt_evidencia: Date;
   // tslint:disable-next-line:variable-name
   nm_arquivo: any;
   arquivo: string;

@@ -1,25 +1,28 @@
+import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
+import { Subject } from 'rxjs';
+import { AuditoriaEvidenciaRequisto } from './../../models/auditoria/auditoriaEvidenciaRequisito';
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { ToastrService } from 'ngx-toastr';
-import { Subject } from 'rxjs';
-import { ArquivoMonitoramentoRecurso } from 'src/app/models/arquivoMonitoramentoRecurso';
-import { ArquivoMonitoramentoService } from 'src/app/services/monitoramentoRecurso/arquivo-monitoramento.service';
-import { UtilsService } from 'src/app/services/utils.service';
+import * as moment from 'moment';
 import { DialogBoxService } from 'src/app/_services/dialog-box.service';
+import { ToastrService } from 'ngx-toastr';
+import { AuditoriaEvidenciaRequisitoService } from 'src/app/services/auditoria/auditoria-evidencia-requisito.service';
+import { UtilsService } from 'src/app/services/utils.service';
 
 @Component({
-  selector: 'app-arquivo-monitoramento-recurso',
-  templateUrl: './arquivo-monitoramento-recurso.component.html',
-  styleUrls: ['./arquivo-monitoramento-recurso.component.sass']
+  selector: 'app-evidencia-requisito',
+  templateUrl: './evidencia-requisito.component.html',
+  styleUrls: ['./evidencia-requisito.component.sass']
 })
-export class ArquivoMonitoramentoRecursoComponent implements OnInit {
+export class EvidenciaRequisitoComponent implements OnInit {
 
-  monitoramento: any;
-  laudo: any;
+  auditoriaEntidadeItRequisito: any;
+  auditoria: any;
+  item: any;
+  evidencia = new AuditoriaEvidenciaRequisto();
   isAddEdit = false;
   arquivos: [];
   loading = false;
-  arquivoLa: ArquivoMonitoramentoRecurso;
   byteArray: string | ArrayBuffer;
   file: any;
 
@@ -28,23 +31,22 @@ export class ArquivoMonitoramentoRecursoComponent implements OnInit {
   constructor(public modalRef: BsModalRef,
               private dialogBox: DialogBoxService,
               private toastrService: ToastrService,
-              private arquivoMonitoramentoService: ArquivoMonitoramentoService) { }
+              private evidenciaRequisitoService: AuditoriaEvidenciaRequisitoService) { }
 
   ngOnInit() {
     this.onClose = new Subject();
-    console.log(JSON.stringify(this.monitoramento));
-    console.log(JSON.stringify(this.laudo));
-    this.getByMonitoramentoId(this.laudo.id);
+    this.getByRequisitoId(this.auditoriaEntidadeItRequisito.id);
+    console.log(('teste ' + JSON.stringify(this.auditoriaEntidadeItRequisito)));
   }
 
   public closeModal(): void {
-    this.onClose.next(this.monitoramento);
+    this.onClose.next(this.auditoriaEntidadeItRequisito);
     this.modalRef.hide();
   }
 
-  getByMonitoramentoId(id: any) {
+  getByRequisitoId(id: any) {
     this.loading = true;
-    this.arquivoMonitoramentoService.getByMonitoramentoId(id).subscribe(data => {
+    this.evidenciaRequisitoService.getByRequisitoId(id).subscribe(data => {
       this.arquivos = data;
       this.loading = false;
     }, () => this.loading = false);
@@ -68,27 +70,34 @@ export class ArquivoMonitoramentoRecursoComponent implements OnInit {
     this.loading = true;
     const doc: any = document;
     const file = doc.querySelector('input[type=file]').files[0];
-    const arquivo = new ArquivoMonitoramentoRecurso();
 
-    arquivo.monitoramento_laudo_id = this.laudo.id;
-    arquivo.nr_laudo = this.laudo.nr_laudo;
-    arquivo.nm_arquivo = file.name;
-    arquivo.arquivo = this.byteArray.toString();
-    this.arquivoMonitoramentoService.add(arquivo).subscribe(data => {
+    this.evidencia.auditoria_entidade_it_requisito_id = this.auditoriaEntidadeItRequisito.id;
+    this.evidencia.dt_evidencia = new Date(this.evidencia.dt_evidencia);
+    this.evidencia.nm_arquivo = file.name;
+    this.evidencia.arquivo = this.byteArray.toString();
+    this.evidenciaRequisitoService.add(this.evidencia).subscribe(data => {
       this.showSuccess('Arquivo adicionado com sucesso!', 'Mensagem');
-      this.getByMonitoramentoId(this.monitoramento.id);
+      this.evidencia = new AuditoriaEvidenciaRequisto();
+      this.getByRequisitoId(this.auditoriaEntidadeItRequisito.id);
       this.byteArray = null;
       this.file = null;
       this.loading = false;
     },() => this.loading = false);
   }
 
+  edit(evidencia: any) {
+    console.log(JSON.stringify(evidencia));
+    this.evidencia = new AuditoriaEvidenciaRequisto;
+    this.evidencia.ds_evidencia = evidencia.ds_evidencia;
+    this.evidencia.dt_evidencia = new Date(evidencia.dt_evidencia);
+  }
+
   remover(id: string) {
     this.dialogBox.show('Confirma remoção do anexo?', 'CONFIRM').then(sim => {
       if (sim) {
-        this.arquivoMonitoramentoService.remove(id).subscribe(data => {
+        this.evidenciaRequisitoService.remove(id).subscribe(data => {
           this.showSuccess('Arquivo removido com sucesso!', 'Mensagem');
-          this.getByMonitoramentoId(this.monitoramento.id);
+          this.getByRequisitoId(this.auditoriaEntidadeItRequisito.id);
         });
       }
     });
@@ -115,5 +124,4 @@ export class ArquivoMonitoramentoRecursoComponent implements OnInit {
       timeOut: 3000,
     });
   }
-
 }

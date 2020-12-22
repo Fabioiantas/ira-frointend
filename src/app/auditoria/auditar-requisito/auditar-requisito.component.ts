@@ -1,10 +1,11 @@
+import { EvidenciaRequisitoComponent } from './../evidencia-requisito/evidencia-requisito.component';
 import { ActivatedRoute } from '@angular/router';
 import { AuditoriaEntidadeItRequisitoService } from './../../services/auditoria/auditoria-entidade-it-requisito.service';
 import { Subject } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
 import { DialogBoxService } from 'src/app/_services/dialog-box.service';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { AuditoriaEntidadeItRequisito } from 'src/app/models/auditoriaEntidadeItRequisito';
 import { AuditoriaEvidenciaRequisto } from 'src/app/models/auditoria/auditoriaEvidenciaRequisito';
 import { AuditoriaEvidenciaService } from 'src/app/services/auditoria/auditoria-evidencia.service';
@@ -27,9 +28,10 @@ export class AuditarRequisitoComponent implements OnInit {
   public onClose: Subject<AuditoriaEntidadeItRequisito>;
 
 
-  constructor(private auditoriaEvidenciaService: AuditoriaEvidenciaService,
+  constructor(private auditoriaEntidadeItRequisitoService: AuditoriaEntidadeItRequisitoService,
               private dialogBox: DialogBoxService,
-              public modalRef: BsModalRef) { }
+              public modalRef: BsModalRef,
+              private modalService: BsModalService) { }
 
   ngOnInit() {
     this.onClose = new Subject();
@@ -46,28 +48,23 @@ export class AuditarRequisitoComponent implements OnInit {
     this.modalRef.hide();
   }
 
-  prepareFile(event) {
-    const doc: any = document;
-    const file = doc.querySelector('input[type=file]').files[0];
-    const reader = new FileReader();
-    if (file) {
-      reader.onload = (e) => {
-        this.byteArray = reader.result;
-        if (new Blob([this.byteArray.toString()]).size > 12000000) {
-          this.dialogBox.show('Arquivo deve ser menor que 10MB!', 'ERROR');
-          this.byteArray = null;
-          return;
-        }
-      };
-    }
-    reader.readAsDataURL(file);
-  }
-
   salvar() {
-    this.auditoriaEvidenciaService.add(this.auditoriaEntidadeRequisito).subscribe(data => {
+    this.auditoriaEntidadeItRequisitoService.edit(this.auditoriaEntidadeRequisito).subscribe(data => {
       this.dialogBox.show('Requisito Auditado com sucesso!', 'OK');
       console.log(JSON.stringify(data));
       this.closeModal();
+    });
+  }
+
+  evidencia() {
+    const initialState = {
+      auditoriaEntidadeItRequisito: this.auditoriaEntidadeItRequisito,
+      auditoria: this.auditoria,
+      item: this.item
+    };
+    this.modalService.show(EvidenciaRequisitoComponent, { initialState, backdrop: 'static', class: 'modal-lg'})
+    .content.onClose.subscribe(itemReturn => {
+      console.log(itemReturn);
     });
   }
 
