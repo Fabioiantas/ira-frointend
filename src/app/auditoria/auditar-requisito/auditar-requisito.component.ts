@@ -6,6 +6,8 @@ import * as moment from 'moment';
 import { DialogBoxService } from 'src/app/_services/dialog-box.service';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { AuditoriaEntidadeItRequisito } from 'src/app/models/auditoriaEntidadeItRequisito';
+import { AuditoriaEvidenciaRequisto } from 'src/app/models/auditoria/auditoriaEvidenciaRequisito';
+import { AuditoriaEvidenciaService } from 'src/app/services/auditoria/auditoria-evidencia.service';
 
 @Component({
   selector: 'app-auditar-requisito',
@@ -18,10 +20,14 @@ export class AuditarRequisitoComponent implements OnInit {
   auditoriaEntidadeRequisito: AuditoriaEntidadeItRequisito;
   item: any;
   auditoria: any;
-  public onClose: Subject<AuditoriaEntidadeItRequisito>;
   loading = false;
+  arquivo: AuditoriaEvidenciaRequisto;
+  byteArray: string | ArrayBuffer;
+  file: any;
+  public onClose: Subject<AuditoriaEntidadeItRequisito>;
 
-  constructor(private auditoriaEntidadeItRequisitoService: AuditoriaEntidadeItRequisitoService,
+
+  constructor(private auditoriaEvidenciaService: AuditoriaEvidenciaService,
               private dialogBox: DialogBoxService,
               public modalRef: BsModalRef) { }
 
@@ -40,20 +46,29 @@ export class AuditarRequisitoComponent implements OnInit {
     this.modalRef.hide();
   }
 
+  prepareFile(event) {
+    const doc: any = document;
+    const file = doc.querySelector('input[type=file]').files[0];
+    const reader = new FileReader();
+    if (file) {
+      reader.onload = (e) => {
+        this.byteArray = reader.result;
+        if (new Blob([this.byteArray.toString()]).size > 12000000) {
+          this.dialogBox.show('Arquivo deve ser menor que 10MB!', 'ERROR');
+          this.byteArray = null;
+          return;
+        }
+      };
+    }
+    reader.readAsDataURL(file);
+  }
+
   salvar() {
-    this.auditoriaEntidadeItRequisitoService.edit(this.auditoriaEntidadeRequisito).subscribe(data => {
+    this.auditoriaEvidenciaService.add(this.auditoriaEntidadeRequisito).subscribe(data => {
       this.dialogBox.show('Requisito Auditado com sucesso!', 'OK');
       console.log(JSON.stringify(data));
       this.closeModal();
     });
-    /* if (!this.amostraGee.dt_amostra || !this.amostraGee.cd_unidade_padrao || !this.amostraGee.qt_consumo_total) {
-      return this.dialogBox.show('É nescessário preencher todos os campos', 'Warning');
-    }
-    this.loading = true;
-    this.amostraService.editar(this.amostraGee).subscribe(data => {
-      this.loading = false;
-      this.closeModal();
-    }, () => this.loading = false);*/
   }
 
   clearDate() {
