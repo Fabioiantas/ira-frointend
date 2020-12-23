@@ -67,6 +67,11 @@
                               <th class="text-center" width="10%">Remover</th>
                             </tr>
                           </thead>
+                          <tr *ngIf="!auditoriaNivelItem?.length">
+                            <td colspan="6" class="text-center">
+                              <h6 class="mt-3">Nenhum item adicionado</h6>
+                            </td>
+                          </tr>
                           <tbody>
                             <!-- DADOS DA TABLE -->
                             <tr *ngFor="let it of auditoriaNivelItem; let i = index">

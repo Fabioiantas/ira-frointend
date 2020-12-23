@@ -142,13 +142,13 @@ export class AuditoriaNivelItRequisitoComponent implements OnInit {
   removeSelected()  {
     this.dialogBox.show('Confirma exclusão de todos os requisitos selecionados?', 'CONFIRM').then((sim: any) => {
       if (sim) {
-        var requisito = [];
-        this.auditoriaNivelItRequisito.forEach(function (value) {
-          if (value.remover) {
-            requisito.push(value);
-          }
-        });
-        if (requisito.length){
+        const requisito = [];
+        this.auditoriaNivelItRequisito.forEach((value) => {
+            if (value.remover) {
+              requisito.push(value);
+            }
+          });
+        if (requisito.length) {
           this.auditoriaNivelItRequisitoService.removeSelected(requisito).subscribe(() => {
             this.showSuccess('Requisitos removidos com sucesso!', 'OK');
           });

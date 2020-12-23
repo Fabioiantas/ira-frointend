@@ -77,7 +77,7 @@
         <tr [ngClass]="{'table-active': !isAddEdit}">
           <th class="text-left">Arquivo</th>
           <th class="text-left">Data</th>
-          <th class="text-right" width="2%">Editar</th>
+          <th class="text-left">Descrição</th>
           <th class="text-right" width="2%">Baixar</th>
           <th class="text-right" width="2%">Remover</th>
         </tr>
@@ -96,8 +96,8 @@
           <td>
             {{file.dt_evidencia | date:'dd/MM/yyyy'}}
           </td>
-          <td class="text-right icons">
-            <i class="pe-7s-edit text-primary" (click)="edit(file)"></i>
+          <td>
+            {{file.ds_evidencia}}
           </td>
           <td class="text-right icons">
             <i class="pe-7s-download text-primary" (click)="download(file.arquivo, file.nm_arquivo)"></i>
