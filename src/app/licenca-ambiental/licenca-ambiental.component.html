@@ -87,7 +87,7 @@
     <ngx-datatable-column name="Validade" prop="dt_validade" [width]="90" [flexGrow]="1">
 
       <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="rowsLicencaAmbiental">
-        {{rowsLicencaAmbiental[rowIndex].dt_validade | date:'dd/MM/yyyy'}}
+        {{value | date:'dd/MM/yyyy'}}
       </ng-template>
     </ngx-datatable-column>
 

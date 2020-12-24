@@ -51,7 +51,6 @@ export class LicencaAmbientalComponent implements OnInit {
     this.licencaAmbientalService.getAll().subscribe((response) => {
       this.licencaAmbiental = [...response];
       this.rowsLicencaAmbiental = [...response];
-      console.log(this.rowsLicencaAmbiental);
     });
   }
 
@@ -126,10 +125,13 @@ export class LicencaAmbientalComponent implements OnInit {
   }
 
   getProximaAcao(licenca) {
+    if (licenca.nr_licenca_ambiental == 'licenciado') {
+      console.log(JSON.stringify(licenca));
+    }
     if (licenca.nr_licenca_ambiental === null && licenca.nr_protocolo_novo === null) {
       return 'Licenciar';
     } else if (licenca.nr_licenca_ambiental !== null && licenca.nr_protocolo_novo === null) {
-      return 'Protocolar em ' + moment(licenca.dt_validade_protocolo).format('DD/MM/YYYY');
+      return 'Protocolar:' + moment(licenca.dt_validade_protocolo).format('DD/MM/YYYY');
     } else {
       return 'Renovar';
     }
@@ -151,7 +153,6 @@ export class LicencaAmbientalComponent implements OnInit {
     };
     this.bsModalService.show(ArquivoLicencaCadastroComponent, { initialState, backdrop: 'static', class: 'modal-lg'})
     .content.onClose.subscribe(itemReturn => {
-      console.log();
     });
   }
 }

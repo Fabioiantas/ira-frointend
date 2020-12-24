@@ -48,10 +48,10 @@
       <input *ngIf="!loading" type="file" class="form-control-file" id="exampleFormControlFile1" data-toggle="tooltip" data-placement="top" title="Arquivo até 10MB - Selecione em seguida pressione Enviar!"
         (change)="prepareFile($event)" [(ngModel)]="file">
     </div>
-    <div class="col-sm-6 text-left">
+    <div class="col-sm-6 text-right">
       <button *ngIf="byteArray?.length" data-toggle="tooltip" data-placement="top" title="Gravar arquivo selecionado."
         type="button" class="btn btn-primary btn-xs p-2" (click)="save()">
-        Enviar<i class="fa fa-upload p-1"></i>
+        <i class="fa fa-save p-1"></i>Salvar
       </button>
     </div>
   </div>
@@ -60,7 +60,7 @@
       <thead>
         <tr [ngClass]="{'table-active': !isAddEdit}">
           <th class="text-left">Arquivo</th>
-          <th class="text-right" width="2%">Baixar</th>
+          <th class="text-right" width="2%">Download</th>
           <th class="text-right" width="2%">Remover</th>
         </tr>
       </thead>

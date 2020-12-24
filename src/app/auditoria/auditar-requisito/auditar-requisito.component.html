@@ -51,12 +51,12 @@
         <option value="A">NÃO SE APLICA</option>
       </select>
     </div>
-    <div class="col-sm-3 form-group">
+    <div class="col-sm-4 form-group">
       <label for="dt_prazo_adequacao">Prazo Adequação</label>
       <div class="input-group">
         <input class="form-control" placeholder="dia-mes-ano" (click)="dtPrazoAdequacao.toggle()"
           [(ngModel)]="auditoriaEntidadeRequisito.dt_prazo_adequacao" name="dtPrazoAdequacao" ngbDatepicker #dtPrazoAdequacao="ngbDatepicker"
-          autocomplete="off">
+          autocomplete="off" readonly>
         <div class="input-group-append">
           <button class="btn btn-primary" (click)="dtPrazoAdequacao.toggle()" type="button">
             <i class="fa fa-calendar"></i>
@@ -64,9 +64,8 @@
         </div>
       </div>
     </div>
-    <div class="col-sm-5 form-group">
-      <label for="exampleFormControlFile1">Evidência</label>
-      <button class="btn btn-primary" (click)="evidencia(auditoriaEntidadeRequisito)" type="button">
+    <div class="col-sm-4 form-group text-center p-4">
+      <button class="btn btn-primary" (click)="evidencia(auditoriaEntidadeRequisito)" type="button" name="evidencia">Evidências
         <i class="fa fa-eye"></i>
       </button>
       <!-- <input type="file" class="form-control-file" id="exampleFormControlFile1"> -->
