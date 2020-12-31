@@ -13,7 +13,7 @@ import { FilterAuditoriaEntidade } from 'src/app/models/filterAuditoriaEntidade'
 export class AuditoriaEntidadeService {
 
   // --service
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient) {}
 
   list(): Observable<any> {
     return this.http.get<any>(`${environment.baseUrl}/auth/auditoriaentidade`);
