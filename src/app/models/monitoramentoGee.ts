@@ -1,3 +1,5 @@
+import { FonteEmissao } from "./fonteEmissao";
+
 export class MonitoramentoGee {
   id: BigInteger;
   // tslint:disable-next-line:variable-name
@@ -10,4 +12,5 @@ export class MonitoramentoGee {
   processo_id: BigInteger;
   // tslint:disable-next-line:variable-name
   fonte_emissora_id: BigInteger;
+  fonte_emissao: FonteEmissao;
 }

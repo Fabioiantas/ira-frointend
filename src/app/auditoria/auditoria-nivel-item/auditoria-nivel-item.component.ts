@@ -29,6 +29,8 @@ export class AuditoriaNivelItemComponent implements OnInit {
   listNivel: AuditoriaNivel;
   filterForm: FormGroup;
   loading = false;
+  loadingC = false;
+  toggleMobileSidebar: any;
   columnsNivelItem = [
     {name : 'Item', prop : 'ds_item', width : '20%', selecionado: true}
   ];
@@ -145,5 +147,7 @@ export class AuditoriaNivelItemComponent implements OnInit {
     this.dataService.changeFilterAuditoriaNivelItem(this.filterForm);
     this.router.navigate([`/nivelitrequisito`]);
   }
+
+  cleanFilter(){}
 
 }

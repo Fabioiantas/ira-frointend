@@ -3,7 +3,7 @@ import { PainelComponent } from './painel/painel.component';
 import { AuditarRequisitoComponent } from './auditoria/auditar-requisito/auditar-requisito.component';
 import { FonteEntidadeComponent } from './gee/fonte-entidade/fonte-entidade.component';
 import { GeeComponent } from './gee/gee.component';
-import { RecursoComponent } from './Recurso/Recurso.component';
+//import { RecursoComponent } from './Recurso/Recurso.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 // Components
@@ -80,6 +80,7 @@ import { AuditoriaEntidadeCadastroComponent } from './auditoria/auditoria-entida
 import { AuditarComponent } from './auditoria/auditar/auditar.component';
 import { GeeEditarComponent } from './gee/gee-editar/gee-editar.component';
 import { ArquivoLicencaCadastroComponent } from './licenca-ambiental/arquivo-licenca-ambiental/arquivo-licenca-cadastro/arquivo-licenca-cadastro.component';
+import { RecursoComponent } from './Monitoramento-Recursos/recurso/recurso.component';
 
 const routes: Routes = [
   {

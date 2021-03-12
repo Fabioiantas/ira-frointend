@@ -17,6 +17,7 @@ export class AuditarComponent implements OnInit {
   requisito: any;
   lastItem: any;
   params: any;
+  toggleMobileSidebar: any;
 
   max = 200;
   showWarning: boolean;

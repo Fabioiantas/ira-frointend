@@ -13,8 +13,8 @@ export class AmostraService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  findAmostra(id: any): Observable<AmostraGee> {
-    return this.http.get<AmostraGee>(environment.baseUrl + '/auth/amostras/' + id);
+  findAmostra(id: any): Observable<AmostraGee[]> {
+    return this.http.get<AmostraGee[]>(environment.baseUrl + '/auth/amostras/' + id);
   }
 
   salvar(amostraGee: AmostraGee) {

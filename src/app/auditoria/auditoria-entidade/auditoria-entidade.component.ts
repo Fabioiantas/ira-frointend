@@ -26,6 +26,8 @@ export class AuditoriaEntidadeComponent implements OnInit {
   selected: any = [];
   loading = false;
   loadPropriedade = false;
+  toggleMobileSidebar: any;
+  isLoading = false;
 
   columnsAuditoriaEntidade = [
     {name : 'Número', prop : 'nr_auditoria', width : '35%', selecionado: true},

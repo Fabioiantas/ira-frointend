@@ -1,4 +1,3 @@
-import { RecursoComponent } from './Recurso/Recurso.component';
 import { AgmCoreModule } from '@agm/core';
 import { DevToolsExtension, NgRedux, NgReduxModule } from '@angular-redux/store';
 import { CommonModule } from '@angular/common';
@@ -27,7 +26,7 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { NouisliderModule } from 'ng2-nouislider';
 import { ClipboardModule } from 'ngx-clipboard';
 import { ColorPickerModule } from 'ngx-color-picker';
-import { DropzoneConfigInterface, DropzoneModule } from 'ngx-dropzone-wrapper';
+import { DropzoneModule } from 'ngx-dropzone-wrapper';
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { NgxLoadingModule } from 'ngx-loading';
 import { PerfectScrollbarConfigInterface, PerfectScrollbarModule, PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
@@ -118,8 +117,6 @@ import { CombustivelComponent } from './gee/combustivel/combustivel.component';
 import { FonteEmissaoCadastroComponent } from './gee/fonte-emissao/fonte-emissao-cadastro/fonte-emissao-cadastro.component';
 import { CombustivelCadastroComponent } from './gee/combustivel/combustivel-cadastro/combustivel-cadastro.component';
 import { EscopoCadastroGeeComponent } from './gee/escopo/escopo-cadastro-gee/escopo-cadastro-gee.component';
-import { FonteEmissaoComponent } from './gee/fonte-emissao/fonte-emissao.component';
-import { EscopoComponent } from './gee/escopo/escopo.component';
 import { ProcessoAnaliseComponent } from './Monitoramento-Recursos/processo-analise/processo-analise.component';
 import { FonteEmissoraComponent } from './Monitoramento-Recursos/fonte-emissora/fonte-emissora.component';
 import { RecursoCadastroComponent } from './Monitoramento-Recursos/recurso/recurso-cadastro/recurso-cadastro.component';
@@ -172,6 +169,9 @@ import { ArquivoLicencaAmbientalComponent } from './licenca-ambiental/arquivo-li
 import { ArquivoLicencaCadastroComponent } from './licenca-ambiental/arquivo-licenca-ambiental/arquivo-licenca-cadastro/arquivo-licenca-cadastro.component';
 import { ArquivoMonitoramentoRecursoComponent } from './Monitoramento-Recursos/arquivo-monitoramento-recurso/arquivo-monitoramento-recurso.component';
 import { EvidenciaRequisitoComponent } from './auditoria/evidencia-requisito/evidencia-requisito.component';
+import { RecursoComponent } from './Monitoramento-Recursos/recurso/recurso.component';
+import { FonteEmissaoComponent } from './gee/fonte-emissao/fonte-emissao.component';
+import { EscopoComponent } from './gee/escopo/escopo.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -214,6 +214,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
 
     // Components
     RecursoComponent,
+    FonteEmissaoComponent,
     NgxDatatableFilterComponent,
     NgxResizeWatcherDirective,
     CampanhasComponent,
@@ -230,7 +231,6 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     RecursoCadastroComponent,
     ParametroComponent,
     ParametroCadastroComponent,
-    FonteEmissaoComponent,
     LicencaAmbientalComponent,
     TipoAtividadeComponent,
     TipoLicencaComponent,

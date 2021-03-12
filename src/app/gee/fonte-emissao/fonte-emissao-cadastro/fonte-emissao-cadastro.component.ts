@@ -14,6 +14,7 @@ export class FonteEmissaoCadastroComponent implements OnInit {
   params: any;
   fonteEmissao: FonteEmissao = new FonteEmissao();
   listFonteEmissao: any;
+  isLoading = false;
 
   formGroup = new FormGroup({
     id: new FormControl(''),

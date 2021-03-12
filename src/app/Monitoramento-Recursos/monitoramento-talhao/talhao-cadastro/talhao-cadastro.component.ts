@@ -17,6 +17,7 @@ export class TalhaoCadastroComponent implements OnInit {
   propriedade: any;
   filter: any;
   params: any;
+  isLoading = false;
 
   formGroup = new FormGroup({
     id: new FormControl(''),
@@ -70,6 +71,10 @@ export class TalhaoCadastroComponent implements OnInit {
       this.dialogBox.show('Talhão salvo com sucesso!', 'OK');
       this.router.navigate(['/talhao']);
     });
+  }
+
+  handleReset() {
+    this.formGroup.reset();
   }
 
 

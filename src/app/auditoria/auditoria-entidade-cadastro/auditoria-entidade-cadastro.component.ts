@@ -22,6 +22,7 @@ export class AuditoriaEntidadeCadastroComponent implements OnInit {
   params: any;
   loadPropriedade = false;
   loadEntidade = false;
+  isLoading = false;
 
   formGroup = new FormGroup({
     id: new FormControl(''),

@@ -53,7 +53,7 @@ export class MonitoramentoCadastroComponent implements OnInit {
   processos: ProcessoAnalise;
   fonteEmissoras: FonteEmissora;
   monitoramentoRecurso: MonitoramentoRecurso;
-  laudos: MonitoramentoLaudo;
+  laudos: MonitoramentoLaudo[];
   rowsLaudo: any;
   laudo: MonitoramentoLaudo;
   listTipoMonitoramento: TipoMonitoramento;
@@ -170,7 +170,7 @@ export class MonitoramentoCadastroComponent implements OnInit {
 
   changeFilter() {
     this.rowsLaudo = null;
-    this.laudos = new MonitoramentoLaudo();
+    this.laudos = [];
     this.monitoramentoRecurso = null;
     this.data.changeFilter(null);
   }
@@ -235,7 +235,8 @@ export class MonitoramentoCadastroComponent implements OnInit {
         this.loading = false;
         if (data) {
           this.monitoramentoRecurso = data.monitoramento;
-          this.laudos = data.laudos;
+          // this.laudos = data.laudos;
+          this.laudos.push(data.laudos);
           this.rowsLaudo = data.laudos;
         }
       });

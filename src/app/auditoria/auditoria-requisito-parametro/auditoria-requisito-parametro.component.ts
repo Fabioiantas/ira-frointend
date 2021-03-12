@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
 import { AuditoriaNivelItRequisito } from 'src/app/models/auditoriaNivelItRequisito';
@@ -23,12 +23,19 @@ export class AuditoriaRequisitoParametroComponent implements OnInit {
   public onClose: Subject<AuditoriaNivelItRequisito>;
   loading = false;
 
+
   constructor(private dialogBox: DialogBoxService, public modalRef: BsModalRef,
               private auditoriaNivelItRequisitoService: AuditoriaNivelItRequisitoService,
               private classificacaoRequisitoService: ClassificacaoRequisitoService,
-              private toastrService: ToastrService) { }
+              private toastrService: ToastrService,private formBuilder: FormBuilder) { }
 
   ngOnInit() {
+
+    this.filterForm = this.formBuilder.group({
+      auditoriaNivel: [null],
+      auditoriaNivelItem: [null]
+    });
+
     this.getClassificacaoRequisito();
     this.onClose = new Subject();
   }

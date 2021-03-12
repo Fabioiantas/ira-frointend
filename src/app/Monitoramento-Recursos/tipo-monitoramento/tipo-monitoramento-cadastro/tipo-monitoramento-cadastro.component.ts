@@ -13,7 +13,7 @@ import { DialogBoxService } from 'src/app/_services/dialog-box.service';
 export class TipoMonitoramentoCadastroComponent implements OnInit {
 
   listRecurso: any;
-
+  isLoading = false;
   formGroup = new FormGroup({
     id: new FormControl(''),
     nr_monitoramento: new FormControl(''),

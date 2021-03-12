@@ -43,6 +43,7 @@ export class AuditoriaNivelItRequisitoComponent implements OnInit {
   isLoading = false;
   loadNivel = false;
   loadItem = false;
+  toggleMobileSidebar: any;
 
   public onClose: Subject<FormGroup>;
 

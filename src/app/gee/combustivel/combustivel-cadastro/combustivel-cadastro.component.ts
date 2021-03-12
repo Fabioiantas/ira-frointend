@@ -15,6 +15,7 @@ export class CombustivelCadastroComponent implements OnInit {
   params: any;
   combustivel: TipoCombustivel = new TipoCombustivel();
   listCombustivel: any;
+  isLoading = false;
 
   formGroup = new FormGroup({
     id: new FormControl(''),

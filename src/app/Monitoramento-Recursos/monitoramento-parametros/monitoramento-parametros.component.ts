@@ -153,4 +153,6 @@ export class MonitoramentoParametrosComponent implements OnInit {
     this.isEdit = false;
     this.tipoMonitoramentoParam = null;
   }
+
+  monitoramento(){}
 }

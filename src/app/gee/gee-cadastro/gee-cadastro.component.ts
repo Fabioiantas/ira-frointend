@@ -46,7 +46,7 @@ export class GeeCadastroComponent implements OnInit {
   fonteEmissoes: FonteEmissao;
   combustiveis: TipoCombustivel;
   monitoramentoGee: MonitoramentoGee;
-  amostrasGee: AmostraGee;
+  amostrasGee: AmostraGee[];
   amostras: AmostraGee;
   showCombustivel = false;
   isAddEdit = false;

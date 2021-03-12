@@ -19,7 +19,7 @@ import { toJSDate } from '@ng-bootstrap/ng-bootstrap/datepicker/ngb-calendar';
 })
 export class GeeFonteCadastroComponent implements OnInit {
 
-  amostras: AmostraGee;
+  amostras: AmostraGee[];
   amostraGee: AmostraGee;
   monitoramentoGee: MonitoramentoGee;
   fontesEntidade: FontesEntidade;
