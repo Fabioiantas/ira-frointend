@@ -18,23 +18,25 @@ export class AuditoriaRequisitoParametroComponent implements OnInit {
 
   auditoriaNivelItRequisito: AuditoriaNivelItRequisito;
   listClassificacaoRequisito: ClassificacaoRequisito;
-  filterForm: FormGroup;
+  filterForm: any;
 
   public onClose: Subject<AuditoriaNivelItRequisito>;
   loading = false;
 
 
-  constructor(private dialogBox: DialogBoxService, public modalRef: BsModalRef,
+  constructor(private dialogBox: DialogBoxService,
+              public modalRef: BsModalRef,
               private auditoriaNivelItRequisitoService: AuditoriaNivelItRequisitoService,
               private classificacaoRequisitoService: ClassificacaoRequisitoService,
-              private toastrService: ToastrService,private formBuilder: FormBuilder) { }
+              private toastrService: ToastrService,
+              private formBuilder: FormBuilder) { }
 
   ngOnInit() {
 
-    this.filterForm = this.formBuilder.group({
-      auditoriaNivel: [null],
-      auditoriaNivelItem: [null]
-    });
+    /*this.filterForm = this.formBuilder.group({
+      auditoriaNivel: [''],
+      auditoriaNivelItem: ['']
+    });*/
 
     this.getClassificacaoRequisito();
     this.onClose = new Subject();

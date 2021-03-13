@@ -31,6 +31,7 @@ export class AuditoriaNivelItemComponent implements OnInit {
   loading = false;
   loadingC = false;
   toggleMobileSidebar: any;
+  tableNivelItens: any;
   columnsNivelItem = [
     {name : 'Item', prop : 'ds_item', width : '20%', selecionado: true}
   ];

@@ -18,21 +18,21 @@
           </div>
 
           <div class="pane-right">
-            <div *ngIf="auditoriaEntidadeItRequisito?.auditoria_nivel" class="ml-2"
+            <div *ngIf="auditoriaEntidadeItRequisito[0]?.auditoria_nivel" class="ml-2"
             data-toggle="tooltip" data-placement="bottom" title="Nome da Auditoria">
-              <i class="fa fa-flag p-1"></i>{{auditoriaEntidadeItRequisito.auditoria_nivel.nm_nivel}}
+              <i class="fa fa-flag p-1"></i>{{auditoriaEntidadeItRequisito[0].auditoria_nivel.nm_nivel}}
             </div>
-            <div *ngIf="auditoriaEntidadeItRequisito?.entidade" class="ml-2" data-placement="bottom" title="Entidade Auditada">
-              <i class="fa fa-user-circle p-1"></i>{{auditoriaEntidadeItRequisito.entidade.nm_reduzido}}</div>
-            <div *ngIf="auditoriaEntidadeItRequisito?.propriedade" class="ml-3" data-placement="bottom" title="Nome da Propriedade">
-              <i class="fa fa-map-marker p-1"></i>{{auditoriaEntidadeItRequisito.propriedade.nm_propriedade}}</div>
+            <div *ngIf="auditoriaEntidadeItRequisito[0]?.entidade" class="ml-2" data-placement="bottom" title="Entidade Auditada">
+              <i class="fa fa-user-circle p-1"></i>{{auditoriaEntidadeItRequisito[0].entidade.nm_reduzido}}</div>
+            <div *ngIf="auditoriaEntidadeItRequisito[0]?.propriedade" class="ml-3" data-placement="bottom" title="Nome da Propriedade">
+              <i class="fa fa-map-marker p-1"></i>{{auditoriaEntidadeItRequisito[0].propriedade.nm_propriedade}}</div>
           </div>
         </div>
         <div class="app-inner-layout__bottom-pane d-flex" style="padding: 0px;">
           <div class="mb-0 form-group" style="width: 100%;">
             <div class="col-sm-12">
               <ngb-accordion [closeOthers]="true" type="ligth" activeIds="{{lastItem}}">
-                <div *ngFor="let itens of auditoriaEntidadeItRequisito.auditoria_entidade_items; let i= index">
+                <div *ngFor="let  itens of auditoriaEntidadeItRequisito[0].auditoria_entidade_items; let i= index">
                   <ngb-panel id="{{itens.id}}">
                     <ng-template ngbPanelHeader>
                       <div class="d-flex align-items-center justify-content-between">

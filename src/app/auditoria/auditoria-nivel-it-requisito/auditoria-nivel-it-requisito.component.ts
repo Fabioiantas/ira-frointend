@@ -227,6 +227,7 @@ export class AuditoriaNivelItRequisitoComponent implements OnInit {
       auditoriaNivelItRequisito: requisito,
       filterForm: this.filterForm.value
     };
+    console.log('ini: ' + JSON.stringify(initialState));
     this.modalService.show(AuditoriaRequisitoParametroComponent, { initialState, backdrop: 'static', class: 'modal-lg'})
     .content.onClose.subscribe(itemReturn => {
       requisito = itemReturn;

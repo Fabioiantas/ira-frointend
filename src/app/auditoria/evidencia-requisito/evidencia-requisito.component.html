@@ -48,13 +48,13 @@
         (change)="prepareFile($event)" [(ngModel)]="file">
     </div>
     <div class="col-sm-6 text-right">
-      <button *ngIf="byteArray?.length" data-toggle="tooltip" data-placement="top" title="Gravar arquivo selecionado."
+      <button *ngIf="byteArray" data-toggle="tooltip" data-placement="top" title="Gravar arquivo selecionado."
         type="button" class="btn btn-primary btn-xs p-2" (click)="save()">
         <i class="fa fa-save p-1"></i>Salvar
       </button>
     </div>
   </div>
-  <div *ngIf="!loading && byteArray?.length" class="form-row">
+  <div *ngIf="!loading && byteArray" class="form-row">
     <div class="col-sm-6">
       <label class="mb-1">Descrição:</label>
       <textarea class="form-control" [(ngModel)]="evidencia.ds_evidencia" name="ds_orientacao" rows="2" type="text"

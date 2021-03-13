@@ -37,7 +37,7 @@
           <input type="file" class="form-control-file" id="exampleFormControlFile1" (change)="prepareFile($event)" [(ngModel)]="file">
         </div>
         <div class="col-sm-6 text-right">
-          <button *ngIf="byteArray?.length" data-toggle="tooltip" data-placement="top" title="Enviar/Salvar Anexo." type="button" class="btn btn-primary btn-xs p-2" (click)="save()">
+          <button *ngIf="byteArray" data-toggle="tooltip" data-placement="top" title="Enviar/Salvar Anexo." type="button" class="btn btn-primary btn-xs p-2" (click)="save()">
             <i class="fa fa-save p-1"></i>Salvar
           </button>
         </div>
