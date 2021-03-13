@@ -172,6 +172,7 @@ import { EvidenciaRequisitoComponent } from './auditoria/evidencia-requisito/evi
 import { RecursoComponent } from './Monitoramento-Recursos/recurso/recurso.component';
 import { FonteEmissaoComponent } from './gee/fonte-emissao/fonte-emissao.component';
 import { EscopoComponent } from './gee/escopo/escopo.component';
+import { LicencasAmbientaisComponent } from './licenca-ambiental/licencas-ambientais/licencas-ambientais.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -299,6 +300,7 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     ArquivoLicencaCadastroComponent,
     ArquivoMonitoramentoRecursoComponent,
     EvidenciaRequisitoComponent,
+    LicencasAmbientaisComponent,
 
   ],
   imports: [

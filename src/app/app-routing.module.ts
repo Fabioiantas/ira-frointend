@@ -81,6 +81,7 @@ import { AuditarComponent } from './auditoria/auditar/auditar.component';
 import { GeeEditarComponent } from './gee/gee-editar/gee-editar.component';
 import { ArquivoLicencaCadastroComponent } from './licenca-ambiental/arquivo-licenca-ambiental/arquivo-licenca-cadastro/arquivo-licenca-cadastro.component';
 import { RecursoComponent } from './Monitoramento-Recursos/recurso/recurso.component';
+import { LicencasAmbientaisComponent } from './licenca-ambiental/licencas-ambientais/licencas-ambientais.component';
 
 const routes: Routes = [
   {
@@ -107,9 +108,15 @@ const routes: Routes = [
     path: 'licenca',
     component: BaseLayoutComponent,
     children: [
-      {
+      /*{
         path: '',
         component: LicencaAmbientalComponent,
+        data: { extraParameter: 'licenciamentoMenu' },
+        canActivate: [AuthGuard]
+      },*/
+      {
+        path: '',
+        component: LicencasAmbientaisComponent,
         data: { extraParameter: 'licenciamentoMenu' },
         canActivate: [AuthGuard]
       },

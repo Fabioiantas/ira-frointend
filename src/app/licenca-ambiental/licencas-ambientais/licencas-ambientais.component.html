@@ -1,0 +1,242 @@
+<div class="app-page-title app-page-title-simple" style="padding-bottom: 15px;">
+  <div class="page-title-wrapper">
+    <div class="page-title-heading">
+      <div>
+        <div class="page-title-subheading opacity-10">
+          <nav class="" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a [routerLink]="">
+                  <fa name="home"></fa>
+                </a>
+              </li>
+              <li class="breadcrumb-item">
+                Cadastro
+              </li>
+              <li class="active breadcrumb-item" aria-current="page">
+                Licenças Ambientais
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Main content -->
+<section class="content">
+  <div class="card-header-tab card-header">
+    <div class="card-header-title font-size-lg text-capitalize font-weight-normal">
+      <i class="header-icon lnr-license mr-3 text-muted opacity-6"></i>
+      Licenças Ambientais
+    </div>
+    <div class="btn-actions-pane-right">
+      <div class="btn-group-xs btn-group" role="group">
+        <div ngbDropdown class="d-inline-block">
+          <button class="btn btn-outline-primary" id="dropdownForm1" ngbDropdownToggle>Ações</button>
+          <div ngbDropdownMenu aria-labelledby="dropdownForm1">
+            <div class="px-4 py-1">
+              <div class="row p-1">
+                <button class="btn btn-success btn-block" [routerLink]="['/licencaambiental/adicionar']"><i class="fa fa-plus-circle mr-1"></i>Adicionar</button>
+              </div>
+              <div class="row p-1">
+                <button class="btn btn-secondary btn-block" (click)="editar(selected[0].id)"><i class="fa fa-edit mr-1"></i>Editar</button>
+              </div>
+              <div class="row p-1">
+                <button class="btn btn-danger btn-block" (click)="remover()"><i class="fa fa-trash mr-1"></i>Remover</button>
+              </div>
+              <div class="row p-1">
+                <button class="btn btn-info btn-block" (click)="anexo(selected[0])"><i class="fa fa-paperclip mr-1"></i>Anexos</button>
+              </div>
+              <div class="row p-1">
+                <button class="btn btn-primary btn-block" (click)="detalhar()"><i class="fa fa-eye mr-1"></i>Detalhar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="p-3 bg-white">
+    <!-- <div class="form-group form-inline mb-0">
+      <ngx-datatable-filter [margin]="'-6px'" [float]="'left'" [columns]="columnsLicencaAmbiental"
+        [lista]="licencaAmbiental" [table]="tableLicencaAmbiental"></ngx-datatable-filter>
+    </div> -->
+  </div>
+  <div class="row pb-5 mb-2">
+    <!-- <div *ngFor="let licenca of rowsLicencaAmbiental | slice: (page-1) * pageSize : page * pageSize ; let i = index" class="col-6 col-xl-2 col-lg-3 col-md-6 mb-4 mb-lg-0"> -->
+    <div *ngFor="let licenca of rowsLicencaAmbiental; let i = index" class="col-6 col-xl-2 col-lg-3 col-md-6 mb-4 mb-lg-0">
+      <div class="card rounded shadow-sm border-0 mb-1">
+        <div class="card-body text-center p-2 mb-0">
+          <!-- <img [src]="getImageUrl(item.cdProduto)" (error)="errorHandler($event,item.cdProduto,item.produto.dsProduto)" alt="{{ item.produto.dsProduto }}"
+            class="img-fluid d-block mx-auto mb-0" style="width: auto; height: 180px;"> -->
+          <h6 class="card-title"> <a href="#" class="text-dark">{{ licenca.nm_atividade }}</a></h6>
+
+          <h6 class="mb-1 text-center">
+            <span class="text-success mr-2" data-toggle="tooltip" data-placement="top"
+              title=""> {{ licenca.nm_licenca }} </span>
+          </h6>
+          <div class="divider mt-2 mb-2"></div>
+          {{ licenca.nm_entidade }}
+
+          <div class="divider mt-2 mb-2"></div>
+          <div class="container">
+            <div class="row no-gutters">
+              <div class="col-5 text-left" id='col-np'>
+                <ul class="list-inline small m-0">
+
+                </ul>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <ngx-datatable ngx-resize-watcher class="bootstrap striped" #tableLicencaAmbiental
+    [columns]="columnsLicencaAmbiental"
+    [selected]="selected"
+    [rows]="rowsLicencaAmbiental"
+    [footerHeight]="25"
+    [columnMode]="'force'"
+    [selectionType]="'single'"
+    [rowHeight]="'50'"
+    (activate)="activate($event)"
+    [messages]="{'emptyMessage': 'Nenhum resultado encontrado...', 'totalMessage': 'total'}"
+    [limit]="10">
+    <ngx-datatable-column name="Entidade" prop="nm_reduzido" [width]="250" [flexGrow]="1"></ngx-datatable-column>
+
+    <ngx-datatable-column name="N° L.A" prop="nr_licenca_ambiental" [width]="110" [flexGrow]="1"></ngx-datatable-column>
+
+    <ngx-datatable-column name="Atividade" prop="nm_atividade" [width]="200" [flexGrow]="1"></ngx-datatable-column>
+
+    <ngx-datatable-column name="Tipo" prop="nm_abreviado" [width]="60" [flexGrow]="1"></ngx-datatable-column>
+
+    <ngx-datatable-column name="Validade" prop="dt_validade" [width]="90" [flexGrow]="1">
+
+      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="rowsLicencaAmbiental">
+        {{value | date:'dd/MM/yyyy'}}
+      </ng-template>
+    </ngx-datatable-column>
+
+    <ngx-datatable-column name="Orgão" prop="sg_orgao" [flexGrow]="1"></ngx-datatable-column>
+
+    <ngx-datatable-column name="Situação" prop="ds_situacao" [width]="100" [flexGrow]="1"></ngx-datatable-column>
+
+    <ngx-datatable-column name="Próxima Ação" prop="ds_acao" [flexGrow]="1">
+      <ng-template ngx-datatable-cell-template let-rowIndex="rowIndex" let-value="value" let-row="row">
+          <a class="btn btn-outline-warning btn-xs">{{getProximaAcao(row)}}</a>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+</section> -->
+
+<ng-template #detalhes let-c="close" let-d="dismiss">
+  <div class="main-card mb-3 card">
+    <div class="card-body">
+      <h5 class="card-title">Detalhes da Licença</h5>
+
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card main-card mb-3">
+            <div class="card-header">
+              <p>{{selected[0].nm_entidade}}
+              {{selected[0].nr_cnpj}}
+              </p>
+            </div>
+            <div class="card-body">
+              <b>Atividade</b>
+              <p>{{selected[0].nm_atividade}}</p>
+              <b>Tipo Licença</b>
+              <p>{{selected[0].nm_licenca}}</p>
+              <b>Orgão Regulador</b>
+              <p>{{selected[0].nm_orgao}}</p>
+
+              <div class="row">
+                <div class="col-sm-4">
+                  <b>N° Licença:</b>
+                  <p>{{selected[0].nr_licenca_ambiental}}</p>
+                </div>
+                <div class="col-sm-4">
+                  <b>Emissão: </b>
+                  <p>{{selected[0].dt_emissao | date:'dd/MM/yyyy'}}</p>
+                </div>
+                <div class="col-sm-4">
+                  <b>Validade:</b>
+                  <p>{{selected[0].dt_validade | date:'dd/MM/yyyy'}}</p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-4">
+                  <b>N° Protocolo:</b>
+                  <p>{{selected[0].nr_protocolo}}</p>
+                </div>
+                <div class="col-sm-4">
+                  <b>Emissão: </b>
+                  <p>{{selected[0].dt_emissao_protocolo | date:'dd/MM/yyyy'}}</p>
+                </div>
+                <div class="col-sm-4">
+                  <b>Validade:</b>
+                  <p>{{selected[0].dt_validade_protocolo | date:'dd/MM/yyyy'}}</p>
+                </div>
+              </div>
+
+              <div class="row  border-bottom">
+                <div class="col-sm-4">
+                  <b>Dias Limite:</b>
+                  <p>{{selected[0].nr_dias_limite_protocolo}}</p>
+                </div>
+                <div class="col-sm-8">
+                  <b>E-mail Alerta:</b>
+                  <p>{{selected[0].ds_email_alerta}}</p>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-6">
+                  <b>Cadastrada em:</b>
+                  <p>{{selected[0].created_at | date:'dd/MM/yyyy HH:mm:ss'}}</p>
+                </div>
+                <div class="col-sm-6">
+                  <b>Por:</b>
+                  <p>fulano</p>
+                </div>
+              </div>
+
+              <div class="row border-bottom">
+                <div class="col-sm-6">
+                  <b>Alterada em:</b>
+                  <p>{{selected[0].updated_at | date:'dd/MM/yyyy HH:mm:ss'}}</p>
+                </div>
+                <div class="col-sm-6">
+                  <b>Por:</b>
+                  <p>fulano</p>
+                </div>
+              </div>
+
+              <div class="row" *ngIf="filha.length > 0">
+                <div class="col-sm-4">
+                  <b>N° Anterior:</b>
+                  <p>{{filha[0].nr_licenca_ambiental}}</p>
+                </div>
+                <div class="col-sm-4">
+                  <b>Última Alteração:</b>
+                  <p>{{filha[0].updated_at | date:'dd/MM/yyyy HH:mm:ss'}}</p>
+                </div>
+                <div class="col-sm-4">
+                  <b>Última Por:</b>
+                  <p>Fulano@teste.com</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+
+
