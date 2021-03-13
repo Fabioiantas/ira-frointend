@@ -9,10 +9,11 @@ import { Entidade } from 'src/app/models/entidade';
 import { LicencaAmbiental } from 'src/app/models/licencaAmbiental';
 import { TipoAtividadeService } from 'src/app/services/tipo-atividade.service';
 import { TipoAtividade } from 'src/app/models/tipoAtividade';
-import { TipoLicenca } from 'src/app/models/tipoLicenca';
+
 import { TipoLicencaService } from 'src/app/services/tipo-licenca.service';
 import { Orgao } from 'src/app/models/orgao';
 import { OrgaoService } from 'src/app/services/orgao.service';
+import { TipoLicenca } from 'src/app/models/tipo-licenca';
 
 @Component({
   selector: 'app-licenca-ambiental-cadastro',

@@ -3,7 +3,8 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 
 import { Router } from '@angular/router';
-import { TipoLicenca } from 'src/app/models/TipoLicenca';
+import { TipoLicenca } from '../models/tipo-licenca';
+
 
 @Injectable({
   providedIn: 'root'

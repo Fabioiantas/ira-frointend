@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TipoLicenca } from 'src/app/models/TipoLicenca';
+import { TipoLicenca } from 'src/app/models/tipo-licenca';
+
 
 
 import { TipoLicencaService } from 'src/app/services/tipo-licenca.service';

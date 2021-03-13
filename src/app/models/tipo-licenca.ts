@@ -1,4 +1,4 @@
-export class TipoLicencas {
+export class TipoLicenca {
   id: BigInteger;
   nm_licenca: string;
   nm_abreviado: string;
