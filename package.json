@@ -8,11 +8,13 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ng build --aot --prod"
+    "postinstall": "ng build --aot --target=production"
   },
   "private": true,
   "dependencies": {
     "@agm/core": "^1.0.0-beta.5",
+    "@angular/cli": "^7.3.7",
+    "@angular/compiler-cli": "^7.2.11",
     "@angular-redux/store": "^9.0.0",
     "@angular/animations": "^7.2.11",
     "@angular/cdk": "^7.3.6",
@@ -87,12 +89,11 @@
     "redux": "4.0.0",
     "slick-carousel": "^1.8.1",
     "sweetalert2": "^7.33.1",
-    "zone.js": "~0.8.26"
+    "zone.js": "~0.8.26",
+    "typescript": "~3.2.2"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^0.13.7",
-    "@angular/cli": "^7.3.7",
-    "@angular/compiler-cli": "^7.2.11",
     "@angular/language-service": "^7.2.11",
     "@fortawesome/fontawesome-free": "^5.8.1",
     "@types/jasmine": "~2.8.8",
@@ -111,8 +112,7 @@
     "protractor": "~5.4.0",
     "ts-node": "~7.0.0",
     "tslib": "^1.13.0",
-    "tslint": "~5.11.0",
-    "typescript": "~3.2.2"
+    "tslint": "~5.11.0"
   },
   "engines": {
     "node": "10.16.0",
