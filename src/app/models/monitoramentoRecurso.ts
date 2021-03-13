@@ -1,3 +1,5 @@
+import { MonitoramentoLaudo } from "./monitoramentoLaudo";
+
 export class MonitoramentoRecurso {
   id: BigInteger;
   // tslint:disable-next-line:variable-name
@@ -11,5 +13,5 @@ export class MonitoramentoRecurso {
   // tslint:disable-next-line:variable-name
   fonte_emissora_id: BigInteger;
   monitoramento: any;
-  laudos: import("c:/xampp/htdocs/ira-frointend/src/app/models/monitoramentoLaudo").MonitoramentoLaudo;
+  laudos: MonitoramentoLaudo;
 }

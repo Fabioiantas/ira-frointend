@@ -4,7 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { MonitoramentoLaudo } from '../models/monitoramentoLaudo';
 import { FontesEntidade } from '../models/fontesEntidade';
 import { MonitoramentoRecursoAmostra } from '../models/monitoramentoRecursoAmostra';
-import { Parametro } from '../models/Parametro';
+import { Parametro } from '../models/parametro';
 import { AuditoriaNivelItem } from '../models/auditoriaNivelItem';
 
 @Injectable({

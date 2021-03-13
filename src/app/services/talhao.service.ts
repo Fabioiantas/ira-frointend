@@ -3,8 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { FilterTalhao } from '../models/filtertalhao';
-import { Talhao } from '../models/Talhao';
+import { Talhao } from '../models/talhao';
 
 @Injectable({
   providedIn: 'root'
