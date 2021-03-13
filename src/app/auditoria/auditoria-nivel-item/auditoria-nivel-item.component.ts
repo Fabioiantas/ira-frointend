@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { AuditoriaItem } from 'src/app/models/auditoriaItem';
 import { AuditoriaNivel } from 'src/app/models/auditoriaNivel';
 import { AuditoriaNivelItem } from 'src/app/models/auditoriaNivelItem';
-import { TipoAtividade } from 'src/app/models/tipoatividade';
+import { TipoAtividade } from 'src/app/models/tipoAtividade';
 import { AuditoriaNivelService } from 'src/app/services/auditoria-nivel.service';
 import { AuditoriaItemService } from 'src/app/services/auditoria/auditoria-item.service';
 import { AuditoriaNivelItemServiceService } from 'src/app/services/auditoria/auditoria-nivel-item-service.service';

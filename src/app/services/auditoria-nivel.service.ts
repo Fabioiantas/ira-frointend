@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { AuditoriaNivel } from '../models/auditoriaNivel';
-import { TipoAtividade } from '../models/tipoatividade';
+import { TipoAtividade } from '../models/tipoAtividade';
 
 @Injectable({
   providedIn: 'root'

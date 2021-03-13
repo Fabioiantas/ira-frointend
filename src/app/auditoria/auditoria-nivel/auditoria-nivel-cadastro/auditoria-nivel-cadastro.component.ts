@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuditoriaNivel } from 'src/app/models/auditoriaNivel';
-import { TipoAtividade } from 'src/app/models/tipoatividade';
+import { TipoAtividade } from 'src/app/models/tipoAtividade';
 import { AuditoriaNivelService } from 'src/app/services/auditoria-nivel.service';
 import { TipoAtividadeService } from 'src/app/services/tipo-atividade.service';
 import { DialogBoxService } from 'src/app/_services/dialog-box.service';

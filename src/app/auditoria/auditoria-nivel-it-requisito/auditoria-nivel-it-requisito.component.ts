@@ -9,7 +9,7 @@ import { AuditoriaNivel } from 'src/app/models/auditoriaNivel';
 import { AuditoriaNivelItem } from 'src/app/models/auditoriaNivelItem';
 import { AuditoriaNivelItRequisito } from 'src/app/models/auditoriaNivelItRequisito';
 import { AuditoriaRequisito } from 'src/app/models/auditoriaRequisito';
-import { TipoAtividade } from 'src/app/models/tipoatividade';
+import { TipoAtividade } from 'src/app/models/tipoAtividade';
 import { AuditoriaNivelService } from 'src/app/services/auditoria-nivel.service';
 import { AuditoriaItemService } from 'src/app/services/auditoria/auditoria-item.service';
 import { AuditoriaNivelItRequisitoService } from 'src/app/services/auditoria/auditoria-nivel-it-requisito.service';

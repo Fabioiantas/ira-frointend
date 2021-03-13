@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TipoAtividadeService } from 'src/app/services/tipo-atividade.service';
 import { DialogBoxService } from 'src/app/_services/dialog-box.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TipoAtividade } from 'src/app/models/tipoatividade';
+import { TipoAtividade } from 'src/app/models/tipoAtividade';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 @Component({
@@ -23,9 +23,9 @@ export class TipoAtividadeCadastroComponent implements OnInit {
   id: any;
   nmAtividade: any;
 
-  constructor(private tipoAtividadeService: TipoAtividadeService, 
+  constructor(private tipoAtividadeService: TipoAtividadeService,
               private dialogBox: DialogBoxService,
-              private route: ActivatedRoute, 
+              private route: ActivatedRoute,
               private router: Router) { }
 
   ngOnInit() {
@@ -46,7 +46,7 @@ export class TipoAtividadeCadastroComponent implements OnInit {
   salvar() {
     if (!this.formGroup.valid) { return; }
     console.log(this.formGroup.value.id);
-    
+
     this.tipoAtividadeService[this.formGroup.value.id ? 'edit' : 'add'](this.formGroup.value).subscribe(() => {
       this.dialogBox.show('Tipo Atividade salva com sucesso!', 'OK');
       this.router.navigate(['/tipoatividade']);

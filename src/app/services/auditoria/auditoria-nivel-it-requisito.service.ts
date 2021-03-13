@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuditoriaNivelItRequisito } from 'src/app/models/auditoriaNivelItRequisito';
-import { TipoAtividade } from 'src/app/models/tipoatividade';
+import { TipoAtividade } from 'src/app/models/tipoAtividade';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

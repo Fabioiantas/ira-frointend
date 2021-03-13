@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Parametro } from 'src/app/models/Parametro';
+import { Parametro } from 'src/app/models/parametro';
 import { TipoMonitoramento } from 'src/app/models/tipoMonitoramento';
 import { TipoMonitoramentoParametros } from 'src/app/models/tipoMonitoramentoParametro';
 import { UnidadeParametro } from 'src/app/models/unidadeParametro';

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Parametro } from 'src/app/models/Parametro';
+import { Parametro } from 'src/app/models/parametro';
 import { UnidadeParametro } from 'src/app/models/unidadeParametro';
 import { DataService } from 'src/app/services/data.service';
 import { ParametroService } from 'src/app/services/parametro.service';
